@@ -1,0 +1,71 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:25:10
+         compiled from db:wfchannel_index.html */ ?>
+<?php if ($this->_tpl_vars['article']['indeximage'] != ''): ?>
+	<div align="center"><?php echo $this->_tpl_vars['article']['indeximage']; ?>
+</div>
+<?php endif; ?>
+
+<h3><?php echo $this->_tpl_vars['article']['headline']; ?>
+</h3>
+<!-- Start topic loop -->
+<?php if ($this->_tpl_vars['article']['isdefaultpage'] == 1): ?>
+	<?php if ($this->_tpl_vars['totalcount']['total'] > 0): ?>
+		<div><B><?php echo $this->_tpl_vars['lang_more']; ?>
+</B></div>
+	<?php endif; ?>
+	<?php if (count((array)$this->_tpl_vars['chanlink'])):
+    foreach ((array)$this->_tpl_vars['chanlink'] as $this->_tpl_vars['chanlink']):
+?>
+		<div align="left" style="margin-left: 16px;"><a href="index.php?pagenum=<?php echo $this->_tpl_vars['chanlink']['id']; ?>
+"><b><?php echo $this->_tpl_vars['chanlink']['pagetitle']; ?>
+</b></a></div>
+	<?php endforeach; endif; ?>
+
+	<?php if ($this->_tpl_vars['mainp']['num'] == 1): ?>
+		<div align="left" style="margin-left: 16px;"><a href="index.php?op=link"><b><?php echo $this->_tpl_vars['lang_linktous']; ?>
+</b></a></div>
+	<?php endif; ?>
+
+	<?php if ($this->_tpl_vars['mainp']['ref'] == 1): ?>
+		<div align="left" style="margin-left: 16px;" ><a href="index.php?op=refer"><b><?php echo $this->_tpl_vars['lang_referfriend']; ?>
+</b></a></div>
+	<?php endif; ?>
+<br />
+<?php endif; ?>
+
+<!-- Opentable for block decoration -->
+<div align = "left"><?php echo $this->_tpl_vars['article']['maintext']; ?>
+</div>
+<!-- Closetable for block decoration -->
+<br />
+
+<div style="text-align: center; padding: 3px; margin: 3px;">
+  <?php echo $this->_tpl_vars['commentsnav']; ?>
+
+  <?php echo $this->_tpl_vars['lang_notice']; ?>
+
+</div>
+
+<div style="margin: 3px; padding: 3px;">
+<!-- start comments loop -->
+<?php if ($this->_tpl_vars['comment_mode'] == 'flat'): ?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_flat.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php elseif ($this->_tpl_vars['comment_mode'] == 'thread'): ?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_thread.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php elseif ($this->_tpl_vars['comment_mode'] == 'nest'): ?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_nest.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php endif; ?>
+<!-- end comments loop -->
+</div>

@@ -1,0 +1,50 @@
+
+<table border="0" width="90%" cellspacing="1" cellpadding="1" align="center">
+  <tr valign="middle"> 
+    <td align="left"> 
+      <div align="center"><img src="images/logo.gif" alt="WF-FAQ" border="0"></div>
+    </td>
+  </tr>
+  <tr> 
+    <td align="left" class="title" height="20">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td align="left" class="title"> 
+      <div align="center"><{$lang_articleheading}></div>
+    </td>
+  </tr>
+  <tr> 
+    <td align="left"> 
+      <div align="center">
+        <H4><{$lang_indextext}></H4>
+      </div>
+    </td>
+  </tr>
+  <tr> 
+    <td align="left">&nbsp;</td>
+  </tr>
+</table>
+<table border="0" width="90%" cellspacing="1" cellpadding="0" align="center">
+  <tr> 
+    <td align="left" width="32%" class="itemHead"><b><{$lang_category}></b></td>
+    <td align="left" width="56%" class="itemHead"><b><{$lang_description}></b></td>
+    <td align="left" width="12%" class="itemHead"><div align="center"><b><{$lang_total}></b></div></td>
+  </tr>
+  <!-- BEGIN DYNAMIC BLOCK -->
+  <{foreach item=indexpage from=$indexpage}>
+  <tr> 
+    <td class="head">
+      <div align="left"><a href="index.php?op=cat&c=<{$indexpage.id}>"><b><{$indexpage.category}></b></a></div>
+    </td>
+    <td valign="middle" class="even">
+      <div align="left"><{$indexpage.description}></div>
+    </td>
+    <td valign="middle" class="even"><div align="center"><{$indexpage.total}></div></td>
+  </tr>
+    <{/foreach}>
+	<!-- END DYNAMIC BLOCK -->
+  <tr> 
+    <td colspan="3" class="itemHead" height="10"></td>
+  </tr>
+</table>
+    

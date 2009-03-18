@@ -1,0 +1,9 @@
+<table cellspacing="0">
+  <tr>
+    <td id="mainmenu">
+  <{foreach item=link from=$block.links}>
+    <a class="menuMain" href="<{$xoops_url}>/modules/tinycontent/index.php?id=<{$link.id}>"><{$link.title}></a>
+  <{/foreach}>
+    </td>
+  </tr>
+</table>

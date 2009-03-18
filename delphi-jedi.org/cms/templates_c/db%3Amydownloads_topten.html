@@ -1,0 +1,65 @@
+<?php /* Smarty version 2.5.0, created on 2004-09-01 15:25:43
+         compiled from db:mydownloads_topten.html */ ?>
+<br /><br />
+
+<p align="center">
+    <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/index.php"><img src="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/images/logo-en.gif" alt="" /></a>
+</p>
+
+<br /><br /><br />
+<!-- Start ranking loop -->
+<?php if (count((array)$this->_tpl_vars['rankings'])):
+    foreach ((array)$this->_tpl_vars['rankings'] as $this->_tpl_vars['ranking']):
+?>
+<table class="outer">
+  <tr>
+    <th colspan="6" align="center"><?php echo $this->_tpl_vars['ranking']['title']; ?>
+ (<?php echo $this->_tpl_vars['lang_sortby']; ?>
+)</th>
+  </tr>
+  <tr>
+    <td width='7%' class="head"><?php echo $this->_tpl_vars['lang_rank']; ?>
+</td>
+    <td width='28%' class="head"><?php echo $this->_tpl_vars['lang_title']; ?>
+</td>
+    <td width='40%' class="head"><?php echo $this->_tpl_vars['lang_category']; ?>
+</td>
+    <td width='8%' class="head" align='center'><?php echo $this->_tpl_vars['lang_hits']; ?>
+</td>
+    <td width='9%' class="head" align='center'><?php echo $this->_tpl_vars['lang_rating']; ?>
+</td>
+    <td width='8%' class="head" align='right'><?php echo $this->_tpl_vars['lang_vote']; ?>
+</td>
+  </tr>
+
+  <!-- Start files loop -->
+  <?php if (count((array)$this->_tpl_vars['ranking']['file'])):
+    foreach ((array)$this->_tpl_vars['ranking']['file'] as $this->_tpl_vars['file']):
+?>
+
+  <tr>
+    <td class="even"><?php echo $this->_tpl_vars['file']['rank']; ?>
+</td>
+    <td class="odd"><a href='singlefile.php?cid=<?php echo $this->_tpl_vars['file']['cid']; ?>
+&amp;lid=<?php echo $this->_tpl_vars['file']['id']; ?>
+'><?php echo $this->_tpl_vars['file']['title']; ?>
+</a></td>
+    <td class="even"><?php echo $this->_tpl_vars['file']['category']; ?>
+</td>
+    <td class="odd" align='center'><?php echo $this->_tpl_vars['file']['hits']; ?>
+</td>
+    <td class="even" align='center'><?php echo $this->_tpl_vars['file']['rating']; ?>
+</td>
+    <td align='right'><?php echo $this->_tpl_vars['file']['votes']; ?>
+</td>
+  </tr>
+
+  <?php endforeach; endif; ?>
+  <!-- End links loop-->
+
+</table>
+<br />
+<?php endforeach; endif; ?>
+<!-- End ranking loop -->

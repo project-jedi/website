@@ -1,0 +1,6 @@
+# robots.txt for http://www.delphi-jedi.org/
+#
+User-agent: *
+
+Allow: /index-robots.htm
+Disallow: /

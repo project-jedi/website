@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI - Converting APIs</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=251 valign="middle">
+<a href="index.html">
+<img src="img/jedi-smaller.gif" width=241 height=66 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Converting APIs</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>Email: tech AT delphi-jedi DOT org</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+
+<h3>Quick Links</h3>
+<p>
+<ul type="circle">
+<LI><A HREF="#reflinks" style="text-decoration:none;color:maroon;"><B>Reference Links</B></A></li>
+<LI><A HREF="#guidelines" style="text-decoration:none;color:maroon;"><B>Standards and Guidelines</B></A></li>
+<LI><A HREF="apipackspec.html" style="text-decoration:none;color:maroon;"><B>Submit a Translation</B></A></li>
+<li><A HREF="ftp://ftp.delphi-jedi.org/manuals/Tutorial4.zip" style="text-decoration:none;color:maroon;">Download <b>Project JEDI Conversion Tutorial</b></A></li>
+<li><A HREF="http://www.yahoogroups.com/community/delphi-jedi" style="text-decoration:none;color:maroon;"><b>Join the API header developers' support list</b></A></li>
+</UL>
+
+<h3>What is an API Header?</h3>
+<p>An API (Application Programming Interface) is a collection of programming libraries distributed as a single unit along with the interfacing necessary to allow applications to access these units. On Windows, APIs most frequently they take the form of a number of DLLs.  The headers are C source modules that publish the declarations and symbols for the various function calls exposed to the interface when the particular DLL is loaded.</p>
+
+<p>Function headers for the libraries are coded in a consistent, format that supplies an interface for programmers to access application features from their own applications. API headers are almost always written in C or C++. Project JEDI's objective is to convert these headers into Pascal, providing pre-translated interfaces for Delphi programmers.</p>
+
+<p>We refer to these &quot;Pascal versions&quot; as <i>conversions</i> or <i>translations</i>.  The two terms are interchangeable.  However, because the two languages are <b>not</b>, there's often a lot of refactoring involved in converting (translating) the headers.</p>
+
+<h3>Project Jedi and Borland</h3>
+
+<p>When Project JEDI began in 1997, our main purpose was to write interface units for APIs that were not supported in Delphi releases. The project's dedication to that goal of converting APIs for free use by any Delphi developer remains.</p>
+
+<p>In the first quarter of 1999, Borland approached Project JEDI, proposing a close liaison between our participants and their own Delphi product development effort. In March that year, Borland formally announced the relationship, its support for our work and its intention to incorporate our best products in the next Delphi release.</p>
+
+<p>These days the relationship is described by Borland [Codegear] Developer Support as <i>The JEDI Initiative</i> and you can read up on it <a href="http://bdn.borland.com/article/22" ><B>HERE</B></a>.</p>
+
+<A NAME="guidelines"></a>
+<h3>Standards and Guidelines </h3>
+
+<P>Two overlapping levels of standards compliance exist:  Project JEDI standards (which largely deal with how translations should be packaged) and Borland standards (which are concerned with source code layout and methodology).</p>
+
+<p>Borland supplied some tools and the set of strict guidelines that needs to be followed to make our work compliant with Delphi R&amp;D standards.  For copyright and version control reasons, Borland would not allow us provide our own downloadable kits of the standards and the supporting tools.  Unfortunately, some of these resources have since been moved or lost.</p>
+
+<blockquote>
+If you find a dead link, by all means post a message to the <a href="http://www.yahoogroups.com/community/delphi-jedi" style="text-decoration:none;color:maroon;"><b>support list for the API conversions</b></a>.</p>
+</blockquote>
+
+                  <table cellpadding=8 cellspacing=4>
+                    <tr>
+                      <td align="center">
+<B>The 'JEDI-certified' marks</B>
+                      </td> 
+                      <td align="center">
+<B>The 'Borland-compliant' marks</B>    
+                      </td>
+                    </tr>         
+                    <tr>
+                      <td align="center">
+<p><IMG SRC="img/JediCertified.gif" ALT="JEDI Certified">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<IMG SRC="img/jedi_j.gif"  ALT="J">
+                     </td>
+                      <td align="center">                
+<IMG SRC="img/BorlandCompliant.gif" ALT="Borland Compliant">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<IMG SRC="img/borland_b.gif"  ALT="B">
+                      </td>
+                    </tr>
+                  </table>
+
+<p>JEDI programmers are encouraged to produce Delphi code that conforms to the set of code and conversion guidelines that was established with the publication of the 
+<A HREF="ftp://ftp.delphi-jedi.org/manuals/Tutorial4.zip"  style="text-decoration:none;color:maroon;">
+<b>Project JEDI Conversion Tutorial</b></A>;  and to the pack specifications defined in <A HREF="apipackspec.html" style="text-decoration:none;color:maroon;"><b>How to Present Your API Conversion</b></A>. Conforming work will be granted JEDI Certification once its developers have completed the testing and documentation requirements.</p>
+
+<p>The Borland requirements differ a little as to the naming and use of some code elements and objects. To be eligible to be considered for inclusion with the next release of Delphi, the work must comply with the guidelines published in these two documents:</p>
+<blockquote>
+
+<p>
+<a HREF="http://bdn.borland.com/article/10281" style="text-decoration:none;color:maroon;">
+Pascal Header Translation Specification</a><BR>
+<a HREF="http://bdn.borland.com/article/10280" style="text-decoration:none;color:maroon;">
+Borland Code Style Guide</a></p>
+
+</blockquote>
+
+<h4><i>Non-Standard Code</i></h4>
+
+<p>Non-standard donated conversions are perfectly acceptable. Donors will be assisted to adapt their code to standard if they wish.</p>
+
+<p><A HREF="apipackspec.html" style="text-decoration:none;color:maroon;">
+Click here for a complete description</A> of the specifications for compliance and certification.</P>
+
+<P><A NAME="reflinks"></a>
+<h3>Additional Resource References</h3>
+<UL type="circle">
+<!-- LI><a href="http://community.borland.com/article/0,1410,22,00.html">Borland-compliant examples and PAR files</a -->
+<li> [Lost link] Borland-compliant examples and PAR files</li>
+<LI> <A HREF="ftp://ftp.delphi-jedi.org/darth/HeadConv.zip" style="text-decoration:none;color:maroon;">Project JEDI Header Converter utility</a>, from original source known as <i>Dr Bob's Header Converter</i> (Bob Swart)</li>
+<LI><A HREF="http://www.drbob42.com/delphi/headconv.htm" style="text-decoration:none;color:maroon;">Dr Bob's header conversion articles</A>
+</UL>
+<hr size=1>
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="index.html">
+<img src="img/return.gif" width=165 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

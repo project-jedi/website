@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Making Forms Work: Part I</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<h3><font color="maroon">Single Document Interface (SDI)</FONT></h3>
+<b>&copy; Kevin S. Gallagher</a></b>
+&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<p>In just about every Delphi application, we 
+use forms to present and retrieve information from users. Delphi arms us with a rich array of visual tools for creating forms and determining their properties and behaviour. We can set them up at design time using the 
+property editors and we can write code to re-set them dynamically at runtime.</P>
+
+<p>Those of us who have used other visual programming languages such as Microsoft Visual Basic appreciate Delphi's many features for working with forms. However, even with all the creature comforts built into Delphi, there are many things we might want to do which cannot be solved by simply dropping a component onto a form and setting its properties. Over the next several months I will show you some of the simple and more complex tricks for making forms work more efficiently.</P>
+
+<h3>Starting Simply</h3>
+
+<p>To get things rolling, let's start off at the simple end with SDI (Single Document Interface) forms.</P>
+
+<p>Starting a new Delphi project generates and displays the first form in the project file. To view the project file code, from the IDE menu:</p>
+<ul type="circle">
+<li>under Delphi 2 and 3 (in the IDE), go to View-&gt;Project Source </li>
+
+<li>under Delphi 4 Project-&gt;View Source menu item.</li>
+</ul>
+
+<p>The line we are interested in is </P>
+<p><FONT FACE="Courier New,Courier"><pre>
+Application.CreateForm(TForm1, Form1);</pre></font></P>
+
+<p>The method <I>CreateForm</I> prepares the form to be displayed as the program's main form. The form is not displayed until the next line executes:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+Application.Run;</pre></font></P>
+
+<p>Executing <I>CreateForm</I> utilizes memory and system resources. This is not a problem with an application with a single form, but if the project has many forms and they are all created at program startup you may run into low resource problems down the road. Your development computer probably has plenty of memory installed but the situation may be quite different on users' machines, where your application has to run with much more limited resources and in competition with other applications.</p>
+
+<P>The solution is simple: take control of form creation and destruction. </P>
+
+<h3>Taking Control</h3>
+
+<p>Let's look at the basics for controlling forms in a new project. Imagine you have an application that has a main form (frmMain) with two subsidiary forms to add a new customer (frmAddNewCustomer) and edit customers (frmEditCustomer). When you define the two subsidiary forms, Delphi places the following code into the project file:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+  Application.Initialize;   
+  Application.CreateForm(TfrmMain, frmMain);   
+  Application.CreateForm(TfrmAddNewCustomer, frmAddNewCustomer);   
+  Application.CreateForm(TfrmEditCustomer, frmEditCustomer);  
+  Application.Run;  
+<B>end</B></pre></font></P>
+
+
+<p>Each <tty>Application.CreateForm</tty> line creates the form object specified by the variable in the second argument as an instance of the class specified in the first. If you leave the code as it is, all three forms will be created in order. The first form in the list (named frmMain here, but it could be any name) is designated as the main form for the project and will be visible once Application.Run has executed. To show either of the other forms you would to apply code to some user-generated event to &quot;show&quot; it (i.e. bring it to the top):</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+FrmAddNewCustomer.Show; 
+FrmAddNewCustomer.ShowModal;</pre></font></P>
+
+<h4>A Modal Form</h4>
+
+<p>Since it is very unlikely that this application would need to have all three forms showing at once, it makes no sense to keep them there hidden and using resources unnecessarily. Our program should create the Add or Edit form only when needed! For example, to display the Add Customer form from the main form: </p>
+
+<UL type="circle">
+
+<li>From the IDE menu, File-&gt;Use Unit, select Unit2 (frmAddNewCustomer).<br></li>
+
+<li><p>Remove the following line from the project file:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>Application.CreateForm(TfrmAddNewCustomer, frmAddNewCustomer);</pre></font></P>
+<p>(Delete it manually or use Project Options in the IDE.)</p></li>
+
+<li><p>Place a Command Button on the form, double click the left mouse button to generate an OnClick event. This drops us down to the code editor were you would amplify the supplied code framework to show the Add New Customer form when the user clicks the button:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>procedure TfrmMain.cmdAddNewCustomerClick(Sender: TObject); 
+var 
+  f:TfrmAddNewCustomer ; 
+begin 
+  f := TfrmAddNewCustomer.Create(Self) ; 
+  try 
+    f.ShowModal ; 
+  finally 
+    f.Release ; 
+  end ; 
+end; </pre></font></P>
+
+<p>The first thing needed is a variable (f, in our example) to create an instance of the &quot;Add New Customer&quot; form, whose type is TfrmAddNewCustomer. Using this variable, the &quot;Add New Customer&quot; form can be initialized using the Create method of our form's ancestor, TCustomForm. The single argument required by <I>Create</I> is the <I>Owner</I> of the form.</p>
+
+<p>Our example uses the <I>Self</I> keyword to make the main form the owner. The owner could also be the application itself; or you can specify <I>Nil</I>. Caution is needed with a <I>Nil</I> owner, however. You must take care to destroy the form object yourself, using the <I>Free</I> method. If you try to use <I>Release</I> for a form (or any object) with a <I>Nil</I> owner, your program will crash later with an access violation.</p></li>
+
+<li><P>Once the form has been created, the method <I>ShowModal</I> displays it in a modal state.  During the time the form is shown and terminated there may be problems, so placing the method call into a <i>try...finally</i> exception block guarantees that the <I>Release</I> method is called and resources are released once the main form has terminated. (In contrast, <I>Free</I>
+releases the resources immediately the modal form closes, making a safer call if the modal form is likely to be invoked more than once during the program).</P></li>
+</ul>
+
+<h4>A Non-Modal Form</h4>
+
+<P>If the secondary form needs to be non-modal, use <I>Show</I> instead of <I>ShowModal</I>. We can't use exactly similar code because the form would show briefly, then disappear, because <I>Release</I> is called right after showing the form. To correct this problem use the code shown next:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.cmdAddNewCustomerClick(Sender: TObject); 
+var 
+  f:TfrmAddNewCustomer ; 
+begin 
+  f := TfrmAddNewCustomer.Create(Self) ; 
+  f.Show ; 
+end; </pre></FONT></P>
+
+
+<p>Then in the <I>FormClose</I> event for the Add New Customer form add the following (Action <I>caFree</I> frees up all resources for the form and destroys it):</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmAddNewCustomer.FormClose(Sender: TObject; 
+var 
+  Action: TCloseAction; 
+begin 
+  Action := caFree ; 
+end; </pre></FONT></P>
+
+<p>Whoops, there is a slight problem with the code! Can you see the problem? Since the secondary form is non-modal the user can go back to the main form and press the Add button again. The program tries to create another Add New Customer form with unfortunate results if you have not planned for it! To prevent this from happening first check to see if the form object already exists. If so, simply show it; if not, create the form and then show it.</P>
+
+<p>There are various ways to test for an object's existence, for example:</FONT><P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.cmdAddNewCustomerClick(Sender: TObject); 
+var 
+  f:TfrmAddNewCustomer ; 
+  iFound, 
+  i:Integer ; 
+begin 
+  iFound := -1; 
+  for i := 0 to Screen.FormCount -1 do 
+    if Screen.Forms[i] is TfrmAddNewCustomer then 
+      iFound := i; 
+  if iFound &gt;= 0 then begin 
+    ShowMessage('Add Customer form already created, will now show it') ; 
+    Screen.Forms[iFound].Show ; 
+  end 
+  else begin 
+    ShowMessage('Add New Customer form not found, creating...') ; 
+    f := TfrmAddNewCustomer.Create(Self) ; 
+    f.Show ; 
+  end; 
+end; </pre></FONT></P>
+
+<p>These methods give your program much better control of resources than auto-created forms, with very little hand-coding. There is a slight performance trade-off with dynamically created forms, but a delay is unlikely to be perceptible unless the called forms are very complex and/or your user has an unreasonably slow machine. </P>
+<blockquote>
+<B>Caution</B>: When defining forms for dynamic invocation you should be aware of the need to avoid any named reference to the properties of the object whose variable is declared in the interface section. That variable will never be assigned because the calling form uses its own local variable to invoke it. For example:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmAddNewCustomer.FormCreate(Sender: TObject); 
+begin 
+  frmAddNewCustomer.Top := Top + 12 ; 
+end; </pre></FONT></P>
+
+<p>Using our example, the reference to the variable frmAddNewCustomer would cause an access violation. The code below demonstrates how you need to work with properties of the secondary form:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmAddNewCustomer.FormCreate(Sender: TObject); 
+begin 
+  Top := Top + 12 ; 
+end; </pre></FONT></P>
+
+<p>If for some reason you need an explicit reference to the form object, use the identifier <I>Self</I> in front of the property or method. </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmAddNewCustomer.FormCreate(Sender: TObject); 
+begin 
+  Self.Top := Self.Top + 12 ; 
+end; </pre></FONT></P>
+
+<p>The variable in the interface section of can be safely removed if the form is intended only for dynamic invocation. It is scarcely worth doing, though, since it will be optimized out when the project is compiled.<P>
+</blockquote>
+
+<h4>A Modeless Form</h4>
+
+<p>For completeness, here is a method for showing a modeless form.</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.cmdAddNewCustomerClick(Sender: TObject); 
+var 
+  f:TfrmAddNewCustomer ; 
+begin 
+  with TfrmAddNewCustomer.Create(Self) do 
+  begin 
+    Show ; 
+  end ; 
+end; </pre></FONT></P>
+
+<p>Once you are finished using the form it can be destroyed by using the following code:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.cmdCloseFormClick(Sender: TObject); 
+var 
+  f:TForm; 
+begin
+  f := TForm(FindComponent('frmAddNewCustomer')) ; 
+  if f &lt;&gt; nil then 
+    f.Release 
+  else 
+    ShowMessage('Failed to find it') ; 
+end; </pre></FONT></P>
+
+<h3>Tidy Habits</h3>
+
+<p>Use <I> FindComponent</I> to determine if the form exists or not. <I>FindComponent</I> returns an object (if it exists) of type TControl. Since the desired type is TForm, we typecast FindComponent's result to cast the object as TForm and assign a TForm variable to grab the result. Theoretically, if <I> FindComponent</I> returns <I>Nil</I>, the form does not exist - <I>or does it?</I> </P>
+
+<p>Try placing the two procedures above into a main form. Provide a command button named 'CmdAddNewCustomer' to create the form. Provide another command button 'CmdCloseForm' to close the form. Compile and run the project. Click the 'CmdAddNewCustomer' button to create the form and then close it using the 'CmdCloseForm' button.</P>
+
+<p>Now click &quot;cmdAddNewCustomer&quot; twice followed by click &quot;cmdCloseForm&quot; twice. On the first attempt the child form is found, then closed, the second attempt fails!</p>
+
+<p>To get around this problem a unique name needs to be assigned to the child form. Select a meaningful name and append an integer to the end of the name, viz.</p>
+<p><FONT FACE="Courier New,Courier"><pre>'AddCustomer_' + IntToStr(iForm) ;</pre></FONT></P>
+
+<p>The variable iForm would be a private variable of frmMain which you would initialize during the OnCreate event of frmMain. Here is the altered code for creating the subsidiary form:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.Button1Click(Sender: TObject);
+var 
+  f:TfrmAddNewCustomer ; 
+begin 
+  Inc(iForm) ; 
+  with TfrmAddNewCustomer.Create(Self) do begin 
+    Name := 'AddCustomer_' + IntToStr(iForm) ; 
+    { The caption will be the name of the form given above } 
+    Show ; 
+  end ; 
+end; </pre></FONT></P>
+
+<p>On the first call to this event iForm would be zero, then directly before creating the form we use Inc to increment iForm to one. This gives the next invocation of the form a name of AddCustomer_1, which can be used later to remove any instances of the form:<//P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.cmdCloseFormClick(Sender: TObject); <P>
+var 
+  f:TForm ; 
+  i:Integer ; 
+begin 
+  for i := 1 to iForm do 
+  begin 
+    f := TForm(FindComponent('AddCustomer_' + IntToStr(i))) ; 
+    if f &lt;&gt; nil then 
+      f.Release 
+    else 
+      MessageDlg('Failed to locate AddCustomer_' + 
+                              IntToStr(i),mtError,[mbOk],0) ; 
+  end ; 
+end; </pre></FONT></P>
+
+<h3>Right Place, Right Time</h3>
+
+<p>One more benefit from creating forms dynamically is the ability to position a secondary form precisely, relative to a control on the parent form. </P>
+
+<p>Suppose you need to position the Add New Customer form directly on a node in a TreeView displaying accounts. In this example the Add form is displayed when the user double clicks on the TreeView.</p> 
+
+<p>First place a TreeView on a main form in a project, select the TreeView, press F11 for the Object Inspector, select the property &quot;Items&quot; and double click the left mouse button. Add several new items and sub-items (optional). Finish up by pressing the &quot;OK&quot; button. </P>
+
+<p>Next, select the Events page of the Object Inspector while the TreeView is still selected. 
+Double click on the event OnDblClick and enter the following code (which I shall explain in a later article):</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TfrmMain.TreeView1DblClick(Sender: TObject); 
+var
+  A, 
+  R, 
+  P : TPoint; 
+  TheSelectedNode : TTreeNode; 
+  f:TfrmAddNewCustomer ; 
+begin
+  if TreeView1.Selected = nil then Exit;
+
+  GetCursorPos(P); 
+  A := TreeView1.ScreenToClient(P); 
+  TheSelectedNode := TreeView1.GetNodeAt(A.x, A.y);
+  if TheSelectedNode = nil then 
+    raise Exception.Create('Please click on an Item in the TreeView!');
+  GetCursorPos(R) ; 
+  P := ClientToScreen(Point(A.x,A.y)); 
+  f := TfrmAddNewCustomer.Create(Self) ; 
+  try 
+    f.Top := R.y ; 
+    f.Left := R.x ; 
+    f.Caption := 'Add customer to account: &quot;' + 
+                                     TheSelectedNode.Text + '&quot;' ; 
+    f.ShowModal ; 
+  finally 
+    f.Release ; 
+  end ; 
+end; </pre></FONT></P>
+
+<p>Run the project. Select a node in the TreeView and double click the left mouse button. The secondary form should appear with its top left corner positioned on the node which was double clicked. Its caption identifies the item selected in the TreeView. If you had centered the form on the screen, the specific information concerning the item selected in the TreeView would not be accessible. Again, dynamic creation of forms can be of great service to you!</P>
+
+<p>I hope this article has given some insight into the techniques Delphi puts at your disposal for taking control of form creation and behaviour when developing SDI forms. Next month, more on working with forms. Until then, have fun!</P>
+
+<p align="center"><I>Kevin S. Gallagher is a full time systems analyst at Oregon Department Of Revenue<br>
+where he uses Delphi, Visual Basic and Clipper to create Property Tax Systems</I>. </p>
+
+<hr size=1>
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

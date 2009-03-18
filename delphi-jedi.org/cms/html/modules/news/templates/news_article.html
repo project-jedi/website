@@ -1,0 +1,37 @@
+<div style="text-align: left; margin: 10px;"><{if
+$pagenav}>Page <{$pagenav}><{/if}></div>
+
+<div style="padding: 3px; margin-right:3px;">
+<{include file="db:news_item.html" story=$story}>
+</div>
+
+<div style="text-align: left; margin: 10px;"><{if
+$pagenav}>Page <{$pagenav}><{/if}></div>
+
+<div style="padding: 5px; text-align: right;
+margin-right:3px;">
+<a href="print.php?storyid=<{$story.id}>"><img
+src="images/print.gif" border="0"
+alt="<{$lang_printerpage}>" /></a> <a target="_top"
+href="<{$mail_link}>"><img src="images/friend.gif"
+border="0" alt="<{$lang_sendstory}>" /></a>
+</div>
+
+<div style="text-align: center; padding: 3px;
+margin:3px;">
+<{$commentsnav}>
+<{$lang_notice}>
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+<{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+<{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+<{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+<{include file='db:system_notification_select.html'}>

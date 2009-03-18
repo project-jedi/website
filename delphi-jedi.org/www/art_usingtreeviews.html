@@ -1,0 +1,509 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Working with Treeviews</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Kevin S. Gallagher</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<h3>TreeViews Basics</h3>
+
+<p><A HREF="ftp://ftp.delphi-jedi.org/voyager/UsingTreeviews.zip">Download article &amp; projects</a></p>
+
+<P>One of the least used components in Delphi is the TreeView control.  When properly used the TreeView can make a big difference in how well someone can utilize your application. One good reason for using a TreeView is, humans identify with graphics much better then with text. Just looks at road signs, at least for me the color and shape of a sign triggers a response prior to reading the text on the sign. One significant aspect of a TreeView is that each branch item (node) can be represented with an image. Example, Microsoft Explorer uses different images for open and closed folder(s), see example below.</P>
+
+<P><b>Figure 1</b></P>
+<P><IMG SRC="img/wwtvImage1.gif" WIDTH=151 HEIGHT=201></P>
+
+<P>Note in the above example several non-selected nodes have special images. This makes them easy to identify much like road signs. The last two nodes in the example make use of custom images assigned by a Delphi application written by Neil J. Rubenking. </P>
+
+<P>Another compelling reason for using trees is that they are good for representing a window that displays a hierarchical list of items, such as the table data, or the files and directories on a disk.  Suppose you have a user or users who find it difficult to traverse data in grids or have limited space on a form to show the data. Using a TreeView makes it much easier to traverse the data since the relationships are easier to understand when viewed with links to parent to children data shown linked together with lines.</P>
+
+<P><b>Figure 2</b></P>
+<P><IMG SRC="img/wwtvImage2.gif" WIDTH=486 HEIGHT=361></P>
+
+<P>Although the example above makes it easier to see relationships it could be enhanced.  For example, by using images companies with no orders could use one image while companies with orders use another image. A sales person would know which company to call to see if they need anything. Of course a report could be made to show the no-order companies also.</P>
+
+<P>Snippet for special images (compare above image with below image on node <I>Driver’s Grotto</I>)</P>
+<P><b>Figure 3</b></P>
+<P><IMG SRC="img/wwtvImage3.gif" WIDTH=182 HEIGHT=46></P>
+
+<P>Note: The grids in <I>figure 2</I> are there to show that the TreeView data moves through the data. In a real application the grid space would be used as business rules dictate. </P>
+
+<P><U>Basics: Adding nodes</u></P>
+<P>The main parts of a TreeView are <I>nodes</I> (TTreeNodes), which are a collection of type <I>node</I> (TTreeNode).  TTreeNodes are seen as the <I>items</I> property of a TreeView, within the <I>items</I> are the individual nodes which are of type TTreeNode. Delphi help will tell you that a node can be accessed as follows:</P>
+
+<font face="Courier New"><pre>
+  MyTreeNode := TreeView1.Items[1];
+</pre>
+</font>
+
+<P>This will access the second node (providing there are at least two nodes in the TreeView). Also mentioned in the help file, avoid referencing a node, as in the above example, this is slow. Most likely you will want to access the selected node (see <I>figure 4</I>)</P>
+
+<P><B>Figure 4</b></P>
+</font></FONT>
+<FONT FACE="Courier New">
+<pre>
+<b>procedure</B> TfrmTrees.cmdSelectedNodeClick(Sender: TObject);
+<B>var</b>
+  tNode: TTreeNode;
+<B>begin</b>
+  tNode := TreeView1.Selected ;
+  <B>if</B> tNode = <B>nil then</b>
+    exit ;
+</pre>
+</FONT>
+
+<P>To add a single node to a TreeView;</P>
+
+<P><B>Figure 5</b></P>
+<P>This adds a single node to a TreeView with no nodes:</P>
+
+<FONT FACE="Courier New">
+<pre>
+  TreeView1.Items.AddFirst(TreeView1.Selected,'Root') ;
+</pre>
+</FONT>
+
+<P>or</P>
+
+<FONT FACE="Courier New">
+<pre>
+  TreeView1.Items.AddFirst(<B>nil</B>,'Root') ;
+</pre>
+</FONT>
+
+<P>and borrowing code from figure 4</P>
+
+<FONT FACE="Courier New">
+<pre>
+  TreeView1.Items.AddFirst(tNode.Selected,'Root') ;
+</pre>
+</FONT>
+
+<P>In the above example one node would be displayed within the TreeView at level zero. As nodes are added beneath the node the level increases. If you need to know the level, use the <I>level</I> property of TTreeNode which starts at zero and increments by one for each level down. Continuing on, to add a node at the same level as the prior one use the method AddChild. When using AddChild the first parameter indicates where the node will be placed i.e.</P>
+
+<FONT FACE="Courier New">
+<pre>
+  TreeView1.Items.AddFirst(TreeView1.Selected,'Root') ;
+  TreeView1.Items.AddChild(TreeView1.Selected,'Child') ;
+</pre>
+
+</FONT>
+
+<P>The result will be two new nodes at level zero since we have not specifically pointed to a node to add the new nodes too. This is the same as </P>
+
+<FONT FACE="Courier New">
+<pre>
+  TreeView1.Items.AddFirst(<B>nil</B>,'Root') ;
+  TreeView1.Items.AddChild(<B>nil</B>,'Child') ;
+</pre>
+</FONT>
+
+<P>If you examine Delphi source code Addxxx calls a function called AddObjectFirst. This function ask the question, Is the node being passed equal to <I>nil</I>? If not then the parent node is used to add the new node to the TreeView, otherwise a call to InternalAddObject is called which handles creating a node if needed. In either case <I>Root</I> and <I>child</I> will be at level zero. If the intent was to place <I>Child</I> beneath <I>Root</I> (making <I>Child</I> and sibling of <I>Root</I>) then we need to tell the TreeView exactly were to place the <I>Child </I>node.</P>
+
+<P>This is how it is done, declare a variable of type TTreeNode. Assign it to the result of AddFirst which returns a reference to the node just added. This reference is then used as parameter one for the AddChild method to attach a child to the node just added rather then at the same level as the node added labeled as &quot;root&quot;. </P>
+
+<FONT FACE="Courier New">
+<pre>
+<B><P>var</P>
+</B><P>  nNode: TTreeNode ;</P>
+<B><P>begin</P>
+</B><P>  nNode := TreeView1.Items.AddFirst(<B>nil</B>,'Root') ;</P>
+<P>  TreeView1.Items.AddChild(nNode,'Child') ;</P>
+</pre>
+</FONT>
+
+<P>Besides visually seeing the level of the second node in relation to the first node use the OnChange event of the TreeView to dynamically check the level</P>
+
+<FONT FACE="Courier New">
+<pre>
+<B>procedure</B> TfrmBasicOne.TreeView1Change(Sender: TObject; Node: TTreeNode);
+<B>begin</B>
+  <B>if</B> Node &lt;&gt; <B>nil</B> <B>then</B>
+    Caption := 'TreeView1Change, Node level is ' + IntToStr(Node.Level)
+  <B>else</B>
+    Caption := 'TreeView1Change, Node level is unknown' ;
+<B>end</B>; 
+</pre>
+</FONT>
+
+<P>IMPORTANT NOTE:  Never assume there is a <I>Selected node</I> at any given time. Always check as shown above.</P>
+
+<P>Nodes can also be added in a way, which allows you to store objects with the node. All of the <I>Add</I> methods have methods for adding objects. For instance</P>
+
+<P>TreeView1.Items.Add has a mirror of TreeView1.Items.AddObject</P>
+
+<P>Just about anything you want can be stored using AddObject. In the demos included there are several examples which store records, classes and VCL objects. Shown below in <I>figure 6</I> are three examples. The code in <I>figure 6</I> is part of the demos, data is shared between two TreeViews on a form.</P>
+
+<P><B>Figure 6</b></P>
+</font></FONT>
+<FONT FACE="Courier New">
+<pre>
+<b>type</B>  TBranchNodeData = <B>class</B>
+    hRootKey: HKEY ;
+    sPath   : <B>String</B>;
+    NodeID  : HTreeItem ;
+  <B>end</B>;
+
+<B>type</B>
+  TBranchBookMarkData = <B>class</B>
+    NodeID  : HTreeItem;
+    sPath   : <B>String</B>;
+  <B>end</B>;
+
+<B>type</B>
+  TExpandStrData = <B>Record</B>
+    Reg: TRegistry ;
+    KeyName: <B>String</B> ;
+    iImage: Integer ;
+  <B>end</B>;
+
+<B>var</B>
+  xNode   : TTreeNode ;
+  BookNode: TTreeNode ;
+  hID     : HTreeItem ;
+
+<B>begin</B>
+  xNode := RegBranchTree.Items.AddChild(aNode,aList.Strings[i]) ;</P>
+  <B>with</B> xNode <B>do</B>
+  <B>begin</B>
+    hID  := ItemId ;
+    Data := TBranchNodeData.Create ;
+    cKey := aList.Strings[i]
+    cRoot := RootKeyName(rKey) ;
+    with BookMarkTree do
+    <B>begin</B>
+      BookNode := Items.AddChild(Selected,cKey) ;
+    <B>end</B> ;</P>
+    BookNode.Data := TBranchBookMarkData.Create ;
+    TBranchBookMarkData(BookNode.Data).NodeID := hId ;
+    TBranchBookMarkData(BookNode.Data).sPath := cKey ;
+    TBranchNodeData(Data).NodeID := BookNode.ItemId  ;
+  <B>end</B> ;
+<B><P>end ;</P>
+</B></pre>
+</FONT>
+
+<P>A simpler demo is also shown where a TreeView is populated with nodes where each one references a TTabSheet on a PageControl.</P>
+
+
+<P><U>Basics: assigning images to nodes</U></P>
+
+<P>Each node added to a TreeView can be assigned images. The property <I>Images</I> is used for assigning images for displaying on the left side of a node. The property <I>StateImages</I> can help display the &quot;state&quot; of an image, this is in addition to the <I>Images</I> image and can be displayed at the same time. To use these properties a TCustomImageList is needed for each property, or one can be shared between the two.  Once there are images added to the Image List you must tell the TreeView which images to use using TreeView.Images from the object inspector or in code.</P>
+
+<P><B>Figure 7</B></P>
+
+</font></FONT>
+<FONT FACE="Courier New">
+<pre>
+aNode := TreeView1.Items.AddChild(Node,'Whatever’);
+<B>with</B> aNode <B>do
+begin</B>
+  ImageIndex := 0 ;
+  SelectedIndex := 1 ;
+<B>end</B> ;
+</pre>
+</FONT>
+
+<P>Shown in <I>figure 7</I> a new node is added and the image properties are set. </P>
+
+<P><U>Basics: Who is my parent?</U></P>
+<P>Once nodes have been added to a TreeView there will be times when the path leading to the node is needed.  Shown in <I>figure 8</I> is a recipe for getting the path.</P>
+
+<P><B>Figure 8</b></P>
+
+<FONT FACE="Courier New">
+<pre>
+<b>var</B>
+  nParent : TTreeNode ;
+<B>begin
+  if</B> Node = <B>nil</B> <B>then</B>
+    exit ;
+  nParent := Node.Parent ;
+  <B>if</B> <B>not</B> (nParent = <B>nil</B>) <B>then</B>
+  <B>begin</B>
+    SomeStringList.Add(nParent.Text) ;
+    nParent := nParent.Parent ;
+    <I>{ Always a good idea when in such a loop }</I>
+    Application.ProcessMessages ;
+    <B>if</B> Application.Terminated <B>then</B>
+      exit ;
+  <B>end</B> ;
+<B>end</B>;
+</pre>
+</FONT>
+
+<P>Once you have collected the items iterate backwards through the list and add the items to a string variable (this is shown in the demo project).</P>
+
+
+<h3>Demo projects</h3>
+<P>There are several demo projects, some simple, some very complex. JCL is required for some of the projects and can be found on the <a href="http://sf.net/projects/jcl">JCL Project site</a>.</P>
+
+<h4>Highlights for each project</h4>
+
+<h5><i>Trees_One.dpr</i></h5>
+
+<P>This project consist of eleven forms, the main form is a launch pad for the remaining forms. </P>
+
+<UL type="square">
+<LI>Basic1.pas there are a few simple examples of adding nodes to a TreeView.<br><br></LI>
+<LI>Basic2.pas shows how to prevent a user from selecting a node in the <I>Changing </I>event of the TreeView.</LI>
+<LI>Basic3.pas has a lot of code to show how to place objects into a node. More or less this only takes a few lines of code and the remaining code is only needed to see a working example.<br><br></LI>
+</ul>
+
+<p>Snippet from Basic3; a node is added to a TreeView with the caption of a TPageControl  for the node’s caption and in the second parameter a TTabSheet object.</p>
+
+<FONT FACE="Courier New">
+<pre>
+<B>with</B> PageControl1 <B>do</B>
+     TreeView1.Items.AddObject(nil,Pages[i].Caption,Pages[i]) ;
+</pre>
+</font>
+
+<P>Later, while the user is traversing the TreeView the code below changes the active sheet in the TPageControl using the sheet object stored in the node. </P>
+
+<FONT FACE="Courier New">
+<pre>
+<B>procedure</B> TfrmAddObject.TreeView1Change(Sender: TObject; Node: TTreeNode);
+<B>begin</B>
+  <B>if</B> Node = <B>nil</B> <B>then</B>
+    exit ;
+  <B>if</B> Node.Data = <B>nil</B> <B>then</B>
+    exit ;
+  PageControl1.ActivePage := TTabSheet(Node.Data) ;
+<B>end</B>;
+</pre>
+</font>
+
+<UL type="square">
+<LI>WhoIsMyParent.pas; Suppose you are no a node and need to know all it’s parents, in other words a string path to the node up to its highest parent.
+
+<P><B>Figure 9</B></P>
+
+<P><IMG SRC="img/wwtvImage4.gif" WIDTH=398 HEIGHT=161></P>
+
+<P>Using the OnChange event of the TreeView we can build a path starting at the selected node which ends at the lowest level of the tree. Each node is stored in a list and later reversed into a string. This can be seen to the right of the TreeView.</P>
+</LI>
+
+<LI>Unit1.pas shows many things such as tracking the selected node and it’s parent nodes various properties. The TreeView was created in the second demo project and saved to disk using TreeView.Items.SaveToFile method. Next it was placed into a RC file and a RES file was created. To load the TreeView from resource the following code was used.
+
+<FONT FACE="Courier New">
+<pre>
+<b>procedure</B> TfrmTrees.FormCreate(Sender: TObject);
+<B>var</B>
+  rs: TResourceStream ;
+<B>begin</B>
+  rs := TResourceStream.Create(hinstance,'TREE_DATA', RT_RCDATA ) ;
+  <B>try</B>
+    TreeView1.LoadFromStream(rs) ;</P>
+    rs.Position := 0 ;</P>
+    RichEdit1.Lines.LoadFromStream(rs) ;
+</pre>
+</FONT>
+
+<P>Using a stream we load the nodes into a resource stream, which is then loaded, into the TreeView using the method called LoadFromStream. </P>
+
+<P>Another point of interest in unit1 is the <I>ItemID</I> property of TTreeNode. By storing the <I>ItemID</I> value it can later be used to revisit the node at a later time by selecting it in the ListBox. This is important to know in the event you need to <U>bookmark</U> and node, go back to it without actually selecting it and finally get information about it all without visually selecting it. You can also visually select it too.</P>
+
+<P>The following code shows how to store the <I>ItemID</I> of the selected node into a TListBox. To store the property it is first typecast to an integer and then converted to a string for storage. </P>
+
+<FONT FACE="Courier New">
+<pre>
+cNodeId := IntToStr(Integer(TreeView1.Selected.ItemID)) ;
+  if HTreeItemList.Items.IndexOf(cNodeId) = -1 then
+  begin
+    HTreeItemList.Items.Add( cNodeId ) ;
+    ...;
+  end ;
+</pre>
+</FONT>
+
+<P>The following code shows how to select a node which was stored in the above snippet </P>
+
+<FONT FACE="Courier New">
+<pre>
+<b>procedure</B> TfrmTrees.cmdGoToNodeClick(Sender: TObject);
+<B>var</B>
+  iNodeID   : integer;
+  FoundNode : TTreeNode;
+  iIndex    : Integer ;
+<B>begin</B>
+  iIndex := HTreeItemList.ItemIndex ;
+  <B>if</B> iIndex = -1 <B>then</B>
+    exit ;
+  iNodeID := StrToIntDef(HTreeItemList.Items.Strings[iIndex],0) ;
+  <B>if</B>(  iNodeID = 0  ) <B>then</B>
+    exit;
+  FoundNode := TreeView1.Items.GetNode(HTreeItem(iNodeID));
+  <B>if</B>(FoundNode &lt;&gt; <B>nil</B>) <B>then</B>
+  <B>begin</B>
+    FoundNode.Selected := true;
+    TreeView1.SetFocus ;
+  <B>end</B> ;
+<B>end</B>;
+</pre>
+</FONT>
+
+<P>First several checks are made to prevent an access violation in the event the item is valid, we then pass the integer value taken from the ListBox and cast it as type <FONT FACE="Courier New" SIZE=2>HtreeItemList</FONT> within the method GetNode which if all works we return a TTreeNode on the TreeView. At this point the node is only being referenced and not actually selected. We first check to see if the variable contains a valid reference to a node, if it does the node is then made the selected node.</P>
+
+<P>Another highlight within the unit is code to duplicate a branch in the TreeView and place it into another TreeView. There are no previsions for this in TTreeView, there is on the other hand a <I>Move</I> method for moving nodes within itself. The main point in duplicating nodes is the use of recursion, meaning calling a function which calls itself until all node(s) belonging to the currently selected node are copies into the target TreeView. If you have never used recursion before this might be a helpful example. Note: There are other uses of recursion in this and the second demo project. In the other demo recursion is used to traverse the Windows system registry to create a look-a-like of RegEdit with a twist.</P>
+
+<P>Also shown is a TreeView which stores bookmarks for records in several tables. Again we store data in the data property of each node. Later the data is used to take you to the corresponding record using the code below.</P>
+
+<FONT FACE="Courier New">
+<pre>
+  tOrders.gotobookmark(Node.Data)
+</pre>
+</FONT>
+
+
+<P>No type-casting is needed here. I should point out that in some cases data stored in a node may require initialing memory for the data and is not freed by the TreeView. In this case you must free the memory allocated yourself.</P>
+</li></ul>
+
+<P>Other examples in this project included building trees containing directories and also a tree which places all running programs into a TreeView.</P>
+
+
+<h5><i>EmulateRegistry.dpr</i></h5>
+<P>This project is a more complex example of using a TreeView. Here is a general overview;</P>
+
+<UL type="square">
+<LI>HKEY_CURRENT_USER of the registry is read using some JCL registry functions with the help of recursion to build a TreeView which resembles a cross between the system registry editor and Norton Utilities registry editor. All branches are created which reside under HKEY_CURRENT_USER.<br><br></LI>
+
+<LI>HKEY_LOCAL_MACHINE branch is built by building the top branches and then placing dummy nodes beneath the true nodes. As the user traverses the nodes the dummy nodes are deleted and true nodes are created.<br><br></LI>
+
+<LI>Any node can be selected and bookmarked. Any marked nodes are placed into a secondary TreeView which when clicking the node you are whisked to the node in the main TreeView. bookmarks are stored within the system registry so that they can be used across sessions. These bookmarks can also be removed.<br><br></LI>
+
+<LI>Many of the concepts used for building this project were broken down into the first demo project so that it could be seen better how many things were done.<br><br></LI>
+
+<LI>A special class (<I>bookmarkmanager.pas</I>) was created to manage bookmarks. Actually the core of the class is managing four separate TStringList.<br><br></LI>
+
+<LI>This project is highly complex and most likely will take some time to fully understand.<br><br></LI>
+
+<LI>Being we are accessing HKEY_LOCAL_MACHINE there might be run time errors if the proper rights to this branch are not set.<br><br></LI>
+
+<LI>Limited testing was done under Windows2000. At least one key could not be read, seems that it can not be accessed even with administrator rights.<br><br></LI>
+</UL>
+
+
+<h3>Conclusion</h3>
+<P>In closing, I feel that we have covered the bare essentials for working with a TreeView. In no way have I covered all, which is needed to fully use Delphi’s wrapper for the TreeView control. </P>
+<hr size=1>
+
+<P>
+<B>References</B> (not comprehensive)</P>
+<P><a href="http://www.lischke-online.de/Controls.html">TreeNT</a>, by Mike Lischke, is a complete replacement of Borland's treeview implementation and includes many improvements and enhancements TreeNT is a completely <B>autarchic implementation</B> and does not need the original TTreeView to work.  </P>
+
+<P><a href="http://www.obsof.com">Objective Software Technology</a> (ABC component library), they have a nice TreeView which is data-aware</P>
+
+<P><a href="http://argentis.mweb.co.za/d/da/dart/zen/Articles/TTreeView/">An excellent TreeView tutorial</a>
+
+<P>Delphi demo for custom draw of a TreeView in your Delphi\Demos\CustomDraw directory.</P>
+
+
+<P><B>Required</B></P>
+<P>JCL Jedi library, found at the <a href="http://sf.net/projects/jcl">JCL Project site</A></P>
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

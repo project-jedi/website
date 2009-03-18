@@ -1,0 +1,53 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:07:21
+         compiled from db:news_index.html */ ?>
+<?php if ($this->_tpl_vars['displaynav'] == true): ?>
+  <div style="text-align: center;">
+    <form name="form1" action="index.php" method="get">
+    <?php echo $this->_tpl_vars['topic_select']; ?>
+ <select name="storynum"><?php echo $this->_tpl_vars['storynum_options']; ?>
+</select> <input type="submit" value="<?php echo $this->_tpl_vars['lang_go']; ?>
+" /></form>
+  </div>
+<?php endif; ?>
+
+<!-- start news item loop -->
+<?php if (isset($this->_sections['i'])) unset($this->_sections['i']);
+$this->_sections['i']['name'] = 'i';
+$this->_sections['i']['loop'] = is_array($this->_tpl_vars['stories']) ? count($this->_tpl_vars['stories']) : max(0, (int)$this->_tpl_vars['stories']);
+$this->_sections['i']['show'] = true;
+$this->_sections['i']['max'] = $this->_sections['i']['loop'];
+$this->_sections['i']['step'] = 1;
+$this->_sections['i']['start'] = $this->_sections['i']['step'] > 0 ? 0 : $this->_sections['i']['loop']-1;
+if ($this->_sections['i']['show']) {
+    $this->_sections['i']['total'] = $this->_sections['i']['loop'];
+    if ($this->_sections['i']['total'] == 0)
+        $this->_sections['i']['show'] = false;
+} else
+    $this->_sections['i']['total'] = 0;
+if ($this->_sections['i']['show']):
+
+            for ($this->_sections['i']['index'] = $this->_sections['i']['start'], $this->_sections['i']['iteration'] = 1;
+                 $this->_sections['i']['iteration'] <= $this->_sections['i']['total'];
+                 $this->_sections['i']['index'] += $this->_sections['i']['step'], $this->_sections['i']['iteration']++):
+$this->_sections['i']['rownum'] = $this->_sections['i']['iteration'];
+$this->_sections['i']['index_prev'] = $this->_sections['i']['index'] - $this->_sections['i']['step'];
+$this->_sections['i']['index_next'] = $this->_sections['i']['index'] + $this->_sections['i']['step'];
+$this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
+$this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
+?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:news_item.html", array('story' => $this->_tpl_vars['stories'][$this->_sections['i']['index']]));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+  <br />
+<?php endfor; endif; ?>
+<!-- end news item loop -->
+
+<div style="text-align: right; margin: 10px;"><?php echo $this->_tpl_vars['pagenav']; ?>
+</div>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include('db:system_notification_select.html', array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>

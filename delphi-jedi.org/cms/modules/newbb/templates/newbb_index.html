@@ -1,0 +1,49 @@
+<!-- start module contents -->
+<table cellspacing="0" width="100%">
+  <tr>
+    <td colspan="2"><b><{$lang_welcomemsg}></b><br /><small><{$lang_tostart}></small><hr /></td>
+  </tr>
+  <tr valign="bottom">
+    <td><small><{$lang_totaltopics}><b><{$total_topics}></b> | <{$lang_totalposts}><b><{$total_posts}></b></small><br /><br /><a href="<{$xoops_url}>/modules/newbb/index.php"><{$forum_index_title}></a></td>
+    <td align="right"><small><{$lang_currenttime}><br /><{$lang_lastvisit}></small></td>
+  </tr>
+</table>
+<br />
+
+<!-- start forum categories -->
+<{section name=category loop=$categories}>
+<table cellspacing="1" class="outer">
+  <tr align="left" valign="top"><th colspan="6"> <a href="<{$xoops_url}>/modules/newbb/index.php?cat=<{$categories[category].cat_id}>"><{$categories[category].cat_title}></a></th></tr>
+  <tr class="head" align="center">
+    <td>&nbsp;</td>
+	<td nowrap="nowrap" align="left"><{$lang_forum}></td>
+	<td nowrap="nowrap"><{$lang_topics}></td>
+	<td nowrap="nowrap"><{$lang_posts}></td>
+	<td nowrap="nowrap"><{$lang_lastpost}></td>
+  </tr>
+  <!-- start forums -->
+  <{section name=forum loop=$categories[category].forums.forum_id}>
+  <tr>
+    <td class="even" align="center" valign="middle" width="5%"><img src="<{$categories[category].forums.forum_folder[forum]}>" alt="" /></td>
+    <td class="odd" onclick="window.location='<{$xoops_url}>/modules/newbb/viewforum.php?forum=<{$categories[category].forums.forum_id[forum]}>'"><a href="<{$xoops_url}>/modules/newbb/viewforum.php?forum=<{$categories[category].forums.forum_id[forum]}>"><b><{$categories[category].forums.forum_name[forum]}></b></a><br /><{$categories[category].forums.forum_desc[forum]}><br /><span style="font-size:smaller;"><b><{$lang_moderators}></b> <{$categories[category].forums.forum_moderators[forum]}></span></td>
+    <td class="even" width="5%" align="center" valign="middle"><{$categories[category].forums.forum_topics[forum]}></td>
+    <td class="odd" width="5%" align="center" valign="middle"><{$categories[category].forums.forum_posts[forum]}></td>
+    <td class="even" width="20%" align="center" valign="middle"><{$categories[category].forums.forum_lastpost_time[forum]}><br /><{$categories[category].forums.forum_lastpost_user[forum]}> <{$categories[category].forums.forum_lastpost_icon[forum]}></td>
+  </tr>
+  <{/section}>
+  <!-- end forums -->
+</table>
+<img src="images/pixel.gif" height="5" alt="" /><br />
+<{/section}>
+<!-- end forum categories -->
+
+<form name="search" action="search.php" method="post">
+  <table width="100%">
+    <tr>
+      <td valign="middle"><img src="<{$img_hotfolder}>" alt="" /> = <{$lang_newposts}><br /><img src="<{$img_folder}>" alt="" /> = <{$lang_nonewposts}><br />  <img src="<{$img_locked}>" alt="" /> = <{$lang_private}></td>
+      <td align="right" valign="bottom"><b><{$lang_search}></b>&nbsp;<input name="term" type="text" size="20" /><input type="hidden" name="forum" value="all" /><input type="hidden" name="sortby" value="p.post_time desc" /><input type="hidden" name="searchboth" value="both" /><input type="hidden" name="submit" value="<{$lang_search}>" /><br />[ <a href="<{$xoops_url}>/modules/newbb/search.php"><{$lang_advsearch}></a> ]</td>
+    </tr>
+  </table>
+</form>
+<{include file='db:system_notification_select.html'}>
+<!-- end module contents -->

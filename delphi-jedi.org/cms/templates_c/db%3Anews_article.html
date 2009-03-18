@@ -1,0 +1,65 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:54:51
+         compiled from db:news_article.html */ ?>
+<div style="text-align: left; margin: 10px;"><?php if ($this->_tpl_vars['pagenav']): ?>Page <?php echo $this->_tpl_vars['pagenav']; ?>
+<?php endif; ?></div>
+
+<div style="padding: 3px; margin-right:3px;">
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:news_item.html", array('story' => $this->_tpl_vars['story']));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+</div>
+
+<div style="text-align: left; margin: 10px;"><?php if ($this->_tpl_vars['pagenav']): ?>Page <?php echo $this->_tpl_vars['pagenav']; ?>
+<?php endif; ?></div>
+
+<div style="padding: 5px; text-align: right;
+margin-right:3px;">
+<a href="print.php?storyid=<?php echo $this->_tpl_vars['story']['id']; ?>
+"><img
+src="images/print.gif" border="0"
+alt="<?php echo $this->_tpl_vars['lang_printerpage']; ?>
+" /></a> <a target="_top"
+href="<?php echo $this->_tpl_vars['mail_link']; ?>
+"><img src="images/friend.gif"
+border="0" alt="<?php echo $this->_tpl_vars['lang_sendstory']; ?>
+" /></a>
+</div>
+
+<div style="text-align: center; padding: 3px;
+margin:3px;">
+<?php echo $this->_tpl_vars['commentsnav']; ?>
+
+<?php echo $this->_tpl_vars['lang_notice']; ?>
+
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<!-- start comments loop -->
+<?php if ($this->_tpl_vars['comment_mode'] == 'flat'): ?>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_flat.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php elseif ($this->_tpl_vars['comment_mode'] == 'thread'): ?>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_thread.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php elseif ($this->_tpl_vars['comment_mode'] == 'nest'): ?>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_nest.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php endif; ?>
+<!-- end comments loop -->
+</div>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include('db:system_notification_select.html', array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>

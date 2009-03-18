@@ -1,0 +1,20 @@
+<{foreach item=poll from=$block.polls}>
+<form style="margin-top: 1px;" action="<{$xoops_url}>/modules/xoopspoll/index.php" method="post">
+<table class="outer" cellspacing="1">
+  <tr>
+    <th align="center" colspan="2"><input type="hidden" name="poll_id" value="<{$poll.id}>" /><{$poll.question}></th>
+  </tr>
+
+  <{foreach item=option from=$poll.options}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td align="center"><input type="<{$poll.option_type}>" name="<{$poll.option_name}>" value="<{$option.id}>" /></td>
+    <td align="left"><{$option.text}></td>
+  </tr>
+  <{/foreach}>
+
+  <tr>
+    <td class="foot" align="center" colspan="2"><input type="submit" value="<{$block.lang_vote}>" /> <input type="button" value="<{$block.lang_results}>" onclick="location='<{$xoops_url}>/modules/xoopspoll/pollresults.php?poll_id=<{$poll.id}>'" /></td>
+  </tr>
+</table>
+</form>
+<{/foreach}>

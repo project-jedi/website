@@ -1,0 +1,32 @@
+<br /><br />
+
+<p align="center">
+    <a href="<{$xoops_url}>/modules/mydownloads/index.php"><img src="<{$xoops_url}>/modules/mydownloads/images/logo-en.gif" alt="" /></a>
+</p>
+
+<br /><br /><br />
+
+<hr size=1 noshade>
+<table border=0 cellpadding=1 cellspacing=0 width="80%" align="center">
+  <tr>
+    <td>
+      <h4><{$file.title}></h4>
+      <ul>
+             <li><{$lang_voteonce}>
+             <li><{$lang_ratingscale}>
+             <li><{$lang_beobjective}>
+             <li><{$lang_donotvote}>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <form method="post" action="ratefile.php">
+        <input type="hidden" name="lid" value="<{$file.id}>">
+        <input type="hidden" name="cid" value="<{$file.cid}>">
+             <select name="rating"><option>--</option><option>10</option><option>9</option><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>&nbsp;&nbsp;
+        <input type="submit" name="submit" value="<{$lang_rateit}>" /> <input type=button value="<{$lang_cancel}>" onclick="location='<{$xoops_url}>/modules/mydownloads/singlefile.php?cid=<{$file.cid}>&amp;lid=<{$file.id}>'" />
+      </form>
+    </td>
+  </tr>
+</table></div>

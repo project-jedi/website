@@ -1,0 +1,18 @@
+Kurzanweisung:
+
+Modul wie gehabt installieren, Rechte vergeben, Block sichtbar machen.
+
+Links festlegen. Es gibt mehrere Optionen:
+
+1. Wenn nur ein Titel angegeben wird ist es eine Art Zwischenüberschrift. 
+2. Eine '0' bei 'Verstecken' bedeutet, dass der Link angezeigt wird. Bei '1' wird der Link versteckt.
+3. Bei 'Ziel' wird angegeben wie der Link geöffnet wird. _blank öffnet den Link in einem neuen Fenster.
+4. Externe Links müssen immer komplett angegeben werden.
+5. Bei 'Gruppen' werden die Gruppen ausgewählt die den Link angezeigt bekommen
+6. Bei 'Mitglieder' kann sogar explizit angegeben werden, welcher User den Link sehen darf. Wenn mehrere User angegeben werden müssen die durch einen senkrechten Strich | abgetrennt werden
+7. Bei Link können auch einfach die Module angesprungen werden wenn der originale Modulname z. B. news in eckige Klammern gesetzt wird = [news]
+
+Viel Spaß
+
+
+An dieser Stelle ein großes Dankeschön an Derya für das Fehlerbereinigen des Codes. Und natürlich für den Hinweis das die Umlaute in der Beschreibung falsch codiert waren ;-) usw. usf.

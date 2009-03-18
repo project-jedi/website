@@ -1,0 +1,24 @@
+<h4><{$lang_pollslist}></h4>
+
+<table width="100%" class="outer" cellspacing='1'>
+  <tr>
+    <th><{$lang_pollquestion}></th>
+    <th align='center'><{$lang_pollvoters}></th>
+    <th align='center'><{$lang_votes}></th>
+    <th align='center'><{$lang_expiration}></th>
+    <th>&nbsp;</th>
+  </tr>
+
+<!-- start polls item loop -->
+<{section name=i loop=$polls}>
+  <tr>
+    <td class="even"><{$polls[i].pollQuestion}></td>
+    <td align="center" class="odd"><{$polls[i].pollVoters}></td>
+    <td align="center" class="even"><{$polls[i].pollVotes}></td>
+    <td align="center" class="odd"><{$polls[i].pollEnd}></td>
+    <td align="right" class="even"><a href="pollresults.php?poll_id=<{$polls[i].pollId}>"><{$lang_results}></a></td>
+  </tr>
+<{/section}>
+<!-- end polls item loop -->
+
+</table>

@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI - Licensing</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=251 valign="middle">
+<a href="index.html">
+<img src="img/jedi-smaller.gif" width=241 height=66 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Licensing Summary</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+<font SIZE="4" COLOR="maroon"><b>Project JEDI and Open Source</b></font><p>Project
+            JEDI is a strong advocate of the &quot;open source&quot; principle in software
+            development. Our library of free Delphi source code comprises 
+                </td>
+              </tr>
+
+              <tr>
+                <td>  
+
+                  <table>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14>
+                      </td>
+                      <td WIDTH="400">API Header Conversions</td>
+                    </tr>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14>
+                      </td>
+                      <td WIDTH="400">Component and Utility packs related to API conversions
+                      </td>
+                    </tr>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14>
+                      </td>
+                      <td WIDTH="400">Utility routines for a variety of purposes</td>
+                    </tr>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14>
+                      </td>
+                      <td WIDTH="400">Donated components and packages</td>
+                    </tr>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14>
+                      </td>
+                      <td WIDTH="400">The JEDI VCL (under construction)</td>
+                    </tr>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14></td>
+                      <td WIDTH="400">
+Business application frameworks/starter packs (under construction)
+                      </td>
+                    </tr>
+                    <tr>
+                      <td WIDTH="126" ALIGN="RIGHT">
+<img SRC="img/redball.gif" ALT="BALL" HEIGHT=14 WIDTH=14>
+                      </td>
+                      <td WIDTH="400">Games and game engines (under construction)
+                      </td>
+                    </tr>
+                  </table>
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>
+The library is being built up by way of both donations of completed or
+            partly-completed work freely given by developers and &quot;start-from-scratch&quot;
+            development projects involving teams of project members. <p>The choice of a licensing
+            scheme for protecting the copyright of these people's work in the Public Domain, while
+            keeping open the door for subsequent development, was made after an intense project
+researching the options. The driver of the original licensing project was Michael Beck.
+
+<br><br>
+
+<b><font SIZE="4" COLOR="maroon">The Project JEDI Licensing Scheme</font></b>
+<br><br>
+The scheme we chose for all Project JEDI code was the 
+            <A HREF="http://www.mozilla.org/MPL/MPL-1.1.html">Mozilla Public Licence</A>
+            (&quot;MPL&quot;) version 1.1. <p>Mozilla is the Open Source initiative formulated by
+            Netscape for the next generation of their web browsers. 
+            <A HREF="http://www.mozilla.org/NPL/">Netscape states</A> &quot;We believe this license
+            satisfies the Debian Free Software  <A HREF="http://www.debian.org/social_contract.html">Guidelines</A>
+            which provide a commonly accepted definition of &quot;free software,&quot; much like other
+            free software licenses such as GPL or BSD.&quot; </p>
+            <p>Project JEDI's implementation of the MPL allows developers to use its code in their
+            applications (&quot;Larger Work&quot;) regardless of whether the intended distribution
+            will be in the public domain or as commercial applications, as long as the licence
+            conditions are met. For a more detailed explanation, an <a
+            <A HREF="http://www.mozilla.org/MPL/annotated.html">annotated version</A> of the MPL is
+            available. 
+
+<br><br>
+<b><font SIZE="4" COLOR="maroon">Source Unit Header Section</font></b> 
+<br><br>
+Your source units need to show licensing and copyright information at the beginning of the
+            file, preceding the beginning of the declarations. </p>
+            <p>a)&nbsp; API header conversion units start with the following header:
+                </td>
+              </tr>
+
+
+              <tr BGCOLOR="lightgrey">
+                <td><pre>
+<tt>{******************************************************************}
+{                                                                  }
+{ Borland Delphi Runtime Library                                   }
+{ &lt;API&gt; interface unit                                             }
+{                                                                  }
+{ Portions created by Microsoft are                                }
+{ Copyright (C) 1995-1999 Microsoft Corporation.                   }
+{ All Rights Reserved.                                             }
+{                                                                  }
+{ The original file is: urlmon.h, released 11 Nov 1997.            }
+{ The original Pascal code is: UrlMon.pas, released 15 Jun 1999.   }
+{ The initial developer of the Pascal code is Rudolph Velthuis     }
+{ (rvelthuis@gmx.de).                                              }
+{                                                                  }
+{ Portions created by Rudolph Velthuis are                         }
+{ Copyright (C) 1999 Rudolph Velthuis.                             }
+{                                                                  }
+{ Contributor(s): Marcel van Brakel                                }
+{ Christopher D. Coppola                                           }
+{                                                                  }
+{ Obtained through:                                                }
+{                                                                  }
+{ Joint Endeavour of Delphi Innovators (Project JEDI)              }
+{                                                                  }
+{ You may retrieve the latest version of this file at the Project  }
+{ JEDI home page, located at http://delphi-jedi.org                }
+{                                                                  }
+{ The contents of this file are used with permission, subject to   }
+{ the Mozilla Public License Version 1.1 (the &quot;License&quot;); you may  }
+{ not use this file except in compliance with the License. You may }
+{ obtain a copy of the License at                                  }
+{ http://www.mozilla.org/MPL/MPL-1.1.html                          }
+{                                                                  }
+{ Software distributed under the License is distributed on an      }
+{ &quot;AS IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or   }
+{ implied. See the License for the specific language governing     }
+{ rights and limitations under the License.                        }
+{                                                                  }
+{******************************************************************} 
+</tt>
+</pre>
+                </td>
+              </tr>
+              <tr>
+                <td WIDTH="120" BGCOLOR="peachpuff">
+<hr size=1>
+<center>
+<a HREF="ftp://ftp.delphi-jedi.org/api/info.ini">Download
+            template</a>
+<center>
+<hr size=1>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+<br>
+b) Component files
+<blockquote>
+To be announced
+</blockquote>
+
+c) Utility and other units
+<blockquote>
+To be announced
+</blockquote>
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="index.html">
+<img src="img/return.gif" width=165 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

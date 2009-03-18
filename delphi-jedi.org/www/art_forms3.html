@@ -1,0 +1,859 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Making Forms Work: Part III</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<h3><font color="maroon">Windows Messages</font></h3>
+<p><b>&copy; Kevin Gallagher</a></b></p>
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+<p>In this article, we explore the various message constants defined in Delphi source code and also documented in Win32 help. </p>
+
+<p>One of Windows' many tasks is to act like the dispatcher in a taxi cab operation. When you call for a cab, a dispatcher receives the request and relays it to a driver. All the drivers may hear the call, but only one will respond. Alternatively, a driver can pick up a passenger and call the job in to the dispatcher. Any driver whose radio is not tuned to the correct frequency does not hear the dispatch.</p>
+
+<p>Like the cab dispatcher, Windows sends and receives messages. An application captures a message through a main procedure, commonly called WinProc. It may handle the message automatically or it may not process it at all. </p>
+
+<p>For example, Delphi automatically handles the repainting of a form when required; although you may choose to insert additional behavior via the OnPaint event handler, it will happily do a repaint without any programmatic intervention. </p>
+
+<p>On the other hand, when the video resolution changes, the Delphi application does not automatically handle the message - conveyed by the constant WM_DISPLAYCHANGE - that Windows dispatches to all windows. The Delphi application gets the message, but does not do anything with it. </p>
+
+<h3>&quot;Tuning In&quot; to Windows Messages</h3>
+
+<p>Taking our WM_DISPLAYCHANGE example, think of it as a message being sent to a receiver (a form) that is not tuned to the correct frequency. To &quot;change the frequency&quot; - that is, to make the form responsive to the message - you need to write a procedure. Let's suppose that you are aware of the need to do something about resolution changes but do not know about WM_DISPLAYCHANGE. So, where do you begin?</p>
+
+<ul type="circle">
+
+<li>First, open up Win32 help, traverse the index with WM_ (Windows messages) and scan for names that appear to fit the task. Many times the message names are cryptic, other times they are very descriptive. We are in luck with WM_DISPLAYCHANGE, it is descriptive and easy to guess.<br></li> 
+
+<li>Next you should check to see if Delphi source provides any assistance, e.g. is a record defined to handle the 
+parameters for WM_DISPLAYCHANGE? You can scan Delphi source code using Windows' Find File(s), or GExperts can do this search for you. (Don't bother trying this for WM_DISPLAYCHANGE: there is no predefined record.)<br></li>
+
+<li>If no pre-defined record is available, we can use TMessage, a generic record defined in the Messages unit. </li>
+</ul>
+
+<h3>The Message-handling Procedure</h3>
+
+<p>Writing the message-handling procedure is not much different to writing any other procedure. Decide on a name, 
+create the parameter list, followed by the keyword message with the message constant you want to intercept.
+<blockquote>
+When coding handlers for Windows API messages it is common practice to use the message name as the procedure 
+name, omitting the underscore and using the &quot;camel case&quot; convention (upper case for the first character of each separate word in the name). So our procedure will be called WMDisplayChange.
+</blockquote>
+For the parameter list I use a variable name of Msg to reduce typing. Place the procedure in the <B>private</B> section of the form's declaration:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type
+  TForm1 = class(TForm)
+private
+  <font color="#000080">{ Private declarations }</FONT>
+procedure WMDisplayChange(var Msg: TMessage) ;
+  Message WM_DISPLAYCHANGE ;
+public
+  <font color="#000080">{ Public declarations }</font>
+end;</pre></FONT></p>
+
+<p>Here is our procedure definition, in the implementation portion of the form:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+implementation
+...
+procedure TForm1.WMDisplayChange(var Msg: TMessage) ;
+begin
+  <font color="#000080">{...}</font>
+end ; </pre></FONT></p>
+
+<p>Within the procedure we get the new video resolution by accessing the members of our Msg parameter:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+ShowMessage(InToStr(Msg.LParamLo) + 'x' + IntToStr(Msg.LParamHi)) ;</pre></FONT></p>
+
+<h3>Controlling Messages Trapped by Delphi</h3>
+
+<p>Some messages which are sent to your form are exposed in its properties or events but do not get handled automatically. For example, when a form is resized, Delphi does do some processing but does not handle repositioning of controls. Instead we are given an event called FormResize which you can use to handle repositioning of controls yourself. </p>
+
+<p>To demonstrate, create a new form and place a TPanel aligned to the form's bottom. Next, place four buttons on the panel, select all four and align their tops. From the Object Inspector click on the event tab, then double click the event called OnResize and enter this handling code:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.FormResize(Sender: TObject);
+<B>const</B>
+  ButtonWidth = 75 ;
+  ButtonHeight = 25 ;
+  ButtonCount = 4 ;
+  ButtonSpacing = 5 ;
+<B>var</B>
+  i, x,
+  ButtonGroupWidth : Integer ;
+<B>begin</B>
+  ButtonGroupWidth := ButtonWidth * ButtonCount + ButtonSpacing * (ButtonCount - 1) ;
+  X := (Panel1.ClientWidth - ButtonGroupWidth) <B>div</B> 2 ;
+  <B>for</B> i := 0 To Panel1.ControlCount - 1 <B>do</B> 
+  <B>begin
+    if</B> Panel1.Controls[i] is TButton <B>then
+      with</B> Panel1.Controls[i] <B>do</B>
+        SetBounds(X,Panel1.Controls[i].Top,ButtonWidth, ButtonHeight) ;
+    Inc(X, ButtonWidth + ButtonSpacing) ;
+  <B>end </B>;
+<B>end</B>; </pre></font></p>
+
+<p>When the form is displayed, each button on Panel1 is horizontally aligned so that they are spread evenly across the panel. The logic used to center buttons was taken from Dialogs unit for CreateMessageDialog.</p>
+
+<h3>Life Cycle of a Form</h3>
+
+<p>Now that we have examined the two basic types of messages and events, let's take a look at the events in a form's life cycle.</p>
+
+                  <table  BORDER=1 CELLSPACING=1 CELLPADDING=1 WIDTH=242 >
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97><B>Action</B></TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132><B>Event</B></TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Create</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnCreate</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Show</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnShow</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Paint</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnPaint</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Activate</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnActivate</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>ReSize</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnResize</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Paint</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnPaint</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Close query</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnCloseQuery</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Close</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnClose</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Deactivate</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnDeactivate</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Hide</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnHide</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=97>Destroy</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=132>OnDestroy</TD>
+                    </TR>
+                  </TABLE>
+
+<h4>Mining the API for Messages</h4> 
+
+<p>If you didn't know about messaging through API calls, you might think that the exposed events are the only ones available. By searching through Win32 help's index on WM_ (as described earlier) you can find out about other events and messages which are available.</p>
+
+<p>You still have a problem to find out the order in which a form receives these messages. One trick to discover the order of messages is to override WinProc: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type
+TForm5 = class(TForm)
+  Panel1: TPanel;
+  cmdClose: TButton;
+  ListBox1: TListBox;
+  chkDisableMessages: TCheckBox;
+  procedure cmdCloseClick(Sender: TObject);
+  procedure FormCreate(Sender: TObject);
+  procedure chkDisableMessagesClick(Sender: TObject);
+private
+<FONT COLOR="#000080"{ Private declarations }</FONT>
+  function MsgToStr( WM : word ) : String;
+protected
+  bFlag:boolean ;
+  procedure WndProc(var Msg: TMessage); override ; 
+<FONT COLOR="#000080">// TCustomForm
+  { Public declarations }</FONT>
+end;
+
+function TForm5.MsgToStr( WM : word ) : String;
+begin
+  case WM of
+    WM_ACTIVATE: result:= 'WM_ACTIVATE';
+    WM_CANCELMODE: result:= 'WM_CANCELMODE ';
+    WM_CLOSE: result:= 'WM_CLOSE';
+    WM_COMMAND: result:= 'WM_COMMAND';
+    WM_CREATE: result:= 'WM_CREATE';
+    WM_ENDSESSION: result:= 'WM_ENDSESSION';
+    ...
+  else result := '' ; 
+<FONT COLOR="#000080">{ I don't care for this demo }</FONT>
+  end;
+end;
+
+procedure TForm5.WndProc(var Msg: TMessage);
+var
+  S:String;
+begin
+  if Msg.Msg = wm_Close then bFlag := False;
+  if (bFlag) and (Self.Showing) then 
+  begin
+    S := MsgToStr(Msg.Msg);
+  if Length(S) &gt;0 then
+    ListBox1.Items.Add(S);
+  end;
+  inherited WndProc(Msg);
+end;
+
+procedure TForm5.FormCreate(Sender: TObject);
+begin
+  ListBox1.Clear;
+  bFlag := True;
+  chkDisableMessages.Checked := bFlag;
+end;</pre></FONT></p>
+
+<p><i>Note: The case statement in MsgToStr in the sample project contains many more checks on messages than I have shown in this example.</i></p> 
+
+<p>WndProc passes the type of message it received to a function called MsgToStr, which returns a string representation of the numeric value sent to it.</p> 
+
+<blockquote>
+<p><B>Be aware of traps, though.</B>&nbsp; For example, attempting to access the ListBox when closing the form would generate an access violation. Using this logic we will not see all the messages sent to us!</p>
+</blockquote>
+
+<h4>Hand-coding as an Option</h4>
+
+<p>Another choice is to hand-code each procedure for each event. Make each procedure add text to a ListBox so we can see the order of events i.e. WM_SIZE, WM_CREATE etc. </p>
+
+<p>The declarations for these events go into the private section of the forms interface:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+private
+<FONT COLOR="#000080">{ Private declarations }</FONT>
+  bFlag: boolean ;
+  procedure WMCreate(var Message: TWMCreate);
+  message WM_CREATE;
+  procedure WMPosChange(var Msg: TWMWINDOWPOSCHANGING);
+  message WM_WINDOWPOSCHANGING ;
+  procedure WMEnterSizeMove(var Msg: TMessage);
+  message WM_ENTERSIZEMOVE ;
+  procedure WMExitSizeMove(var Msg: TMessage);
+  message WM_EXITSIZEMOVE ;
+  procedure WMDisplayChange(var Msg: TMessage);
+  message WM_DISPLAYCHANGE ;
+  procedure WMMove(var Message: TWMMove);
+  message WM_MOVE ;
+public
+<FONT COLOR="#000080">{ Public declarations }</FONT>
+  procedure WhenChangingForms(Sender: TObject);
+  ..</pre></font></p>
+
+<p>Next, we need to implement the procedures:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.WMDisplayChange(<B>var</B> Msg: TMessage) ;
+<B>begin</B>
+  ListboxAddItem(Self,IntToStr(Msg.LParamLo) 
+                 + 'x' + IntToStr(Msg.LParamHi));
+<B>end</B>;
+
+<B>procedure</B> TForm1.WMCreate(<B>var</B> Message: TWMCreate);
+<B>begin
+  inherited</B>;
+  ListboxAddItem(Self,'WMCreate');
+  Message.Result := 0;
+<B>end</B>;
+
+<B>procedure</B> TForm1.WMPosChange(<B>var</B> Msg: TWMWINDOWPOSCHANGING);
+<B>begin
+  if</B> <B>not</B> bFlag <B>then</B> exit;
+  PWindowPos(TMessage(Msg).lParam).Flags :=
+  PWindowPos(TMessage(Msg).lParam).Flags or SWP_NOMOVE or SWP_NOSIZE;
+  ListboxAddItem(Self,'WMPosChange');
+<B>end</B>;
+
+<B>procedure</B> TForm1.WMEnterSizeMove(<B>var</B> Msg: TMessage);
+<B>begin
+  inherited</B> ;
+  ListboxAddItem(Self,'WM_EnterSizeMove');
+  Msg.Result := 0;
+<B>end</B>;
+
+<B>procedure</B> TForm1.WMExitSizeMove(<B>var</B> Msg: TMessage);
+<B>begin
+  inherited</B>;
+  ListboxAddItem(Self,'WM_ExitSizeMove');
+  Msg.Result := 0;
+<B>end</B>;
+
+<B>procedure</B> TForm1.WMMove(<B>var</B> Message: TWMMove);
+<B>begin
+  inherited</B>;
+  ListboxAddItem(Self,'WM_Move') ;
+  <font color="#000080">{ If both child forms are visible we make them hug the right side
+  of this form. We don't want to complicate matters too much for
+  moving either form if one was not visible.
+  <B>NOTE</B>: WM_MOVE is executed before this form's OnCreate event and
+  also before the two child forms are available. Hence, there is a call 
+  to check how many forms are available, to avoid causing a GPF 
+  when the two child forms are not yet available. }</font>
+  <B>if</B> Screen.FormCount = 3 <B>then</B> 
+  <B>begin
+    if</B> (Form2.Visible = True) <B>and</B> (Form3.Visible = True) <B>then</B>       <B>begin
+        with</B> Form2 do 
+        <B>begin</B>
+          ListboxAddItem(Self,'Moving Form2 from WMMove');
+          Top := Self.Top;
+          Self.Left + Self.Width;
+        <B>end</B>;
+        <B>with</B> Form3 <B>do</B> 
+        <B>begin</B>
+          ListboxAddItem(Self,'Moving Form3 from WMMove');
+          Top := Form2.Top + Form2.Height;
+          Left := Form2.Left;
+        <B>end</B>;
+      <B>end</B>;
+    <B>end</B>;
+<B>end</B>;
+<font color="#000080">{ This event is fired each time the active form changes.
+An example would be to allow Form2 to be shown non-modally
+then allow the user to attempt to show Form2 in modally.
+In this case, an exception would prevent ShowModal, since the 
+form is already visible. To avoid this, I use a For loop which 
+checks to see if Form2 is visible. If so, the Command Button
+which shows Form2 as a modal form is disabled. }</font>
+
+<B>procedure</B> TForm1.WhenChangingForms(Sender: TObject);
+<B>var</B>
+  i, iCount: Integer ;
+<B>begin
+  if</B> Screen.ActiveForm &lt;&gt; <B>nil</B> <B>then</B>
+    ListboxAddItem(Self,'WhenChangingForms');
+  iCount := Screen.FormCount;
+  <B>for</B> i := 0 <B>to</B> iCount -1 <B>do
+    if</B> Screen.Forms[i] <B>is</B> TForm2 <B>then</B>
+      cmdShowModalForm.Enabled := not Screen.Forms[i].Visible;
+<B>end</B>;</pre></FONT></p>
+
+<p>Running the code with a ListBox as our &quot;eye&quot;, we would see something like this:</p>
+
+<blockquote>
+<pre>02:37:25 Pm WM_Move
+02:37:25 Pm WMCreate
+02:37:25 Pm FormCreate
+02:37:25 Pm WM_Move
+02:37:25 Pm WM_Move
+02:37:25 Pm FormShow
+02:37:25 Pm WMPosChange
+02:37:25 Pm WMPosChange
+02:37:25 Pm FormActivate
+02:37:26 Pm WhenChangingForms
+02:37:26 Pm WMPosChange
+02:37:26 Pm FormResize
+02:37:26 Pm WMPosChange
+02:37:26 Pm WMPosChange
+02:37:26 Pm WM_Move
+02:37:26 Pm FormActivate
+02:37:26 Pm FormPaint</pre>
+</blockquote>
+
+<p>Notice the message WM_MOVE is received before the OnCreate event for the form! This is why I have logical statements within the form's WMMove procedure. Without them, we would get access violations because some 
+of the variables to the forms and their components do not exist at this time.</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>if</B></FONT> Screen.FormCount = 3 <B>then</B> <B>begin
+  if</B> (Form2.Visible) <B>and</B> (Form3.Visible) <B>then</B> 
+  <B>begin</B> 
+  ...</pre></font><p>
+
+<p>Directly after the WM_MOVE event has fired, we get a message called WM_CREATE. Within this event you can stop the creation of the form! Programmers are constantly asking, How can I stop a form from being created? By 
+returning -1 rather than 0 for the result of WM_CREATE you would halt the creation of a form.</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<font color="#000080"><i>// This example allows form creation</i></FONT>
+<B>procedure</B> TForm4.WMCreate(<B>var</B> Message: TWMCreate);
+<B>begin
+  inherited</B>;
+  Message.Result := 0;
+<B>end</B>;
+
+<font color="#000080"><I>// This example halts form creation</I></font>
+procedure TForm4.WMCreate(var Message: TWMCreate);
+<B>begin</B>
+  <B>inherited</B>;
+  Message.Result := -1;
+<B>end</B>;</pre></FONT></p>
+
+<p>There is no cleanup required: Delphi handles this for you. You still should wrap the Show method in a try/except block:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre><b>try</b>
+  f.ShowModal;
+<B>finally</B>
+  f.Release;
+<B>end</B> ;</pre></FONT></p>
+
+<p>Once WM_CREATE message has finished, the form's OnCreate event handler is fired, if you have assigned one. WM_MOVE is sent several more times, followed by the FormShow event which is triggered when the form's 
+visible property is set to True. </p>
+
+<p>Next comes the WM_WINDOWPOSCHANGING event. Much can be done here, like dynamically deciding whether the user can resize or move the form. The message WM_GETMINMAXINFO allows you to control resizing of a form, as well as its minimum and maximum dimensions. In Delphi 4, this event/message is surfaced in TForm as a property called Constraints. If you are using two versions of Delphi, e.g. 3 and 4, then use the following technique (conditional compiling) to work with WM_GETMINMAXINFO:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre><b>type</b>
+  TfrmMain = class(TForm)
+  <B>private</B>
+<FONT COLOR="#000080"><i>{$IFNDEF VER120}</i></FONT>
+  <B>procedure</b> WMGetMinMaxInfo(var Message: TWMGetMinMaxInfo); 
+    message WM_GETMINMAXINFO ;
+<FONT COLOR="#000080"><i>{$ENDIF}</i> </font>
+  <b>public</B>
+  <FONT COLOR="#000080"><I>{ Public declarations }</I></font>
+<b>end</b>;
+
+<B>implementation</B>
+<FONT COLOR="#000080"<i>{$IFNDEF VER120}</i></FONT>
+<b>procedure</b> TfrmMain.WMGetMinMaxInfo(var Message: TWMGetMinMaxInfo) ;
+begin
+  with Message.MinMaxInfo^ do
+    ptMinTrackSize := Point(330,213);
+  Message.Result := 0;
+  <B>inherited</B>;
+end;
+<FONT COLOR="#000080"><i>{$ENDIF}</i></FONT></pre></FONT></p>
+
+<p>As Delphi matures, more comes to the surface from the Windows API. If you were to port an earlier version of Delphi to version 4 without conditional compiling, you would get undesirable results. </p>
+
+<h3>Hooking into TScreen and TApplication Events</h3>
+
+<p>Staying closer to the surface, did you know about TScreen? Within this class there is an event called OnActiveFormChange which you might find useful. It is fired whenever the current active form loses focus, and 
+another form gains focus. To try it out, place the following code in the OnCreate event of the main form:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+Screen.OnActiveFormChange := WhenChangingForms ; 
+</pre></font></p>
+
+<p>Place the following code in the <B>public</B> section of the form's declaration:</p> 
+<FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> WhenChangingForms(Sender: TObject) ;</pre></FONT></p>
+
+<p>Finally add this code into the <B>implementation</B> section of the main form:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<b>procedure </b> TForm1.WhenChangingForms(Sender: TObject);
+<B>begin
+  if</B> Screen.ActiveForm &lt;&gt; nil then
+    ShowMessage('WhenChangingForms fired' + #13 
+                 + Screen.ActiveForm.Name) 
+<B>end</B>;</pre></FONT></p>
+
+<p>Hooking into this event allows you to be notified when the active form is changing and to handle whatever processing needs to be done. </p>
+
+<p>Another place many programmers do not think to look for messages/events is in the application class, TApplication. For example, TScreen has the event handler OnActiveFormChange, while TApplication has OnActivate and its twin, TApplication.OnDeactivate. Both can be used to determine when your application gains or loses focus from/to another application.</p>
+
+<p>For example, this code sends your application to the task bar when it loses focus: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.FormCreate(Sender: TObject) ;
+<B>Begin</B>
+  Applicaton.OnDeactivate := DeActivate ;
+<B>End</B> ;
+//
+<B>Procedure</B> TForm1.DeActivate(Sender: TObject ) ;
+<B>Begin</B>
+  Application.Minimize ;
+<B>End</B> ;</pre></FONT></p>
+
+<h3>WndProc and Context-Sensitive Help</h3>
+
+<p>Let's dig down into TApplication class and examine the procedure WndProc. WndProc has a case statement which checks for specific messages sent to your application, as well as messages sent by your application to itself.</p>
+
+<p>I would like to focus on CM_INVOKEHELP which is defined in the Control unit. On receiving this message Delphi executes a function called InvokeHelp. If your application has a help file assigned to it, this is where help gets called. If you are new to writing help, hooking into this event can help in debugging if some components fail to work correctly when the user presses F1 for context sensitive help.</p>
+
+<p>Another reason to tie into this event is to get a visual indication of the components' help identifiers while writing help files. We will use Application.OnHelp to hook into what is going on under the covers when help is invoked:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre> 
+type
+  TfrmMain = class(TForm)
+  ...
+private
+  function TestHelp(Command: word; Data: LongInt; var CallHelp: boolean):boolean ;
+public
+end;
+...
+TfrmMain.FormCreate(Sender: TObject);
+<B>begin</B>
+  Application.OnHelp := TestHelp;
+<B>end;
+//
+function</B> TfrmMain.TestHelp(Command: word; Data: LongInt; 
+                               var CallHelp: boolean):boolean;
+<B>begin</B>
+  Caption := Format('Command %d HelpContext %d',[Command,Data]);
+  CallHelp := False;
+<B>end</B>;
+//
+<B>procedure</B> TfrmMain.FormDestroy(Sender: TObject);
+<B>begin</B>
+  Application.OnHelp := nil;
+<B>end;</B></pre></FONT></p>
+
+<p>In the form's OnCreate event handler we can assign a function to Application.OnHelp, which can do several 
+things. In this example, we write a string to the form caption indicating the type of command issued and the context help identifier. In destroying the form we must de-assign our function to avoid an access violation.</p>
+
+<h3>Tips for Shutting Down an Application</h3>
+
+<p>As you can see there are many messages and events underlying the normal everyday things you work with. There are enough topics for a book on the subject, but we will finish here with some tips about several messages that are sent when shutting down an application. </p>
+
+<p>If you need to do some processing before terminating your application, the message called WM_ENDSESSION can be trapped. Suppose you would like your application to be started the next time Windows starts up? Use the 
+following logic: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<b>type</B>
+  TForm1 = class(TForm)
+<B>private</B>
+  <FONT COLOR="#000080" SIZE="-1"><I>{ Private declarations }</I></FONT>
+  WMEndSession(var Msg:TWMEndSession) ;
+  message WM_ENDSESSION ;
+<B>public</B>
+  <FONT COLOR="#000080"><I>{ Public declarations }</I></FONT>
+<B>end;</B> 
+
+<B>procedure</B> TForm1.WMEndSession(var Msg: TWMEndSession) ;
+<B>const</B>
+  xKey = 'Software\Microsoft\Windows\CurrentVersion\RunOnce' ;
+<B>var</B>
+  Reg:TRegistry ;
+<B>begin</B>
+  Reg := TRegistry.Create ;
+  <B>try</B>
+    <FONT COLOR="#000080"><I> { HKEY_LOCAL_MACHINE will work on all user logins
+    Run will work more than once }</I></FONT>
+    Reg.RootKey := HKEY_CURRENT_USER ;
+    if Reg.OpenKey(xKey,True) then
+      Reg.WriteString('kg_MyApp','&quot;' + ParamStr(0) + '&quot;') ;
+  <B>finally</B>
+    Reg.CloseKey ;
+    Reg.Free ;
+    <B>inherited</B>
+  <B>end</B> ;
+<B>end</B> ;</pre></FONT></p>
+
+<p>Of course you would need to insert the proper logic to limit this code so that it executes only when you want it to.</p>
+
+<h4>Is the session closing?</h4>
+
+<p>Use this code to detect if the current Windows session is closing: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.WMEndSession(var Msg: TWMEndSession) ;
+<B>begin</B>
+  <B>inherited</B> ;
+  if Msg.EndSession then 
+  <b>begin</b>
+    Close ;
+  <B>end</B> ;
+  Msg.Result := 0 ;
+<B>End</B> ;</pre></FONT></p>
+
+<p>We can hook into the WM_QUERYENDSESSION message, to stop Windows from shutting down: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<b>type</b>
+  TForm1 = class(TForm)
+<B>private</B>
+  <b>procedure</B> WMQueryEndSession(var Msg: TWMQueryEndSession) ;
+  message WM_QUERYENDSESSION ;
+<B>public</B>
+
+<B>end;</B> 
+...
+...
+<B>procedure</B> TForm1.WMQueryEndSession(var Msg: TWMQueryEndSession);
+<B>const</B>
+  ABORT_WINDOWS_SHUTDOWN = 0 ;
+  CONTINUE_WINDOWS_SHUTDOWN = 1 ;
+<B>begin</B>
+  <B>inherited</B> ;
+  if MessageDlg( 'Allow ShutDown', mtConfirmation,[mbYes,mbNo],0) = mrYes then
+    Msg.Result := CONTINUE_WINDOWS_SHUTDOWN
+  <B>else</B>
+    Msg.Result := ABORT_WINDOWS_SHUTDOWN ;
+<B>end;</B></pre></FONT></p>
+
+<p>When the user attempts to restart or close Windows, the application using this code will ask if Windows is 
+allowed to terminate. If the user responds by clicking the No button, Windows will not shut down. If the Yes button is clicked, Windows can proceed to shut down, unless another application prevents it.</p>
+
+<blockquote>
+Do yourself a favor and explore the source code which comes with Delphi. There is a wealth of hidden treasures there for you to discover.</B>
+</blockquote>
+
+<h3>Demo Projects for Part III</H3>
+
+<p align="center"><A HREF="ftp://ftp.delphi-jedi.org/voyager/mfw3_demos.zip"
+  style="text-decoration:none;color:maroon;"><b> Download demo projects</b></A></p>
+
+<p>There are three demo projects. The table below briefly describes the demos of Windows messaging by project, then unit. Many of the units have more going on than is described here, so check out the source code. </p>
+
+<h4>Project 1</h4>
+
+<p>This is the main project. Project 2 must be created before running Project 1.</p>
+                  <table BORDER=1 CELLSPACING=1 CELLPADDING=1 WIDTH=603 >
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><B>Unit 1</b></TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Description</b></TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_CREATE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Records the event in a ListBox</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_WINDOWPOSCHANGING</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Shows how to prevent resizing or repositioning the form. In this demo, there is a checkbox to enable/disable sizing and positioning 
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_ENTERSIZEMOVE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Records the event in a ListBox</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_EXITSIZEMOVE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Records the event in a ListBox </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_DISPLAYCHANGE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>This event is triggered when you change the video resolution, or start the change and back out.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_MOVE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>If there are three forms (form1,2 and 3) visible, and a move is detected the logic keeps two child forms hugged to the right side of the main form. Refer to comments within the WM_MOVE procedure. 
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_QUERYENDSESSION</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>This gets triggered when the user attempts to shutdown windows. The code within the procedure allows the user to allow Windows to shutdown or to prevent the shutdown. Even if the user prevents the shutdown, another application can block the shutdown by doing similar logic.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_ENDSESSION</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>The WM_ENDSESSION message is sent to an application after Windows processes the results of the WM_QUERYENDSESSION message. The WM_ENDSESSION message informs the application whether the Windows session is ending. 
+                      </TD>
+                      </TR>
+                      <TR>
+                        <TD>&nbsp;</TD>
+                        <TD>&nbsp;</TD>
+                      </TR>
+                      <TR>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 2</b></td>
+                        <TD>&nbsp;</TD>
+                      </TR>
+                      <TR>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_CREATE</TD>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Records the event in a ListBox </TD>
+                      </TR>
+                      <TR>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_SYSCOMMAND</TD>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Simple demo of how to prevent the Windows screen saver from kicking in. 
+                        </TD>
+                      </TR>
+                      <TR>
+                        <TD>&nbsp;</TD>
+                        <TD>&nbsp;</TD>
+                      </TR>
+                      <TR>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 3</B></TD>
+                        <TD>&nbsp;</TD>
+                      </TR>
+                      <TR>
+                        <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_CREATE</TD>
+                        <TD>&nbsp;</TD>
+                      </TR>
+                      <TR>
+                        <TD>&nbsp;</TD>
+                        <TD>&nbsp;</TD>
+                       </TR>
+                       <TR>
+                         <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 4</B></TD>
+                         <TD>&nbsp;</TD>
+                       </TR>
+                       <TR>
+                         <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_CREATE</TD>
+                         <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Records the event in a ListBox</TD>
+                       </TR>
+                       <TR>
+                         <TD>&nbsp;</TD>
+                         <TD>&nbsp;</TD>
+                       </TR>
+                       <TR>
+                         <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 5</B></TD>
+                         <TD>&nbsp;</TD>
+                       </TR>
+                       <TR>
+                         <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WndProc</TD>
+                         <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Shows a simple example of overriding a form's WndProc. Some messages which are sent to the form are displayed in a ListBox. If we were to record all messages then the ListBox would fill up in no time. Example of the logic used in this procedure, there is exception handling to ensure we do not cause a GPF.
+                         </TD>
+                       </TR>
+                     </TABLE>
+
+<h4>Project 2</h4>
+
+<p>Although this project is part of project 1, it can be executed by itself.</p>
+
+<p><b>Important notes:</B></p>
+<UL type="circle">
+
+<li>There is code in the project file and in the main unit (unit6) which hides the application from the task-list 
+(Ctrl+Alt+Del) dialog and from the taskbar. The only method to return to the application is via Alt+Tab. 
+There is a child form which, when shown, causes two items in the task-list to show up.<br></li>
+
+<li>There is code which simulates a shadow on the main form when requesting to close the demo<br></li> 
+</UL>
+
+                  <table BORDER=1 CELLSPACING=1 CELLPADDING=1 WIDTH=603 >
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 6</B></TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Description</b></TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_NCHITTEST</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Shows how to prevent a user from moving a form by dragging the mouse over the forms caption. Also shows how to move the form by holding and dragging the mouse in the client area of the form
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_NCMOUSEMOVE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Shows various messages being sent to the form in response to mouse positioning.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 7</B></TD>
+                      <TD>&nbsp;</TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_SYSCOMMAND</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Shows how to prevent the user from minimizing or maximizing a form. For example, if certain conditions are met at runtime, allow minimizing and maximizing; otherwise disallow these actions. Alternatively, simply use a dialog-style form.
+                      </TD>
+                    </TR>
+                  </TABLE>
+
+<h4>Project 3</h4>
+
+<p>A stand-alone project not directly attached to Project 1 or 2.</p>
+
+                  <TABLE BORDER=1 CELLSPACING=1 CELLPADDING=1 WIDTH=603 >
+                    <TR>
+                     <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Unit 8</B></TD>
+                     <TD VALIGN=TOP ALIGN=LEFT WIDTH=295><b>Description </b></TD>
+                    </TR>
+                    <TR>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>WM_TIMECHANGE</TD>
+                      <TD VALIGN=TOP ALIGN=LEFT WIDTH=295>Demonstrates how to detect when the system time changes. To make it simple, you simply press a button and the time is incremented by one millisecond, we broadcast the action to all top level windows and in return we are notified ourselves. </td>
+                    </tr>
+                  </table>
+<p>&nbsp;</p>
+<p align="center"><I>Kevin S. Gallagher is a full time systems analyst at Oregon Department Of Revenue<br>where he uses Delphi, Visual Basic and Clipper to create Property Tax Systems.</I></p>
+
+<hr size=1>
+  
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+<p>This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org</p>
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<p align="center">
+Find software, books and training materials at our sponsor's site, www.href.com</p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,115 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-16 16:22:36
+         compiled from db:mydownloads_index.html */ ?>
+<br /><br />
+
+<p align="center">
+<h2>API Conversion Library</h2>
+</p>
+
+<p>
+Welcome to the Project JEDI API Conversion Library. The API Library is a collection of API header conversions either donated to Proiect JEDI or freely available under the Mozilla Public License (or lesser like BSD). Project JEDI wants to thank all the individuals around the world converting APIs for Delphi - each of them makes Delphi a little bit better!</p>
+
+<h4>How can you help?</h4>
+<p>
+If you know an API conversion which is missing or a better - maybe more up to date - conversion or a broken link etc. please feel free to report that back to us either using the "Submit API" feature, our Issuetracker,  the "Add comment" feature or the "Broken Link" button  of this homepage. Your feedback is essential to keep this site one of the best API conversion related resources.  One of our APIs isn't up to date? Please feel free to improve it!
+</p>
+
+<h4>Bug reporting</h4>
+<p>
+Found a bug? To report a bug please please contact the original authors - especially for API conversions from external sources (e. g. Borlands Code Central) which are not hosted by us - and add the bug to our issuetracker for further reference. </p>
+
+<p>
+Now, if you want to submit a new API please click <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/submit.php">here</a>
+</p>
+
+<p>
+Project JEDI now wishes you a lot of fun with our API Library and may the source be with you! 
+</p>
+
+<br /><br /><br />
+<?php if (count ( $this->_tpl_vars['categories'] ) > 0): ?>
+<hr noshade color=#000000">
+<table border='0' cellspacing='5' cellpadding='0' align="center">
+  <tr>
+  <!-- Start category loop -->
+  <?php if (count((array)$this->_tpl_vars['categories'])):
+    foreach ((array)$this->_tpl_vars['categories'] as $this->_tpl_vars['category']):
+?>
+
+    <td valign="top" >
+    <?php if ($this->_tpl_vars['category']['image'] != ""): ?>
+    <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/viewcat.php?cid=<?php echo $this->_tpl_vars['category']['id']; ?>
+"><img src="<?php echo $this->_tpl_vars['category']['image']; ?>
+" height="50" border="0" alt="" /></a>
+    <?php endif; ?>
+    </td>
+    <td valign="top" width="40%"><a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/viewcat.php?cid=<?php echo $this->_tpl_vars['category']['id']; ?>
+"><b><?php echo $this->_tpl_vars['category']['title']; ?>
+</b></a>&nbsp;(<?php echo $this->_tpl_vars['category']['totaldownloads']; ?>
+)<br /><?php echo $this->_tpl_vars['category']['subcategories']; ?>
+</td>
+    <?php if (!($this->_tpl_vars['category']['count'] % 3)): ?>
+    </tr><tr>
+    <?php endif; ?>
+
+  <?php endforeach; endif; ?>
+  <!-- End category loop -->
+  </tr>
+</table>
+<br /><br />
+
+<div><?php echo $this->_tpl_vars['lang_thereare']; ?>
+</div>
+<hr noshade color=#000000">
+
+  <?php endif; ?>
+
+<?php if ($this->_tpl_vars['file'] != ""): ?>
+<h4><?php echo $this->_tpl_vars['lang_latestlistings']; ?>
+</h4>
+<table width="100%" cellspacing="0" cellpadding="10" border="0">
+<tr>
+<td width="100%" align="center" valign="top">
+  <!-- Start new link loop -->
+  <?php if (isset($this->_sections['i'])) unset($this->_sections['i']);
+$this->_sections['i']['name'] = 'i';
+$this->_sections['i']['loop'] = is_array($this->_tpl_vars['file']) ? count($this->_tpl_vars['file']) : max(0, (int)$this->_tpl_vars['file']);
+$this->_sections['i']['show'] = true;
+$this->_sections['i']['max'] = $this->_sections['i']['loop'];
+$this->_sections['i']['step'] = 1;
+$this->_sections['i']['start'] = $this->_sections['i']['step'] > 0 ? 0 : $this->_sections['i']['loop']-1;
+if ($this->_sections['i']['show']) {
+    $this->_sections['i']['total'] = $this->_sections['i']['loop'];
+    if ($this->_sections['i']['total'] == 0)
+        $this->_sections['i']['show'] = false;
+} else
+    $this->_sections['i']['total'] = 0;
+if ($this->_sections['i']['show']):
+
+            for ($this->_sections['i']['index'] = $this->_sections['i']['start'], $this->_sections['i']['iteration'] = 1;
+                 $this->_sections['i']['iteration'] <= $this->_sections['i']['total'];
+                 $this->_sections['i']['index'] += $this->_sections['i']['step'], $this->_sections['i']['iteration']++):
+$this->_sections['i']['rownum'] = $this->_sections['i']['iteration'];
+$this->_sections['i']['index_prev'] = $this->_sections['i']['index'] - $this->_sections['i']['step'];
+$this->_sections['i']['index_next'] = $this->_sections['i']['index'] + $this->_sections['i']['step'];
+$this->_sections['i']['first']      = ($this->_sections['i']['iteration'] == 1);
+$this->_sections['i']['last']       = ($this->_sections['i']['iteration'] == $this->_sections['i']['total']);
+?>
+    <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:mydownloads_download.html", array('down' => $this->_tpl_vars['file'][$this->_sections['i']['index']]));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+  <?php endfor; endif; ?>
+  <!-- End new link loop -->
+</td></tr>
+  </table>
+<?php endif; ?>
+<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_notification_select.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>

@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Using TControl Hints to Supply
+Quick Help</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Kevin Gallagher</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+                  <table width="100%">
+                    <tr bgcolor="pink">
+                      <td>
+<blockquote>
+<p>Often, when a user starts using your new program,
+he needs assistance to step him through &quot;how-to&quot; do
+different operations. As experience grows, less structured help
+is required. Quick and appropriate information can be helpful.
+So - where can this information be stored, and how is it displayed?</p>
+</blockquote>
+                     </td>
+                   </tr>
+                 </table>
+
+<P>As a Delphi programmer, you are in luck. Most
+visual controls, being descendants of TControl, have a Hint property,
+that can be set to display a little &quot;balloon&quot; of brief
+help to inform or remind your user about the control. </p>
+
+<P>To implement a control's Hint property, select
+the control, press F11 for the Object Inspector, select the Hint
+property and type in the text. Repeat this step until all desired
+controls have hints assigned. </p>
+
+<P>One last thing is required. Select the form,
+go to ShowHint property in the Object Inspector and set it to
+True. Now fire up the application, position the mouse over each
+control to see the hint assigned to it. </p>
+
+<P>Notice that hints display for only a short
+time. You can change the length of time hints display in your
+application, by setting a new value for the global HintHidePause
+property: </p>
+<P><FONT face="Courier New"><pre>
+Application.HintHidePause := 10000;</pre></FONT></P>
+
+<p>The example above shows all hints for approximately
+ten seconds, much longer than the half second default timeout.</p>
+
+<h3>Another Hint about Hints</h3>
+
+<P>Besides showing hints over controls, you can
+show them in another location, such as a StatusBar. Simply enter
+the hint as before but add a <i>pipe symbol</i>: </p>
+
+<P><FONT face="Courier New"><pre>
+Button1.Hint := 'This is shown over the button|This is redirected to a status-bar';</pre></FONT></P>
+
+<p>NOTE: The text on the left of the pipe symbol
+is referred to as <I>ShortHint</I> and to the right of the pipe
+symbol is called <I>LongHint.</I> </p>
+
+<h3>Steps to display LongHint</h3>
+
+<p>(nothing changes for ShortHint)</p>
+<OL>
+
+<LI>Add a StatusBar to the main form.<BR></li>
+
+<LI><p>Manually add the following code to the private section of the form's interface:</p>
+<P><FONT face="Courier New"><pre>
+<b>procedure</B> AppOnHint(Sender: TObject); </pre></FONT></P></li>
+
+<LI><p>Double click the form, and place this code in the OnCreate event: </p>
+<P><FONT face="Courier New"><pre>
+StatusBar1.SimplePanel := True;
+<FONT COLOR=#000080>// but set this False if you want to use panels.</font>
+Application.OnHint := AppOnHint; <FONT COLOR=#000080>// specifies an event to trigger
+when OnHint is fired. </font> </pre></FONT></P></li>
+
+<LI><p>Add the following procedure to your code: </p>
+<P><FONT face="Courier New"><pre>
+<b>procedure</FONT></B>
+TfrmMain.AppOnHint;
+<B>begin</B>
+  Statusbar1.SimpleText := Application.Hint; 
+<B>end</B>; </pre></FONT></P>
+
+<p>This code takes the LongHint and places it into the StatusBar. Most of the time this works
+fine, but it has limitations which we will examine shortly. </p></li>
+
+<LI>As the mouse cursor moves over any controls which have long hints assigned to them,
+you should see hints. (Note: short hints will not display unless
+you set the form's property ShowHint to True.) </li>
+</OL>
+
+<h3>Hints on Child Forms</h3>
+
+<P>Now that you understand how to show hints
+for the main form of a project, lets move onto showing hints on
+child forms. I feel it is rude to make users look for long hints
+in the main forms status-bar while on a child form. To rectify
+this, a few code additions are needed to the original code for
+the main form and we need to add status bars to each child form.</p>
+
+<P>First, change the code for the procedure AppOnHintto read: </p>
+<P><FONT face="Courier New"><pre>
+TStatusBar(Screen.ActiveForm.FindComponent('Statusbar1')).SimpleText:= Application.Hint; </pre></font></p>
+
+<blockquote>
+<P>When the application's OnHint event fires,
+it triggers AppOnHint. The code within AppOnHint locates StatusBar1
+using FindComponent, then typecasts it as TStatusBar. Next the
+current control's long hint is assigned to StatusBar1's SimpleText
+property, on the current form. </p>
+</blockquote>
+
+<P>Next, add a StatusBar to each form, setting
+SimplePanel to True. Run the application and you will see hints
+displayed on the status-bar of any form that is current. </p>
+
+<h4>Caveat</h4>
+<p>This code works 99% of the time. An error will occur if you forget to include a statusbar on a form
+or you are using a third-party message box which is actually a descendant of TCustomForm. Probably a GPF will occur and you will blame that third party control. </p>
+
+<P>In fact, it is the code for showing hints that is the culprit here, but you can prevent the access violation
+very simply by testing for the presence of the statusbar. Change the code to: </p>
+<P><FONT face="Courier New"><pre>
+<b>procedure</FONT></B> TfrmMain.AppOnHint;
+<B>var</B>
+T: TComponent;<BR>
+<B>begin</B>
+  T := Screen.ActiveForm.FindComponent('Statusbar1');
+  <B>if</B> T &lt;&gt; <B>nil then</B>
+    TStatusBar(T).SimpleText := Application.Hint;
+  <B>end</B>;
+<B>end</B></pre></font></p>
+
+<P>Now, when the active form has no component named StatusBar1, no GPF!</p>
+
+<h3>A Couple of Tips</h3>
+
+<P>Tip 1: Menu items can display hints as described above, i.e. in a StatusBar</p>
+<P>
+
+<p>Tip 2: Short hints can be displayed in multi-line format. For example </p>
+
+<P><FONT face="Courier New"><pre>
+Button1.Hint := 'Pretty cool'#13'You can have multi-line hints|Of course not long hints'; </pre></font></p>
+
+<P>The above example would show a short hint with two (2) lines of text in a Hint balloon, while the long hint
+remains a one-liner. </p>
+
+<P align="center">Well, that should be enough to get you started - have fun! </p>
+
+<h3>Demo projects to download</h3>
+
+<blockquote>
+<P><A HREF="ftp://ftp.delphi-jedi.org/voyager/UsingHints_demo.zip">Using Hints Main Demo</A></p>
+
+<P><A HREF="ftp://ftp.delphi-jedi.org/voyager/DBGridHints_demo.zip">DBGrid Hints Demo</A></P>
+</blockquote>
+
+<p align="center"><I><FONT size="1">Kevin S. Gallagher is a full time systems analyst at Oregon Department Of Revenue<br>where he uses Delphi, Visual Basic and Clipper to create Property Tax Systems.</FONT></I></P>
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

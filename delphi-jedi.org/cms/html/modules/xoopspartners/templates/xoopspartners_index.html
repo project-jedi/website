@@ -1,0 +1,37 @@
+<h4><{$sitename}> <{$lang_main_partner}></h4>
+
+<table cellspacing='0' border='0' width='98%'>
+  <tr>
+    <td width='50%' align='left'><{$partner_join}></td>
+    <td width='50%' align='left'><{$pagenav}></td>
+  </tr>
+</table>
+
+<table class='outer' cellspacing='1' width='98%'>
+  <tr>
+    <th width='5%' align='left' nowrap='nowrap'><{$lang_partner}></th>
+    <th align='left'><{$lang_desc}></th>
+    <th width='1%' align='left' nowrap='nowrap'><{$lang_hits}></th>
+  </tr>
+
+<{section name=partner loop=$partners}>
+  <tr>
+    <td class='even' width='5%' valign='middle' align='center'><{$partners[partner].image}></td>
+    <td class='odd' align='left' valign='top'><b><{$partners[partner].title}></b> <br /><{$partners[partner].description}><{$partners[partner].admin_option}></td>
+    <td width='1%' valign='middle' align='center' class='even'><{$partners[partner].hits}></td>
+  </tr>
+<{sectionelse}>
+
+  <tr>
+    <td class='even' valign='middle' align='center' colspan='3'><{$lang_no_partners}></td>
+  </tr>
+<{/section}>
+
+</table>
+
+<table cellspacing='0' border='0' width='98%'>
+  <tr>
+    <td width='50%' align='left'><{$partner_join}></td>
+    <td width='50%' align='left'><{$pagenav}></td>
+  </tr>
+</table>

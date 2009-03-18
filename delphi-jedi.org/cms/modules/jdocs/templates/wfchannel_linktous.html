@@ -1,0 +1,56 @@
+<p>
+<{if $linktous.linkpagelogo }>
+<div align="center">
+	<div><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.linkpagelogo}>' name='image' id='image' alt='' /></div>
+</div></p>
+<{/if}>
+
+<p><div align= "center"><h3><{$lang_linktous}></h3></div></p>
+<p><div align= "left"><{$lang_linkintro}></div></p>
+
+<{if $linktous.textlink }>
+	<p><div align= "left" class = "itemHead"><b><{$lang_displaytext}></b></div></p>
+	<p><div align= "left"><b><{$lang_textexample}></b><br /> <a href='<{$xoops_url}>' target='_blank'><{$linktous.textlink}></b></a></a><br></div></p>
+	<div align= "left"><{$lang_displayscript}></div>
+	<textarea name='linktext' cols='60' rows='2' wrap='VIRTUAL'><a href='<{$xoops_url}>' target='_blank'><{$linktous.textlink}></b></a></textarea>
+<{/if}>
+
+<{if $linktous.button }>
+	<p><div align= "left" class = "itemHead"><b><{$lang_displaybutton}></b></div></p>
+	<p><div align= "left"><b><{$lang_buttonexample}></b></div>
+	<div><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.button}>' name='image' id='image' alt='<{$linktous.sitename}>' /></div></p>
+	<div align= "left"><{$lang_displayscript}></div>
+	<textarea name='lienbt' cols='70' rows='4' wrap='VIRTUAL'><a href='<{$xoops_url}>' target='_blank'><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.button}>' alt='<{$linktous.sitename}>'></a></textarea>
+<{/if}>
+
+<{if $linktous.logo }>
+	<p><div align= "left" class = "itemHead"><b><{$lang_displaylogo}></b></div></p>
+	<p><div align= "left"><b><{$lang_logoexample}></b></div>
+	<div><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.logo}>' name='image' id='image' alt='<{$linktous.sitename}>' /></div></p>
+	<div align= "left"><{$lang_displayscript}></div>
+	<textarea name='lienbt' cols='70' rows='4' wrap='VIRTUAL'><a href='<{$xoops_url}>' target='_blank'><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.logo}>' alt='<{$linktous.sitename}>'></a></textarea>
+<{/if}>
+
+<{if $linktous.banner }>
+	<p><div align= "left" class = "itemHead"><b><{$lang_displaybanner}></b></div></p>
+	<p><div align= "left"><b><{$lang_bannerexample}></b></div>
+	<div><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.banner}>' name='image' id='image' alt='<{$linktous.sitename}>' /></div></p>
+	<div align= "left"><{$lang_displayscript}></div>
+	<textarea name='lienbt' cols='70' rows='4' wrap='VIRTUAL'><a href='<{$xoops_url}>' target='_blank'><img src='<{$xoops_url}>/<{$linktous.path}>/<{$linktous.banner}>' alt='<{$linktous.sitename}>'></a></textarea>
+<{/if}>
+
+<{if $linktous.newsfeed == 1}>	
+	<p><div align= "left" class = "itemHead"><b><{$lang_displaynews}></b></div></p>
+	<p><div><img src='<{$xoops_url}>/modules/wfchannel/images/rss.gif' name='image' id='image' alt='<{$linktous.sitename}>' /></div></p>
+	<p><div align= "left"><{$lang_displaynewsrss}></div></p>
+	<p><div align= "left"><i><{$lang_newsfeedexample}> <b><{$xoops_url}>/backend.php</b></i></div></p>
+<{/if}>
+
+<{if $linktous.newsfeedjs == 1}>	
+	<p><div align= "left"><{$lang_displayjsnewsrss}></div></p>
+	<p><div align= "left"><i><{$lang_newsfeedjsexample}> <b><{$xoops_url}>/backendjs.php</b></i></div></p>
+	<div align= "left"><{$lang_displayscript}></div>
+	<textarea name='backend' cols='70' rows='4' wrap='VIRTUAL'><script type='text/javascript' src='<{$xoops_url}>/backendjs.php'></script></textarea>
+<{/if}>
+<br /><br />
+<p><div align= "center"><small><{$lang_copyrightnotice}></small></div></p>

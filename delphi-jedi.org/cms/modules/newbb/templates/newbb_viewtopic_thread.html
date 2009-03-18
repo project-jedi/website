@@ -1,0 +1,71 @@
+<!-- start module contents -->
+<table border="0" cellpadding='5' align='center'>
+  <tr>
+    <td align='left'><img src='<{$xoops_url}>/modules/newbb/images/folder.gif' alt='' /> <a href='<{$xoops_url}>/modules/newbb/index.php'><{$lang_forum_index}></a><br />&nbsp;&nbsp;<img src='<{$xoops_url}>/modules/newbb/images/folder.gif' alt='' /> <a href='<{$xoops_url}>/modules/newbb/viewforum.php?forum=<{$forum_id}>'><{$forum_name}></a>
+<br />&nbsp;&nbsp;&nbsp;&nbsp;<img src='<{$xoops_url}>/modules/newbb/images/folder.gif' alt='' /> <b><{$topic_title}></b></td><td align='right'><{$forum_post_or_register}></td>
+  </tr>
+</table>
+
+<img src="images/pixel.gif" height="5" alt="" /><br />
+
+<!-- start topic thread -->
+<table cellpadding="4" width="100%">
+  <tr>
+    <td align="left"><a href="viewtopic.php?viewmode=flat&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
+    <td align="right"><a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
+  </tr>
+</table>
+<table cellspacing="1" class="outer">
+  <tr>
+    <th width='20%'><{$lang_poster}></th>
+    <th><{$lang_thread}></th>
+  </tr>
+  <{foreach item=topic_post from=$topic_posts}>
+    <{include file="db:newbb_thread.html" topic_post=$topic_post}>
+  <{/foreach}>
+</table>
+
+<table cellpadding="4" width="100%">
+  <tr>
+    <td align="left"><a href="viewtopic.php?viewmode=flat&amp;order=<{$order_current}>&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>"><{$lang_flat}></a></td>
+    <td align="right"><a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=prev&amp;topic_time=<{$topic_time}>"><{$lang_prevtopic}></a> | <a href="viewtopic.php?viewmode=thread&amp;topic_id=<{$topic_id}>&amp;forum=<{$forum_id}>&amp;move=next&amp;topic_time=<{$topic_time}>"><{$lang_nexttopic}></a></td>
+  </tr>
+</table>
+
+<br />
+
+<!-- start topic tree -->
+<table class="outer" cellspacing='1'>
+  <tr align='left'>
+    <th width='50%'><{$lang_subject}></th>
+    <th width='20%'><{$lang_poster}></th>
+    <th><{$lang_date}></th>
+  </tr>
+  <{foreach item=topic_tree from=$topic_trees}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td><{$topic_tree.post_prefix}> <{$topic_tree.post_image}> <{$topic_tree.post_title}></td>
+    <td><{$topic_tree.poster_uname}></td>
+    <td><{$topic_tree.post_date}></td>
+  </tr>
+  <{/foreach}>
+</table>
+<!-- end topic tree -->
+<!-- end topic thread -->
+
+<img src="images/pixel.gif" height="5" alt="" /><br />
+
+<table width="100%" class="outer" cellspacing="0">
+  <tr class='foot' valign="top">
+    <td align='left'> <{$forum_post_or_register}></td>
+    <td align='right'><{$forum_jumpbox}> </td>
+  </tr>
+  <tr class='foot' valign="bottom">
+    <{if $viewer_is_admin == true}>
+    <td colspan='2' align='center'>&nbsp;<{$topic_lock_image}>&nbsp;<{$topic_move_image}>&nbsp;<{$topic_delete_image}>&nbsp;<{$topic_sticky_image}>&nbsp;</td>
+    <{else}>
+    <td colspan='2'>&nbsp;</td>
+    <{/if}>
+  </tr>
+</table>
+<{include file='db:system_notification_select.html'}>
+<!-- end module contents -->

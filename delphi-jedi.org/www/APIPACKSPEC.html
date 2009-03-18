@@ -1,0 +1,869 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI ::  API Sourcecode Packaging Specification</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table>
+  <tr>
+    <td width="70%">
+      <table>
+        <tr>
+          <td width=251 valign="middle">
+<a href="index.html">
+<img src="img/jedi-smaller.gif" width=241 height=66 border=0></a>
+<br><br>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>How to Present Your API Conversion</h2></font>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"align="center" BGCOLOR="peachpuff" ALIGN=CENTER>
+  
+<A HREF="APISUBMITTING.html"><B>Click here</B></A> <FONT COLOR=#00008B>if you have followed the specifications in this document and are ready to submit your conversion pack</FONT>
+
+          </td>
+        </tr>
+     </table>
+   </td>
+  </tr>
+
+  <tr>
+    <td>  
+
+<!--  Main body -->
+
+
+      <TABLE>
+        <TR>
+          <TD WIDTH=30></TD>
+          <TD WIDTH=270><I>Formulated September 1999 by</TD>
+          <TD WIDTH=245></I>
+<P>
+<I>Phil Shrimpton</I> <BR>
+<I>Marcel van Brakel</I> <BR>
+<I>Rudy Velthuis</I><P>
+<font size="-1">Last updated 28 January 2000</font>
+          </TD>
+         </TR>
+       </TABLE>
+
+
+       <TABLE CELLPADDING=5 CELLSPACING=0 BGCOLOR="lightblue" BORDER=0>
+         <TR>
+           <TD WIDTH=120 VALIGN=TOP></TD>
+           <TD WIDTH=455 VALIGN=TOP></TD>
+         </TR>
+
+         <TR>
+         <TD WIDTH=120 VALIGN=TOP>
+<B><FONT SIZE=4>This document </FONT></B>
+<P>
+         </TD>
+         <TD WIDTH=455 VALIGN=TOP> 
+<UL>
+<LI>explains how to package a conversion project for submission to the Project JEDI API Library
+<LI>identifies the levels of compliance with Project JEDI and Borland standards
+<LI>identifies the statuses that apply to work-in-progress and completed work
+<LI>describes the contents of the ancillary documentation files that may be included in the pack
+<LI>summarizes the &quot;open source&quot; licensing conditions for Project JEDI work
+</UL>
+         </TD>
+        </TR>
+
+        <TR>
+          <TD WIDTH=100></TD>
+          <TD WIDTH=475></TD>
+        </TR>
+      </TABLE>
+
+      <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5>
+        <TR>
+          <TD WIDTH=100 VALIGN=TOP BGCOLOR="cornsilk">
+<B><FONT SIZE=5><A NAME="contents">Contents</A></FONT></B> 
+          </TD>
+          <TD WIDTH=475>
+<A HREF="#packformat">1.</A> API Pack (.Zip) Format and Organization<BR>
+<A HREF="#certlevels">2.</A> Certification Levels<BR>
+<A HREF="#statuslevels">3.</A> Status Levels<BR>
+<A HREF="#interface">4.</A> Contents of an Interface Unit<BR>
+<A HREF="#infotxt">5.</A> Contents of Info.txt<BR>
+<A HREF="#readme">6.</A> Contents of Readme.txt<BR>
+<A HREF="#helpfile">7.</A> Contents of a Help File<BR>
+<A HREF="#licensing">8.</A> Licensing Summary<BR>
+          </TD>
+        </TR>
+      </TABLE>
+
+      <TABLE WIDTH=675 BGCOLOR="cornsilk">
+        <TR>
+          <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="packformat">
+
+1.  API PACK (.ZIP) FORMAT AND ORGANIZATION</A>
+
+<BR></FONT></B>
+          </TD>
+          <TD WIDTH=100 ALIGN=RIGHT>
+<FONT SIZE="-1"><A HREF="#contents">Contents</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+
+      <TABLE WIDTH=675>
+        <TR>
+          <TD WIDTH=675>
+(a)<B> Naming of Files</B>
+<P>
+The Team Captain (or, in the case of a new submission, the donor) should submit all files in a single .zip file. This must be a standard pkzip/winzip file generated with maximum compression. The name of this file must be &lt;API_NAME&gt;.zip where API_NAME is the name of the corresponding API, possibly abbreviated. It should be as short as is practicable and follow the &quot;camel case&quot; convention (see below). Do not include spaces in the filename.<BR>
+<P>
+If the pack contains a group of APIs but does not translate the whole of an SDK (as often occurs with the Microsoft platform APIs), choose a name that makes the group recognizable. For further guidelines, refer to the next section.<BR>
+<P>
+Wherever possible, the names of interface units should be identical to the corresponding header files and in <B><FONT COLOR=#FF0000>camel case</FONT></B>, which is mixed case with <B><FONT COLOR=#FF0000>no spaces or underline characters</FONT></B> and with uppercase letters marking the first letter of each word.<P>
+For example:<P>
+msiquery.h becomes MsiQuery.pas<BR>
+<P>
+If possible, restrict the length of unit names to 8 characters. <BR>
+<P>
+            <TABLE>
+              <TR>
+                <TD WIDTH=50></TD>
+                <TD WIDTH=525>
+Example:<BR>
+<P>
+The Microsoft Installer API (generally referred to as MSI)<P>
+Name of zip file: Msi.zip<BR>
+Unit names:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msi.h -&gt; Msi.pas<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msiquery.h -&gt; MsiQuery.pas<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msidefs.h -&gt; MsiDefs.pas<BR>
+                </TD>
+              </TR>
+            </TABLE>
+<P>
+If a name clash would occur by following these rules, the unit name should be altered as little as possible. For example, htmlhelp.h becomes HtmlHlp.pas because there is a function named HtmlHelp in the unit so it cannot be named HtmlHelp.pas.<BR>
+
+<P>
+b) <B>Organization of a Submitted Pack<BR>
+</B>
+<P>
+The zip file should be organized as follows:<BR>
+<P>
+The <U>root folder</U> should have the same name as the zip file and should contain only the following files:<BR>
+<P>
+<B>Info.txt</B> and <B>Readme.txt</B> Please read the detailed notes regarding the content of these files. These are to be plain text or, if formatting is required, use .rtf (rich text) format <U>only</U>. <I>Use of word-processor formats (such as Word or Word Perfect) will cause the pack to be rejected until this requirement is met.<BR>
+</I>
+<P>
+Please do not submit a zip file containing the absolute path structure copied from your hard disk. <BR>
+<P>
+All other files should be organized in sub-folders, as described here. Please conform to the supplied naming standard for sub-folders. <BR>
+          </TD>
+        </TR>
+      </TABLE>
+<P>
+      <TABLE>
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Folder</B></TD>
+        <TD WIDTH=495><B>Purpose</B></TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Pas</B></TD>
+        <TD WIDTH=495>Contains the interface unit(s)</TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Par</B></TD>
+        <TD WIDTH=495>Contains the intermediate .par file(s) </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Bin</B></TD>
+        <TD WIDTH=495>Compiled units</TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Demos</B></TD>
+        <TD WIDTH=495>
+Contains demo projects. Use a separate subfolder for each demo
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Docs</B></TD>
+        <TD WIDTH=495>
+Additional documentation (e.g. a tutorial on using the API)
+        </TD>
+      </TR>
+ 
+      <TR>
+        <TD WIDTH=40></TD>
+        <TD WIDTH=40><B>Help</B></TD>
+        <TD WIDTH=495>
+Compiled WinHelp help file(s) as well as all sources needed to (re)build it (rtf, hpp etc).         </TD>
+      </TR>
+
+      <tr>
+        <td  colspan="3">        
+Do not include empty folders, e.g. if there are no demo projects then do not include an empty Demo folder.
+<P>
+Related files and/or projects should be placed in a subfolder of the Demos folder, for instance, a unit with utility functions or a (set of) component(s). However it is preferred that these be made available as separate packs, rather than be included in the API pack. </TD></TR></TABLE>
+        </td>
+      </tr>
+    </TABLE>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="certlevels">
+2. CERTIFICATION LEVELS</A><BR></FONT></B>
+        </TD>
+
+        <TD WIDTH=100 ALIGN=RIGHT>
+<FONT SIZE="-1"><A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE WIDTH=675>
+      <TR>
+        <TD WIDTH=675>
+There will be a delay between receipt of a pack and its appearance in the ftp download area (ftp://delphi-jedi.org) whilst the certification level of the work is being assessed. When contacting the Technical Coordinator for an upload password, you should indicate the certification level for which you wish to apply. Upon assessment, if the work does not meet the level you requested, you may be contacted to decide whether to submit it at a downgraded level or to complete the requirements and resubmit.<BR>
+<P>
+At any time, you (or another volunteer) may apply to do the work to upgrade a pack.<BR>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=66><B>Level</B></TD>
+        <TD WIDTH=108><B>Certification</B></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326><B>Description</B></TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(0)</TD>
+        <TD WIDTH=108><B>Unknown</B> </TD>
+        <TD ALIGN="CENTER" WIDTH=90>
+<P>
+<CENTER><IMG SRC="img/Jedi_unknown.gif" ALT="Status ungraded">
+        </TD>
+        <TD WIDTH=326>
+<P>
+The API has not been graded yet. This will be the certification level for
+all projects that are work in progress, or do not meet the required
+specifications for Level 1 or 2.
+        </TD>
+      </TR>
+      <TR>
+        <TD WIDTH=66></TD>
+        <TD WIDTH=108></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326>
+<HR SIZE=1 COLOR="gold">
+<P>
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(1)</TD>
+        <TD WIDTH=108><B>Partial</B> </TD>
+        <TD ALIGN="CENTER" WIDTH=90>
+<P>
+
+<CENTER><IMG SRC="img/Jedi_partial.gif" ALT="Status partial"></TD>
+        <TD WIDTH=326>
+<P>
+The interface unit(s) form a subset of the complete API. That is, either -
+one or more interface units are missing or - one or more units are
+incomplete.  The main translation units (*.pas) will include the MPL header. 
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66></TD>
+        <TD WIDTH=108></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326>
+<HR SIZE=1 COLOR="gold">
+<P>
+
+        </TD>
+      </TR>
+      <TR>
+        <TD WIDTH=66>(2)</TD>
+        <TD WIDTH=108><B>Untested</B> </TD>
+        <TD ALIGN="CENTER" WIDTH=90>
+<P>
+<CENTER><IMG SRC="img/Jedi_untested.gif" ALT="Status untested">
+        </TD>
+        <TD WIDTH=326>
+<P>
+Level 1 &quot;Partial&quot; BUT interface unit(s) is (are) a complete translation of
+all header files from a single API. No testing has been done. 
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66></TD>
+        <TD WIDTH=108></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326>
+<HR SIZE=1 COLOR="gold">
+<P>
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(3)</TD>
+        <TD WIDTH=108><B>Complete</TD>
+        <TD ALIGN="CENTER" WIDTH=90></B>
+<P>
+<CENTER><IMG SRC="img/jedi_complete.gif" ALT="Status complete">
+        </TD>
+        <TD WIDTH=326>
+<P>
+As Level 2 &quot;Untested&quot; BUT everything has been tested AND there is a 1-to-1 correspondence between units and
+header files or a text file is present in the Readme.txt file describing the
+mapping (see <A HREF="#mapping">section 6/5</A> below). Packs
+containing completed translations whose code or file names are not compliant
+with Borland standards will rest at this level.
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66></TD>
+        <TD WIDTH=108></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326>
+<HR SIZE=1 COLOR="gold">
+<P>
+        </TD>
+      </TR>
+      <TR>
+        <TD WIDTH=66>(4)</TD>
+        <TD WIDTH=108><B>Borland Compliant</TD>
+        <TD ALIGN="CENTER" WIDTH=90></B>
+<P>
+<CENTER><IMG SRC="img/BorlandCompliant.gif" ALT="Borland Compliant"> <BR>
+</CENTER>
+<P>
+<CENTER><IMG SRC="img/borland_b.gif" ALT="Borland B"></TD><TD WIDTH=326></CENTER>
+<P>
+Level 3 &quot;Complete&quot; AND the interface units comply with the specifications described in the documents <a HREF="http://community.borland.com/soapbox/techvoyage/article/1,1795,10281,00.html">&quot;Pascal Header Translation Specification&quot;</a> and <a HREF="http://community.borland.com/soapbox/techvoyage/article/1,1795,10280,00.html">&quot;Styleguide&quot;</a> which are available at the Borland Techvoyage website. All .par files are present. All *.h macros have been translated (if required).  All original comments from *.h have be preserved. No Dynamic Linking and/or conditional defines are present in the main translation units.
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66></TD>
+        <TD WIDTH=108></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326>
+<HR SIZE=1 COLOR="gold">
+<P>
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(5)</TD>
+        <TD WIDTH=108><B>JEDI Certified</TD>
+        <TD ALIGN="CENTER" WIDTH=90></B>
+<P>
+<CENTER><IMG SRC="img/JediCertified.gif" ALT="Jedi Certified"> <BR>
+<IMG SRC="img/jedi_j.gif" ALT="Jedi J"></CENTER>
+        </TD>
+        <TD WIDTH=326>
+<P>
+Level 4 &quot;Borland Compliant&quot;, with the addition of the Readme.txt document. The pack complies with the rules laid out in 'Organization of a Submitted Pack' (above).
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66></TD>
+        <TD WIDTH=108></TD>
+        <TD ALIGN="CENTER" WIDTH=90></TD>
+        <TD WIDTH=326>
+<HR SIZE=1 COLOR="gold">
+<P>
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(6)</TD>
+        <TD WIDTH=108><B>JEDI Plus</TD>
+        <TD ALIGN="CENTER" WIDTH=90></B>
+<P>
+<CENTER><IMG SRC="img/JediCertified.gif" ALT="Jedi Certified"> <BR>
+<IMG SRC="img/jedi_Plus.gif" ALT="Jedi Plus"></CENTER>
+        </TD>
+        <TD WIDTH=326>
+<P>
+Level 5 &quot;JEDI Compliant&quot; PLUS at least one Demo project and possibly a
+tutorial and help file. It may also include units that implement Dynamic
+linking and/or IFDEFs in a separate subdirectory.
+        </TD>
+      </TR>
+    </TABLE>
+<BR><br>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="statuslevels">
+3. STATUS LEVELS</A><BR></FONT></B>
+        </TD>
+        <TD WIDTH=100 ALIGN=RIGHT><FONT SIZE="-1">
+<A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=66><B>Level</B></TD>
+        <TD WIDTH=99><B>Status</B></TD>
+        <TD WIDTH=426><B>Description</B></TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(1)</TD>
+        <TD ALIGN="LEFT" VALIGN="MIDDLE" WIDTH=99>
+<B>Forming</B>
+        </TD>
+        <TD WIDTH=426>
+A team is forming for this API and/or the conversion work is started. No source code is available yet.
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(2)</TD>
+        <TD ALIGN="LEFT" VALIGN="MIDDLE" WIDTH=99>
+<B>Active</B>
+        </TD>
+        <TD WIDTH=426>
+The conversion and creation of other files are in progress. A download is available but it is incomplete and/or not tested yet
+        </TD>
+      </TR>
+      <TR>
+        <TD WIDTH=66>(3)</TD>
+        <TD WIDTH=99><B>Testing</B></TD>
+        <TD WIDTH=426>
+Some or all parts are available for testing, sample writing and Help writing
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=66>(4)</TD>
+        <TD ALIGN="LEFT" VALIGN="MIDDLE" WIDTH=99>
+<B>Finished</B>
+        </TD>
+        <TD WIDTH=426>The conversion is finished and a certified package (of whatever level) is available for download. No more work will be spent on this version of the API.
+        </TD>
+      </TR>
+    </TABLE> 
+
+<BR><br>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="interface">
+4. CONTENTS OF AN INTERFACE UNIT</A><BR></FONT></B>
+        </TD>
+        <TD WIDTH=100 ALIGN=RIGHT><FONT SIZE="-1">
+<A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+<BR>
+    <TABLE WIDTH=675>
+      <TR>
+        <TD WIDTH=675>
+An interface unit (.pas) contains only code directly translated from an API header file. No other code, such as utility subroutines, is present. However, any routine written in order to implement the functionality of a C macro must be included in the unit (see <A HREF="#macros">note 4d</A>) below).<BR>
+<P>
+(a) <B>Header Section</B>
+<P>
+All units start with the following header:
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=400 BGCOLOR="lightgrey">
+<PRE>
+<TT>{******************************************************************}
+{                                                                  }
+{ Borland Delphi Runtime Library                                   }
+{ &lt;API&gt; interface unit                                             }
+{                                                                  }
+{ Portions created by Microsoft are                                }
+{ Copyright (C) 1995-1999 Microsoft Corporation.                   }
+{ All Rights Reserved.                                             }
+{                                                                  }
+{ The original file is: urlmon.h, released 11 Nov 1997.            }
+{ The original Pascal code is: UrlMon.pas, released 15 Jun 1999.   }
+{ The initial developer of the Pascal code is Rudolph Velthuis     }
+{ (rvelthuis@gmx.de).                                              }
+{                                                                  }
+{ Portions created by Rudolph Velthuis are                         }
+{ Copyright (C) 1999 Rudolph Velthuis.                             }
+{                                                                  }
+{ Contributor(s): Marcel van Brakel                                }
+{ Christopher D. Coppola                                           }
+{                                                                  }
+{ Obtained through:                                                }
+{                                                                  }
+{ Joint Endeavour of Delphi Innovators (Project JEDI)              }
+{                                                                  }
+{ You may retrieve the latest version of this file at the Project  }
+{ JEDI home page, located at http://delphi-jedi.org                }
+{                                                                  }
+{ The contents of this file are used with permission, subject to   }
+{ the Mozilla Public License Version 1.1 (the &quot;License&quot;); you may  }
+{ not use this file except in compliance with the License. You may }
+{ obtain a copy of the License at                                  }
+{ http://www.mozilla.org/MPL/MPL-1.1.html                          }
+{                                                                  }
+{ Software distributed under the License is distributed on an      }
+{ &quot;AS IS&quot; basis, WITHOUT WARRANTY OF ANY KIND, either express or   }
+{ implied. See the License for the specific language governing     }
+{ rights and limitations under the License.                        }
+{                                                                  }
+{******************************************************************} 
+</TT>
+</PRE>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=250></TD>
+        <TD WIDTH=120 BGCOLOR="peachpuff">
+<A HREF="ftp://ftp.delphi-jedi.org/api/info.ini">Download template</A>
+        </TD>
+      </TR>
+    </TABLE> 
+<P>
+    <TABLE WIDTH=675>
+      <TR>
+        <TD WIDTH=675>
+(b) <B>Linking Options</B> 
+<P>
+The default (no defines) should always be the latest version of an API combined with static linking and should assume the latest version of Delphi.<BR>
+<P>
+If the author of the interface unit wants to provide dynamic linking against the API this should be done through the use of conditional defines ($IFDEF compiler directives). The unit should implement either static linking alone OR both static and dynamic linking and provide a switch through a compiler directive. <BR>
+<P>
+If dynamic linking is present then all function variables should be initialized to nil (automatically done by Delphi), the unit should have exactly the same name as it would have if static linking was used, and the following functions should be provided:
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=400 BGCOLOR="lightgrey">
+<PRE>
+<TT>function Load&lt;API_NAME&gt;: Boolean; //returns True if API successfully loaded
+procedure UnLoad&lt;API_NAME&gt;; 
+function &lt;API_NAME&gt;Loaded: Boolean; //returns if the API is loaded<BR>
+</TT>
+</PRE>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE WIDTH=675>
+      <TR>
+        <TD WIDTH=675>
+The API should be automatically unloaded in the finalization section, but must be tested to ensure that it does not misbehave if it is explicitly unloaded sooner by using UnLoad&lt;API_NAME&gt;. When the API is unloaded all function variables should be reset to nil (helps with debugging). There could be an optional differentiation between explicit and implicit loading, i.e. Load&lt;API_NAME&gt; could be called automatically on startup (initialization) depending on another conditional. <P>
+For examples, see HtmlHlp.pat.<BR>
+<P>
+c) <B>Documentation Within the Source Code<BR>
+</B>
+<P>
+All original documentation from the header file should be copied to the translation.<BR>
+<P>
+Keep further source code comments to a minimum and restrict them to matters concerning programming and the translation. Do not include implementation or user documentation in the source code. Please refer to the notes below about <B>Readme.txt</B>.<BR>
+<P>
+Do not document &quot;KNOWN ISSUES&quot; in the source units. Please refer to the <A HREF="#knownissues">notes below</A> about <B>Readme.txt</B>.<BR>
+<A NAME="macros">
+<P>
+d) <B>Translation of C Macros</A><BR>
+</B>
+<P>
+Because C/C++ macros are not translatable, it is necessary to create Delphi functions based on the macro's description in the SDK documentation. In this sense, the converter is writing a new method in order to achieve the functionality of untranslatable C code. Please include a short explanation of any such solutions. Do not physically separate this &quot;new&quot; function from the translated code from the same header.
+        </TD>
+      </TR>
+    </TABLE>
+<BR><br>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="infotxt">
+5. CONTENTS OF INFO.TXT</A><BR></FONT></B>
+        </TD>
+        <TD WIDTH=100 ALIGN=RIGHT><FONT SIZE="-1">
+<A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+<BR>
+    <TABLE>
+      <TR>
+        <TD WIDTH=675>
+Info.txt is used for recording all information about the API that is available. All dates should be in the format dd MMM yyy. Please do not use dd/mm/yy(yy), mm/dd/yy(yy) or yy(yy)/mm/dd because of the confusion this causes to international readers. 
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=400 BGCOLOR="lightgrey">
+<PRE><TT>
+[API] 
+Name=&lt;name of the API; e.g. HtmlHelp&gt;
+Version=&lt;version of the API; e.g. 1.21&gt;
+Date=&lt;release date of the API; e.g. 12 May 1999&gt;
+Originated=&lt;source of the API; ex: HtmlHelp Workshop 1.21&gt;
+URL=&lt;Homepage of API; exmdsn.microsoft.com/workshop&gt;
+Description=&lt;short description of the API; e.g. Interface for the Microsoft Html Help API&gt; 
+
+[CONVERSION] NOTE: THERE CAN BE MORE THAN ONE FILE - Duplicate this section for each file.
+FileName=&lt;name of file&gt;
+FileDate=&lt;creation date of file dd MMM yyyy&gt;
+Status=[READY|WORK-IN-PROGRESS|READY-FOR-TESTING]
+Version=&lt;version of file&gt;
+LastModify=&lt;date of last modification dd MMM yyyy&gt;
+OriginalFile=&lt;name of original header file&gt;
+[Platform]
+Win31=[YES|NO|UNKNOWN]
+Win95=[YES|NO|UNKNOWN]
+Win98=[YES|NO|UNKNOWN]
+Win2000=[YES|NO|UNKNOWN]
+WinNT3=[YES|NO|UNKNOWN]
+WinNT4=[YES|NO|UNKNOWN]
+
+[Requirements]
+Req1=&lt;e.g. Requires IE3 or higher&gt;
+Req2=&lt;e.g. Requires hhctrl.ocx&gt;
+
+[Captain]
+Name=&lt;name of team captain&gt;
+Email=&lt;email address of captain&gt;
+
+[Converters]
+Converter1=&lt;name;email;homepage&gt;
+Converter2=&lt;name;email;homepage&gt;
+
+[Testers]
+Tester1=&lt;name;email;homepage&gt;
+Tester2=&lt;name;email;homepage&gt; 
+</TT></PRE>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE>
+      <TR>
+        <TD WIDTH=250></TD>
+        <TD WIDTH=120 BGCOLOR="peachpuff">
+<A HREF="ftp://ftp.delphi-jedi.org/api/info.ini">Download template</A>
+        </TD>
+      </TR>
+    </TABLE> 
+
+<BR><br>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="readme">
+6. CONTENTS OF README.TXT</A><BR></FONT></B>
+        </TD>
+        <TD WIDTH=100 ALIGN=RIGHT><FONT SIZE="-1">
+<A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+<BR>
+
+<A NAME="knownissues">
+    <TABLE>
+      <TR>
+        <TD WIDTH=675>
+1. KNOWN ISSUES Section
+<BR>
+Use this section to document any issues that gave rise to a peculiarity in a translation, workarounds to solve problems detected in testing, discrepancies in behaviour between compiler versions, etc. Any issues that affect the way the function is used in an application should also be duplicated into the Help text.<BR>
+<P>
+2. IMPLEMENTATION Section<BR>
+Implementation details should (ideally) be made into a Help file so that it can be compiled with other Delphi help. If a pack is submitted without a Help file, the author should include in the Readme.txt as much information as the programmers and testers can provide, including code snippets, both to assist users to implement the code and to assist help writers who may be subsequently assigned to help-writing.<BR>
+<P>
+3. TESTER REPORTS section<BR>
+If Tester reports are available, include them in README.TXT under the heading TESTER REPORTS. This section should include references to any code demos that the testers have supplied.<P>
+4. ASSOCIATED WORK Section<BR>
+Use this section to refer to any wrappers, components, utility units or spin-off projects associated with this conversion. If possible, include the names of the packs in which these items may be found.<BR>
+<A NAME="mapping"><P>
+5. FILE MAPPING Section (if required)</A><BR>
+Use this section to show the mapping of API header files to pas units, where a header file has been split across more than one pas unit. 
+<P>
+Since the unit already has a header which describes which header file the code originates from, you need only provide a header file to pas units mapping. It should be a table describing which units are created for a particular header file.
+<P>
+For example, if DirectX.h is split up into DirectMusic.pas and DirectPlay.pas, it should look something like this:
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE WIDTH=300 BGCOLOR="lightgrey">
+      <TR>
+        <TD>
+<PRE><TT>
+header file interface units
+----------- ---------------
+directx.h   DirectMusic.pas
+            DirectPlay.pas
+</TT>
+        </TD>
+      </TR>
+    </TABLE>
+
+    <TABLE WIDTH=675>
+      <TR>
+        <TD WIDTH=675>
+It is not necessary to provide mappings at the level of individual functions or constants, although you are free to supply this if you wish.<BR>
+<P>
+6. DEFINES Section<P>
+All conditional defines should be properly explained here and repeated in the Help file.<BR>
+<P>
+7. BUG LIST and FIXES<BR>
+<P><P>
+The Readme.txt is not restricted to only these sections. The author may include any information considered relevant to the conversion. 
+        </TD>
+      </TR>
+    </TABLE>
+<BR><br>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4>
+<A NAME="helpfile">
+7. CONTENTS OF A HELP FILE</A><BR></FONT></B>
+        </TD>
+        <TD WIDTH=100 ALIGN=RIGHT><FONT SIZE="-1">
+<A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+<BR>
+    <TABLE>
+      <TR>
+        <TD WIDTH=675>
+Whilst Team Captains are not obliged to write help files for conversions, they are encouraged to arrange for help files to be written and to provide as much supporting information and example material as possible. Project JEDI has a large number of members who have expressed interest in joining projects to assist with this. It is suggested that testers and help file writers work together on developing the content, typically including the following sections:
+<UL>
+<LI>Introduction describing the purpose of the API. KNOWN ISSUES may be duplicated here from the Readme.txt. List all of the functions exposed by the conversion with a brief description of the purpose of each. List all known dependencies.
+<LI>Document each exposed function individually, including an explanation of all parameters and any dependencies upon other functions. If a macro was translated, include an overview of its description from the SDK.
+<LI>Wherever possible, link to an example snippet of each function as it would be used in a Delphi method call.
+<LI>Where conditional defines have been used, they should be explained.
+<LI>It has been suggested that, where good help files and documentation exist in the SDK, they could be &quot;translated&quot; to use Delphi examples.
+</UL>
+        </TD>
+      </TR>
+
+      <TR>
+        <TD WIDTH=400 BGCOLOR="peachpuff" ALIGN=CENTER><B>
+<A HREF="APISUBMITTING.html">Click here</A> </B> >if you have followed the specifications in this document and are ready to submit your conversion pack
+        </TD>
+      </TR>
+    </TABLE>
+<BR><br>
+
+    <TABLE WIDTH=675 BGCOLOR="cornsilk">
+      <TR>
+        <TD WIDTH=475>
+<B><FONT SIZE=4><A NAME="licensing">
+8. LICENSING SUMMARY</A><BR></FONT></B>
+        </TD>
+        <TD WIDTH=100 ALIGN=RIGHT><FONT SIZE="-1">
+<A HREF="#contents">Contents</A></FONT>
+        </TD>
+      </TR>
+    </TABLE>
+<BR>
+    <TABLE>
+      <TR>
+        <TD WIDTH=675 ALIGN=CENTER>
+<A HREF="JEDLICENSING.html"><B>Click here</b></a> for a summary of the Mozilla Public License 1.1 as it applies to Project JEDI code
+        </TD>
+      </TR>
+    </TABLE>
+<P>
+<FONT SIZE=2>&copy; Project JEDI 1999</FONT> </TD></TR></TABLE>
+  </TD>
+</TR>
+</TABLE>
+
+
+
+<!--  Footer -->
+    <table> 
+      <tr>
+        <td colspan=2 align="center">
+<a href="index.html">
+<img src="img/return.gif" width=165 height=39 border=0></a> 
+        </td>
+      </tr>
+
+      <tr>   
+        <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+        </td>
+        <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+<hr size="1">
+          <table>
+            <tr>
+             <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+             </td>
+             <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+             </td>
+            </tr>
+           </table>
+
+         </td>
+       </tr>
+     </table>
+
+   </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

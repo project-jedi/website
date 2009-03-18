@@ -1,0 +1,30 @@
+<h4 style="text-align:left;"><{$lang_faq}></h4>
+<table width="100%" cellspacing="1" class="outer">
+  <tr>
+    <th><{$lang_categories}></th>
+  </tr>
+  <tr>
+    <td class="even">
+
+      <!-- start category loop -->
+      <{foreach item=category from=$categories}>
+
+        &nbsp;&nbsp;<img src="<{$xoops_url}>/modules/xoopsfaq/images/folder.gif" width="14" height="14" border="0" alt="" />&nbsp;<a href="index.php?cat_id=<{$category.id}>"><{$category.name}></a>
+        <ul style="list-style-image:url(images/question.gif);">
+
+        <!-- start question loop -->
+        <{foreach item=question from=$category.questions}>
+
+          <li>&nbsp;<a href="index.php?cat_id=<{$category.id}>#q<{$question.id}>"><{$question.title}></a></li>
+
+        <{/foreach}>
+        <!-- end question loop -->
+
+        </ul>
+
+      <{/foreach}>
+      <!-- end category loop -->
+
+    </td>
+  </tr>
+</table>

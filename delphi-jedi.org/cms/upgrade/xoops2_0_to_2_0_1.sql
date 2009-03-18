@@ -1,0 +1,1 @@
+ALTER TABLE configoption CHANGE confop_name confop_name varchar(255) NOT NULL default '', CHANGE confop_value confop_value varchar(255) NOT NULL default '';

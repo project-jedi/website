@@ -1,0 +1,29 @@
+Change Log:
+
+Planned:
+           Add the capablilty to disable certain features that are not needed.
+
+Version 0.5:
+  Added:   Creation of documents via the use of templates.
+  Added:   Document Life Cycles (Permissions system needs added).
+  Added:   Keyword Search Screen (Search functionallity needs added).
+  Added:   File Copy and Move capability.
+  Change:  Document properties screen now displays the user name of the user who has checked-out the document, if the
+           user viewing the properties has at least browse permission to that document.
+  Change:  Non-administrative users are no longer able to create top-level folders.
+  Change:  Users are no longer able to make sub-folders in an inbox.
+  Change:  Misc. user interface changes/improvements
+  
+Version 0.4:
+  Added:   Permissions system to manage user, group, and everyone permissions.
+  Added:   Administrator can now set the title for the DMS pages.
+  
+Version 0.3:
+  Added:   Document Routing 
+
+Version 0.2:
+  Added:   Document Properties
+  Added:   Document Versioning
+
+Version 0.1:
+  Basic document management, including check-in and check-out.

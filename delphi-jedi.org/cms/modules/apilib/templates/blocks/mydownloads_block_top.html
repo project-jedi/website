@@ -1,0 +1,5 @@
+<ul>
+  <{foreach item=download from=$block.downloads}>
+    <li><a href="<{$xoops_url}>/modules/mydownloads/singlefile.php?cid=<{$download.cid}>&amp;lid=<{$download.id}>"><{$download.title}></a> (<{$download.hits}>)</li>
+  <{/foreach}>
+</ul>

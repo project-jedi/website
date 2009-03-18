@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI - QuickTime Project</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=251 valign="middle">
+<a href="index.html">
+<img src="img/jedi-smaller.gif" width=241 height=66 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>JEDI Quicktime Project</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>Team Lead: George Birbilis</b><br>
+&lt;birbilis AT  kagi DOT com&gt;
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<h3>What is QuickTime?</h3>
+
+
+<p>QuickTime&reg; is a huge multimedia API that originated on the Apple Macintosh.  To find out about QuickTime use these links:</p>
+<blockquote>
+
+                  <table cellpadding=3>
+                    <tr>
+                      <td width=24 height=27 valign="middle">
+<a HREF="http://www.apple.com/quicktime/products/qt/"><img src="img/blue_apple.gif" width="22" height="25" border=0></a>
+                      </td>
+                      <td>
+<a HREF="http://www.apple.com/quicktime/products/qt/" style="text-decoration:none;color:#1e90ff;">For info about Quicktime&reg; products</a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width=24 height=27 valign="middle">
+<a HREF="http://www.apple.com/quicktime/player/specs.html"><img src="img/blue_apple.gif" width="22" height="25" border=0></a>
+                      </td>
+                      <td>
+<a HREF="http://www.apple.com/quicktime/player/specs.html" style="text-decoration:none;color:#1e90ff;">Authoring File formats</a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width=24 height=27 valign="middle">
+<a HREF="http://www.apple.com/quicktime/tools_tips/tutorials/"><img src="img/blue_apple.gif" width="22" height="25" border=0></a>
+                      </td>
+                      <td>
+<a HREF="http://www.apple.com/quicktime/tools_tips/tutorials/"  style="text-decoration:none;color:#1e90ff;">Tutorials</a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width=24 height=27 valign="middle">
+<a HREF="http://developer.apple.com/quicktime/"><img src="img/blue_apple.gif" width="22" height="25" border=0></a>
+                      </td>
+                      <td>
+<a HREF="http://developer.apple.com/quicktime/" style="text-decoration:none;color:#1e90ff;">Apple Developer Connection - QuickTime</a>
+                      </td>
+                    </tr>
+                  </table>
+</blockquote>
+<p>The idea is to make a foundation that will build a market for QT controls
+for Delphi. QT is a multimedia API that can cover lots of areas
+of multimedia. Of course, as part of the foundation the team will provide several
+controls for free (e.g. the QTFileDialog control with image/movie previewing, etc.)</p>
+
+<P>JEDI's MPL license covers the case of
+companies marketing their own shareware components for Quicktime based on
+our free headers, ported Apple sample code, utils etc. foundation. This
+would also make a critical mass of people contributing free stuff for the
+QuickTime-Delphi project (like an exchange project - they get something for
+free, they feel obliged to contribute something too).</P>
+
+<h3>Downloads</h3>
+
+                  <table cellpadding=3>
+                    <tr bgcolor=dodgerblue >
+                      <td width="30%"><font color=#ffffff><b>File</b></font></td>
+                      <td width="8%"><font color=#ffffff><b>Date</b></font></td>
+                      <td><font color=#ffffff><b>Contents</b></font></td>
+                     </tr>
+
+                     <tr bgcolor=azure>
+                       <td valign="top">
+<p><a HREF="ftp://ftp.delphi-jedi.org/API_Not_Assessed/QuickTime/qtmlClient_qt501sdk.zip" style="text-decoration:none;color:#1e90ff;">
+The qtmlClient.DLL library</a>
+                      </td>
+                       <td valign="top"> - - </td>
+                       <td>A separate download because of its size.  Please also take note of the FAQ items I have added regarding this DLL.</td>
+                     </tr>
+                     <tr><td colspan=3><hr size=1></td></tr>
+
+                     <tr bgcolor=azure>
+                       <td valign="top">
+<p><a HREF="ftp://ftp.delphi-jedi.org/API_Not_Assessed/QuickTime/JEDI_QuickTime_20080811.zip" style="text-decoration:none;color:#1e90ff;">
+The whole bundle of files</a>
+                      </td>
+                       <td valign="top">2008-08-11</td>
+                       <td>Contains all you need. Includes
+<ul type="circle">
+
+<li>Work-in-Progress - several completed translations that are READY FOR TESTING</li>
+
+<li>Additions to qt_QuicktimeVR.pas, now supporting &quot;view state calls&quot;.  I have now almost finished the &quot;QuickTime VR&quot; support.</li>
+
+<li>The QuickTime Utilities package contains some needed utility units for compiling the simple player application.  Much of the <a href="http://developer.apple.com/samplecode/Sample_Code/QuickTime.htm" style="text-decoration:none;color:#1e90ff;">Apple sample code</a> is, or will be, ported into this package</li>
+
+<li>QuickTime Components package containing the freeware components the QT JEDI team is designing/implementing. The .pas files are still the same, but "Delphi4" and "Delphi5" folders with binaries are now provided instead of the older "bin" (DCUs) and "Delphi5" (D5 package) folders.</li>
+
+Most useful thing in it is a property editor for filename properties that shows a QT file dialog with preview (for
+images/videos/qtvr/etc.). Also has a QTFileDialog component but is yet unfinished...</li>
+
+<li>QuickTime Simple Player, an application written by me (George Birbilis) to demonstrate the conversions at work. The latest version has some additions aimed at better support for MPEG files.</li>
+</ul>
+                       </td>
+                     </tr>
+                     <tr><td colspan=3><hr size=1></td></tr>
+
+                     <tr bgcolor=azure>
+                       <td valign="top">
+<p><a HREF="ftp://ftp.delphi-jedi.org/API_Not_Assessed/QuickTime/C2PasFilter_20011108.zip" style="text-decoration:none;color:#1e90ff;">
+C2PasFilter code filter tool</a>
+                      </td>
+                       <td valign="top">Nov 2001</td>
+                       <td>A utility I developed to speed up code conversion. It can work on multiple lines, e.g. the 'funcs' button can run through and convert many proc declarations from the QT headers;  similarly for the the 'vars' button, which converts syntax like:<br>
+<p><font face="Courier New"><pre>
+int x;
+double y;
+
+  to
+
+x:int;
+y:double;</font></pre>
+</td>
+                     </tr>
+                     <tr><td colspan=3><hr size=1></td></tr>
+                   </table>
+
+<h4>c2pasFilter</h4>
+<p>These c2pasFilter sources are not clever code, although the string-parsing routines in ac_strings.pas are quite useful.  Some snippets would be of use in the development of an automatic QT headers translator.</p>
+
+<h3>Developers</h3>
+
+<p>Anyone working on QT-SDK C code/declarations and adding to the headers please contribute the changes to the JEDI-QT effort by emailing them to me (birbilis AT kagi DOT com) with the subject &quot;New QT Translations&quot; first for inspection before uploading to the FTP area.  Please do make use of the C2PasFilter tool.
+</p>
+
+<h3>QuickTime F A Q</h3>
+
+<dl>
+
+<dt><b>I'm getting error 'Einvalidop - Invalid floating point operation'</b>
+
+<dd><br>please see <a href="http://lists.apple.com/archives/quicktime-api/2005/Aug/msg00039.html" style="text-decoration:none;color:#1e90ff;">this Apple QuickTime list posting</a> for a solution to this QuickTime issue with Delphi. You can make a unit with
+wrapper calls for any JEDI QuickTime functions you find that have this
+problem. Those wrappers would do the workaround mentioned at the above
+posting and call the original JEDI functions (that map to calls to QuickTime
+DLLs). Please consider contributing any such unit or your list of
+problematic functions to JEDI. We have already reported this issue to Apple,
+but you can still file a bug at their bugreporter page.<br></dd></dt>
+<br></dd></dt>
+
+<dt><b>How can I open a movie from my Delphi program?</b>
+<dd><br>To open a movie, you use FSMakeFSSpec to make a file spec (a file object -
+Apple/MacOS style of programming similar to file handles in UNIX/C) and then
+you open a movie object (I think OpenMovie call) from the FSSpec you created.<br></dd>
+<dd><br>
+At the <a href="http://developer.apple.com/samplecode/Sample_Code/QuickTime.htm" style="text-decoration:none;color:#1e90ff;">QT samples site of Apple</a> and in their docs there's plenty of code about this.<br></dd>
+<dd><br>
+The following code is from my TQTControl/TQTVRControl code (those are commercial components, can buy from my <a href="http://qt4all.onestop.net/" style="text-decoration:none;color:#1e90ff;">QT4Delphi site</a> if you want them):
+<font face="Courier New">
+<pre>procedure TQTControl.setFilename;
+var fs:FSSpec;
+    movieResFile:short;
+begin
+  fFileName:=value;
+  if (not qtInited) then exit; //window handle not inited yet... will try to 
+                               //load from the filename property later
+  CloseMovie; //dispose any previous movie&controller (can't reuse a controller, 
+              //cause we may have now loaded some 
+              //other movie type that needs other controller, say QTVR)
+  if (value='') then exit; //just do a CloseMovie if the new filename=''
+  try
+    SetGWorld(CGrafPtr(GetNativeWindowPort(handle)),nil); //!!!
+    FSMakeFSSpec(0,0,@value,@fs);
+    if (OpenMovieFile(@fs,@movieResFile,fsRdPerm)<>noErr) then 
+      exit; //raise Exception.Create('Couldn''t open file '+value);
+    NewMovieFromFile(@theMovie,movieResFile,nil,nil,newMovieActive,nil);
+    CloseMovieFile(movieResFile);
+
+    setTheMovie(theMovie); //?can we use a local myMovie var 
+                           //and then do on a property theMovie:=myMovie ??? 
+                           //(or does QT keep those movie var pointers)
+  except
+    {Handle it}
+  end;
+end;
+</pre></font><br></dd></dt>
+
+<dt><b> Delphi is missing qd3d.dll. Quicktime is installed. What is the qd3d.dll?</b>
+<dd><br>It's QuickDraw3D. InitializeQT is calling InitializeQD3D or something like
+that.  QuickDraw3D is a bit abandoned by Apple, but it should be available as an
+optional component in the QT installer (press custom when installing QT and
+check for a "QuickDraw 3D item").<br></dd>
+<dd><br>
+QD3D wasn't an optional QT component in the past... we have to check if it is now and may have to do some changes to QT-JEDI to pass flags to QT initialization routines to not initialize QD3D at startup.
+<br></dd></dt>
+<br>
+<dt><b>Will the SimplePlayer application play MPEGs?</b>
+<dd><br>MPEG files are supported by my commercial QT Controls, but the SimplePlayer crashes with MPEGs.  I'm looking into why that is happening. SimplePlayer seems to also not open some other files that my controls do open. The movie seems to open OK when stepping the SimplePlayer code with the Delphi debugger but 
+the problem seems to be a crash in QT when the movie is played. 
+<br></dd></dt>
+<br>
+<dt><b>When I try to install this component Delphi says:<br>
+&quot;Can`t load package ...\QuickTime.bpl. &nbsp;The device linked to system does not work.&quot;<br>
+What can I do?</b>
+<dd><br>I got some feedback from Alexey Smirnov that the QTMLClient.DLL of QT5 SDK causes a loading problem for QuickTime.bpl (he tried on WinME/Delphi5) then delivers this message.
+<br><br>
+Dmitry said that using the QTMLClient.DLL from the QT4 SDK (the one distributed on our download page) it now worked OK for him.  I will try to look into it sooner or later...
+<br></dd></dt>
+<br>
+<dt><b>What about Delphi 6 headers?</b>
+<dd><br>Since the sources are available you can compile them with Delphi6 too.<br>
+If you find out that DCUs of QT-JEDI build with Delphi5 don't work in Delphi6, please let me know.  In that case, please do a build of the sources with Delphi6 and sent me the build DCUs so that we can put them on the JEDI site for downloading [for developers' ease to avoid rebuilding].
+<br></dd></dt>
+<br>
+<dt> <b>It seems a bit weird that you need the DLL, I tried the quicktime
+c++ sample application and I don't recall it using any external DLL.  Having
+a DLL may have "issues" with redistribution since it doesn't seem to come
+with the default QuickTime install.</b>
+<dd><br> the DLL is for free, have checked it with Apple's QT team long ago...the DLL is needed because Delphi can't use C's .lib files and static linking of C libraries.  The DLL also provides name-mungled-free versions (C++ does name mungling and changes names of exported procs to add info about the method's syntax etc.)
+<br></dd></dt>
+<br>
+<dt> <b>Can you possibly change the code so that the qtmlClient.dll it isn't required by default?  or say, not used if the dll doesn't exist ...</b>
+<dd><br> This isn't possible (see previous FAQ). To do that I'd have to find each C++ name-mungled name and where it is in the various QT DLLs. The QuickTime team from Apple is providing this DLL for ease of use in non-C++ environments (also in Borland's BC++ or C++Builder which uses different name-mungling from
+Microsoft's VC++)
+<br></dd></dt>
+<br>
+<dt> <b>I`m trying to work with QTVRSetMouseOverHotSpotProc. My example:</b>
+<font face="Courier New"><pre>
+    ==cut==
+function TForm1.MyMouseOverHotSpotProc(qtvr:QTVRInstance; hotSpotID:UInt32 ; 
+                                       flags:UInt32 ; refCon:SInt32 ):OSErr;
+begin
+  MyMouseOverHotSpotProc:=noErr;
+end;
+   ==cut==
+procedure TForm1.OpenMovie;
+    ==cut==
+    QTVRSetMouseOverHotSpotProc(myInstance,MyMouseOverHotSpotProc, 0, 0);
+    ==cut==
+</pre>
+</font><b>and I see error message - &quot;Incompatible types: Calling conventions
+    differ&quot;.</b>
+<dd><br>See the definition of the MouseOverHotSpotProc routine, it isn't a method pointer, it's a function pointer. (Methods have an extra hidden parameter passed with the &quot;self&quot; pointer [the object instance].  So you need to use a function in your unit, not an object method.<br></dd>
+<dd><br>
+Also see the end of that function pointer type definition, if it has a &quot;cdecl&quot;, you need to also use &quot;cdecl&quot; for your function (see &quot;calling conventions&quot; in the Delphi help).<br>
+e.g.
+<font face="Courier New"><pre>
+function MyMouseOverHotSpotProc(qtvr:QTVRInstance;hotSpotID:Uint32;
+                                flags:UInt32;refCon:SInt32):OSErr; cdecl;
+begin
+//...
+end;
+</pre></font>
+<br></dd>
+<dd><br>If I do remember well, in my TQTVRControl (a commercial one, see the <a href="http://qt4all.onestop.net/" style="text-decoration:none;color:#1e90ff;">QT4Delphi website</a>), I've made a unit that acts as a dispatcher for events: there's only one function for the event handler and it checks the &quot;refCon&quot; parameter to get the pointer of the object and cast it to TQTVRControl and call its appropriate OnXXX event handler method, if there's one set (if the respective OnXXX property is not nil).<br></dd>
+<dd><br>
+So when I register the event handler, I always do for example something like:
+
+<font face="Courier New"><pre>
+QTVRSetMouseOverHotSpotProc(MyQTVRControl.movie, 
+                            Dispatcher.MouseOverHotSpotDispatcher, 
+                            0, MyQTVRControl);
+</pre></font>
+<br></dd>
+<dd><br>
+(Dispatcher is a unit, I could also write MouseOverHotSpotDispatcher cause I have &quot;uses Dispatcher&quot; in that code, but for clarity I prefer to write the unit name, dot, then the dispatcher function name: just warning to not fool you and think that MouseOverHotSpotDispatcher is a method cause it isn't: it's just a function in the Dispatcher unit).<br></dd>
+<dd><br>
+The function MouseOverHotSpotDispatcher should do something like:
+<font face="Courier New"><pre>
+function MouseOverHotSpotDispatcher(qtvr:QTVRInstance;hotSpotID:Uint32;
+                                    flags:UInt32;refCon:SInt32):OSErr; cdecl;
+begin
+ (refcon as TQTVRControl).onMouseOver(qtvr,hotspotID,flags);
+end;
+</pre></font>
+<br></dd></dt></dl>
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="index.html">
+<img src="img/return.gif" width=165 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

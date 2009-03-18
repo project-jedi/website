@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Displaying Help File Contents</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Kevin Gallagher</b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<P>Once you have created a help file for your application you might wonder how to show it. You <I>could</I>
+use the following code: </p>
+<P>
+<p><FONT FACE="Courier New"><pre>
+<b>if</b> ShellExecute(0,'open',PChar(Application.CurrentHelpFile),
+                       <B>nil</B>,<B>nil</B>,SW_SHOWNORMAL) &lt;= 32 <B>then</b>
+  ShowMessage(SysErrorMessage(GetLastError)); </pre></font></p>
+
+<P>...or, you could do it the EASY way! Delphi provides all you need to display a help file from within your
+application. </p>
+
+<P>First we need to tell the Application object the name of the Help file and where to locate it. You can accomplish this either through setting properties in the IDE or by using code. The information Delphi needs to get the name is in this code snippet: </p>
+
+<p><FONT FACE="Courier New"><pre>
+Application.HelpFile := 'MyHelp.hlp'; </pre></font></p>
+
+<p>If WinHelp cannot find the help file, it will complain and will ask the user to search for it. The following
+code can avoid this: </p>
+
+<p><FONT FACE="Courier New"><pre>
+<b>procedure</B>TfrmMain.FormCreate(Sender: TObject); 
+<B>var</B>
+  S: <B>String</B>; 
+<B>begin</B>
+S := ExtractFilePath(Application.ExeName) + 'TheHelpFile.hlp';
+<B>if</B> FileExists(S) <B>then</b>
+  Application.HelpFile := S 
+<B>else</B> <B>begin</b></font>
+  <FONT COLOR=#000080>{ do nothing or inform the users }</font>
+  <B>end</B>; 
+<B>end;</B> </pre></font></p>
+
+<P>Next, you need to add some code to set up &quot;HelpContent&quot; properties for any controls which have
+topics in your help file. Now for a little fun and games, the following code was taken from Delphi's help for showing a help files content tab: </FONT>
+
+<p><FONT FACE="Courier New"><pre>
+Application.HelpCommand(HELP_CONTENTS,0);</pre></font></p>
+
+<P>Add a button to your form, add the code above to the OnClick event. Add another button and place the following
+code into the OnClick event: </p>
+<p><FONT FACE="Courier New"><pre>
+Application.HelpCommand(HELP_INDEX, 0);</pre></font></p>
+
+<P>Upon running the project and testing each button you should meet with nothing but problems. Both buttons
+do exactly the same thing. This is because in Windows.pas you will find: </p>
+
+<p><FONT FACE="Courier New"><pre>
+HELP_INDEX = 3; <FONT COLOR=#000080>{ Display index }</font>
+HELP_CONTENTS = 3; </pre></font></p> 
+
+<P>Interesting that both constants have the same value. I did some searching on MSDN and found that they advise
+using HELP_FINDER to call up help contents. Some more digging turned up some code for showing the index tab.</p>
+
+<P>Replace the first button's Click event with</p>
+
+<p><FONT FACE="Courier New"><pre>
+Application.HelpCommand(HELP_FINDER, 0);</pre></font></p> 
+
+<P>For the second button use </p>
+
+<p><FONT FACE="Courier New"><pre>
+<b>Const</B>
+  HELP_TAB = 15; 
+  Application.HelpCommand(HELP_TAB, -2);</pre></font></p> 
+
+<P>Running the project again will show the proper tabs, assuming you created the help file correctly.</p>
+
+<P>Now, suppose you want to do a partial search for a string. At first glance it does not look easy and I suspect
+it is an infrequent operation. It won't hurt to be armed with the information, just in case...<p>
+
+<p><FONT FACE="Courier New"><pre>
+<b>procedure</B> TfrmMain.mnuIncrementalSearchClick(Sender: TObject); 
+<B>var</B>
+  aArr_: array[0..127] of AnsiChar;
+<B>begin</b>
+  StrLCopy(aArr_,PChar(Edit1.Text),127); 
+  Application.HelpCommand(HELP_PARTIALKEY,LongInt(@aArr_));
+<B>end</B>; </pre></font></p> 
+
+<P>I hacked this out at the last minute with limited testing and it worked fine. </p>
+
+<h3>Demo projects to download</h3>
+
+<p>The demo for this article allows you to test these tricks for yourself. It also show how to code jumps to existing topics in a help file.</p>
+<blockquote>
+<A HREF="ftp://ftp.delphi-jedi.org/voyager/DisplayingHelp_demo.zip">Displaying Help Contents Demo</A>
+</blockquote>
+
+<p><center><I><FONT size=1>Kevin S. Gallagher is a full time systems analyst at Oregon Department Of Revenue<br> where he uses Delphi, Visual Basic and Clipper to create Property Tax Systems.</I></center></p>
+<hr size=1>
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

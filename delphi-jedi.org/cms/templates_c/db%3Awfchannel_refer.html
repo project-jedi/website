@@ -1,0 +1,56 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:25:10
+         compiled from db:wfchannel_refer.html */ ?>
+<p>
+<?php if ($this->_tpl_vars['referfriend']['linkpagelogo']): ?>
+<div align="center">
+	<div><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['referfriend']['path']; ?>
+/<?php echo $this->_tpl_vars['referfriend']['linkpagelogo']; ?>
+' name='image' id='image' alt='' /></div>
+</div></p>
+<?php endif; ?>
+
+<div align= "center">
+  <h3 align="left"><?php echo $this->_tpl_vars['lang_linktous']; ?>
+</h3>
+</div>
+<div align= "left"><?php echo $this->_tpl_vars['referfriend']['chanrefheadline']; ?>
+</div>
+
+<form name = 'refer'  action='index.php?op=refersend' method = 'post'>
+
+  <div align = 'center'><b><?php echo $this->_tpl_vars['lang_sendername']; ?>
+</b>:<br>
+    <input type='text' name='uname' size='40' maxlength='50' value= '<?php echo $this->_tpl_vars['referfriend']['uname']; ?>
+' /></div>
+  <div align = 'center'><b><?php echo $this->_tpl_vars['lang_senderemail']; ?>
+</b><br>
+    <input type='text' name='email' size='40' maxlength='50' value= '<?php echo $this->_tpl_vars['referfriend']['emailaddy']; ?>
+' /></div>
+<br />
+
+  <div align = 'center'><b><?php echo $this->_tpl_vars['lang_recipname']; ?>
+</b><br>
+    <input type='text' name='runame' size='40' maxlength='50' value= '' /></div>
+  <div align = 'center'><b><?php echo $this->_tpl_vars['lang_reciptremail']; ?>
+</b><br>
+    <input type='text' name='remail' size='40' maxlength='50' value= '' /></div>
+<br />
+
+
+<?php if ($this->_tpl_vars['referfriend']['usersblurb']): ?>
+<div align = 'center'><b><?php echo $this->_tpl_vars['lang_writeblurb']; ?>
+</b><br />
+    <textarea name="message" cols="60" rows="10"><?php echo $this->_tpl_vars['referfriend']['defblurb']; ?>
+
+</textarea>
+</div>
+<br />
+<?php endif; ?>
+
+<br />
+<div align ="center">
+<input type = 'submit' value = 'Send' >
+ <input type = 'reset' value = 'Clear' >
+</div>
+</form>

@@ -1,0 +1,784 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:10pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Working with OpenGL - An FAQ</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Mike Lischke</a></b>
+<font size=1>(author of our OpenGL interface unit)</font>
+&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+                  <table colspec="3" width="100%">
+                    <tr bgcolor="midnightblue">
+                      <td colspan=3><font color=#ffffff>
+<b>What do I need to write programs for OpenGL with Delphi?</b></FONT>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><img src="img/clearpixel.gif" width=20></td>
+                      <td colspan=2> 
+<p>Compared to other graphics libraries you need very little additional software. Microsoft provides two dynamic link libraries (DLLs) with Windows9x and WindowsNT called OpenGL32.DLL and GLU32.DLL, which are able to 
+render on accelerated as well as unaccelerated hardware. </P>
+
+<p>To actually use the DLLs you need an interface unit which loads the libraries and connects your program with them. Delphi 3.0 and above provide a unit named 
+OpenGL.pas which does exactly this. But you can download other interface units (sometimes split into two units called gl.pas and glu.pas) from different Delphi servers. I'd recommend that all Delphi users (even Delphi 
+3+ programmers) download one of the newer units (in particular OpenGL12.zip from the JEDI web site) to take advantage of additional features like dynamic DLL loading, context creation help, extension support and others.</P>
+                      </td>
+                    </tr>
+                    <tr><td colspan=3><hr size=1></td></tr>
+
+                    <tr bgcolor="midnightblue">
+                      <td colspan=3><font color=#ffffff>
+<b>How do I get OpenGL to work with Delphi?</b>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><img src="img/clearpixel.gif" width=20></td>
+                      <td colspan=2> 
+<p>Getting your program working with OpenGL isn't very complicated, but it does involve some steps and handwritten code. The reason is that OpenGL is very closely connected to a device context of a window or bitmap, which cannot be handled in a drag'n'drop manner.</P>
+
+<p>Two steps are needed to make a device context (DC) drawable by OpenGL:<br>
+- set up a pixel format for the specific DC and
+- connect the DC to OpenGL by creating a rendering context (RC) for it.</p>
+
+<P>Here is typical RC creation:</p>
+
+<p><font face="Courier New,Courier"><pre>
+
+procedure SetupPalette(DC: HDC; PFD: TPixelFormatDescriptor); 
+var 
+  nColors, I : Integer;
+  lpPalette : PLogPalette;
+  byRedMask,
+  byGreenMask,
+  byBlueMask : Byte;
+  Palette : HPalette;
+begin
+  nColors:=1 shl Pfd.cColorBits; 
+  GetMem(lpPalette,SizeOf(TLogPalette)+(nColors*SizeOf(TPaletteEntry))); 
+  try
+    lpPalette^.palVersion:=$300;
+    lpPalette^.palNumEntries:=nColors;
+    byRedMask :=(1 shl Pfd.cRedBits)-1;
+    byGreenMask:=(1 shl Pfd.cGreenBits)-1;
+    byBlueMask :=(1 shl Pfd.cBlueBits)-1;
+<font color=#000080>
+{$ifopt R+} {$define RangeCheck} {$endif} {$R-}
+</FONT>
+    for I:=0 to nColors-1 do
+    begin
+      lpPalette^.palPalEntry[I].peRed 
+        :=(((I shr Pfd.cRedShift) and byRedMask) *255) DIV byRedMask;
+      lpPalette^.palPalEntry[I].peGreen
+        :=(((I shr Pfd.cGreenShift) and byGreenMask)*255) DIV byGreenMask;
+      lpPalette^.palPalEntry[I].peBlue 
+        :=(((I shr Pfd.cBlueShift) and byBlueMask) *255) DIV byBlueMask;
+      lpPalette^.palPalEntry[I].peFlags:=0;
+    end;
+<font color=#000080>
+{$ifdef RangeCheck} {$R+} {$undef RangeCheck} {$endif}
+</FONT>
+    Palette:=CreatePalette(lpPalette^);
+    if (Palette &lt;&gt; 0) then
+    begin
+      SelectPalette(DC,Palette,False);
+      RealizePalette(DC);
+    end;
+  finally
+    FreeMem(lpPalette);
+  end;
+end;
+
+type TRCOptions = set of (opDoubleBuffered,opGDI,opStereo); 
+function CreateRenderingContext(DC: HDC; Options: TRCOptions; 
+                                StencilBits: Byte): HGLRC;
+<font color=#000080>// Set the OpenGL properties required to draw to the given canvas and
+// create a rendering context for it.</font>
+var 
+  PFDescriptor : TPixelFormatDescriptor;
+  PixelFormat : Integer; 
+begin
+  FillChar(PFDescriptor,SizeOf(PFDescriptor),0);
+  with PFDescriptor do
+  begin
+    nSize:=sizeof(PFDescriptor);
+    nVersion:=1;
+    dwFlags:=PFD_SUPPORT_OPENGL;
+    if GetObjectType(DC) = OBJ_MEMDC then 
+      dwFlags:=dwFlags or PFD_DRAW_TO_BITMAP
+    else 
+      dwFlags:=dwFlags or PFD_DRAW_TO_WINDOW;
+    if opDoubleBuffered in Options then 
+      dwFlags:=dwFlags or PFD_DOUBLEBUFFER;
+    if opGDI in Options then 
+      dwFlags:=dwFlags or PFD_SUPPORT_GDI;
+    if opStereo in Options then 
+      dwFlags:=dwFlags or PFD_STEREO; 
+    iPixelType:=PFD_TYPE_RGBA;
+    cColorBits:=32;
+    cDepthBits:=32; 
+    cStencilBits:=StencilBits;
+    iLayerType:=Byte(PFD_MAIN_PLANE); 
+  end;
+  // 
+  PixelFormat:=ChoosePixelFormat(DC,@PFDescriptor);
+  SetPixelFormat(DC,PixelFormat,@PFDescriptor);
+  // check the properties just set
+  DescribePixelFormat(DC,PixelFormat,SizeOf(PFDescriptor),@PFDescriptor);
+  with PFDescriptor do
+    if (dwFlags and PFD_NEED_PALETTE) &lt;&gt; 0 then
+      SetupPalette(DC,PFDescriptor);
+  Result:=wglCreateContext(DC); 
+end;
+</pre></FONT></P>
+
+<p>Note that there's no OpenGL call yet. All the functions do is set up a pixel format and create a rendering context (with creation of a proper color palette if one is needed). The returned handle is only needed while making a RC 'current' in the particular DC (function wglMakeCurrent) because, while each thread can have more than one rendering context, only one can be active (current) at a given time. </P>
+
+<p>Once you have created a RC you can issue as many OpenGL calls as you wish.</p> 
+
+<P>Let's see how to actually create the OpenGL program: The easiest way to accomplish that is to take a window-like control in Delphi (TForm is a very good candidate for the first time) and use its OnCreate event to create a RC for the windows canvas:</p>
+
+<p><font face="Courier New,Courier"><pre>
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FMyContext:=CreateRenderingContext(Canvas.Handle,[opDoubleBuffer],0);
+end;
+</pre></FONT></p>
+
+<P>If you don't want to animate your 3D scene you don't even need opDoubleBuffered, which occupies twice the memory as for a simple RC to maintain a back and a front buffer to draw to alternatively.</p>
+
+<p>Now two steps remain:</p>
+<p>- first, tell OpenGL about the window region it can draw to, giving it some instructions concerning the viewport, using gluPerspective and glViewport (see OpenGL.hlp for a description). The best place to do this is in the OnResize event:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TForm1.FormResize(Sender: TObject);
+begin
+  wglMakeCurrent(Canvas.Handle,FMyContext);
+  glViewport(0,0,Width,Height);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity;
+  gluPerspective(30,Width/Height,1,100);
+  Refresh;
+end;</pre></FONT></p>
+<p>- secondly, do your actual drawing in OnPaint. Cover your draw commands with calls to wglMakeCurrent, to activate and deactivate the RC on enter and exit of OnPaint:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TForm1.FormPaint(Sender: TObject);
+begin
+  // activate the RC
+  wglMakeCurrent(Canvas.Handle,FMyContext);
+  // clear color and depth buffer
+  glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+  // initialize transformation pipeline
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity;
+  // now do the drawing calls:
+  //:  
+  //:
+  // finally deactivate the RC
+  wglMakeCurrent(0,0);
+end;
+</pre></FONT></p>
+<p>Don't forget to delete the RC on program exit (wglDeleteContext). The code snippets above are taken from the sample included in OpenGL12.zip. There you'll find a complete and simple project.</P>
+                      </td>
+                    </tr>
+                    <tr><td colspan=3><hr size=1></td></tr>
+
+                    <tr bgcolor="midnightblue">
+                      <td colspan=3><font color=#ffffff>
+<b>How do I do texturing?</b></FONT>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><img src="img/clearpixel.gif" width=20></td>
+                      <td colspan=2> 
+<p>Texturing is a way to map a one, two or three-dimensional bitmap onto a polygonal surface, to improve image quality dramatically.</p> 
+
+<P>Consider a 2D bitmap and how it is used as a texture, since this image format is widely used under Windows. The main problem while texturing a polygon is mapping pixels of the texture image to 3D coordinates of the given polygon. For bitmap coordinates in 3D space we use the identifiers S, T and Q instead of X, Y and Z (S for one dimension, S, T and Q for three dimensions). You can consider the orientation of each of the coordinates according to your needs. For imaging the texture so that the image has an upright perspective, you would normally use S for horizontal and T for vertical.</P>
+
+<p>Regardless of the actual image size S and T are always in the range 0..1 for one occurence of the image on the polygon. Values &lt; 0 or &gt; 1 will either set a border color, repeat the first (last) image pixel or repeat the entire image, depending on the state flags. The easiest way to specify how the image has to be mapped is to apply a specific texture coordinate to each vertex of the polygon you want to texture:</P>
+<p><FONT FACE="Courier New,Courier"><pre>
+glBegin(GL_POLYGON);
+  glTexCoord2f(0,0);
+  glVertex3f(0,0,0);
+  glTexCoord2f(1,0);
+  glVertex3f(1,0,0);
+  glTexCoord2f(1,1);
+  glVertex3f(1,1,0);
+  glTexCoord2f(0,1);
+  glVertex3f(0,1,0);
+glEnd; </pre></FONT></P>
+
+<p>As you can see the texture coordinate must precede the actual vertex. This small example maps an image independent of its size onto a square of unit size. If the image does not have an aspect ratio of 1 (say 320x256 instead of 128x128) it will not be scaled uniformly.</P>
+
+<p><B>Important:</B> OpenGL requires all image pixel sizes to be a power of two (2,4,8,16,32...). There is usually an upper limit. The 1024x1024 pixels limit that MS and SGI DLLs have is quite large: you should use smaller images. With the broad introduction of texture compression this limit is certain to be extended.</p>
+<P>
+
+<p>To do the actual texturing with Delphi (or by other means) there are four steps:</p>
+
+<OL TYPE="I">
+
+<LI>- load an image into host memory</LI>
+<LI>- transfer the image to your OpenGL rendering context</LI>
+<LI>- set the desired options (don't forget to enable texturing) and</LI>
+<LI>- specify texture coordinates while issuing vertices</LI>
+</OL>
+
+<P>As always in OpenGL you need an active rendering context before any gl call. By far the hardest job is loading a bitmap into OpenGL. I use my own loader routine, which should handle most if not all of the possible pixel formats available. You can easily adapt it to your needs:</p>
+
+<P><FONT FACE="Courier New,Courier"><pre>
+procedure TTexture.PrepareImage; 
+// load texture to OpenGL subsystem 
+
+type PPixelArray = ^PPixelArray; 
+
+TPixelArray = array [0..0] of Byte; 
+<P>
+var 
+  Data : PPixelArray; 
+  BMInfo : TBitmapInfo; 
+  I,ImageSize : Integer; 
+  Temp : Byte; 
+  MemDC : HDC; <P>
+begin 
+  with BMinfo.bmiHeader do 
+  begin 
+    // make image data available (i.e load a picture into Image) 
+    Image.DataNeeded; 
+    // let Windows do any conversion to OpenGL's internal format we use, 
+    // create a description of the required image format 
+    FillChar(BMInfo,SizeOf(BMInfo),0); 
+    biSize:=sizeof(TBitmapInfoHeader); 
+    biBitCount:=24; 
+    biWidth:=RoundUpToPowerOf2(Image.Width); 
+    biHeight:=RoundUpToPowerOf2(Image.Height); 
+    ImageSize:=biWidth*biHeight; 
+    biPlanes:=1; 
+    biCompression:=BI_RGB; <P>
+    // a dummy DC for the GetDIBits call below 
+    MemDC:=CreateCompatibleDC(0); 
+    // a piece of memory to place the bitmap bits into 
+    GetMem(Data,ImageSize*3); 
+    try 
+      // get the actual bits of the image 
+      GetDIBits(MemDC,Image.Bitmap,0,biHeight,Data,BMInfo,DIB_RGB_COLORS); 
+
+      // now set the bits depending on the features supported by OpenGL 
+      if GL_EXT_bgra then 
+        // BGR extension avoids color component swapping 
+        glTexImage2d(GL_TEXTURE_2D,0,3,biWidth,biHeight,0,
+                     GL_BGR_EXT,GL_UNSIGNED_BYTE,Data)
+      else 
+        begin 
+          // no BGR support, so we must swap the color components by hand 
+          // switch off range checking for color swapping, make sure we 
+          // restore the original state 
+<font color=#000080>
+{$ifopt R+} {$define RangeCheck} {$R-} {$endif} 
+</font>
+          for I:=0 TO ImageSize-1 do //swap blue with red 
+          begin 
+            Temp:=Data[I*3]; 
+            Data[I*3]:=Data[I*3+2]; 
+            Data[I*3+2]:=Temp; 
+          end; 
+          // restore range check, if previously activated 
+<font color=#000080>
+{$ifdef RangeCheck} {$undef RangeCheck} {$R+} {$endif} 
+</font>
+          glTexImage2d(GL_TEXTURE_2D,0,3,biWidth,biHeight,0,
+                       GL_RGB,GL_UNSIGNED_BYTE,Data); 
+      end; 
+    finally 
+        FreeMem(Data); 
+        DeleteDC(MemDC); 
+        Image.ReleaseData; 
+    end; 
+  end; 
+end;</pre></FONT></P>
+
+<P>My TTexture class has an Image property which is a simple TPicture class. By calling Image.LoadFromFile(FileName) you can load a bitmap from disk into main memory. In TTexture it is done by calling Image.DataNeeded. Conversely, Image.ReleaseData empties the Image since we don't need it any longer after it has been transferred to OpenGL.</p> 
+ <P>One problem while loading an image is that OpenGL expects its color components in RGB order (remember we use a 24-bit image), which is the way a pixel is described in video memory. For some reason, Microsoft has introduced 
+the BGR format. Because our image is stored in a Windows HBitmap (BGR format), all pixels must be changed to RGB. The SGI OpenGL for Windows has an extension for that situation which you can check for during context 
+activation:</p>
+
+<FONT FACE="Courier New,Courier"><pre>
+Buffer:=StrPas(PChar(glGetString(GL_EXTENSIONS))); 
+if Pos('GL_EXT_bgra',Buffer) &gt; 0 then 
+  GL_EXT_bgra:=True 
+else 
+  GL_EXT_bgra:=False;</pre> </FONT></P>
+
+<p>The interface unit in OpenGL12.zip handles extension detection automatically. WIth the release of OpenGL version 1.2 you won't have to deal with exception like the one above, because there will be many 
+new common pixel formats (RGB 555, BGR 565 etc.).>/p>
+
+<p>If you encounter problems implementing the rounding function used in the loader routine, here is one solution:</p>
+<FONT FACE="Courier New,Courier"><pre>
+function TTexture.RoundUpToPowerOf2(Value: Integer): Integer; 
+var 
+  LogTwo : Extended; 
+begin 
+  LogTwo:=log2(Value); 
+  if Trunc(LogTwo) &lt; LogTwo then 
+    Result:=Trunc(Power(2,Trunc(LogTwo)+1)) 
+  else 
+    Result:=value; 
+end; </pre></FONT></P>
+
+<p>At this point we have almost all that's needed for texturing. The last step is setting up how OpenGL should apply the texture while rendering:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TTexture.PrepareParams; 
+begin 
+  glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST); 
+  glPixelStorei(GL_UNPACK_ALIGNMENT,4); 
+  glPixelStorei(GL_UNPACK_ROW_LENGTH,0); 
+  glPixelStorei(GL_UNPACK_SKIP_ROWS,0); 
+  glPixelStorei(GL_UNPACK_SKIP_PIXELS,0);
+
+  case FTextureWrap of 
+    twBoth : begin 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT); 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT); 
+    end; 
+
+    twNone : begin 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP); 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP); 
+    end; 
+
+    twHorizontal : begin 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT); 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP); 
+    end; 
+
+    twVertical : begin 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP); 
+      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT); 
+    end; 
+  end; 
+
+  case FMinFilter of 
+    miNearest :
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+
+    miLinear : glTexParameteri(GL_TEXTURE_2D, 
+                               GL_TEXTURE_MIN_FILTER,GL_LINEAR); 
+
+    miNearestMipmapNearest : 
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                    GL_NEAREST_MIPMAP_NEAREST); 
+    miLinearMipmapNearest : 
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                      GL_LINEAR_MIPMAP_NEAREST); 
+
+    miNearestMipmapLinear : 
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                      GL_NEAREST_MIPMAP_LINEAR); 
+    miLinearMipmapLinear : 
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                      GL_LINEAR_MIPMAP_LINEAR); 
+  end; 
+
+  case FMagFilter of 
+    maNearest : 
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_NEAREST); 
+    maLinear : 
+      glTexParameteri(GL_TEXTURE_2D,G L_TEXTURE_MAG_FILTER,GL_LINEAR); 
+  end; 
+
+  case FTextureMode of 
+    tmDecal : glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_DECAL); 
+    tmModulate : glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,
+                           GL_MODULATE); 
+    tmBlend : glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_BLEND); 
+    tmReplace : glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE); 
+  end; 
+end; </pre></FONT></P>
+
+<p>It would be far out of scope to describe what all the options do. I recommend that you read OpenGL.hlp in the Delphi\Help directory and experiment with the parameters in the procedures. The variables FTextureWrap, FMinFilter, FMagFilter and FTextureMode are simple sets of the values in the case statements they apply to.</p> 
+<P>If you use one of the mipmap options in FMinFilter you have to adjust the loader function as well. Good starting parameters are miNearest/maNearest for the filters and tmModulate (with light calculations) or tmDecal (without) for the texture mode.</p>
+<p>If you want to load multiple textures and quickly switch between them, you should consider using texture objects. These objects are simple integer numbers describing a specific set of parameters and a texture image (bitmap). Texture objects are very similar to display lists and can even be shared between different contexts, but have a different name space. All you have to do is to bind such a texture object to the current context by calling glBindTexture(GL_TEXTURE_2D,FHandle) every time you either want to set up the object or to use it. <P>
+
+<p>To get a valid texture object call glGenTextures(1,@FHandle).Free it with glDeleteTextures(1,@FHandle).</p> 
+
+<P>Don't search in OpenGL.hlp for any of the texture object calls. They are quite new and not covered in the 
+current version of the help file (even in Delphi 4).</p>
+
+<p>To sum up so far, the following sequence enables the use of textures in your OpenGL program:</p>
+<p><pre>- glGenTextures(1,@FHandle)
+- glBindTexture(GL_TEXTURE_2D,FHandle)
+- PrepareImage
+- PrepareParams
+- glEnable(GL_TEXTURE_2D)
+- .... any glTexCoord and glVertex call combination
+- glDeleteTextures(1,@FHandle) (will free used texture memory as well)</pre>
+</p>
+
+                      </td>
+                    </tr>
+                    <tr><td colspan=3><hr size=1></td></tr>
+
+                    <tr bgcolor="midnightblue">
+                      <td colspan=3><font color=#ffffff>
+<b>How can I run an application fullscreen?</b></FONT>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><img src="img/clearpixel.gif" width=20></td>
+                      <td colspan=2> 
+<p>Running an application full screen means that the application window covers the entire desktop area. This is often necessary because some video cards can only accelerate full screen apps; but you may also often want to ensure that your program is the only one visible to the user.</p>
+
+<P>Running fullscreen isn't exclusive to OpenGL, DirectX or 3D in general. Strictly speaking, fullscreen operation only requires setting the window state to wsMaximize. However, asking for fullscreen operation has other implications. You may want to let the user choose a specific color and pixel resolution or you might want to run your program in a fixed resolution (very important, since not all video cards support all resolutions and often a game or other 3D application has to run in a different - - mostly lower - resolution than the user's everyday work requires).</P>
+
+<p>So the complete question is &quot;How can I run an application fullscreen in a specific 
+color and pixel resolution without re-booting?&quot;</P>
+
+<p>The function ChangeDisplaySettings is the key to this. Depending on the video driver, you can set many video modes dynamically, without rebooting the computer:</p>
+
+<P><FONT FACE="Courier New,Courier"><pre>
+function SetFullscreenMode(ModeIndex: Integer) :Boolean; 
+// changes to the video mode given by 'ModeIndex' 
+var 
+  DeviceMode : TDevMode; 
+begin 
+  with DeviceMode do 
+  begin 
+    dmSize:=SizeOf(DeviceMode); 
+    dmBitsPerPel:=VideoModes[ModeIndex].ColorDepth; 
+    dmPelsWidth:=VideoModes[ModeIndex].Width; 
+    dmPelsHeight:=VideoModes[ModeIndex].Height; 
+    dmFields:=DM_BITSPERPEL or DM_PELSWIDTH or DM_PELSHEIGHT; 
+    // if mode set failed, we'll just run in windowed mode 
+    Result:=ChangeDisplaySettings
+                (DeviceMode, CDS_FULLSCREEN) = DISP_CHANGE_SUCCESSFUL; 
+    if Result then ScreenModeChanged:=True; 
+    if ModeIndex = 0 then ScreenModeChanged:=False; 
+  end; 
+end;</pre></FONT></P>
+
+<p>Notice the global variable VideoModes in this example. You need to enumerate all available video modes which can be set dynamically and store them into a structure like VideoModes, to restrict the modes the application will try to set:</p>
+<P><FONT FACE="Courier New,Courier"><pre>
+const 
+  MaxVideoModes = 200; // this isn't very much actually 
+type TVideoMode = record 
+  Width, 
+  Height, 
+  ColorDepth : Word; 
+  Description : String[20]; 
+end; 
+
+var 
+  VideoModes : array[0..MaxVideoModes] of TVideoMode;
+  NumberVideomodes : Integer = 1; // 1 because we have a default mode </pre></font></p>
+
+<p>This makes our example much larger but you can enhance functionality very usefully by implementing it. As an alternative, you can substitute VideoModes in the above function with fixed values (say 640, 480, 16).</p>
+
+<P>Enumerating all video modes is done by EnumDisplaySettings:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure ReadVideoModes; 
+var 
+  I, ModeNumber : Integer; 
+  done : Boolean; 
+  DeviceMode : TDevMode; 
+  DeskDC : HDC; <P>
+begin 
+  // prepare 'default' entry 
+  with VideoModes[0] do <P>
+  try 
+    DeskDC:=GetDC(0); 
+    ColorDepth:=GetDeviceCaps(DeskDC,BITSPIXEL); 
+    Width:=Screen.Width; 
+    Height:=Screen.Height; 
+    Description:='default'; 
+  finally 
+    ReleaseDC(0,DeskDC); 
+  end; 
+
+  // enumerate all available video modes 
+  ModeNumber:=0; 
+
+  done:=False; 
+  repeat 
+    done:=not EnumDisplaySettings(nil,ModeNumber,DeviceMode); 
+    TryToAddToList(DeviceMode); 
+    Inc(ModeNumber); 
+  until (done or (NumberVideomodes &gt;= MaxVideoModes)); 
+
+  // low-res modes don't always enumerate, ask about them explicitly 
+  with DeviceMode do 
+  begin 
+    dmBitsPerPel:=8; 
+    dmPelsWidth:=42; 
+    dmPelsHeight:=37; 
+    dmFields:=DM_BITSPERPEL or DM_PELSWIDTH or DM_PELSHEIGHT; 
+
+    // make sure the driver doesn't just answer yes to all tests 
+    if ChangeDisplaySettings(DeviceMode,CDS_TEST or CDS_FULLSCREEN) 
+                             &lt;&gt; DISP_CHANGE_SUCCESSFUL then 
+    begin 
+      I:=0; 
+      while (I &lt; NumberLowResModes-1) and (NumberVideoModes &lt; MaxVideoModes) do 
+      begin 
+        dmSize:=Sizeof(DeviceMode); 
+        dmBitsPerPel:=LowResModes[I].ColorDepth; 
+        dmPelsWidth:=LowResModes[I].Width; 
+        dmPelsHeight:=LowResModes[I].Height; 
+        dmFields:=DM_BITSPERPEL or DM_PELSWIDTH or DM_PELSHEIGHT; 
+        TryToAddToList(DeviceMode); 
+        Inc(I); 
+      end; 
+    end; 
+  end; 
+end; </pre></FONT></P>
+
+<p>This function is quite straightforward. There are two parts to consider. The first is the standard way to enumerate the video modes. The second ensures that all low-res modes are tested as well. For this you need to supply a list of low-res modes:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type TLowResMode = record
+  Height, 
+  ColorDepth : Word;
+end;
+
+const 
+  NumberLowResModes = 60;
+
+LowResModes : array[0..NumberLowResModes-1] of TLowResMode =(
+             (Width:320;Height:200;ColorDepth: 8),
+             (Width:320;Height:200;ColorDepth:15),
+             (Width:320;Height:200;ColorDepth:16),
+             (Width:320;Height:200;ColorDepth:24),
+             (Width:320;Height:200;ColorDepth:32),
+             (Width:320;Height:240;ColorDepth: 8), 
+             (Width:320;Height:240;ColorDepth:15),
+             (Width:320;Height:240;ColorDepth:16), 
+             (Width:320;Height:240;ColorDepth:24),
+             (Width:320;Height:240;ColorDepth:32), 
+             (Width:320;Height:350;ColorDepth: 8),
+             (Width:320;Height:350;ColorDepth:15), 
+             (Width:320;Height:350;ColorDepth:16),
+             (Width:320;Height:350;ColorDepth:24), 
+             (Width:320;Height:350;ColorDepth:32),
+             (Width:320;Height:400;ColorDepth: 8), 
+             (Width:320;Height:400;ColorDepth:15),
+             (Width:320;Height:400;ColorDepth:16), 
+             (Width:320;Height:400;ColorDepth:24),
+             (Width:320;Height:400;ColorDepth:32), 
+             (Width:320;Height:480;ColorDepth: 8),
+             (Width:320;Height:480;ColorDepth:15), 
+             (Width:320;Height:480;ColorDepth:16),
+             (Width:320;Height:480;ColorDepth:24), 
+             (Width:320;Height:480;ColorDepth:32),
+             (Width:360;Height:200;ColorDepth: 8), 
+             (Width:360;Height:200;ColorDepth:15),
+             (Width:360;Height:200;ColorDepth:16), 
+             (Width:360;Height:200;ColorDepth:24),
+             (Width:360;Height:200;ColorDepth:32), 
+             (Width:360;Height:240;ColorDepth: 8),
+             (Width:360;Height:240;ColorDepth:15), 
+             (Width:360;Height:240;ColorDepth:16),
+             (Width:360;Height:240;ColorDepth:24), 
+             (Width:360;Height:240;ColorDepth:32),
+             (Width:360;Height:350;ColorDepth: 8), 
+             (Width:360;Height:350;ColorDepth:15),
+             (Width:360;Height:350;ColorDepth:16), 
+             (Width:360;Height:350;ColorDepth:24),
+             (Width:360;Height:350;ColorDepth:32), 
+             (Width:360;Height:400;ColorDepth: 8),
+             (Width:360;Height:400;ColorDepth:15), 
+             (Width:360;Height:400;ColorDepth:16),
+             (Width:360;Height:400;ColorDepth:24), 
+             (Width:360;Height:400;ColorDepth:32),
+             (Width:360;Height:480;ColorDepth: 8), 
+             (Width:360;Height:480;ColorDepth:15),
+             (Width:360;Height:480;ColorDepth:16), 
+             (Width:360;Height:480;ColorDepth:24),
+             (Width:360;Height:480;ColorDepth:32), 
+             (Width:400;Height:300;ColorDepth: 8),
+             (Width:400;Height:300;ColorDepth:15), 
+             (Width:400;Height:300;ColorDepth:16),
+             (Width:400;Height:300;ColorDepth:24), 
+             (Width:400;Height:300;ColorDepth:32),
+             (Width:512;Height:384;ColorDepth: 8), 
+             (Width:512;Height:384;ColorDepth:15),
+             (Width:512;Height:384;ColorDepth:16), 
+             (Width:512;Height:384;ColorDepth:24),
+             (Width:512;Height:384;ColorDepth:32)
+            );</pre></FONT></p>
+
+<p>Now, the function TryToAddToList:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TryToAddToList(DeviceMode: TDevMode); 
+// Adds a video mode to the list if it's not a duplicate and can actually be set. 
+var 
+  I : Integer; 
+begin 
+  // See if this is a duplicate mode (can happen because of refresh 
+  // rates, or because we explicitly try all the low-res modes) <P>
+  for I:=1 to NumberVideomodes-1 do 
+    with DeviceMode do 
+      if ( (dmBitsPerPel = VideoModes[I].ColorDepth) 
+          and (dmPelsWidth = VideoModes[I].Width) 
+          and (dmPelsHeight = VideoModes[I].Height)) then 
+        Exit; // it's a duplicate mode 
+      // do a mode set test (doesn't actually do the mode set, but reports
+      // whether it would have succeeded). 
+  if ChangeDisplaySettings(DeviceMode,CDS_TEST or CDS_FULLSCREEN) 
+      &lt;&gtDISP_CHANGE_SUCCESSFUL then Exit; 
+
+  // it's a new, valid mode, so add this to the list 
+  with DeviceMode do 
+  begin 
+    VideoModes[NumberVideomodes].ColorDepth:=dmBitsPerPel; 
+    VideoModes[NumberVideomodes].Width:=dmPelsWidth; 
+    VideoModes[NumberVideomodes].Height:=dmPelsHeight; 
+    VideoModes[NumberVideomodes].Description:=
+      Format('%d x %d, %d bpp',[dmPelsWidth,dmPelsHeight,dmBitsPerPel]); 
+  end; 
+  Inc(NumberVideomodes); 
+end; </pre></FONT></p>
+
+<p>To make your fullscreen implementation complete, you'd need a function to restore the default video mode, after your program exits:</p>
+
+<FONT FACE="Courier New,Courier"><pre>
+procedure RestoreDefaultMode; 
+// restores default desktop video mode 
+var 
+  T : TDevMode absolute 0; // a little trick to create a nil pointer 
+begin 
+  // Since the first parameter must be a var, we cannot use nil directly.
+  // Instead we use a variable with an absolute address of 0. 
+  ChangeDisplaySettings(T,CDS_FULLSCREEN); 
+end; </pre></font></p>
+                      </td>
+                    </tr>
+                    <tr><td colspan=3><hr size=1></td></tr>
+
+<!-- In case this FAQ gets added to in future 
+
+                    <tr bgcolor="midnightblue">
+                      <td colspan=3><font color=#ffffff>
+<b>Question</b></FONT>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><img src="img/clearpixel.gif" width=20></td>
+                      <td colspan=2> 
+Answer<p></p>           
+
+                      </td>
+                    </tr>
+                    <tr><td colspan=3><hr size=1></td></tr>
+-->
+
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

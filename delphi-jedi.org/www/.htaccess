@@ -1,0 +1,26 @@
+Order Allow,Deny
+Allow from all
+
+RewriteEngine On
+
+RewriteBase /
+
+# --------------------------------------------------------------
+# To force http://www.delphi-jedi.org instead of http://delphi-jedi.org
+# --------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^delphi-jedi.org [NC]
+RewriteRule (.*)  http://www.delphi-jedi.org/$1 [L,R=301]
+
+# --------------------------------------------------------------
+# To redirect jedi.grizzlydev.com/www to www.delphi-jedi.org  
+# --------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^jedi.grizzlydev.com [NC]
+RewriteRule www  http://www.delphi-jedi.org/ [L,R=301]
+
+# --------------------------------------------------------------
+# To redirect technical_difficulties.html towards its PHP counterpart
+# --------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^jedi.grizzlydev.com [NC]
+RewriteRule technical_difficulties\.html www/technical_difficulties\.php [L]
+
+

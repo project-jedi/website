@@ -1,0 +1,28 @@
+<?php /* Smarty version 2.5.0, created on 2005-08-23 16:22:54
+         compiled from db:system_block_mainmenu.html */ ?>
+<table cellspacing="0">
+  <tr>
+    <td class="mainmenu">
+      <a class="menuTop" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/"><?php echo $this->_tpl_vars['block']['lang_home']; ?>
+</a>
+      <!-- start module menu loop -->
+      <?php if (count((array)$this->_tpl_vars['block']['modules'])):
+    foreach ((array)$this->_tpl_vars['block']['modules'] as $this->_tpl_vars['module']):
+?>
+      <a class="menuMain" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/<?php echo $this->_tpl_vars['module']['directory']; ?>
+/"><?php echo $this->_tpl_vars['module']['name']; ?>
+</a>
+        <?php if (count((array)$this->_tpl_vars['module']['sublinks'])):
+    foreach ((array)$this->_tpl_vars['module']['sublinks'] as $this->_tpl_vars['sublink']):
+?>
+          <a class="menuSub" href="<?php echo $this->_tpl_vars['sublink']['url']; ?>
+"><?php echo $this->_tpl_vars['sublink']['name']; ?>
+</a>
+        <?php endforeach; endif; ?>
+      <?php endforeach; endif; ?>
+      <!-- end module menu loop -->
+    </td>
+  </tr>
+</table>

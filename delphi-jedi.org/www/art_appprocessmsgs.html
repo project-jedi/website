@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Using Application.ProcessMessages</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Richard Todosichuk</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+<p>If you are new to Delphi you may be surprised to learn that under certain circumstances none of the event handlers you've coded into your programs will execute when the events occur.</P>
+
+<p>Preposterous? Consider that no more than one section of your program's code can execute at the same time. How, then, can your event handler code execute while your program is performing a lengthy task in a <B>for</B> loop for example?</P>
+
+<h3>The Problem</h3>
+
+<p>Even if you've never given this any thought, you may nonetheless be familiar with the problem: Your program's user interface is unresponsive during long executions. It appears that the application has died. Your program's main window turns white. The application is stuck in never-never land until lengthy tasks finish.</P>
+
+<p>What can you do to make your application function normally as you execute a lengthy task?</p>
+
+<h3>The Solution</h3>
+
+<p>A simple solution is Application.ProcessMessages. Application.ProcessMessages is a command that interrupts the execution of an application so that it can respond to events. Specifically, Application.ProcessMessages reads through the messages that Windows has accumulated for your program and selectively executes those parts of your program designed to respond to each message. Short of you calling them directly, this is the only way your event handlers will ever execute.</p>
+
+<h4>Using Application.ProcessMessages</h4>
+
+<p>Using Application.ProcessMessages is easy, but you'll need to know a little about the Application variable to use it. The Application variable is declared in Delphi's Forms unit. Here is the declaration:</p>
+
+<p><FONT FACE="Courier New">
+<pre>
+<B>var</B>
+  Application: TApplication;
+</pre></font></p>
+
+<p>When a Delphi program starts, an instance of TApplication is created. The public variable Application points to this instance. You can therefore make a call to Application.ProcessMessages in any unit that includes Forms in one of its <B>uses</B> clauses.</P>
+
+<p><FONT FACE="Courier New">
+<pre>
+<B>uses</B>
+  Forms, ...
+</pre></font></p>
+
+<p>Whenever you code a loop (<B>while</B>, <B>for</B>, <B>repeat</B>/<B>until</B>) into your program, place a call to Application.ProcessMessages somewhere inside the loop. This will allow your application to repaint, minimize, maximize, resize, or respond to messages in some other way while your loop executes. The following lines of code illustrate the idea:</P>
+
+<p><FONT FACE="Courier New">
+<pre>
+<B>for</B> I := 1 to 1000 <B>do
+begin</B>
+  ....
+  ....
+  ....
+  Application.ProcessMessages;
+<B>end</B>;
+</pre></font></p>
+
+<p><b>An Example<</B></P>
+
+<p>Let's look at a simple example. This example loops through over 900 records with a progress bar and a label to display progress. To create the example yourself, start a new project and drop the following components onto the form:</P>
+<p><FONT FACE="Courier New">
+<pre>
+    TTable
+    TButton
+    TProgressBar
+    TLabel
+</pre></font></p>
+
+<p>Click on the TTable component and set the DatabaseName property in the object inspector to DBDEMOS and the TableName property to ITEMS.DB.  Then double click on the TButton component and code the OnClick event as follows:</P>
+
+<p><FONT FACE="Courier New">
+<pre>
+<B>procedure</B> TForm1.Button1Click(Sender: TObject);
+<B>begin</B>
+  ProgressBar1.Max := Table1.RecordCount;
+  ProgressBar1.Position := 0;
+  Table1.First;
+  <B>while not</B> Table1.EOF <B>do
+  begin</B>
+    Sleep(50);  // <I>Just to slow this down.</I>
+    ProgressBar1.Position := ProgressBar1.Position + 1;
+    Label1.Caption := 'Record ' + IntToStr(ProgressBar1.Position);
+    Table1.Next;
+   <B>end;
+end</B>;
+</pre></font></p>
+
+<p>Run the application and click the button. While the button's event handler is executing, notice that you cannot move the window. Placing another window on top causes your program's window to turn white. The caption of LabeL1 does not change.</P>
+
+<p>Now add a call to Application.ProcessMessages to the button's OnClick event handler. The event handler should now look like this:</P>
+
+<p><FONT FACE="Courier New">
+<pre>
+<B>procedure</B> TForm1.Button1Click(Sender: TObject);
+<B>begin</B>
+  ProgressBar1.Max := Table1.RecordCount;
+  ProgressBar1.Position := 0;
+  Table1.First;
+  <B>while not</B> Table1.EOF <B>do
+  begin</B>
+    Sleep(50);  // <I>Just to slow this down.</I>
+    ProgressBar1.Position := ProgressBar1.Position + 1;
+    Label1.Caption := 'Record ' + IntToStr(ProgressBar1.Position);
+    Application.ProcessMessages;
+    Table1.Next;
+  <B>end;
+end</B>;
+</pre></font></p>
+
+<p>Run the application again and click the button.  This time notice that you can move the window. Repaint works, and the label is changing!</P>
+
+<p>Everything is working great. Or is it?  Where ProcessMessages is called, be aware that <I>all</I> events will be processed, even events that you may not want to have processed. It's up to you to protect your application from the user. Run the application again. Click the button. Wait a few seconds. Click the button again. Notice what has happened. The function started over again. </P>
+
+<p>To prevent this unwanted effect, disable the controls that may cause problems. Let's add a few lines of code to disable and enable the button: </P>
+
+<p><FONT FACE="Courier New">
+<pre>
+<B>procedure</B> TForm1.Button1Click(Sender: TObject);
+<B>begin</B>
+  ProgressBar1.Max := Table1.RecordCount;
+  ProgressBar1.Position := 0;
+  Button1.Enabled := False;
+  <B>try</B>
+    Table1.First;
+    <B>while not</B> Table1.EOF <B>do
+    begin</B>
+      Sleep(50);  // <I>Just to slow this down.</I>
+      ProgressBar1.Position := ProgressBar1.Position + 1;
+      Label1.Caption := 'Record ' + IntToStr(ProgressBar1.Position);
+      Application.ProcessMessages;
+      Table1.Next;
+    <B>end;
+  finally</B>
+    Button1.Enabled := True;
+  <B>end</B>;
+<B>end</B>;
+</pre></font></p>
+
+<p>You should now know enough about Application.ProcessMessages to use it in any Delphi program you write.</p>
+
+<blockquote>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="ftp://ftp.delphi-jedi.org/Voyager/App_ProcessMessages.zip" style="text-decoration:none;color:maroon;"> Download Sample Project</A></P>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="ftp://ftp.delphi-jedi.org/Voyager/App_ProcessMessages.rtf" style="text-decoration:none;color:maroon;"> Download Article (RTF)</A><P>
+</blockquote>
+
+<hr size=1>
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,451 @@
+<h1>-Chunk:chJediHeader</h1>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<TABLE %=mcBorder=% CELLSPACING=0 CELLPADDING=0 WIDTH=100%>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD WIDTH=637  ALIGN=LEFT VALIGN=TOP>%=chJediMap=%</TD> <!HEIGHT=134>
+</TR>
+</TABLE>
+<TABLE %=mcBorder=% CELLPADDING=0 CELLSPACING=0 WIDTH=100%>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD width=100>%=chJediMenu=%</TD>
+<TD>
+
+<h1>-Chunk:chJediFooter</h1>
+</TD>
+</TR>
+</TABLE>
+
+<table %=mcBorder=% width=100%><tr>
+<td width=40></td>
+<td width=432><FONT SIZE="1" face="Verdana">
+This page has received %=waGetCounter|%=PageID=%|DAY=% hits
+today, and %=waGetCounter|%=PageID=%|TOTAL=% in total (%=JUMP|pgPageStats,%=PageID=%|More stats=%).<br>
+It took %=TimeSoFar=% ms to serve this page, and it was requested from %=WebServer.CgiRemoteAddress=%
+%=IF|_PageCompressed|(Compressed)%=waIncCounter|_compressedpages=%||%=waIncCounter|_uncompressedpages=%=%
+<BR><BR>
+This site and the pages contained within are Copyright © 1997-2003, Project JEDI.
+For questions and comments regarding this site please contact the %=MailCommentsTo=%
+</td>
+<td align=center valign=middle>
+%=ImgJediNow=%
+</td>
+</tr></table>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>-Chunk:chJediMap</h1>
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=637 NOF=LY %=mcBorder=%>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD WIDTH=637  ALIGN=LEFT VALIGN=TOP> <!HEIGHT=134 >
+
+%=DYNCHUNK|chJediMaps,%=Pagedefault.Section=%=%
+
+</TD>
+</TR>
+</TABLE>
+
+<h1>-Chunk:chJediMaps</h1>
+<IMG HEIGHT=134 WIDTH=637 SRC="%=mcImgDir=%PJediLogo.GIF" %=mcBorder=% ALT="Project JEDI">
+//<IMG HEIGHT=158 WIDTH=637 SRC="%=mcImgDir=%PJediLogo.GIF" %=mcBorder=% ALT="Project JEDI" USEMAP="#map0">
+<MAP NAME="map0">
+<AREA SHAPE=RECT ALT="" COORDS="223,128,314,152" HREF="%=ACTION|homepage=%">
+<AREA SHAPE=RECT ALT="" COORDS="313,127,438,156" HREF="%=ACTION|newsnews=%">
+<AREA SHAPE=RECT ALT="" COORDS="438,128,531,156" HREF="%=ACTION|apilibrary=%">
+//<AREA SHAPE=RECT ALT="" COORDS="532,127,629,154" HREF="%=ACTION|adminsearch=%">
+</MAP>
+
+<h1>-Chunk:chJediMapsAdmin</h1>
+%=mcBegin=% %=mcEnd=%
+
+<h1>-Chunk:chJediMapsDevTeam</h1>
+%=mcBegin=%DEVELOPER TEAMS%=mcEnd=%
+
+<h1>-Chunk:chJediMapsJoin</h1>
+%=mcBegin=% %=mcEnd=%
+
+<h1>-Chunk:chJediMapsApi</h1>
+%=mcBegin=%API CONVERSIONS%=mcEnd=%
+
+<h1>-Chunk:chJediMapsKBase</h1>
+%=mcBegin=%DEVELOPER EDUCATION%=mcEnd=%
+
+<h1>-Chunk:chJediMapsInvolved</h1>
+%=mcBegin=%%=mcEnd=%
+
+<h1>-Chunk:chJediMapsJedix</h1>
+%=mcBegin=%JEDIX - Kylix%=mcEnd=%
+
+<h1>-Chunk:chJediMapsMembers</h1>
+%=mcBegin=% %=mcEnd=%
+
+<h1>-Chunk:chJediMapsNews</h1>
+%=mcBegin=%NEWSLETTERS%=mcEnd=%
+
+<h1>-Chunk:chJediMapsPortal</h1>
+%=mcBegin=%PORTAL%=mcEnd=%
+
+<h1>-Chunk:chJediMapsVCL</h1>
+%=mcBegin=%VISUAL CONTROLS LIBRARY%=mcEnd=%
+
+<h1>-Chunk:chJediMapsCodeLib</h1>
+%=mcBegin=%CODE LIBRARY%=mcEnd=%
+
+<h1>-Chunk:chJediMapsTeams</h1>
+%=mcBegin=%TEAMS%=mcEnd=%
+
+<h1>-Chunk:chJediMapsVoy</h1>
+%=mcBegin=%VOYAGER%=mcEnd=%
+
+<h1>-Chunk:chJediMapsGrf</h1>
+%=mcBegin=%DELPHI GRAPHICS%=mcEnd=%
+
+<h1>-Chunk:chJediMapsAdmini</h1>
+%=mcBegin=%JEDI STEERING%=mcEnd=%
+
+//<MAP NAME="map24">
+//<AREA SHAPE=RECT ALT="" COORDS="3,128,83,153" HREF=%=ACTION|voyvoyager=%>
+//<AREA SHAPE=RECT ALT="" COORDS="81,128,177,152" HREF=%=ACTION|voyarticles=%>
+//<AREA SHAPE=RECT ALT="" COORDS="275,128,412,154" HREF=%=ACTION|voywpapers=%>
+//<AREA SHAPE=RECT ALT="" COORDS="177,129,274,152" HREF=%=ACTION|voysamples=%>
+//</MAP>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>-Chunk:chPageIsNA</h1>
+Sorry, this page is still under construction.<BR>
+Please come back later.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>-Chunk:chWhoKnows</h1>
+<DIV><ILAYER VISIBILITY=HIDDEN WIDTH=27 HEIGHT=19 Z-INDEX=1>
+<a target="_top" href=%=ACTION|http://z=%>
+<img name=im src="http://z0.extreme-dm.com/i/" height=38 %=mcBorder=% width=41 alt=""></a>
+<script language="javascript"><!--
+an=navigator.appName;d=document;function
+pr(){d.write("<img src=\"http://z1.extreme-dm.com",
+"/z/?tag=pjedi&j=y&srw="+srw+"&srb="+srb+"&",
+"rs="+r+"&l="+escape(d.referrer)+"\" height=1 ",
+"width=1>");}srb="na";srw="na";//-->
+</script><script language="javascript1.2"><!--
+s=screen;srw=s.width;an!="Netscape"?
+srb=s.colorDepth:srb=s.pixelDepth;//-->
+</script><script language="javascript"><!--
+r=41;d.images?r=d.im.width:z=0;pr();//-->
+</script><noscript><img height=1 width=1 alt="" 
+src="http://z1.extreme-dm.com/z/?tag=pjedi&j=n"></noscript>&nbsp;
+</ILAYER></DIV>
+
+<h1>-Chunk:chJediLeftSide</h1>
+<TABLE %=mcBorder=% CELLSPACING=0 CELLPADDING=0 width=100%>
+<TR>
+//<TD VALIGN=TOP bgcolor="#47526B">
+<TD VALIGN=TOP bgcolor="#808080">
+//font tags nest. initialize as white:
+<FONT FACE="Verdana" COLOR="#FFFFFF" SIZE="1">
+
+<B>WEB PAGE</B><BR>
+//nest to (not blue)
+<FONT COLOR="00FFFF">
+%=JUMP||Home=%<BR>
+%=JUMP||News Desk=%<BR>
+%=JUMP||API Library=%<BR>
+%=JUMP||Getting Involved=%
+
+<P><FONT COLOR="FFFFFF">
+<B>Project JEDI</B><BR>
+<FONT COLOR="00FFFF">
+%=JUMP||VoyVoyager=%<BR>
+%=JUMP||Converting APIs=%<BR>
+%=JUMP||Education=%<BR>
+%=JUMP||The Portal=%
+
+<P><FONT COLOR="FFFFFF">
+<B>JEDI Misc</B><BR>
+<FONT COLOR="00FFFF">
+%=JUMP||<B>JEDI</B> FAQ=%<BR>
+%=JUMP||Members=%<BR>
+%=JUMP||Linking To <B>JEDI</B>=%<BR>
+%=JUMP||Early Beginnings=%<BR>
+%=JUMP||Sponsors=%
+
+
+<P><FONT COLOR="FFFFFF">
+<B>JEDI Projects</B><BR>
+<FONT COLOR="00FFFF">
+%=JUMP||Delphi Graphics=%<BR>
+%=JUMP||DelphiDolphin=%
+
+
+</TD>
+</TR>
+
+//spacer-row
+<tr><td height=5></td></tr>
+
+<tr><td>
+<FONT face="Verdana" SIZE="1">
+This site was modified on:<br>
+July 17th, 1999
+</FONT>
+</td></tr>
+
+//spacer-row
+<tr><td height=5></td></tr>
+
+//some external link
+<TR><TD>%=chWhoKnows=%</TD></TR>
+
+</TABLE>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>-Chunk:chJediMenu</h1>
+%=DYNCHUNK|chJediMenus,%=Pagedefault.Section=%=%
+
+<h1>-Chunk:chJediMenus</h1>
+<TABLE %=mcBorder=% CELLSPACING=0 CELLPADDING=0 WIDTH=105 BGCOLOR="#808080"> <!#47526B">
+<TR ALIGN=LEFT VALIGN="TOP"><TD>
+
+<B>%=miFont=%SITE DIRECTORY</FONT></B><BR>
+%=JUMP||%=miFont=%Home</FONT>=%<BR>
+%=JUMP|joininvolved|%=miFont=%Getting Involved</FONT>=%<BR>
+%=JUMP|adminmembers|%=miFont=%Members</FONT>=%<BR>
+%=JUMP|teamsmain|%=miFont=%Team Pages</FONT>=%<BR>
+%=JUMP|ADMIN_LISTS|%=miFont=%Lists &amp; Newsgroups</FONT>=%<BR>
+%=JUMP|newsnews|%=miFont=%News Archive</FONT>=%<BR>
+%=JUMP|adminsponsors|%=miFont=%Sponsors</FONT>=%<BR>
+%=JUMP|newsbeginnings|%=miFont=%Early Beginnings</FONT>=%<BR>
+<BR>
+<B>%=miFont=%OPEN SOURCE</FONT></B><BR>
+%=JUMP|apilibrary|%=miFont=%API Library</FONT>=%<BR>
+%=JUMP|apiconvteams|%=miFont=%Converting APIs</FONT>=%<BR>
+%=JUMP|apipackspec|%=miFont=%API Pack Spec</FONT>=%<BR>
+%=HREF|HTTP://jvcl.sourceforge.net|%=miFont=%JEDI VCL</FONT>=%<BR>
+%=HREF|http://sourceforge.net/projects/jcl/|%=miFont=%JCL Code Library</FONT>=%<BR>
+%=JUMP|voyjedix|%=miFont=%The Jedix Page</FONT>=%<BR>
+%=JUMP|api_tools|%=miFont=%Tools</FONT>=%<BR>
+%=JUMP|adminlicensing|%=miFont=%Licensing</FONT>=%<BR>
+<BR>
+<B>%=miFont=%RESOURCES</FONT></B><BR>
+%=JUMP|kbaseeducation|%=miFont=%Education</FONT>=%<BR>
+%=JUMP|voyvoyager|%=miFont=%Voyager</FONT>=%<BR>
+%=JUMP|portalportal|%=miFont=%The Portal</FONT>=%<BR>
+%=JUMP|portallinking_to_j|%=miFont=%Linking to JEDI</FONT>=%<BR>
+%=JUMP|kbasefaq|%=miFont=%FAQ</FONT>=%<BR>
+<BR>
+<B>%=miFont=%PROJECTS</FONT></B><BR>
+%=JUMP|grfgraphics|%=miFont=%Delphi Graphics</FONT>=%<BR>
+//%=HREF|/DelphiGraphics/jedi-index.htm|%=miFont=%Delphi Graphics</FONT>=%<BR>
+//%=HREF|/gameproject/index.htm|%=miFont=%Pythian Game Engine</FONT>=%<BR>
+%=HREF|http://www.pythianproject.org/|%=miFont=%Pythian Game Engine</FONT>=%<BR>
+%=HREF|http://delphree.clexpert.com/|%=miFont=%Delphree Open Source</FONT>=%<BR>
+</TD></TR>
+<TR><TD BGCOLOR="#FFFFFF" HEIGHT="40"><FONT SIZE="-1">Last updated<BR>%=waPageDate.Execute|dd-mmm-yy=%</FONT>
+</TD></TR></TABLE>
+
+<h1>-Chunk:chOldJediMenus</h1>
+                            <TABLE %=mcBorder=% CELLSPACING=0 CELLPADDING=0 WIDTH=100 HEIGHT=345  bgcolor="#808080" >
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+                                        <TABLE %=mcBorder=% CELLSPACING=0 CELLPADDING=0 WIDTH=98  >
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD WIDTH=2 HEIGHT=330></TD>
+<TD WIDTH=96><P>
+<B><FONT COLOR="#FFFFFF" SIZE="-1">WEB PAGE<BR>
+</FONT></B>
+%=JUMP|homepage|<B><FONT COLOR="#FFFFFF" SIZE="-1"></FONT><FONT COLOR="#FFFF00" SIZE="-1"></FONT></B><FONT COLOR="#FFFF00"
+SIZE="-1">Home</FONT>=%<FONT COLOR="#FFFF00" SIZE="-1"><BR>
+</FONT>
+%=JUMP|newsnews|<FONT COLOR="#FFFF00" SIZE="-1"></FONT><FONT COLOR="#FFFFFF" SIZE="-1">News Desk</FONT>=%<FONT COLOR="#FFFFFF"
+SIZE="-1"><BR>
+</FONT>
+%=JUMP|apilibrary|<FONT COLOR="#FFFFFF" SIZE="-1">API Library</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|adminjcl|<FONT COLOR="#FFFFFF" SIZE="-1">Code Library</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|vclvcl|<FONT COLOR="#FFFFFF" SIZE="-1">JEDI VCL</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|joininvolved|<FONT COLOR="#FFFFFF"
+SIZE="-1">Getting Involved</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><P>
+<B>Project JEDI<BR>
+</B></FONT>
+%=JUMP|voyvoyager|<FONT COLOR="#FFFFFF" SIZE="-1"><B></B><U>Voyager</U></FONT>=%
+<FONT COLOR="#FFFFFF" SIZE="-1"><U><BR>
+</U></FONT>
+%=JUMP|apiconvteams|<FONT COLOR="#FFFFFF" SIZE="-1"><U>Converting API´s</U></FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><U> </U>
+</FONT>
+%=JUMP|kbaseeducation|<FONT COLOR="#FFFFFF" SIZE="-1"><U>Education</U></FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><U><BR>
+</U></FONT>
+%=JUMP|portalportal|<FONT COLOR="#FFFFFF"
+SIZE="-1"><U>The Portal</U></FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><U></U><P>
+<B>JEDI Misc<BR>
+</B></FONT>
+%=JUMP|kbasefaq|<FONT COLOR="#FFFFFF" SIZE="-1"><B>JEDI</B> FAQ</FONT>=%
+<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|adminmembers|<FONT COLOR="#FFFFFF" SIZE="-1">Members</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|teamsmain|<FONT COLOR="#FFFFFF" SIZE="-1">Team Pages</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|portallinking_to_j|<FONT COLOR="#FFFFFF" SIZE="-1">Linking To <B>JEDI</B></FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><B><BR>
+</B></FONT>
+%=JUMP|newsbeginnings|<FONT COLOR="#FFFFFF"
+SIZE="-1"><B></B>Early Beginnings</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"><BR>
+</FONT>
+%=JUMP|adminsponsors|<FONT COLOR="#FFFFFF" SIZE="-1">Sponsors</FONT>=%<FONT COLOR="#FFFFFF"
+SIZE="-1"><P>
+<B>JEDI Projects<BR>
+</B></FONT>
+%=HREF|/DelphiGraphics/jedi-index.htm|<FONT COLOR="#FFFFFF" SIZE="-1"><B></B>Delphi Graphics</FONT>=%<FONT COLOR="#FFFFFF"
+SIZE="-1"><BR>
+</FONT>
+%=JUMP|kbasedolphin|<FONT COLOR="#FFFFFF" SIZE="-1">DelphiDolphin</FONT>=%<FONT COLOR="#FFFFFF" SIZE="-1"></FONT></TD>
+</TR>
+                                        </TABLE>
+</TD>
+</TR>
+
+                            </TABLE>
+//<TR><TD WIDTH="96">
+<FONT SIZE="-1">Last updated<BR>%=waPageDate.Execute|dd-mmm-yy=%</FONT>
+//</TD></TR>
+
+<h1>-Chunk:chJediMenusAdmin</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusCodeLib</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusTeams</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusJoin</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusApi</h1>
+%=chJediMenus=%
+
+//<h1>-Chunk:chJediMenusConvTeams</h1>
+//%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusKBase</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusInvolved</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusMembers</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusNews</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusPortal</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusVCL</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusJedix</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusVoy</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusGrf</h1>
+%=chJediMenus=%
+
+<h1>-Chunk:chJediMenusAdmini</h1>
+%=chJediMenus=%
+
+
+<h1>-Chunk:chGARBAGE</h1>
+<B>%=mivhFont=%SITE DIRECTORY</FONT></B><BR>
+%=JUMP||%=mivFont=%Home</FONT>=%<BR>
+%=JUMP|joininvolved|%=mivFont=%Getting Involved</FONT>=%<BR>
+%=JUMP|adminmembers|%=mivFont=%Members</FONT>=%<BR>
+%=JUMP|teamsmain|%=mivFont=%Team Pages</FONT>=%<BR>
+%=JUMP|newsnews|%=mivFont=%News Archive</FONT>=%<BR>
+%=JUMP|adminsponsors|%=mivFont=%Sponsors</FONT>=%<BR>
+%=JUMP|newsbeginnings|%=mivFont=%Early Beginnings</FONT>=%<BR>
+<BR>
+<B>%=mivhFont=%OPEN SOURCE</FONT></B><BR>
+%=JUMP|apilibrary|%=mivFont=%API Library</FONT>=%<BR>
+%=JUMP|apiconvteams|%=mivFont=%Converting APIs</FONT>=%<BR>
+%=JUMP|apipackspec|%=mivFont=%API Pack Spec</FONT>=%<BR>
+%=JUMP|vclvcl|%=mivFont=%JEDI VCL</FONT>=%<BR>
+%=JUMP|codelibjcl|%=mivFont=%Code Library</FONT>=%<BR>
+%=JUMP|voyjedix|%=mivFont=%The Jedix Page</FONT>=%<BR>
+%=JUMP|api_tools|%=mivFont=%Tools</FONT>=%<BR>
+%=JUMP|adminlicensing|%=mivFont=%Licensing</FONT>=%<BR>
+<BR>
+<B>%=mivhFont=%RESOURCES</FONT></B><BR>
+%=JUMP|kbaseeducation|%=mivFont=%Education</FONT>=%<BR>
+%=JUMP|voyvoyager|%=mivFont=%Voyager</FONT>=%<BR>
+%=JUMP|portalportal|%=mivFont=%The Portal</FONT>=%<BR>
+%=JUMP|portallinking_to_j|%=mivFont=%Linking to JEDI</FONT>=%<BR>
+%=JUMP|kbasefaq|%=mivFont=%FAQ</FONT>=%<BR>
+<BR>
+<B>%=mivhFont=%PROJECTS</FONT></B><BR>
+%=HREF|/DelphiGraphics/jedi-index.htm|%=mivFont=%Delphi Graphics</FONT>=%<BR>
+//%=HREF|/gameproject/index.htm|%=mivFont=%Pythian Game Engine</FONT>=%<BR>
+%=HREF|http://www.pythianproject.org/|%=mivFont=%Pythian Game Engine</FONT>=%<BR>
+%=HREF|http://delphree.clexpert.com/|%=mivFont=%Delphree Open Source</FONT>=%<BR>
+</TD></TR>
+<TR><TD BGCOLOR="#FFFFFF" HEIGHT="40"><FONT SIZE="-1">Last updated<BR>%=waPageDate.Execute|dd-mmm-yy=%</FONT>
+</TD></TR></TABLE>
+
+<h1>-Chunk:chOldJediMenusVoy</h1>
+                <TABLE %=mcBorder=% CELLSPACING=0 CELLPADDING=0 WIDTH=100  >
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD WIDTH=4></TD>
+<TD WIDTH=96><P>
+<B><FONT COLOR="#000099" SIZE="-1">WEB PAGE<BR>
+</FONT></B><A HREF="%=ACTION|homepage=%"><B><FONT COLOR="#000099" SIZE="-1"></FONT><FONT SIZE="-1"></FONT></B><FONT SIZE="-1">Home</FONT><FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|newsnews|<FONT SIZE="-1">News Desk</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|apilibrary|<FONT SIZE="-1">API Library</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|adminjcl|<FONT SIZE="-1">Code Library</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|vclvcl|<FONT SIZE="-1">JEDI VCL</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|joininvolved|<FONT SIZE="-1">Getting Involved</FONT>=%<FONT SIZE="-1"></FONT><P>
+<B><FONT COLOR="#000099" SIZE="-1">Project JEDI<BR>
+</FONT></B>
+%=JUMP|voyvoyager|<B><FONT COLOR="#000099"
+SIZE="-1"></FONT><FONT SIZE="-1"></FONT></B><FONT SIZE="-1"><U>Voyager</U></FONT>=%<FONT SIZE="-1"><U><BR>
+</U></FONT>
+%=JUMP|apiconvteams|<FONT SIZE="-1"><U>Converting API´s</U></FONT>=%<FONT
+SIZE="-1"><U> </U></FONT>
+%=JUMP|kbaseeducation|<FONT SIZE="-1"><U>Education</U></FONT>=%<FONT SIZE="-1"><U><BR>
+</U></FONT>
+%=JUMP|portalportal|<FONT SIZE="-1"><U>The Portal</U></FONT>=%
+<FONT SIZE="-1"><U></U></FONT><P>
+<B><FONT COLOR="#000099" SIZE="-1">JEDI Misc<BR>
+</FONT></B>
+%=JUMP|kbasefaq|<B><FONT COLOR="#000099" SIZE="-1"></FONT><FONT SIZE="-1">JEDI</FONT></B><FONT SIZE="-1"> FAQ
+</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|adminmembers|<FONT SIZE="-1">Members</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|teamsmain|<FONT SIZE="-1">Team Pages</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|portallinking_to_j|<FONT SIZE="-1">Linking To 
+<B>JEDI</B></FONT>=%<FONT SIZE="-1"><B><BR>
+</B></FONT>
+%=JUMP|newsbeginnings|<FONT SIZE="-1"><B></B>Early Beginnings</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|adminsponsors|<FONT SIZE="-1">
+Sponsors</FONT>=%<FONT SIZE="-1"></FONT><P>
+<B><FONT COLOR="#000099" SIZE="-1">JEDI Projects<BR>
+</FONT></B>
+%=HREF|/DelphiGraphics/jedi-index.htm|<B><FONT COLOR="#000099" SIZE="-1"></FONT>
+<FONT SIZE="-1"></FONT></B><FONT SIZE="-1">Delphi Graphics</FONT>=%<FONT SIZE="-1"><BR>
+</FONT>
+%=JUMP|kbasedolphin|<FONT SIZE="-1">DelphiDolphin</FONT>=%<FONT SIZE="-1"></FONT></TD>
+</TR>
+                </TABLE>

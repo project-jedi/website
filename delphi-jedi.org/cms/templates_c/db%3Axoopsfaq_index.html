@@ -1,0 +1,44 @@
+<?php /* Smarty version 2.5.0, created on 2004-10-03 16:04:16
+         compiled from db:xoopsfaq_index.html */ ?>
+<h4 style="text-align:left;"><?php echo $this->_tpl_vars['lang_faq']; ?>
+</h4>
+<table width="100%" cellspacing="1" class="outer">
+  <tr>
+    <th><?php echo $this->_tpl_vars['lang_categories']; ?>
+</th>
+  </tr>
+  <tr>
+    <td class="even">
+
+      <!-- start category loop -->
+      <?php if (count((array)$this->_tpl_vars['categories'])):
+    foreach ((array)$this->_tpl_vars['categories'] as $this->_tpl_vars['category']):
+?>
+
+        &nbsp;&nbsp;<img src="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/xoopsfaq/images/folder.gif" width="14" height="14" border="0" alt="" />&nbsp;<a href="index.php?cat_id=<?php echo $this->_tpl_vars['category']['id']; ?>
+"><?php echo $this->_tpl_vars['category']['name']; ?>
+</a>
+        <ul style="list-style-image:url(images/question.gif);">
+
+        <!-- start question loop -->
+        <?php if (count((array)$this->_tpl_vars['category']['questions'])):
+    foreach ((array)$this->_tpl_vars['category']['questions'] as $this->_tpl_vars['question']):
+?>
+
+          <li>&nbsp;<a href="index.php?cat_id=<?php echo $this->_tpl_vars['category']['id']; ?>
+#q<?php echo $this->_tpl_vars['question']['id']; ?>
+"><?php echo $this->_tpl_vars['question']['title']; ?>
+</a></li>
+
+        <?php endforeach; endif; ?>
+        <!-- end question loop -->
+
+        </ul>
+
+      <?php endforeach; endif; ?>
+      <!-- end category loop -->
+
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,1335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI API Header Library</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="90%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=251 valign="middle">
+<a href="index.html">
+<img src="img/jedi-smaller.gif" width=241 height=66 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>API Header Library</h2></font>
+          </td>
+        </tr>
+     </table>
+   </td>
+  </tr>
+</table
+
+<table>
+  <tr>
+    <td>  
+
+<!--  Main body -->
+
+<!-- Put a transparent border at the left -->
+      <table>
+        <tr>
+          <td>
+<img src="img/clearpixel.gif" width=10>
+          </td>
+     <td>
+
+<!-- Now the visible content -->          
+
+      <TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <td width=123 height=147>
+<A HREF="licensing.html">
+<img src="img/oslogo.gif" width="123" height="147" border="0" 
+  alt="Read about MPL 1.1"></A>
+          </td>
+          <td colspan=4 valign="middle" align="left">
+<font size="+2"><b>API Conversion Library Graded Packs</b></font>
+<P>
+<A HREF="toolslibrary.html">Go to CONVERTED TOOLS list</A>
+<P>
+<A HREF="clxlibrary.html">Go to Cross-platform API Library</A>
+<P>
+<A HREF="testfiles.html">Go to TEST FILES list</A>
+<P>
+<A HREF="http://sourceforge.net/projects/jedi-apilib"><img src="img/sflink.gif"></A>
+
+          </td>
+          <td>&nbsp;</td>
+        </tr>
+
+        <tr valign=top align=left>
+          <td colspan=5 height=10 align="left">
+<img src="img/clearpixel.gif" height="10">
+<hr>
+          </td>
+        </tr>
+
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <td width=335>
+<font size="-1">
+<ul>
+<li><img src="img/Jedi_unknown.gif">&nbsp;&nbsp;Unknown
+<li><img src="img/Jedi_partial.gif">&nbsp;&nbsp;Partial translation, untested
+<li><img src="img/Jedi_untested.gif">&nbsp;&nbsp;Complete translation, untested
+</ul></font>
+          </td>
+          <td width=335>
+<font size="-1">
+<ul>
+<li><img src="img/jedi_complete.gif">&nbsp;&nbsp;Complete, tested but not compliant
+<li><img src="img/borland_b.gif">&nbsp;&nbsp;Borland compliant
+<li><img src="img/jedi_j.gif">&nbsp;&nbsp;JEDI certified
+<li><img src="img/jedi_Plus.gif">&nbsp;&nbsp;JEDI-Plus certified
+</ul></font>
+          </td>
+        </tr>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+        <tr valign=top align=left>
+          <td colspan=6>
+<b>These assessments are NOT a 'judgement of quality'.</b>  They indicate the status of the translation with respect to completeness, testing and compliance with the standards described in the <A HREF="apipackspec.html#certlevels">Project JEDI API Conversion Pack Specification</A>.  
+<p>
+The gradings are cumulative, i.e. a Jedi-certified pack is also Borland-compliant.  Please study the specification before submitting new or upgraded packs.
+          </td>
+        </tr>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+        <TR>
+          <TD COLSPAN=6 align="center"><a name="windows">
+<font color="mediumblue" size="+2">
+<b>W i n d o w s&nbsp;&nbsp; A P I</b>
+<br>&nbsp;
+          </td>
+        </tr>
+
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=270></TD>
+          <TD WIDTH=180></TD>
+          <TD WIDTH=40></TD>
+          <TD WIDTH=120></TD>
+          <td WIDTH=40></TD>
+        </TR>
+
+          <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 align="center" bgcolor="lightsteelblue">
+<B>Pack Description</b>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="lightsteelblue">
+<b>Author(s)</b>
+          </TD>
+          <TD WIDTH=40 align="center" bgcolor="lightsteelblue">
+<b>Level</b>
+          </TD>
+          <TD WIDTH=120 align="center" bgcolor="lightsteelblue">
+<B>Pack Name</b>
+          </TD>
+          <td WIDTH=80 align="center" bgcolor="lightsteelblue">
+<b>Date</b>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Win32 Expanded API Conversion-->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">EXPANDED WIN32 API :: New update of full expanded Win32 API Conversion, tested and in ongoing development.  Contains more updates for Windows XP and now includes 'jwa' prefix on all unit names.  Latest update 25-Nov-2002.  
+<br>NB A more recent version of this file may be available from 
+<A HREF="http://members.chello.nl/m.vanbrakel2/">Marcel's site</A>.
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_complete.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/win32api.zip">Win32API.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">25 Nov 2002</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Windows Address Book API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ADDRESS BOOK :: Windows Address Book API</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Petr Vones</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/WAB.zip">WAB.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">17 Mar 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- ASPI/SCSI for Win32 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ASPI and SCSI for Win32 Definitions</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Eugene Danilov</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/scsi.zip">scsi.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">2 Aug 1999</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+
+<!-- MS Audio Compression Manager -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+AUDIO COMPRESSION :: Interface for Microsoft Audio Compression Manager.  Updated 5 May 2000 to include WaveFmtU.ini, an info file about use of WaveFmtU.zip (see <A HREF="tools.html">Tools page</A>) which contains wave format constants and a sample app.</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Francois Piette<br>(Constants: Alan Lloyd)</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/acm.zip">acm.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">5 May 2000</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- ATI Direct Video Access -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ATI DVA :: ATI Direct Video Access (DVA) API</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Viorel Dehelean</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/d_ati_tuner.zip">d_ati_tuner.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">6 June 1999</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS CryptoAPI v.1.1 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">CRYPTO 1.1 :: Interface for Microsoft CryptoAPI version 1.1</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Massimo Maria Ghisalberti</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/CryptoAPI1.zip">CryptoAPI1.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">7 Aug 1999</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS CryptoAPI v.2.0 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">CRYPTO 2.0 :: Interface for Microsoft CryptoAPI version 2.0</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Massimo Maria Ghisalberti</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_partial.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/CryptoAPI2.zip">CryptoAPI2.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">20 July 2000</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Cubase VST plugins interface -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">CUBASE :: SDK to make plugins for Cubase VST</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Frederic Vanmol</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/vstsdk.zip">vstsdk.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">12 Apr 1998</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- WM_DEVICECHANGE Equates -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">DEVICE MESSAGING :: Equates for WM_DEVICECHANGE and BroadcastSystemMessage</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Tom Deprez</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/dbt.zip">dbt.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">27 Apr 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Direct-X Headers -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">DIRECTX :: Direct-X Headers</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">JEDI Graphics Teams,<br>but now taken over by other parties</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="http://clootie.ru/delphi/index.html">Direct-X at Clootie Graphics pages</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">(originally 6 Sep 1999</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Human Interface Device (HID) -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+HUMAN INPUT :: Interface for Microsoft Human Input Device (HID) API, updated 23 Mar 2000</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Robert Marquardt</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/hid.zip">hid.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">23 Mar 2000</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS HTML Help API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">HTML HELP :: Interface for the Microsoft HTML Help API, v 1.1</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/HtmlHelp.zip">HtmlHelp.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">2 May 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- ICQ API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ICQ :: Interface for ICQ</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Jean-Marie Cannie</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/icq.zip">icq.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">15 May 1999</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Windows Internet Extensions -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">INTERNET :: Microsoft Windows Internet Extensions (Win95, 98, 2000 and NT4+) 1.2</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Rudolph Velthuis, updated by Marcel van Brakel</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/WinInet.zip">WinINET.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">23 June 2001</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- IP Helper API v.1.2 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">IP HELPER :: IP Helper API, v. 1.2, latest bugfix 28 July 2001</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel, Jon Penman, Vladimir Vassiliev</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_j.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/IPHlpAPI.zip">IPHlpAPI.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">28 July 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- LANManager API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle"><font size="-1">
+LANMANAGER :: LanManager API</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Petr Vones</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/LanManager.zip">LanManager.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">2 Oct 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+
+<!-- Windows LDAP -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">LDAP :: Windows Lightweight Directory Access Protocol - WLDAP32.DLL (bug-fixed 19 Mar 2000)
+</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Luk Vermeulen, Rudolph Velthuis</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/WinLDAP.zip">WinLDAP.zip</a></font>
+          </TD><td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">19 Mar 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS SQL 16 and 32-bit -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">MSSQL :: Microsoft SQL 16 & 32</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Ed Lyk</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/mssql.zip">mssql.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">27 Aug 1997</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MSSQL Server translation of mtwdblib.h -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">MSSQL :: Microsoft SQL Server translation of mtwdblib.h</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Sebian</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/mssqlsrv.zip">mssqlsrv.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">5 Mar 1998</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- ODBC Class headers? -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ODBC :: ODBC Class Headers (?)</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">potoya@ctgred.net.co</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/Odbclass.zip">Odbclass.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">08-Sep-1998</font>
+          </TD>
+        </TR>
+
+<!-- MSSQL Server ODBC/sql APIs -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ODBC :: ODBC/SQL APIs for Microsoft SQL Server</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Doug Kiely and unknown others</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/msODBC04.zip">msODBC04.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">19 Dec 1997</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MSSQL Server Open Data Services port -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">ODS :: Microsoft SQL Server Open Data Services port</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font face="Arial" size="-1">François Piette</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/SqlOds.zip">SqlOds.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 valign=middle bgcolor="cornsilk">
+<font size="-2">16 Sept 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Off Vorbis v.1.RC2 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">OGG VORBIS :: Ogg Vorbis audio codec Version=1.0 RC2 (decoder) Audio Encoding and streaming technology, patent free and open source. </font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><a href="mailto:matthijsln@xs4all.nl">Matthijs Laan</a></font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/OggVorbis.zip">OggVorbis.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">17-Nov-2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Packet32.h Packet Sniffer -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">PACKET32 :: Conversion of packet32.h including a packet-sniffer class.  
+<font color="red">NOTE :: the packet32.dll library gives a False-Positive for the virus Backdoor.subseven with some anti-virus checkers.</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">'Jagad'</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/PacketSniffer.zip">PacketSniffer.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">14 May 1999</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Win32 PerfMon 1.2 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">PERFORMANCE MONITOR :: Interface for Microsoft Windows Performance Monitoring, v.1.2</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/PerfMon.zip">PerfMon.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">02 May 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Win32 RAS 1.1 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">REMOTE ACCESS :: Interface for the Microsoft Remote Access Service, incl. Network Configuration, v.1.1</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Manuel Parma, Davide Moretti, Marcel van Brakel, Petr Vones (latest)</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/RAS.zip">RAS.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">2 May 2001</font>
+          </TD>          
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Installer API v.1.1 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SETUP :: Setup and Device Installer API interface, v.1.1</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Robert Marquardt</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_j.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/SetupAPI.zip">SetupAPI.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">2 May 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Shell Folder Locations Interface -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SHELL :: Extra Shell Folder locations interface</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Rudolph Velthuis</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/ShFolder.zip">ShFolder.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">26 Feb 2000</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- ShellAPI complement (Win Explorer) -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SHELL :: A complement to Delphi 3.02's ShellAPI.pas (Explorer)</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Daniel U. Thibault</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/ShellAPIAdditional.zip">ShellAPIAdditional.zip</a>
+</font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">31 July 1998</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- ShellObj complement for Delphi 3.02 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SHELL :: A complement to Delphi 3.02's ShlObj.pas (Explorer)</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Daniel U. Thibault</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/ShlObjAdditional.zip">ShlObjAdditional.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">31 July 1998</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Shell Lite 1.2 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SHELL LITE :: Microsoft Shell Lightweight Utility API, v.1.2.  Updated to fix a wrong GUID.</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel, Robert Marquardt</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_j.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/Shlwapi.zip">Shlwapi.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">21 June 2005</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- RSA pkcs11 Smartcard API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle"><font size="-1">
+SMARTCARD RSA :: Smartcard API interface units for RSA Security PKCS11, untested</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Danny Hjeil</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_untested.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/API_Not_Assessed/SmartcardRSA/pkcs11.zip">pkcs11.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">10 Jun 2006</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Smartcard API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle"><font size="-1">
+SMARTCARD MS :: Interface units for the Microsoft Smart Card API, reviewed, untested</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Chris Dickerson</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_untested.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/SmartCard.zip">SmartCard.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">20 Nov 2001</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS SNMP Simple Network Management -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SNMP :: Microsoft headers for Simple Network Management Protocol (SNMP) definitions.  Dynamic linking added and a major bug fixed 23-Mar-2002 </font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Petr Vones</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/snmp.zip">snmp.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">23 Mar 2002</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Speech API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">SPEECH :: Interface for the Microsoft Speech API</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Alec Bergamini, Alex Hekstra</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/sapi.zip">sapi.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">4 Feb 2000</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Telephony API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">TELEPHONY :: Telephony API. Used to create Telephony-enabled applications and to create Telephony service providers</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel, Rudolph Velthuis</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_j.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/TAPI.zip">TAPI.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">11 Sep 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Task Scheduler API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">TASK SCHEDULER :: Task Scheduler API, v.1.1, bug fixed in demo</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Unknown original contributor;  updates Marcel van Brakel</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_Plus.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">
+<A HREF="ftp://ftp.delphi-jedi.org/api/TaskScheduler.zip">TaskScheduler.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">20 Nov 2001</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- TCL Interpreter Interface -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">TCL :: Basic Interface into the TCL Interpreter</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Mike Edenfield (Kutulu)</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/tcl.zip">tcl.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">13 May 1999</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Terminal Services API 1.2 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">TERMINAL SERVICES :: Terminal Services API (Windows &amp; Citrix), v.1.2</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Marcel van Brakel, Fabio Bomfim Nunes, Nathan Allan</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_untested.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/TermServ.zip">TermServ.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">18 June 2001</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- TWAIN -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">TWAIN Scanner and Imaging Interface</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Uli Tessel, Matthias Thoma, revised by Martin Olsson</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_j.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/twain19.zip">twain19.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk"><font size="-2">13 Dec 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- URL Moniker Support -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">URL Moniker support (missing function added 1 Mar 2000)</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Rudolph Velthuis</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_j.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/UrlMon.zip">UrlMon.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">1 Mar 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- MS Video for Win32 -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">VIDEO :: Video for Windows Interface Unit</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Ronald Dittrich, Ivo Steinmann, others</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_unknown.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/vfw.zip">vfw.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">7 Dec 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- WinLogon Extension -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">WINLOGON :: Interface for the Microsoft WinLogon eXtension (WLX) API</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Nico Bendlin</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/jedi_complete.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/WinWlx.zip">WinWlx.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk" valign=middle>
+<font size="-2">1 May 2001</font>
+          </TD>
+        </TR>
+
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+<!-- Winsock 2 API -->
+        <TR VALIGN=TOP ALIGN=LEFT>
+          <TD WIDTH=250 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">WINSOCK 2 :: Winsock 2 API (Windows Sockets)</font>
+          </TD>
+          <TD WIDTH=180 align="center" bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1">Alex Konshin</font>
+          </TD>
+          <TD WIDTH=40 height=20 align="center" valign="middle" bgcolor="cornsilk">
+<font size="-1"><img src="img/Jedi_untested.gif"></font>
+          </TD>
+          <TD WIDTH=120 bgcolor="cornsilk" height=20 valign="middle">
+<font size="-1"><A HREF="ftp://ftp.delphi-jedi.org/api/Winsock2.zip">Winsock2.zip</a></font>
+          </TD>
+          <td WIDTH=80 height=20 bgcolor="cornsilk">
+<font size="-2">25 Jul 2000</font>
+          </TD>
+        </TR>
+
+<tr valign=top align=left>
+        <tr valign=top align=left>
+          <td colspan=6 height=10>
+<img src="img/clearpixel.gif" height="10">
+          </td>
+        </tr>
+
+        <tr><td colspan=5><hr></td></tr>
+      </table>  
+    </td>
+   </tr>
+<!--    FOOTER   -->                
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="index.html">
+<img src="img/return.gif" width=165 height=39 border=0></a> 
+          </td>
+        </tr>
+  
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+               <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+               </td>
+               <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+               </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

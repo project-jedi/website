@@ -1,0 +1,44 @@
+<table class="outer" cellspacing="1">
+
+  <{if $block.full_view == true}>
+  <tr>
+    <th><{$block.lang_forum}></th>
+    <th><{$block.lang_topic}></th>
+    <th align="center"><{$block.lang_replies}></th>
+    <th align="center"><{$block.lang_views}></th>
+    <th align="right"><{$block.lang_lastpost}></th>
+  </tr>
+
+  <{foreach item=topic from=$block.topics}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td><a href="<{$xoops_url}>/modules/newbb/viewforum.php?forum=<{$topic.forum_id}>"><{$topic.forum_name}></a></td>
+    <td><a href="<{$xoops_url}>/modules/newbb/viewtopic.php?topic_id=<{$topic.id}>&amp;forum=<{$topic.forum_id}>&amp;post_id=<{$topic.post_id}>#forumpost<{$topic.post_id}>"><{$topic.title}></a></td>
+    <td align="center"><{$topic.replies}></td>
+    <td align="center"><{$topic.views}></td>
+    <td align="right"><{$topic.time}></td>
+  </tr>
+  <{/foreach}>
+
+  <{else}>
+
+  <tr>
+    <td class="head"><{$block.lang_topic}></td>
+    <td class="head" align="center"><{$block.lang_replies}></td>
+    <td class="head" align="right"><{$block.lang_lastpost}></td>
+  </tr>
+
+  <{foreach item=topic from=$block.topics}>
+  <tr class="<{cycle values="even,odd"}>">
+    <td><a href="<{$xoops_url}>/modules/newbb/viewtopic.php?topic_id=<{$topic.id}>&amp;forum=<{$topic.forum_id}>"><{$topic.title}></a></td>
+    <td align="center"><{$topic.replies}></td>
+    <td align="right"><{$topic.time}></td>
+  </tr>
+  <{/foreach}>
+
+  <{/if}>
+
+</table>
+
+<div style="text-align:right; padding: 5px;">
+<a href="<{$xoops_url}>/modules/newbb/"><{$block.lang_visitforums}></a>
+</div>

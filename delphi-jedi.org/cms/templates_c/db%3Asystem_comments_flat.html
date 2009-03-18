@@ -1,0 +1,19 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-28 04:48:33
+         compiled from db:system_comments_flat.html */ ?>
+<table class="outer" cellpadding="5" cellspacing="1">
+  <tr>
+    <th width="20%"><?php echo $this->_tpl_vars['lang_poster']; ?>
+</td>
+    <th><?php echo $this->_tpl_vars['lang_thread']; ?>
+</td>
+  </tr>
+  <?php if (count((array)$this->_tpl_vars['comments'])):
+    foreach ((array)$this->_tpl_vars['comments'] as $this->_tpl_vars['comment']):
+?>
+    <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comment.html", array('comment' => $this->_tpl_vars['comment']));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+  <?php endforeach; endif; ?>
+</table>

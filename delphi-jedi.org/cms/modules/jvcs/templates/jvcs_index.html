@@ -1,0 +1,26 @@
+<{$content}>
+
+<div style="padding: 5px; text-align: right; margin-right:3px;">
+<a href="print.php?id=<{$id}>"><img src="images/print.gif" border="0" alt="<{$lang_printerpage}>" /></a>
+<a href="<{$mail_link}>" target="_top"><img src="images/friend.gif" border="0" alt="<{$lang_sendstory}>" /></a>
+</div>
+
+<{if $nocomments == 0}>
+<br /><br />
+<div style="text-align: center; padding: 3px; margin: 3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin: 3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+<{/if}>

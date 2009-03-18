@@ -1,0 +1,31 @@
+<a href="index.php"><{$lang_search}></a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;<{$lang_results}><br /><br />
+
+<{if $total_found != 0}>
+
+<table class="outer" cellspacing="1" cellpadding="4">
+  <tr>
+    <th align="center"><{$lang_avatar}></th><th align="center"><{$lang_username}></th><th align="center"><{$lang_realname}></th><th align="center"><{$lang_email}></span></th><th align="center"><{$lang_privmsg}></th><th align="center"><{$lang_url}></th><th align="center"><{$lang_regdate}></th><th align="center"><{$lang_lastlogin}></th><th align="center"><{$lang_posts}></th>
+    <{if $is_admin == true}>
+    <th align="center">&nbsp;</th>
+    <{/if}>
+  </tr>
+
+  <{section name=i loop=$users}>
+  <tr valign="middle">
+    <td class="even"><{$users[i].avatar}></td><td class="odd"><a href="<{$xoops_url}>/userinfo.php?uid=<{$users[i].id}>"><{$users[i].name}></a></td><td class="even"><{$users[i].realname}></td><td align="center" class="odd"><{$users[i].email}></td><td class="even" align="center"><{$users[i].pmlink}></td><td class="odd" align="center"><{$users[i].website}></td><td class="even" align="center"><{$users[i].registerdate}></td><td align="center"><{$users[i].lastlogin}></td><td class="odd" align="center"><{$users[i].posts}></td>
+    <{if $is_admin == true}><td class="even" align="center"><{$users[i].adminlink}></a></td><{/if}>
+  </tr>
+  <{/section}>
+
+</table>
+
+<div style="text-align:center">
+  <{$pagenav}>
+  <{$lang_numfound}>
+</div>
+
+<{else}>
+
+  <{$lang_nonefound}>
+
+<{/if}>

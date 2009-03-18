@@ -1,0 +1,1117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Using the Windows Registry</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Kevin S. Gallagher</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+
+<blockquote>
+                  <table cellpadding="3">
+                    <tr bgcolor="pink">
+                      <td>
+             
+<p><b>!! WARNING !! </b>&nbsp; Until you feel absolutely comfortable with the registry only <b>read</b> information from it. DO NOT attempt to change existing information unless you know what the ramifications are! If you make undesirable changes your computer may not run properly or not at all. The demo code supplied here has been tested many times on Windows95/98. No testing has been done on Windows NT4/2000 or Windows XP.</p>
+                      </td>
+                    </tr>
+                  </table>
+</blockquote>
+
+<P>
+<A HREF="ftp://ftp.delphi-jedi.org/Voyager/UsingTheRegistry.zip">Download the Article and Demos</a> (122Kb)</P>
+
+<h3>What is the Registry?</h3>
+<p>The Registry is a database used to store settings and options for the 32 bit versions of Microsoft Windows; including Windows 95, 98 and NT. It contains information and settings for hardware, software, users, and preferences of the PC. Whenever a user makes changes to a Control Panel settings, or File Associations, System Policies, or installed software, the changes are reflected and stored in the Registry. In short, the registry is a shared resource to all programs running under Windows and NT.</P>
+
+<P><U>Where is the Registry found?</U></P>
+
+<P>The physical files that make up the registry are stored differently depending on your version of Windows; under Windows 95 &amp; 98 it is contained in two hidden files in your Windows directory, called USER.DAT and SYSTEM.DAT, while under Windows NT the files are contained seperately in the &quot;Windows / System32 / Config&quot; directory.</P>
+
+<P><U>What's the structure of the Registry?</U></P>
+
+<P>As stated in Delphi's online help for TRegistry,</P>
+<blockquote>
+<P><i>The registry is a database that an applications can use to store and retrieve configuration information. Configuration information is stored in a hierarchical tree. Each node in the tree is called a key. Every key can contain subkeys and data values that represent part of the configuration information for an application.</i></P>
+</blockquote>
+
+<P>The Registry has a hierarchical structure. Although it looks complicated the structure is similar to the directory structure on your hard disk, with Regedit being similar to Windows Explorer. Each main branch (denoted by a folder icon in the Registry Editor, see below) is called a Hive, and Hives contains Keys. Each key can contain other keys (sometimes referred to as sub-keys), as well as Values. The values contain the actual information stored in the Registry. There are three types of values; String, Binary (similar to a Pascal record), and DWORD (Delphi specifies them as an integer) - the use of these depends upon the context.</p>
+
+<p>There are six main branches, each containing a specific portion of the information stored in the Registry. They are as follows:</P>
+
+<UL>
+<LI>HKEY_CLASSES_ROOT : This branch contains all of your file association types, OLE information and shortcut data. </LI>
+<LI>HKEY_CURRENT_USER : This branch links to the section of HKEY_USERS appropriate for the user currently logged onto the PC. </LI>
+<LI>HKEY_LOCAL_MACHINE : This branch contains computer specific information about the type of hardware, software, and other preferences on a given PC, this information is used for all users who log onto this computer. </LI>
+<LI>HKEY_USERS : This branch contains individual preferences for each user of the computer, each user is represented by a SID sub-key located under the main branch. </LI>
+<LI>HKEY_CURRENT_CONFIG : This branch links to the section of HKEY_LOCAL_MACHINE appropriate for the current hardware configuration.</LI>
+<LI>HKEY_DYN_DATA : This branch points to the part of HKEY_LOCAL_MACHINE, for use with the Plug-&amp;-Play features of Windows, this section is dymanic and will change as devices are added and removed from the system.</LI></UL>
+
+
+<h3>Using the Registry</h3>
+
+<P>Not only can Windows itself read and write information to the registry, but so can you through your Delphi application. Many programmers will write information to the registry during the installation process of their application. When their application is running they retrieve the information using various methods of TRegistry. You are not limited to simply reading static information in the registry, but can write, edit, modify and delete information from the registry. </P>
+<blockquote>
+<P><b>Caveat</b> :: Just about every minute that your computer is running, something is being read from or written to the registry. It is not very obvious this is going on.  To see what is going on, there is a tool called RegMon. It is a freeware utility which can be downloaded from </P>
+
+<p><A HREF="http://www.sysinternals.com/">www.sysinternals.com</A></p>
+</blockquote>
+
+<p>The RegMon tool can be of great service to you in learning what goes on behind the what you see. For instance, let's look to see what activity goes on by simply pressing the Windows Start button:</P>
+
+<P><IMG SRC="img/SnapShot_Of_RegMon.gif" WIDTH=708 HEIGHT=89></P>
+
+<P>As you can see, Windows need to get information even for this simple operation. Once you have found something interesting simply double click on the line item to open up RegEdit. Remember that once RegEdit is open to be careful not to change something you don't know what that item does. Another nice tool to own is from Norton Utilities, it is called Registry Editor. One of the nice features is, bookmarks. To locate a key or value in RegEdit each time you fire it up you must search for it, or traverse the registry. In Norton's Registry Editor you can bookmark an item, then use the bookmark window to instantly go to that item.</P>
+
+<h3>To Access the Registry in Delphi</h3>
+<OL>
+
+<LI>Add <I>registry</I> to the uses clause of the unit you are going to open the registry with.</LI>
+<LI>In the routine which will open the registry declare a variable of type TRegistry.
+<P>Example:</P>
+<p><font face="Courier New"><pre>
+  Reg: TRegistry;
+</pre></font></P></li>
+
+<LI>Use the Create method to instantiate a TRegistry object.
+<P>Example</P>
+<p><font face="Courier New"><pre>
+  Reg := TRegistry.Create ;
+</pre></font></p>
+
+<P>For Delphi 5 the Create method has been overloaded:</P>
+<p><font face="Courier New"><pre>
+  <B>constructor</B> Create(AAccess:LongWord); <B>overload</B>;
+</pre></font></P>
+
+<P>AAccess sets the value of the Access property (new) which is used to specify the desired access whenever a key is opened. An example:</P>
+
+<p><font face="Courier New"><pre>
+  Reg.Create(KEY_ALL_ACCESS);
+</pre></font></P></li>
+
+<LI><p>Next we must tell our object which branch of the registry to work with:<p>
+<p><font face="Courier New"><pre>
+  Reg.RootKey := HKEY_LOCAL_MACHINE;
+</pre></font></P>
+<P>By default the rootkey is HKEY_CURRENT_USER, so if this is the branch you intend to work with there is no need to set the rootkey.</P></li>
+
+<LI>Now you can use OpenKey to open up the desired key.</li>
+<li>Finally use the Read and Write methods to read and write information from and to the Registry.</LI>
+</OL>
+
+<h4>Access Level in TRegistry</h4>
+<P>Delphi 5 introduced a new property for TRegistry which allows you to set the access level to use when opening a key:</P>
+
+<blockquote>
+<P><B>property</B> Access: LongWord;</P>
+<P><B>Description</b></P>
+<P><i>Use Access to specify the level of security access to use when opening keys.<br>
+The OpenKey method uses the value of Access when opening a registry key.
+Access is initialized by the TRegistry constructor, but can be altered
+before calling OpenKey.</i></p>
+</blockquote>
+
+<P>The value of Access is a set of flags or’d together, where each flag indicates a type of permission. Choose a value that grants sufficient permission to allow the desired actions while not exceeding the access level of the system running the application. The following table lists the flags that can be included:</P>
+
+                  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=7>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP"><B>Flag</B></TD>
+                      <TD WIDTH="64%" VALIGN="TOP"><b>Meaning</B></TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_ALL_ACCESS</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">combination of KEY_READ, KEY_WRITE, and KEY_CREATE_LINK.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_READ</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">combination of KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS, and KEY_NOTIFY.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_WRITE</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">combination of KEY_SET_VALUE and KEY_CREATE_SUB_KEY.</FONT>
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_QUERY_VALUE</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">grants permission to query subkey data.</TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_ENUMERATE_SUB_KEYS</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">grants permission to enumerate subkeys.</TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_NOTIFY</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">grants ability to receive change notifications.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_SET_VALUE</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">grants permission to set subkey data.</TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_CREATE_SUB_KEY</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">grants permission to create subkeys.</TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_CREATE_LINK</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">grants permission to create symbolic links.
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="36%" VALIGN="TOP">KEY_EXECUTE</TD>
+                      <TD WIDTH="64%" VALIGN="TOP">restricts permission to read-only access.</TD>
+                    </TR>
+                  </TABLE>
+
+<P>
+<B>Note</B>: Access is ignored by the CreateKey method, which always uses KEY_ALL_ACCESS.</p>
+
+<h3>Uses for Registry Access</h3>
+
+<P>A good example for <U>writing</U> new keys and values to the registry is when your application does not use an installation program to write information to the registry. </P>
+
+<P>An example for <U>modifying</U> information is, each time your application closes it stores various pieces of information about the applications current status (form placement, menu item configuration etc) which is used when the application fires up next time.</P>
+
+<P>An example for <U>deleting</U> information, your application only stores information if the user customizes various parts of the application. If they press a &quot;restore defaults&quot; button then you delete all the custom settings. </P>
+
+<h3>Understanding the Registry Structure</h3>
+
+<P>Before you begin to actually change data in the registry you must understand the structure of the registry. Key elements of the registry are illustrated in the image below:</P>
+
+<P><IMG SRC="img/Reg_1.gif" WIDTH=472 HEIGHT=177></P>
+
+<P>You can see the hierarchy of the registry. Each folder is a key within the structure of the registry. On the right hand side there are two columns, on the left (name) are keys, on the right values (data). </p>
+
+<P>Suppose you want to know the color the current user has selected for <I>ButtonFace</I>. The first thing you will need to do is find the <i>key</i> in the registry which stores the colors used by the current user. 
+<ul>
+<li>Your first lead is that this value is for the currently logged-in user, so begin with HKEY_CURRENT_USER. </li>
+
+<li>Once this key is open, look for any key, which might appear to lead in the direction of a place to store colors. Well it appears that there is a key called Control Panel, hum, seems like a good candidate to me, let's open it up. Sure enough there is another key called colors. Single click on colors and we have found the key called <I>ButtonFace</I>.</li>
+</ul> 
+
+<p>Now, all we need to do is figure out how to open the value for the key. Our starting point is to create an object to reference the key. As with manually creating any object, a declaration is in order. Once the object has been created we can begin using it. </p>
+<P>
+
+<p>The key elements to accessing data are:</p>
+ <ul>
+
+<li>Usually before opening the key to read, you must set the root key to let the object know the major branch of the registry to open. The default is HKEY_CURRENT_USER. In our example we are using HKEY_CURRENT_USER so this step is not required. <br><br></li>
+<li><p>next, open up the registry branch where the desired data resides in the registry. We can move directly to opening the desired key - ControlPanel\Colors.  The OpenKey method of TRegistry accomplishes this. <P>
+<p>Note that the method OpenKey returns a Boolean indicating whether the key was opened. The second argument is a Boolean, if set to True, will create the key if it does not exist.  If you set it to False and the key does not exist, OpenKey returns a value of False, indicating that the key could not be opened. If this key does not exist, we can not continue. </p></li>
+
+<li><p>Assuming OpenKey returned True, next we open the key called <I>ButtonFace</I> and retrieve its value, using the ReadString method (or another 'Read' method, if the return type is not string).</p>
+
+<p>
+<font face="Courier New">
+<pre>
+procedure TForm1.ButtonDemoClick(Sender: TObject);
+const
+  BaseKey = 'Control Panel\Colors' ;
+  TheKey = 'ButtonFace' ; 
+var
+  Reg: TRegistry ; 
+
+begin
+  { We create a registry object used to access 
+    the  value  stored in  ButtonFace  } 
+  Reg := TRegistry.Create ; 
+  { To ensure the object is freed the code is wrapped 
+    into a Try..Finally statement } 
+  try 
+    with Reg do 
+    begin<font color="#0000ff">
+    { This is not needed in this example since it is the default
+      RootKey is HKEY_CURRENT_USER. If you needed to change
+      the RootKey, this is where to do it. }</font>
+ 
+      RootKey := HKEY_CURRENT_USER ;<FONT COLOR="#0000ff">
+
+    { Now we can open the "key" &lt;Control Panel\Colors&gt; to 
+      access the "value" &lt;ButtonFace&gt;. You do not need to
+      check if the "key" was opened, although it is wise
+      to do so. }</FONT>
+
+      if OpenKey(BaseKey, False) then<FONT COLOR="#0000ff">
+
+     { Again it is wise to check to see if something exists
+       prior to accessing it. So ValueExists checks to see
+       if the "value" &lt;ButtonFace&gt; truly exist then reads
+       the value from it. }</FONT>
+
+        if ValueExists(TheKey) then
+          ShowMessage('ButtonFace= ' + ReadString(TheKey)) ;
+    end ;
+  finally
+    Reg.Free ;
+  end ;
+end;
+</pre></font></P>
+</li></ul>
+
+<p>The above example was fairly straightforward, open a key and read the data. There will be times when the information needed from the registry is not an easy path. For instance there are some values stored in the registry which can only be found by first going to one key, pick up some directions to another key which then houses the data you want. Other times there will be a need to use API calls to access sections of the registry. Let's examine both cases.</P>
+
+<P>Unless you have been living on an island you have heard of Microsoft ADO. To get version information for ADO you need to dig into the Registry. Your first thought might be to search for ADO in the Registry but this will lead to several findings. First, ADO will most likely appear about 600 times, secondly you will see several version numbers if you had installed, then updated it.</p>
+
+<p>So a different approach needs to be taken! To accomplish the task you need to do some research. Rather than keep you guessing I will tell you the information for locating this data is located on the home page at Microsoft for ADO/DCOM.</p> 
+
+<p>Here is the is the key to start off with. The <I>root key</I> is HKEY_CLASSES_ROOT and the sub-key is CLSID\{bdc67890-4fc0-11d0-a805-00aa006d2ea4}\InstalledVersion. Once here we then read the default value of InstalledVersion. This returns a value formatted with commas. This is the version of DCOM installed on the computer. This is a necessary component of ADO. Compare the returned value to what ADO expects to find. If the version is correct then we move to the next query (see below).</P>
+
+<p><font face="Courier New">
+<pre>
+function GetDCOMVersion: String ;
+const
+  sSubKey = 'CLSID\{bdc67890-4fc0-11d0-a805-00aa006d2ea4}\InstalledVersion' ;
+var
+  Reg: TRegistry ;
+begin
+  if not DCOMEnabled then   begin
+    Result := 'DCOM not installed' ;
+  end ;
+  Reg := TRegistry.Create ;
+  try
+    Reg.RootKey := HKEY_CLASSES_ROOT ;
+    try
+      if Reg.OpenKey(sSubKey,False) then
+        if Reg.ValueExists('') then
+          Result := Reg.ReadString('') ;
+    except
+      Result := 'ERROR' ;
+    end ;
+  finally
+    Reg.Free ;
+  end ;
+end ; 
+</pre></font></p>
+
+<P>Now comes a &quot;seek and find&quot; operation. The version for ADO is stored in a DLL with a name that appears to indicate the version of ADO, it is not. Microsoft has no reasoning for this. To obtain the version we first start by reading HKEY_CLASSES_ROOT\ADODB.Connection\CLSID, read the default value for the key, remember it within a string variable so that it can be used to read yet another key: </P>
+
+<P>'CLSID\' + cKey +'\InprocServer32'</P>
+
+<P>In the code above <I>cKey</I> represents the value taken from the first key read. Now by reading the key shown above we can get the version of ADO (although the function name is MDAC_Version. At this point we have the name of the file which contains the version number. Simply take the file name and use a component which can extract the version number and we are done. The attached example contains all the code required to retrieve the version number.</P>
+
+<h3>Concerns using straight API routines to access the Registry</h3> 
+
+<p>The class TRegistry can run into problems if the value it needs to read is <I>locked</I> by another application. This means that another program has denied access to anyone else attempting to read the information we want. A good example is, you are on a computer with a modem to connect to the internet and your browser is Microsoft Internet Explorer. IE will open up the registry and lock up a section. Using the Delphi wrapper TRegistry to read the value we need will end up with a Windows violation message and fail to open the required key.</p>
+
+<p>The only way around this problem is to either write a new class or write a function which uses the same functions TRegistry does but by altering some parameters and logic. Below is an example which will properly open the key which IE might have open.</P>
+
+<p><font face="Courier New">
+<pre>
+unit IE_Connected;
+
+interface
+uses
+  Windows, Messages, SysUtils, Controls, Dialogs, StdCtrls, Registry;
+
+function IsConnected: boolean ;
+
+implementation
+
+function IsConnected: boolean ;
+const
+  cMsg = 'Place your error message here ' ;<font COLOR="#0000ff">  { for demoing only }</font>
+  sSubKey = 'System\CurrentControlSet\Services\RemoteAccess' ;
+  sKeyValue = 'Remote Connection' ;
+var
+  pKey: hKey ;
+  lpData,
+  DataSize: Longint ;
+begin
+  lpData := $0 ;
+  if RegOpenKeyEx(HKEY_LOCAL_MACHINE,sSubKey,0,KEY_QUERY_VALUE,pKey) = 0 then
+  begin
+    try
+      DataSize := Sizeof(lpData);
+      if RegQueryValueEx(pKey,sKeyValue,nil,nil,@lpData,@DataSize) &lt;&gt; 0 then
+        raise Exception.Create(cMsg + #13 + SysErrorMessage(GetLastError)) ;
+    finally
+      RegCloseKey(pKey) ;
+    end;
+    if lpData &gt; 0 then
+      Result := True
+    else
+      Result := False ;
+  end 
+  else
+    raise Exception.Create(cMsg + #13 + SysErrorMessage(GetLastError)) ;
+  end ;
+end.
+</pre></font></p>
+
+<h3>How to read information from the registry</h3>
+
+<P>There are nine different types of data which you can read from the Registry. Each is shown below along with the method used to read the specific data.</P>
+
+
+                  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=7 WIDTH=590>
+                    <TR>
+                      <TD WIDTH="14%" VALIGN="TOP"><b>Type</B></TD>
+                      <TD WIDTH="86%" VALIGN="TOP"><b>Description</B></TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="14%" VALIGN="TOP">Binary</TD>
+                      <TD WIDTH="86%" VALIGN="TOP"><P>Returns data similar to an Object Pascal record type.</P>
+<P>Use ReadBinaryData method to read data
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD WIDTH="14%" VALIGN="TOP">Boolean</TD>
+                      <TD WIDTH="86%" VALIGN="TOP"><P>Returns data resembling Logical type i.e. True or False</P>
+<P>Use ReadBool method to read data.</P>
+<P><B>Note</B>: The registry stores Boolean values as integers, Delphi transposes them to Boolean type for you.</p>
+                      </TD>
+                     </TR>
+                     <TR>
+                       <TD WIDTH="14%" VALIGN="TOP">Currency</TD>
+                       <TD WIDTH="86%" VALIGN="TOP"><P>Returns the value of a key as currency. If the key being read is not the proper type then an exception is raised.</P>
+<P>Use ReadCurrency method to read data.</p>
+                       </TD>
+                     </TR>
+                     <TR>
+                       <TD WIDTH="14%" VALIGN="TOP">Date</TD>
+                       <TD WIDTH="86%" VALIGN="TOP"><P>Returns the date part of a TDateTime type.</P>
+<P>Use ReadDate method read data.</P>
+<P><B>Note</B>: Many data types can be checked using TRegistry.GetDataType, but not with dates. As stated in Delphi's online help, only using the method ReadDate when you have written a value to a key with WriteDate method.</p>
+                       </TD>
+                     </TR>
+                     <TR>
+                       <TD WIDTH="14%" VALIGN="TOP">DateTime</TD>
+                       <TD WIDTH="86%" VALIGN="TOP"><P>Returns a TDateTime value from a specific key in the registry.</P>
+<P>Use ReadDateTime to read data.
+                       </TD>
+                     </TR>
+                     <TR>
+                       <TD WIDTH="14%" VALIGN="TOP">Float</TD>
+                       <TD WIDTH="86%" VALIGN="TOP"><P>Returns a number with the format 00.00</P>
+<P>Use ReadFloat to read data.</TD>
+                     </TR>
+                     <TR>
+                       <TD WIDTH="14%" VALIGN="TOP">Integer</TD>
+                       <TD WIDTH="86%" VALIGN="TOP"><P>Returns a number with no fractional part.</P>
+<P>Use ReadInteger to read data.</p>
+                       </TD>
+                     </TR>
+                     <TR>
+                       <TD WIDTH="14%" VALIGN="TOP">String</TD>
+                       <TD WIDTH="86%" VALIGN="TOP"><P>Returns a string.</P>
+<P>Use ReadString to read data.</TD>
+                      </TR>
+                      <TR>
+                        <TD WIDTH="14%" VALIGN="TOP">Time</TD>
+                        <TD WIDTH="86%" VALIGN="TOP"><P>Returns the time portion of a TDateTime type.</P>
+<P>Use ReadTime to read data.</P>
+<P><B>Note</B>: Many data types can be checked using TRegistry.GetDataType, but not with dates/times. As stated in Delphi's online help, only use the method ReadDate when you have written a value to a key with WriteTime method.
+                        </TD>
+                      </TR>
+                    </TABLE>
+
+<h4>Simple demo of reading a string from the registry</h4>
+
+<P>Reading a string from a key. The key, which the following code reads, is for finding out the keyboard speed and delay factor.</P>
+<P><IMG SRC="img/KeyboardKey.gif" WIDTH=177 HEIGHT=193></P>
+<P>Create a new form, add <I>registry</I> to the uses clause. Next place a button and a ListBox on the form. Double click the button and place the following code into it.</P>
+<p><font face="Courier New">
+<pre>
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  Reg: TRegistry ;
+begin
+  Reg := TRegistry.Create ;
+  try
+    Reg.RootKey := HKEY_CURRENT_USER ;
+    if Reg.OpenKey('Control Panel\Keyboard', False) then
+    begin
+      ListBox1.Items.add(Reg.ReadString('KeyboardDelay')) ;
+      ListBox1.Items.add(Reg.ReadString('KeyboardSpeed')) ;
+    end ;
+  finally
+    Reg.Free ;
+  end ;
+end;
+</pre></font></p>
+
+<P>The first statement creates a local instance of a TRegistry object. The remaining statements are enclosed with in an exception block to ensure that the object is destroyed and the reference to the registry is closed. To tell the object were to read from we use the property <I>RootKey</I> to point to HKEY_CURRENT_USER (you can also read from HKEY_CLASSES_ROOT, HKEY_CURRENT_CONFIG, HKEY_DYN_DATA, HKEY_LOCAL_MACHINE and HKEY_USERS). Next using the method OpenKey we pass in the branch of HKEY_CURRENT_USER to read from. An if statement is used to determine if the key was opened or not. The second argument to OpenKey determines if the key is to be created if not located. Once the key has been opened the method ReadString is used to read the entries of two values from the keys we have indicated to read. If either of the keys was not located then nothing is returned. One failure does not mean a valid call to ReadString will fail.</P>
+
+<P><U>Caveat</U>: Delphi supplies (not in the standard version) a file called <I>RegStr</I> which is filled with constants for many known pieces of information and paths into the registry. You should take time to examine the file's content.</P>
+
+<P><b>Example</b></P>
+
+<P>Reading the current color scheme for the current user</P>
+
+<P>The following example requires a new form, and command button. It will retrieve the colors for the current user. Enter the code and run the project.</P>
+
+<P>Partial image of the end result</P>
+
+<P><IMG SRC="img/PartOfShemeColors.gif" WIDTH=167 HEIGHT=120>
+<p><font face="Courier New">
+<pre>
+procedure TForm1.Button3Click(Sender: TObject);
+procedure ShowColors(cCaption, Value: String; TheTop: Integer) ;
+  var
+  L: TLabel ;
+  P: TPanel ;
+  x: Integer ;
+  R: Integer ;
+  G: Integer ;
+  B: Integer ;
+  S: String ;
+  begin
+    S := Value ;<FONT COLOR="#0000ff">
+    { Create labels for each system color }</font>
+    l := TLabel.Create(Self);
+    l.Name := 'Label' + IntToStr(TheTop) ;
+    l.Caption := cCaption ;
+    l.Parent := Self;
+    l.Top := TheTop ;
+    l.Left := 10 ;
+    l.Visible := True ;<FONT COLOR="#0000ff">
+    { Create a panel to show the color for corresponding
+      label above }</font>
+    P := TPanel.Create(Self) ;
+    P.Name := 'Panel' + IntToStr(TheTop) ;
+    P.Visible := False ;
+    P.Caption := '' ;
+    P.Parent := Self ;<FONT COLOR="#0000ff">
+    { Convert string RGB to individual integers for
+      showing color below }</FONT>
+    x := Pos(#32,S) ;
+    R := StrToInt(Copy(S,1,x -1)) ;
+    Delete(S,1, x) ;
+    x := Pos(#32,S) ;
+    G := StrToInt(Copy(S,1,x -1)) ;
+    Delete(S,1, x ) ;
+    B := StrToInt(S) ;
+    P.Color := TColor(Windows.rgb(R,G,B)) ;
+    P.Top := L.Top + 1 ;
+    P.Left := 150 ;
+    P.Width := 11 ;
+    P.Height := 11 ;
+    P.Visible := True ;
+  end ;
+  //------------------------------------
+const
+  BaseKey = 'Control Panel\Colors' ;
+var
+  Reg: TRegistry ;
+  aList: TStringList ;
+  iCount: Integer ;
+  iValue: Integer ;
+  cValue: String ;
+  iTop: Integer ;
+begin
+  Reg := TRegistry.Create ;
+  try
+    with Reg do
+    begin
+      RootKey := HKEY_CURRENT_USER ;
+      if OpenKey(BaseKey, False) then
+      begin
+        aList := TStringList.Create ;
+        lockWindowUpdate(handle) ;
+        try
+          GetValueNames(aList) ;
+          iCount := aList.Count ;
+          CloseKey ;
+          iTop := 5 ;
+          for iValue := 0 to iCount -1 do
+          begin
+            if OpenKey(BaseKey,False) then
+              begin
+                cValue := ReadString(aList.Strings[iValue]) ;
+                CloseKey ;
+                ShowColors(aList.Strings[iValue],cValue,iTop) ;<FONT COLOR="#0000ff">
+                { label height plus fill between next label }</FONT>
+                Inc(iTop, 16) ;
+              end ;
+          end ;
+        finally
+          aList.Free ;
+          Sleep(1000) ;
+          lockWindowUpdate(0) ;
+        end ;
+    end ;
+  finally
+    Reg.Free ;
+  end ;
+  Button3.Enabled := False ;
+end;
+</pre></font></p>
+
+<P><B>Reading unknown keys in a branch</B></P>
+<P>Suppose that you need to obtain some string values for a branch of the registry where you do not know how many keys there are. Building on the first example we can get the number of entries and their values. Note that an assumption that all the keys are of type string. The key to getting all the entries is a method called <I>GetValueNames</I>. This method will return all the keys under the branch of the registry currently open. The current branch for this example is HKEY_CURRENT_USER\ Control Panel\Keyboard. </P>
+
+<p><font face="Courier New">
+<pre>
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  Reg: TRegistry ;
+  SomeValues: TStringList ;
+  iCount, i: Integer ;
+begin
+  Reg := TRegistry.Create ;
+  SomeValues := TStringList.Create ;
+  try
+    Reg.RootKey := HKEY_CURRENT_USER ;
+    if Reg.OpenKey('Control Panel\Keyboard', False) then
+    begin
+      Reg.GetValueNames(SomeValues) ;
+      iCount := SomeValues.Count ;
+      if iCount &gt;0 then
+      for i := 0 to iCount -1 do
+        Listbox1.Items.Add(SomeValues.Strings[i] + '--&gt;' +
+        Reg.ReadString(SomeValues.Strings[i])) ;
+    end ;
+  finally
+    Reg.Free ;
+    SomeValues.Free ;
+  end ;
+end ;
+</pre></font></p>
+
+<h4>How to Enumerate an entire Branch of the registry</h4>
+
+<P>This example goes through the registry searching for &^quot;CurrentVersion&quot; under the root key HKEY_CURRENT_USER. Once it finds the key it increments a counter, when completed the times which &quot;CurrentVersion&quot; was found is displayed. In a real life example you might need to narrow your search to a key or a value. This is a simple example.</P>
+<P>To run this example, on a new form place a memo control and a command button.</P>
+<p><font face="Courier New">
+<pre>
+type
+  TEnumerateRegBranch = class(TForm)
+    Memo1: TMemo;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    iRanIt:boolean ;
+  public
+end;
+var
+  EnumerateRegBranch: TEnumerateRegBranch;
+
+implementation<FONT COLOR="#0000ff">
+{$R *.DFM}</FONT>
+uses registry ;
+procedure TEnumerateRegBranch.Button1Click(Sender: TObject);
+var
+  indent: Integer;
+  iMatches: Integer ;
+  procedure EnumAllKeys( hkey: THandle );
+  var
+    l: TStringList;
+    n: Integer;
+  begin
+    Inc(indent, 2);
+    with Tregistry.Create do
+    try
+      RootKey := hkey;
+      OpenKey( EmptyStr, false );
+      l := TStringLIst.Create;
+      try
+        GetKeynames(l);
+        CloseKey;
+        for n := 0 To l.Count-1 do 
+        begin
+          memo1.lines.add( StringOfChar(' ',indent) +l [n]);
+          try
+            if CompareStr('CurrentVersion',L.Strings[n]) = 0 then
+              Inc(iMatches) ;
+          except
+          end ;
+          if OpenKey( l[n], false ) then 
+          begin
+            EnumAllKeys( CurrentKey );
+            CloseKey;
+          end;
+        end;
+      finally
+        l.Free
+      end;
+    finally
+      Free;
+    end;
+    Dec(indent, 2);
+  end;
+  //-----------------------------------------
+
+begin <FONT COLOR="#0000ff">
+  { Searches Key and Values for "CurrentVersion" while traversing. }</font>
+  Memo1.Clear;
+  memo1.lines.add('Keys under HKEY_CURRENT_USER');
+  indent := 0;
+  Button1.Enabled := False ;
+  EnumAllKEys( HKEY_CURRENT_USER );
+  Button1.Enabled := True ;
+  iRanIt := True ;
+  if iMatches &gt;0 then
+    ShowMessage('Found ' + IntToStr(iMatches) + ' of "CurrentVersion"')
+  else
+    ShowMessage('Did not find CurrentVersion') ;
+end ;
+  //------------------------------------------
+
+procedure TEnumerateRegBranch.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if iRanIt then
+    ShowMessage('This may take a while') ;
+end;
+</pre></font></p>
+
+<h3>Writing data to the registry</h3>
+
+<P>Delphi provides all the routines which are needed to write information to the registry as shown below:</P>
+                  <TABLE CELLSPACING=0 BORDER=0 CELLPADDING=7 WIDTH=590>
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP"><b>Type</B></TD>
+                      <TD WIDTH="74%" VALIGN="TOP"><b>Description</B></TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteBinaryData</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to write binary data to the Registry
+                      </TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteBool</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to write Boolean data to the registry
+                      </TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteCurrency</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to write Currency data to the registry
+                      </TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteDate</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to write the date part of a TDateTime type to the registry                       </TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteDateTime</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to write a TDateTime type to the registry
+                      </TD>
+                    </TR>
+  
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteExpandString</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to store a string that contains unexpanded references to environment variables such as "%PATH%. The string is stored in a data value associated with the current key.
+                      </TD>
+                    </TR>
+ 
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteFloat</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to store a float to the registry</TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteInteger</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to store an integer to the registry
+                      </TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteString</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to store an ordinary string to the registry
+                      </TD>
+                    </TR>
+
+                    <TR>
+                      <TD WIDTH="26%" VALIGN="TOP">WriteTime</TD>
+                      <TD WIDTH="74%" VALIGN="TOP">Used to store the Time part of a TDateTime type to the registry.
+                      </TD>
+                    </TR>
+                  </TABLE>
+
+<h4>Demo for writing information to the registry</h4>
+
+<P>The following example creates a new key under the HKEY_CURRENT_USER branch of the registry. Once created several keys and values are set. After the values are written to the registry they are read back to confirm they are indeed in the registry. Lastly all the data which was written is removed.</P>
+
+<P>Create a new form, place a ListBox and a command button on the form followed by the code below.</P>
+
+<P>The following code shows some simple examples of reading, 
+writing and returning information back from the registry.</P>
+
+<P>NOTE 1: Little exception handling is done since I want to keep the code clear.</P>
+<P>NOTE 2: Since I don't have Windows-NT there is no way for me to check how to deal with NT-security.</P>
+
+<p><font face="Courier New">
+<pre>
+procedure TForm1.Button1Click(Sender: TObject);<FONT COLOR="#0000ff">
+{ This record is used to demo read/write operations to
+  the registry }</FONT>
+type
+  TSomeData = record
+    Top,
+    Left,
+    Width,
+    Height:Integer ;
+    Caption:String ;
+end;
+</FONT><FONT COLOR="#0000ff">
+{ Key beneath HKEY_CURRENT_USER to work with }</FONT>
+const>
+BaseKey = 'a_test' ;
+var
+  Reg: TRegistry ;
+  MyCurrency: Currency ;
+  FSomeData : TSomeData ;
+begin
+  ListBox1.Clear ;</FONT><FONT COLOR="#0000ff">
+  { Assign a value to store into the registry }</FONT>
+  FSomeData.Top := Top ;
+  FSomeData.Left := Left ;>
+  FSomeData.Width := Width ;
+  FSomeData.Height := Height ;
+  FSomeData.Caption := Caption ;
+  MyCurrency := 1000000.90 ;</FONT><FONT COLOR="#0000ff">
+  { Create an object to access the system registry }</FONT>
+  Reg := TRegistry.Create ;
+  try
+    Reg.RootKey := HKEY_CURRENT_USER ;
+    if not Reg.CreateKey(BaseKey) then
+    begin
+      ShowMessage('Failed to make it new entry for "' + BaseKey + '"');
+      exit ;
+    end ;
+    Reg.OpenKey(BaseKey,False) ;</FONT><FONT COLOR="#0000ff">
+    { Write our data to the currency and binary values to the registry }</FONT>
+    Reg.WriteCurrency('Currency Example',MyCurrency) ;
+    Reg.WriteBinaryData('BinaryData Example',FSomeData,SizeOf(TSomeData)) ;
+    </FONT><FONT COLOR="#0000ff">
+    { Now read back the data for currency }</FONT>
+    ListBox1.Items.Add(Format('Currency Example = %m',
+    [Reg.ReadCurrency('Currency Example')])) ;
+    </FONT><FONT COLOR="#0000ff">
+    { Nullify the record to ensure we get back the data }</FONT>
+    FSomeData.Top := -1 ;
+    FSomeData.Left := -1 ;
+    FSomeData.Width := -1 ;
+    FSomeData.Height := -1 ;
+    FSomeData.Caption := '' ;
+    </FONT><FONT COLOR="#0000ff">
+    { Screw a bit with the form, later we restore it with the
+      registry data }</FONT><FONT color="black">
+    Top := Top - 100 ;
+    Left := Left - 100 ;
+    Caption := 'Just demoing...' ;
+    </FONT><FONT COLOR="#0000ff">
+    { Timely pause for reflection }</FONT>
+    Sleep(2000) ;
+    </FONT><FONT COLOR="#0000ff">
+    { Okay let's get the data back }</FONT>
+    Reg.ReadBinaryData('BinaryData Example',
+    FSomeData,SizeOf(TSomeData)) ;
+    </FONT><FONT COLOR="#0000ff">
+    { Show the returned members retrieved from the registry }</FONT>
+    ListBox1.Items.Add('Top = ' + IntToStr(FSomeData.Top)) ;
+    ListBox1.Items.Add('Left = ' + IntToStr(FSomeData.Left)) ;
+    ListBox1.Items.Add('Width = ' + IntToStr(FSomeData.Width)) ;
+    ListBox1.Items.Add('Height = ' + IntToStr(FSomeData.Height)) ;
+    ListBox1.Items.Add('Caption = ' + FSomeData.Caption) ;
+    </FONT><FONT COLOR="#0000ff">
+    { Using registry data restore the form's position }</FONT>
+    Top := FSomeData.Top ;
+    Left := FSomeData.Left ;
+    Caption := FSomeData.Caption ;
+    </FONT><FONT COLOR="#0000ff">
+    { Close the current key }</FONT>
+    Reg.CloseKey ;
+    </FONT><FONT COLOR="#0000ff">
+    { Remove it since we are done with it }</FONT>
+    Reg.DeleteKey(BaseKey) ;
+  finally
+    Reg.CloseKey ;
+    Reg.Free ;
+  end ;
+end;
+</pre></font></p>
+
+<h4>Simple demo for reading and writing to the registry</h4>
+
+<P>The following example shows how to save the position of a form on exit and restoring the forms position next time it is shown. Note, this is a simplified version, it was kept simple to show how to work with the registry rather then clouding the example with code, which is not really relevant to exploring the registry.</P>
+
+<P>Start with a new project with one form, add the code shown below:</P>
+
+<p><font face="Courier New">
+<pre>
+procedure TForm1.FormCreate(Sender: TObject);
+var
+  PriorState:TWindowState ;
+  Reg: TRegistry ;
+begin <FONT COLOR="#0000ff">
+  { Restore form state as saved in the
+  registry on closure of this form }</FONT>
+  Reg := TRegistry.Create ;
+  try
+    if Reg.OpenKey(MyBaseKey,False) then
+    begin
+      if Reg.OpenKey(MyAppSettings,False) then
+      begin
+        with Reg do
+        begin
+          if ValueExists('Top') and ValueExists('Left') 
+          and ValueExists('Width') and ValueExists('Height') 
+          and ValueExists('WindowState') then
+          begin
+            Self.SetBounds(ReadInteger('Left'),
+            ReadInteger('Top'),
+            ReadInteger('Width'),
+            ReadInteger('Height')) ;
+            PriorState := TWindowState( ReadInteger('WindowState') ) ;
+            if PriorState = wsMinimized then
+            begin
+              Visible := True ;
+              Application.Minimize ;
+            end
+            else
+              WindowState := PriorState ;
+          end ;
+        end ;
+      end 
+      else
+        ShowMessage('Failed to open ' + MyAppSettings) ;
+    end 
+    else 
+      ShowMessage('Failed to open ' + MyBaseKey) ;
+  finally
+    Reg.Free ;
+  end ;
+end;
+
+procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  Reg: TRegistry ;
+begin
+  Reg := TRegistry.Create ;
+  try
+    if Reg.OpenKey(MyBaseKey,True) then
+      if Reg.OpenKey(MyAppSettings,True) then
+      begin
+        with Reg do
+        begin<FONT COLOR="#0000ff">
+          { Store the current form settings }</FONT>
+          WriteInteger('Top',Top) ;
+          WriteInteger('Left',Left) ;
+          WriteInteger('Width',Width) ;
+          WriteInteger('Height',Height) ;
+          WriteInteger('WindowState',Ord(WindowState)) ;
+        end ;
+      end ;
+  finally
+    Reg.Free ;
+  end ;
+end;
+</pre></font></p>
+
+<P>The form's Close event opens the key HKEY_CURRENT_USER\JEDI_Registry_Demo if it exists. If the key does not exist it is created. Notice that the second argument to OpenKey is set to True, if it was set to False then the call to OpenKey would fail if the key didn't exist. The first time this code runs it creates the key, if the key gets deleted then it will be recreated.</P>
+
+<P>if Reg.OpenKey(MyBaseKey,True) then</P>
+<P>The line following the above uses the exact same logic for </P>
+<P>HKEY_CURRENT_USER\JEDI_Registry_Demo\FormSettings</P>
+<P>since the second parameter to OpenKey is set to True.</P>
+<P>if Reg.OpenKey(MyAppSettings,True) then
+<P>The next several lines of code check to see if values exist under </P>
+<P>HKEY_CURRENT_USER\JEDI_Registry_Demo\FormSettings</P>
+<P>and if not found are created. If they exist then we move on to the next several lines of code which place current form properties into the values.</P>
+<P>Now when the form is used again, there is code in the Create event which reads back the data we stored in the Close event. Notice that the code in the Create event opens our keys using OpenKey with the second parameter set to False. This means that if the keys do not exists a message is displayed informing us of an error. If the keys do exist we then check to see if the values are found, if they are not an error message is displayed alerting you of a problem. If the values are located then they are retrieved and used to restore the forms position.</P>
+<P>You could take the code presented here and expand upon it, or surf on over to your favorite Delphi web site and find several good components which handle positioning without any coding. The entire purpose of this example is for learning the registry, not building perfect code to position forms. </P>
+
+<h3>Unstable operations</h3>
+
+<P>LoadKey and SaveKey methods of TRegistry provide ways to save a branch of the registry to a binary disk file and later import the information back into the registry. Between trying both methods myself and doing research over the web it is my conclusion that they do not work well. Using them resulted in unusual error messages with small parts my registry locking up until I restarted my computer.</P>
+
+<P>The code below shows how to mess up a computer with Load/SaveKey</P>
+<U><P>Make sure to add the registry unit to the uses clause</u></P>
+
+<p><font face="Courier New">
+<pre>
+const
+  SaveRestoreKey = 'JEDIRegistryDemo' ;
+  SaveRestoreFile = 'JEDI_1' ;
+
+....
+procedure TForm1.LoadMeClick(Sender: TObject);
+var
+  Reg: TRegistry ;
+begin
+  if not FileExists(SaveRestoreFile) then
+  begin
+    ShowMessage('Restore file (' + SaveRestoreFile + ')not found') ;
+    exit ;
+  end ;
+  Reg := TRegistry.Create ;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+    if Reg.LoadKey(SaveRestoreKey, SaveRestoreFile) then
+      ShowMessage('Key has been restored')
+    else
+      ShowMessage('Restorekey failed with the following error' + #13 +
+      SysErrorMessage( GetLastError ) );
+  finally
+    Reg.CloseKey ;
+    Reg.Free ;
+  end ;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+var
+  Reg: TRegistry ;
+begin
+  Reg := TRegistry.Create ;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE ;
+    if not Reg.KeyExists(SaveRestoreKey) then
+    begin
+      ShowMessage('HKEY_LOCAL_MACHINE\' + SaveRestoreKey + 'does not exist') ;
+    end ;
+    if Reg.SaveKey(SaveRestoreKey,SaveRestoreFile) then
+    begin
+      ShowMessage(SaveRestoreKey + ' was saved') ;
+      Application.ProcessMessages ;
+      <I><FONT COLOR="#0000ff">
+      {if Reg.KeyExists(SaveRestoreKey) then
+        if Reg.DeleteKey(SaveRestoreKey) then
+        begin
+          ShowMessage(SaveRestoreKey + ' deleted') ;
+          Button5.Enabled := True ;
+        end 
+        else
+        begin
+          ShowMessage('delete failed with the following error' + #13 +
+          SysErrorMessage( GetLastError ) );
+        end ;}</I></FONT>
+    end 
+    else
+      ShowMessage('SaveKey failed with the following error' + #13 +
+      SysErrorMessage( GetLastError ) );
+  finally
+    Reg.CloseKey ;
+    Reg.Free ;
+  end ;
+  Reg := TRegistry.Create ;
+  try
+    Reg.RootKey := HKEY_LOCAL_MACHINE ;
+    if Reg.KeyExists('JEDIRegistryDemo') then
+      if Reg.DeleteKey('JEDIRegistryDemo') then
+        ListBox1.Items.Add('Worked') ;
+  finally
+    Reg.CloseKey ;
+    Reg.Free ;
+  end ;
+end;
+</font></pre></p>
+
+<p><center>Kevin Gallagher<br>
+July 2000</center></p>
+<hr size=1>
+<A HREF="ftp://ftp.delphi-jedi.org/Voyager/UsingTheRegistry.zip">Download the Article and Demos</a> (122Kb)</P>
+<hr size=1>
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

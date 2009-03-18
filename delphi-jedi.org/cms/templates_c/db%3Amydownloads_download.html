@@ -1,0 +1,68 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-16 16:20:08
+         compiled from db:mydownloads_download.html */ ?>
+<table width='100%' cellspacing='0' class='outer'>
+<tr>
+<td class='even' width=60%' align='left' valign="bottom"><a href='visit.php?cid=<?php echo $this->_tpl_vars['down']['cid']; ?>
+&amp;lid=<?php echo $this->_tpl_vars['down']['id']; ?>
+' target='_blank'><img src="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/images/shots/<?php echo $this->_tpl_vars['down']['logourl']; ?>
+" border='0' alt='<?php echo $this->_tpl_vars['lang_dlnow']; ?>
+' /><b><?php echo $this->_tpl_vars['down']['title']; ?>
+</b></a></td>
+
+<td class='even' align='right' width='40%'><b><?php echo $this->_tpl_vars['lang_version']; ?>
+:</b>&nbsp;<?php echo $this->_tpl_vars['down']['version']; ?>
+ <b><?php echo $this->_tpl_vars['lang_subdate']; ?>
+:</b>&nbsp;&nbsp;<?php echo $this->_tpl_vars['down']['updated']; ?>
+</td>
+  </tr>
+  <tr>
+    <td colspan='2' class='odd' align='left'><?php echo $this->_tpl_vars['down']['adminlink']; ?>
+<b><?php echo $this->_tpl_vars['lang_description']; ?>
+</b><br />
+
+<div style="text-align: justify"><?php echo $this->_tpl_vars['down']['description']; ?>
+</div><br /></td>
+  </tr>
+  <tr>
+    <td colspan='2' class='even' align='left'><img src='images/counter.gif' border='0' align='absmiddle' alt='<?php echo $this->_tpl_vars['down']['lang_dltimes']; ?>
+' />
+&nbsp;<?php echo $this->_tpl_vars['down']['hits']; ?>
+&nbsp;&nbsp;<img src='images/size.gif' border='0' align='absmiddle' alt='<?php echo $this->_tpl_vars['lang_size']; ?>
+' />&nbsp;<?php echo $this->_tpl_vars['down']['size']; ?>
+&nbsp;&nbsp;<img src='images/platform.gif' border='0' align='absmiddle' alt='<?php echo $this->_tpl_vars['lang_platform']; ?>
+' />&nbsp;<?php echo $this->_tpl_vars['down']['platform']; ?>
+&nbsp;&nbsp;<img src='images/home.gif' border='0' align='absmiddle' alt='<?php echo $this->_tpl_vars['lang_homepage']; ?>
+' />&nbsp;<a href="<?php echo $this->_tpl_vars['down']['homepage']; ?>
+" target="_BLANK"><?php echo $this->_tpl_vars['down']['homepage']; ?>
+</a></td>
+  </tr>
+  <tr>
+    <td colspan='2' class='foot' align='center'>
+    <div><b><?php echo $this->_tpl_vars['lang_ratingc']; ?>
+</b> <?php echo $this->_tpl_vars['down']['rating']; ?>
+ (<?php echo $this->_tpl_vars['down']['votes']; ?>
+)</div>
+    <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/ratefile.php?cid=<?php echo $this->_tpl_vars['down']['cid']; ?>
+&amp;lid=<?php echo $this->_tpl_vars['down']['id']; ?>
+"><?php echo $this->_tpl_vars['lang_ratethissite']; ?>
+</a> | <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/modfile.php?lid=<?php echo $this->_tpl_vars['down']['id']; ?>
+"><?php echo $this->_tpl_vars['lang_modify']; ?>
+</a> | <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/brokenfile.php?lid=<?php echo $this->_tpl_vars['down']['id']; ?>
+"><?php echo $this->_tpl_vars['lang_reportbroken']; ?>
+</a> | <a target="_top" href="mailto:?subject=<?php echo $this->_tpl_vars['down']['mail_subject']; ?>
+&amp;body=<?php echo $this->_tpl_vars['down']['mail_body']; ?>
+"><?php echo $this->_tpl_vars['lang_tellafriend']; ?>
+</a> | <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/singlefile.php?cid=<?php echo $this->_tpl_vars['down']['cid']; ?>
+&amp;lid=<?php echo $this->_tpl_vars['down']['id']; ?>
+"><?php echo $this->_tpl_vars['lang_comments']; ?>
+ (<?php echo $this->_tpl_vars['down']['comments']; ?>
+)</a>
+    </td>
+  </tr>
+</table>
+<br /><br />

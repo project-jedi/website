@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Lessons in Good Programming</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Robert Marquardt</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+
+
+
+
+<center>
+<h2>...or How a One-liner Can Bite You</h2>
+</center>
+<P>
+Have a look at this simple function:</font>
+<font face="Courier New" size="3"><pre>
+<b>function</b> MakePercentage(const Step, Max: Longint): Integer;
+<b>begin</b>
+  Result := Round (Step / Max) * 100;
+<b>end</b>;
+</pre></font>
+
+<p>The function has four lines, three bugs, two problems and needs one push up in self documentation.</p>
+
+<P>First try to find the bug which renders the function useless.
+Are you smart enough to find <b>two problems</b> the use of this function can cause?</p>
+
+<blockquote>
+<font color="maroon">
+<p>Please do not read on until you've found the bug.</font> 
+<br>
+Not found yet? <i>Read the Delphi help for Round().</i>
+</p>
+</blockquote>
+<P><b>Bug # 1</b></p>
+The bug should be now obvious. A pair of braces is missing. 
+MakePercentage(49,100) returns not 49 but 0, and MakePercentage(51,100) returns not 51 but 100.</P>
+
+<p><b>Lesson:</b> Testing is ALWAYS needed and real-world values are a must.</p>
+
+<P><b>Bug # 2</b></p>
+
+<p>The second bug is less obvious. The type of the parameters and the type of the function result do not agree. They are only <i>compatible</i>.</P>
+
+<p>You do not call this a bug?  I call it a bug because code should be as portable as possible. If this function is compiled with a Pascal compiler where the size of Longint and Integer is not the same then wrong results may occur.</P>
+
+<p>The correction is to change Integer to Longint. Longint can hold bigger values than Integer and therefore broadens the useability of the function.</P>
+
+<p><b>Lesson:</B> Correcting a bug is not easy and needs careful decisions.</p>
+
+<P><b>Bug # 3</b></p>
+
+<p>Extensive testing will uncover the third bug.  The function is not as accurate as expected. By dividing first and multiplying afterwards, some accuracy is lost. So reverse the operations and enhance the accuracy.
+<blockquote>
+The tradeoff is small: you lose some range in return values.<P>
+</blockquote>
+
+<p><b>Lesson:</b> Sometimes bug fixing fixes one problem and introduces another. You will have to go for the lesser evil.</p>
+
+<P>To find usage problems with the function, you will have to go beyond testing.
+It is not enough to test with real world values. The initial intention for writing the function may blur your vision.</p> 
+
+<p>This function may have been written to drive a progress bar. So testing with MakePercentage(0,100) up to MakePercentage(100,100) is good enough to find the bug and make a progress bar work, but it won't exhibit the problems with extreme or anomalous values.</P>
+
+<p><center><img src="img/percent1.gif"></center></p>
+
+<p>Proving the function with all possible values for the parameters cannot be achieved by testing the obvious. You will have to use your brain. Check the function with extreme values.
+If Step is bigger than Max, MakePercentage will return values bigger than 100. This is ok. The function works beyond the initial intention.</p>
+
+<P><i>Problem # 1</i></p>
+
+<p>Try Max = 0. <i>Hey, a &quot;division by zero&quot; exception occurs!</i></p>
+
+<p>How to solve this? You can write code, but which value to return? MaxInt comes to mind.
+Not a good idea! You hide a problem by using a value which is not quite right. It's only close to the correct but unrepresentable result &quot;infinity&quot;.</p>
+
+<p>The best solution is simply to document the problem.<br>
+The user of the function can then handle the problem himself by catching the exception or ensuring that he never uses Max = 0.</p>
+
+<p>Good programming is not only writing good code. Good documentation is also needed.<br>
+Do I hear &quot;but the problem is not solved&quot; ? You are wrong. The function is now correct because correctness is always defined against a reference. The reference is the documentation.</P>
+
+<p><b>Lesson:</b> Documentation is an integral part of good code and cannot be omitted.</p>
+
+<p><i>Problem # 2</i></p>
+
+<p>The second problem arises from the type of the parameters. It's a signed type.
+MakePercentage(-50,100) returns -50. What to do with that? </P>
+
+<p>Instead of considering the mathematical implications, take a pragmatic approach. Does the user of the function want the sign? If the answer is &quot;maybe&quot;, the solution is not to touch the function.</p>
+
+<p>If the user wants the sign he gets it. Deleting an unwanted sign is easily achieved by applying Abs to the result.</P>
+
+<p>What if you deleted the sign in the function? To restore the sign, the user will have to reimplement the function - rendering your function useless. The user may even be tempted to keep your function and write some strange code to restore the sign.</P>
+
+<p><b>Lesson:</b> Good programming has more to do with people than with code.</p>
+
+<p><b>Code Cleanup --&gt;Self-Documentation</b></p>
+
+The function is now as correct as is reasonably possible. The last change only improves readability. Replace &quot;100&quot; with &quot;100.0&quot;.<br>
+Now it's easy to spot that the calculations are floating-point. Programmers keep forgetting that &quot;/&quot; is floating-point division.</P>
+
+<p>The function is now self documenting. Reading the source helps the programmer to  understand it. This is the link between good programming and Open Source.</p>
+<P>
+
+<p>The corrected function:</p>
+<font face="Courier New">
+<pre><b>function</b> MakePercentage(const Step, Max: Longint): Longint;
+<b>begin</b>
+  Result := Round((Step * 100.0) / Max);
+<b>end</b>;
+</pre></font>
+
+<p>When I sent the first version of this text to Marcel van Brakel (then Code Czar for the Jedi Code Library) as an oversized error report, I hadn't spotted the third error.  Marcel found the bug in minutes.</P>
+
+<p><b>Last lesson:</b> Good programming cannot be done alone. Involve a friend!</P>
+
+<p>If you want to understand more about the process of joint open code development and the benefits of its &quot;many eyes&quot;, read Eric S. Raymond's famous article &quot;<a href="http://www.alamut.com/subj/economics/misc/cathedral.html">The Cathedral and the Bazaar</a>&quot;. Its a must-do, anyway.</p>
+<center><i>-- R.M.</i></center>
+<p><center><img src="img/percent2.gif"></center></p>
+<hr size=1>
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Four Delphi Tools</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; Jack B. Lyle</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<p>Nicole Boivin’s Proposal for a <a href="art_sw_eng.html" style="text-decoration:none;color:#8a2be2;">Project JEDI Software
+Engineering Tool Suite Project</a> got me interested in the tools available for Delphi and in a few odd minutes I have looked around and tried a few out.</p>
+
+<h3>FreeVCS</h3>
+
+<p >This is a Freeware software version control system by Thomas
+Hensle The version numbers are fairly complex, but
+I seem to have server version 1.09 and client (Delphi Add On) version 2.2.1.</p>
+
+<blockquote>
+<p><i>FreeVCS was donated to Project JEDI in 2002 and is actively in development now as <a href="http://jedivcs.sourceforge.net" style="text-decoration:none;color:#8a2be2;"><b>JEDI VCS</b></a> under the administration of Thomas Huber. -- Ed.</i></p>
+</blockquote>
+
+<p>I would put this at the top of my list of must have Delphi
+stuff.<span style="mso-spacerun: yes">  </span>I have been using this product
+since I first read about it in Nicole’s Jedi documents.<span
+style="mso-spacerun: yes">  </span>I have not tried it across the network.<span
+style="mso-spacerun: yes">  </span>It just lives on my personal machine at work
+and at home.<span style="mso-spacerun: yes">  </span>I have also limited my
+experiments to Delphi 5 so far.<span style="mso-spacerun: yes">  </span>FreeVCS
+works great.</p>
+
+<p>I knew what version control software was before I downloaded
+FreeVCS but I had never used any.<span style="mso-spacerun: yes">  </span>And I
+hadn’t gotten a very high opinion of it from my fellows who had been forced to
+use such.<span style="mso-spacerun: yes">  </span>They found the programs to be
+a pain and just checked every file out at the beginning of a project and maybe,
+if someone made them, checked them all back in at the end.<span
+style="mso-spacerun: yes">  </span>Using FreeVCS, I don’t understand what all
+the fuss was about.<span style="mso-spacerun: yes">  </span>This is very easy
+to use and it takes care of some jobs I was doing by hand.</p>
+
+<p>For example, I used to try and keep a little history of the
+modifications to my units up at the top.<span style="mso-spacerun: yes"> 
+</span>I was pretty good about keeping notes in the file I was mostly working
+in, but if I had changes in several files the notes never made it into everyone
+of them.<span style="mso-spacerun: yes">  </span>FreeVCS keeps track of that
+and prompts me when I check the file in.</p>
+
+<p>In the past I have occasionally broken programs while
+working on them.<span style="mso-spacerun: yes">  </span>I have code saved that
+won’t compile and I have no idea what I did to it.<span style="mso-spacerun:
+yes">  </span>Getting interrupted late on Friday afternoon is a great cause of
+this problem.<span style="mso-spacerun: yes">  </span>Since I have been working
+with FreeVCS I haven’t made one of those bone head mistakes.<span
+style="mso-spacerun: yes">  </span>So I can’t prove that FreeVCS would let me
+back out of it gracefully.<span style="mso-spacerun: yes">  </span>However, the
+capability does seem to be there.<span style="mso-spacerun: yes">  </span>I did
+have one little interruption where I wasn’t sure what I had been doing when I
+came back.<span style="mso-spacerun: yes">  </span>The FreeVCS delta display
+made it easy to see where I had been making changes.</p>
+
+<p>Are there any weaknesses?<span style="mso-spacerun: yes"> 
+</span>Well, I like to enter my history comments after I make the changes.<span
+style="mso-spacerun: yes">  </span>FreeVCS seems to insist on displaying the
+dialog box when I check the file out as well as when I check it in.<span
+style="mso-spacerun: yes">  </span>You are supposed to be able to turn that
+off, but I followed the instructions and it still does it.<span
+style="mso-spacerun: yes">  </span>The other little gotcha I have run across is
+that the FreeVCS server is really that, a TCP/IP server even when it runs
+local.<span style="mso-spacerun: yes">  </span>My home computer is on
+RoadRunner so its IP address changes every time the power goes off.<span
+style="mso-spacerun: yes">  </span>So I have to be careful to check the IP
+address when I start the server and cut and paste the current one into the
+connect to Server dialog in Delphi.</p>
+
+<p class=MsoNormal>The web site has a new version showing that includes support
+for C++ Builder as well as Delphi.<span style="mso-spacerun: yes">  </span>The
+site also has a note about using FreeVCS with Delphi 6.<span
+style="mso-spacerun: yes">  </span>I haven’t tried either of those yet.</p>
+
+<h3>YAPP</h3>
+
+<p>Yapp stands for yet another pretty printer, but it doesn’t
+really reformat code for printing.<span style="mso-spacerun: yes">  </span>What
+it does do is convert source code to either rich text format for pasting into
+Word or HTML for pasting into web documents.<span style="mso-spacerun: yes"> 
+</span>Yapp is provided courtesy of John Kaster and you can download
+it from CodeCentral at Borland.</p>
+
+<p>I once wrote my own Pascal pretty print program to convert
+Turbo Pascal code to RTF and I kept it up to date through a couple of versions
+of Delphi and Word.<span style="mso-spacerun: yes">  </span>Mine worked, but
+this works better.<span style="mso-spacerun: yes">  </span>For one thing it
+handles C++ and Java as well as Pascal.<span style="mso-spacerun: yes"> 
+</span>That is one thing I wish all the Borland helpers would do.<span
+style="mso-spacerun: yes">  </span>Borland does sell, and I do use, three
+different language products.<span style="mso-spacerun: yes">  </span>Shouldn’t
+the tools support all three?</p>
+
+<p>Yapp works fine for me.<span style="mso-spacerun: yes"> 
+</span>There is an option to automatically insert the resulting RTF into your
+open Word session.<span style="mso-spacerun: yes">  </span>I have that option
+tuned off because it doesn’t insert, it replaces everything in your open Word
+document.<span style="mso-spacerun: yes">  </span>I lost some good work that
+way.<span style="mso-spacerun: yes">  </span>If the option actually inserted as
+the Word Insert File... command, then I would probably use it.</p>
+
+<p>I do have a couple of wishes for Yapp.<span
+style="mso-spacerun: yes">  </span>First, it doesn’t do Ada.<span
+style="mso-spacerun: yes">  </span>Ok, Borland doesn’t sell an Ada compiler,
+but yes I actually have gotten paid to write Ada code.<span
+style="mso-spacerun: yes">  </span>I currently use the Grasp editor to get
+pretty printed Ada.<span style="mso-spacerun: yes">  </span>Grasp, which is a
+continuing computer science project from Auburn University (<a
+href="http://www.eng.auburn.edu/grasp">http://www.eng.auburn.edu/grasp</a>), is
+an editor that handles Ada, C++, and Java.<span style="mso-spacerun: yes"> 
+</span>It can export RTF but the big deal about Grasp is that it can draw a
+code structure diagram alongside the code in the editor window.<span
+style="mso-spacerun: yes">  </span>The CSD is a great idea and I wish all the
+editors in the world did it.<span style="mso-spacerun: yes">  </span>Naturally
+it would be nice if Yapp did that too.</p>
+
+<h3>CodeRush</h3>
+
+<p>Eagle Software, Inc. (<a
+href="http://www.eagle-software.com/">www.eagle-software.com</a>) sells
+CodeRush as an add on to Delphi that takes the already pretty good Delphi
+editor and gives it even more power.<span style="mso-spacerun: yes"> 
+</span>Maybe too much power.<span style="mso-spacerun: yes">  </span>I have had
+CodeRush 5 standard installed for months now and I suspect I am only using a
+tiny fraction of its true power.</p>
+
+<p>CodeRush does several things I like.<span
+style="mso-spacerun: yes">  </span>First it auto-magically keeps track of the
+lines I have changed in this editing session.<span style="mso-spacerun: yes"> 
+</span>It is sort of like having the FreeVCS diff up all the time.<span
+style="mso-spacerun: yes">  </span>It lets me stick real bookmarks with names
+and cute icons in the code.<span style="mso-spacerun: yes">  </span>Those help
+some in finding my way around.<span style="mso-spacerun: yes">  </span>It lets
+me comment out blocks of code by inserting or removing leading //’s rather than
+using (* *) surrounds.<span style="mso-spacerun: yes">  </span>It keeps track
+of mismatched parentheses.<span style="mso-spacerun: yes">  </span>I like these
+features and can use them.</p>
+
+<p>CodeRush also has a macro language and thousands of
+predefined macros.<span style="mso-spacerun: yes">  </span>Maybe millions of
+predefined macros.<span style="mso-spacerun: yes">  </span>This is where I get
+overwhelmed.<span style="mso-spacerun: yes">  </span>The macros are not set up
+exactly the way I want them.<span style="mso-spacerun: yes">  </span>Too many
+spaces here, the wrong kind of comment marker there.<span style="mso-spacerun:
+yes">  </span>With the book in hand I did manage to define a couple of my own
+macros and edit some of the others.<span style="mso-spacerun: yes">  </span>I
+haven’t had time to edit all the macros I might want to use, and with them not
+edited I don’t use them.<span style="mso-spacerun: yes">  </span>None of this
+is a criticism of CodeRush, it’s just a lot of product.<span
+style="mso-spacerun: yes">  </span>I suspect if I was hacking Delphi full time
+I would like it more.</p>
+
+<p>CodeRush runs fairly well, but it is not as solid as Delphi
+itself.<span style="mso-spacerun: yes">  </span>The popup right mouse menu is
+noticeably slower to pop up with CodeRush installed.<span style="mso-spacerun:
+yes">  </span>I occasionally get odd Interface not supported errors when I
+start Delphi.<span style="mso-spacerun: yes">  </span>The error dialog pops up,
+I click on it, and nothing bad happens.<span style="mso-spacerun: yes"> 
+</span>Sometimes I get protection faults when I stop Delphi and Windows warns
+me it is halting the task, which is fine because I am done anyway.</p>
+
+<p>For all the things I think CodeRush can do that I don’t know
+how to use yet, there is one thing I really wish it would do that it
+can’t.<span style="mso-spacerun: yes">  </span>It can’t check the spelling in
+my comments.<span style="mso-spacerun: yes">  </span>This becomes particularly
+important with Doc4Delphi (see below), so I keep Word up while I’m coding and
+cut and paste comments in and out, sometimes, when I think about it.<span
+style="mso-spacerun: yes">  </span>There are some limitations in Word too.<span
+style="mso-spacerun: yes">  </span>It doesn’t know that ThisIsFourWords or
+This_Is_Four_Words is really four fine words, all of them spelled
+correctly.<span style="mso-spacerun: yes">  </span>It puts the red wiggle under
+the whole thing.</p>
+
+<h3>Doc4Delphi</h3>
+
+<p>This is a Delphi version of JavaDoc provided to the world by
+User Driven Software, Ltd. (<a href="http://www.udsl.com/">www.udsl.com</a>).<span
+style="mso-spacerun: yes">  </span>You can download the Beta test version from
+the CodeCentral at Borland.<span style="mso-spacerun: yes">  </span>I have only
+recently spent some time learning Java so javaDoc was new to me.<span
+style="mso-spacerun: yes">  </span>Oh, what a wonderful idea, I thought, I wonder
+if anyone has built anything like that for Delphi?<span style="mso-spacerun:
+yes">  </span>And here it is.<span style="mso-spacerun: yes">  </span></p>
+
+<p>Doc4Delphi produces HTML documentation by reading your
+source code.<span style="mso-spacerun: yes">  </span>It can get the basic
+structure with no special help from you.<span style="mso-spacerun: yes"> 
+</span>However, if you want real helpful documents you do have to insert HTML
+into comments in the code.<span style="mso-spacerun: yes">  </span>Which of
+course is why I want an editor that spell checks comments.</p>
+
+<p>Doc4Delphi works fairly well.<span style="mso-spacerun:
+yes">  </span>The documents look very much like what javaDoc generates.<span
+style="mso-spacerun: yes">  </span>Maybe it uses the same cascading style
+sheets?<span style="mso-spacerun: yes">  </span>I have managed to break it on
+code with overloaded procedure names.<span style="mso-spacerun: yes"> 
+</span>It doesn’t support the special @ constructs that javaDoc uses, but that
+isn’t a major problem for a first effort.</p>
+
+<p>The interface for Doc4Delphi is rather cryptic although I
+have managed to make it work.<span style="mso-spacerun: yes">  </span>What I
+would prefer is just one menu item in the Delphi IDE that generates (or
+updates) the HTML files for the current project.<span style="mso-spacerun:
+yes">  </span>Of course that would require parsing the project file and walking
+the tree of uses.<span style="mso-spacerun: yes">  </span>Doc4Delphi doesn’t do
+that yet.<span style="mso-spacerun: yes">  </span>It is strictly a one Pascal
+file at a time critter.</p>
+
+<p>One of the weaknesses I noticed in the javaDoc generated
+documents that ship with JBuilder is that they lack the many examples we Delphi
+folks are used to having in our on-line help.<span style="mso-spacerun: yes"> 
+</span>It might be possible to use yapp in conjunction with Doc4Delphi to
+include syntax highlighted examples in your documents.<span
+style="mso-spacerun: yes">  </span>I tried it once and made a mess.<span
+style="mso-spacerun: yes">  </span>What would be really nice would be something
+like an @see construct that points to an example.<span style="mso-spacerun:
+yes">  </span>Then our Delphi classes would quickly outclass the Java classes
+because they would all have examples.</p>
+
+<h3>Conclusion</h3>
+
+<p>So I found four Delphi tools that I think are
+worthwhile.<span style="mso-spacerun: yes">  </span>What else is out
+there?<span style="mso-spacerun: yes">  </span>Does anyone want to add his or
+her discoveries to this list?</p>
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

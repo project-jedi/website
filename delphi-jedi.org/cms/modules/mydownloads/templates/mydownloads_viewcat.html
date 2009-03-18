@@ -1,0 +1,62 @@
+<br /><br />
+
+<p align="center">
+    <a href="<{$xoops_url}>/modules/mydownloads/index.php"><img src="<{$xoops_url}>/modules/mydownloads/images/logo-en.gif" alt="" /></a>
+</p>
+
+<br /><br /><br />
+<div>
+<table width="97%" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td align="left">
+      <table width="100%" cellspacing="1" cellpadding="2" border="0">
+        <tr>
+          <td class="newstitle" height="18"><b><{$category_path}></b></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <table width="90%">
+        <tr><br />
+          <{foreach item=subcat from=$subcategories}>
+            <td align="left"><b><a href="viewcat.php?cid=<{$subcat.id}>"><{$subcat.title}></a></b>&nbsp;(<{$subcat.totallinks}>)<br /><font class="subcategories"><{$subcat.infercategories}></font></td>
+            <{if $subcat.count is div by 4}>
+            </tr><tr>
+            <{/if}>
+          <{/foreach}>
+        </tr>
+      </table>
+      <br />
+      <hr />
+
+      <{if $show_links == true}>
+
+      <{if $show_nav == true}>
+      <div><{$lang_sortby}>&nbsp;&nbsp;<{$lang_title}> (<a href="viewcat.php?cid=<{$category_id}>&amp;orderby=titleA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;orderby=titleD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;<{$lang_date}> (<a href="viewcat.php?cid=<{$category_id}>&amp;orderby=dateA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;orderby=dateD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;<{$lang_rating}> (<a href="viewcat.php?cid=<{$category_id}>&amp;orderby=ratingA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;orderby=ratingD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;<{$lang_popularity}> (<a href="viewcat.php?cid=<{$category_id}>&amp;orderby=hitsA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;orderby=hitsD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)
+      <br /><b><{$lang_cursortedby}></b>
+      </div>
+      <hr />
+      <{/if}>
+
+    </td>
+  </tr>
+</table>
+<table width="100%" cellspacing="0" cellpadding="10" border="0">
+<tr>
+<td width="100%" align="center" valign="top">
+  <!-- Start link loop -->
+  <{section name=i loop=$file}>
+    <{include file="db:mydownloads_download.html" down=$file[i]}>
+  <{/section}>
+  <!-- End link loop -->
+</td></tr>
+</table>
+<{$page_nav}>
+<{else}>
+    </td>
+  </tr>
+</table>
+<{/if}>
+<{include file="db:system_notification_select.html"}>

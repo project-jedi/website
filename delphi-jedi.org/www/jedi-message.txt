@@ -1,0 +1,17 @@
+21-Jan-2003
+
+We lost the hard drive for the server that JEDI is hosted on in December 2002. 
+We are working on rebuilding from backups, etc. and will try to keep you updated 
+here with more news as we have it.
+
+In the meantime, please go to 
+
+   http://projectjedi.sourceforge.net 
+
+for links to project items that are located there or at other external sites.
+
+Ann Lynnworth
+HREF Tools Corp.
+
+Helen Borrie
+Project JEDI Webmaster

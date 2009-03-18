@@ -1,0 +1,79 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:46:33
+         compiled from db:xoopspartners_index.html */ ?>
+<h4>Project JEDI Alliance </h4>
+<p>
+The Project JEDI Alliance is an easy way to to get your project a part of JEDI. We developed some guidelines which we hope will be helpful to any existing Open Source projects that would like to be associated with JEDI <a href="join.php">[Read more]</a>
+ <p>
+</p>
+
+<table cellspacing='0' border='0' width='98%'>
+  <tr>
+    <td width='50%' align='left'><?php echo $this->_tpl_vars['partner_join']; ?>
+</td>
+    <td width='50%' align='left'><?php echo $this->_tpl_vars['pagenav']; ?>
+</td>
+  </tr>
+</table>
+
+<table class='outer' cellspacing='1' width='98%'>
+  <tr>
+    <th width='5%' align='left' nowrap='nowrap'><?php echo $this->_tpl_vars['lang_partner']; ?>
+</th>
+    <th align='left'><?php echo $this->_tpl_vars['lang_desc']; ?>
+</th>
+    <th width='1%' align='left' nowrap='nowrap'><?php echo $this->_tpl_vars['lang_hits']; ?>
+</th>
+  </tr>
+
+<?php if (isset($this->_sections['partner'])) unset($this->_sections['partner']);
+$this->_sections['partner']['name'] = 'partner';
+$this->_sections['partner']['loop'] = is_array($this->_tpl_vars['partners']) ? count($this->_tpl_vars['partners']) : max(0, (int)$this->_tpl_vars['partners']);
+$this->_sections['partner']['show'] = true;
+$this->_sections['partner']['max'] = $this->_sections['partner']['loop'];
+$this->_sections['partner']['step'] = 1;
+$this->_sections['partner']['start'] = $this->_sections['partner']['step'] > 0 ? 0 : $this->_sections['partner']['loop']-1;
+if ($this->_sections['partner']['show']) {
+    $this->_sections['partner']['total'] = $this->_sections['partner']['loop'];
+    if ($this->_sections['partner']['total'] == 0)
+        $this->_sections['partner']['show'] = false;
+} else
+    $this->_sections['partner']['total'] = 0;
+if ($this->_sections['partner']['show']):
+
+            for ($this->_sections['partner']['index'] = $this->_sections['partner']['start'], $this->_sections['partner']['iteration'] = 1;
+                 $this->_sections['partner']['iteration'] <= $this->_sections['partner']['total'];
+                 $this->_sections['partner']['index'] += $this->_sections['partner']['step'], $this->_sections['partner']['iteration']++):
+$this->_sections['partner']['rownum'] = $this->_sections['partner']['iteration'];
+$this->_sections['partner']['index_prev'] = $this->_sections['partner']['index'] - $this->_sections['partner']['step'];
+$this->_sections['partner']['index_next'] = $this->_sections['partner']['index'] + $this->_sections['partner']['step'];
+$this->_sections['partner']['first']      = ($this->_sections['partner']['iteration'] == 1);
+$this->_sections['partner']['last']       = ($this->_sections['partner']['iteration'] == $this->_sections['partner']['total']);
+?>
+  <tr>
+    <td class='even' width='5%' valign='middle' align='center'><?php echo $this->_tpl_vars['partners'][$this->_sections['partner']['index']]['image']; ?>
+</td>
+    <td class='odd' align='left' valign='top'><b><?php echo $this->_tpl_vars['partners'][$this->_sections['partner']['index']]['title']; ?>
+</b> <br /><?php echo $this->_tpl_vars['partners'][$this->_sections['partner']['index']]['description']; ?>
+<?php echo $this->_tpl_vars['partners'][$this->_sections['partner']['index']]['admin_option']; ?>
+</td>
+    <td width='1%' valign='middle' align='center' class='even'><?php echo $this->_tpl_vars['partners'][$this->_sections['partner']['index']]['hits']; ?>
+</td>
+  </tr>
+<?php endfor; else: ?>
+
+  <tr>
+    <td class='even' valign='middle' align='center' colspan='3'><?php echo $this->_tpl_vars['lang_no_partners']; ?>
+</td>
+  </tr>
+<?php endif; ?>
+
+</table>
+
+<table cellspacing='0' border='0' width='98%'>
+  <tr>
+    <td width='50%' align='left'><?php echo $this->_tpl_vars['partner_join']; ?>
+</td>
+    <td width='50%' align='left'><?php echo $this->_tpl_vars['pagenav']; ?>
+</td>
+  </tr>
+</table>

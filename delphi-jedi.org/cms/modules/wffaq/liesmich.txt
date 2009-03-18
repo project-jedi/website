@@ -1,0 +1,29 @@
+/* 
+* $Id: Readme.txt v 1.0 12 July 2003 Catwolf Exp $
+* Module: WF-FAQ
+* Version: v1.00
+* Release Date: 12 July 2003
+* Author: Catzwolf
+* Translated: frankblack - frankblack@01019freenet.de
+* Licence: GNU
+*/
+
+-------------
+Einführung:
+-------------
+
+Hi,
+
+Danke dass ihr euch die Zeit genommen habt WF-FAQ herunterzuladen und auszuprobieren. Ich hoffe ihr habt Spass bei der Benutzung dieses Moduls.
+
+WF-FAQ ist ein Frage-Antwort-Modul (FAQ) in dem oft gestellte Fragen beantwortet werden können.
+
+WF-FAQ ist ein echtes Xoops-Modul im Vergleich zu seinem Vorgänger 'FAQ Manager'.  
+
+Fast der komplette Code der Vorgängerversion wurde ausgetauscht und das Modul nutzt jetzt viele der Xoops Core Funktionen.
+
+--------------
+Installation
+--------------
+
+Das Modul wird wie jedes andere Modul in den modules-Ordner kopiert und dann in der Moduladministration installiert. Fertig!! Die Benutzung dieses Moduls ist selbsterklärend oder wird durch diverse Meldungen/Hilfetexte unterstützt

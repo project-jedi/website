@@ -1,0 +1,46 @@
+
+Database Description:
+
+dms_objects:
+
+obj_id bigint(14) unsigned NOT NULL auto_increment
+    Primary ID of each object.
+ptr_obj_id bigint(14) unsigned NOT NULL default '0'
+    Pointer to the obj_id, if this object is a link or object permission as set by obj_type (below).
+obj_type tinyint(2) unsigned NOT NULL default '0'
+    Type of object, as follows:
+	  0  file
+	  1  folder
+	  2  empty inbox
+	  3  full inbox
+	  4  link to an object
+obj_name varchar(255) NOT NULL default ''
+    Displayed name of the object
+obj_status tinyint(2) unsigned NOT NULL default '0'
+    Status of object, as follows:
+	  0  normal
+	  1  checked-out
+	  2  deleted
+obj_owner bigint(14) NOT NULL default '0'
+    Object ID of object (usually a folder) that this object resides under.
+	Objects in the root folder have an object_owner of 0.
+obj_checked_out_user_id bigint(14) NOT NULL default '0'
+    User ID of user that has checked the object out for editing.
+user_id bigint(14) unsigned NOT NULL default '1'
+group_id bigint(14) unsigned NOT NULL default '0'
+user_perms tinyint(2) NOT NULL default '3'
+	0  None
+	1  Browse
+	2  Read Only
+	3  Read/Write
+	4  Owner
+	99 Deny
+group_perms tinyint (2) NOT NULL default '3'
+	See user_perms.
+everyone_perms tinyint (2) NOT NULL default '0'
+	See user_perms.
+current_version_row_id bigint(14) unsigned NOT NULL default '0'
+    The row_id in the dms_object versions table of the current version of this object.
+
+
+

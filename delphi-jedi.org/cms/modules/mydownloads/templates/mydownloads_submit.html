@@ -1,0 +1,82 @@
+<br /><br />
+
+<p align="center">
+    <a href="<{$xoops_url}>/modules/mydownloads/index.php"><img src="<{$xoops_url}>/modules/mydownloads/images/logo-en.gif" alt="" /></a>
+</p>
+
+<br />
+
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+  <tr>
+    <td>
+        <ul>
+            <li><{$lang_submitonce}></li>
+            <li><{$lang_allpending}></li>
+            <li><{$lang_dontabuse}></li>
+            <li><{$lang_wetakeshot}></li>
+        </ul><br />
+    <form action="submit.php" method="post">
+        <table class ="outer" width="80%">
+          <tr> 
+            <td class="itemHead" align="left" nowrap colspan="2"><b><{$lang_submitcath}></b> 
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left" nowrap><b><{$lang_sitetitle}></b></td>
+            <td class="even"> 
+              <input type="text" name="title" size="50" maxlength="100" />
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left" nowrap><b><{$lang_siteurl}></b></td>
+            <td class="odd" > 
+              <input type="text" name="url" size="50" maxlength="250" value="http://" />
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left" nowrap><b><{$lang_category}></b></td>
+            <td class="even"><{$category_selbox}></td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><{$lang_homepage}></b></td>
+            <td class="odd" > 
+              <input type="text" name="homepage" size="50" maxlength="100" value="<{$file.homepage}>">
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><{$lang_version}></b></td>
+            <td class="even"> 
+              <input type="text" name="version" size="10" maxlength="20" value="<{$file.version}>">
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><{$lang_size}></b></td>
+            <td class="odd"> 
+              <input type="text" name="size" size="10" maxlength="20" value="<{$file.size}>">
+              <{$lang_bytes}></td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><{$lang_platform}></b></td>
+            <td class="even"> 
+              <input type="text" name="platform" size="50" maxlength="50" value="<{$file.plataform}>">
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left" valign="top" nowrap><b><{$lang_description}></b></td>
+            <td class="odd"><{$xoops_codes}><{$xoops_smilies}></td>
+          </tr>
+          <tr>
+            <td class="head"><b><{$lang_options}></b></td>
+            <td class="even">
+            <{if $notify_show}>
+              <input type="checkbox" name="notify" value="1"><{$lang_notify}></input>
+            <{/if}>
+            </td>
+          </tr>
+        </table>
+      <br />
+      <div style="text-align: center;"><input type="submit" name="submit" class="button" value="<{$lang_submit}>" />&nbsp;<input type="button" value="<{$lang_cancel}>" onclick="javascript:history.go(-1)" /></div>
+    </form>
+  </td>
+</tr>
+</table>

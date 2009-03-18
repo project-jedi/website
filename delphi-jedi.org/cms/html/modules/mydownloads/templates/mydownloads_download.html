@@ -1,0 +1,30 @@
+<table width='100%' cellspacing='0' class='outer'>
+  <tr>
+    <td class="head" colspan='2' align='left' height="18"><{$lang_category}> <{$down.category}></td>
+  </tr>
+  <tr>
+    <td class='even' width='65%' align='left' valign="bottom"><a href='visit.php?cid=<{$down.cid}>&amp;lid=<{$down.id}>' target='_blank'><img src='images/download.gif' border='0' alt='<{$lang_dlnow}>' /><b><{$down.title}></b></a></td>
+    <td class='even' align='right' width='35%'><b><{$lang_version}>:</b>&nbsp;<{$down.version}><br /><b><{$lang_subdate}>:</b>&nbsp;&nbsp;<{$down.updated}></td>
+  </tr>
+  <tr>
+    <td colspan='2' class='odd' align='left'><{$down.adminlink}><b><{$lang_description}></b><br />
+
+<{if $down.logourl != ""}>
+   <a href="<{$xoops_url}>/modules/mydownloads/visit.php?cid=<{$down.cid}>&amp;lid=<{$down.id}>" target="_blank"><img src="<{$xoops_url}>/modules/mydownloads/images/shots/<{$down.logourl}>" width="<{$shotwidth}>" alt=""  align="right" vspace="3" hspace="7"/></a>
+<{/if}>
+
+<div style="text-align: justify"><{$down.description}></div><br /></td>
+  </tr>
+  <tr>
+    <td colspan='2' class='even' align='left'><img src='images/counter.gif' border='0' align='absmiddle' alt='<{$down.lang_dltimes}>' />
+&nbsp;<{$down.hits}>&nbsp;&nbsp;<img src='images/size.gif' border='0' align='absmiddle' alt='<{$lang_size}>' />&nbsp;<{$down.size}>&nbsp;&nbsp;<img src='images/platform.gif' border='0' align='absmiddle' alt='<{$lang_platform}>' />&nbsp;<{$down.platform}>&nbsp;&nbsp;<img src='images/home.gif' border='0' align='absmiddle' alt='<{$lang_homepage}>' />&nbsp;<a href="<{$down.homepage}>" target="_BLANK"><{$down.homepage}></a></td>
+  </tr>
+  <tr>
+    <td colspan='2' class='foot' align='center'>
+    <div><b><{$lang_ratingc}></b> <{$down.rating}> (<{$down.votes}>)</div>
+    <a href="<{$xoops_url}>/modules/mydownloads/ratefile.php?cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$lang_ratethissite}></a> | <a href="<{$xoops_url}>/modules/mydownloads/modfile.php?lid=<{$down.id}>"><{$lang_modify}></a> | <a href="<{$xoops_url}>/modules/mydownloads/brokenfile.php?lid=<{$down.id}>"><{$lang_reportbroken}></a> | <a target="_top" href="mailto:?subject=<{$down.mail_subject}>&amp;body=<{$down.mail_body}>"><{$lang_tellafriend}></a> | <a href="<{$xoops_url}>/modules/mydownloads/singlefile.php?cid=<{$down.cid}>&amp;lid=<{$down.id}>"><{$lang_comments}> (<{$down.comments}>)</a>
+    </td>
+  </tr>
+</table>
+<br /><br />
+

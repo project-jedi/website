@@ -1,0 +1,89 @@
+<h1>-Macros</h1>
+//mcImgDir=http://www.sonic.net/~hrefmgr/JEDI/img/
+mcImgDir=/img/
+//mcImgDir=http://files.project-jedi.org/img/
+mcImg_Dir=/jedi_img/
+MailCommentsTo=%=MAILTO|webmaster@delphi-jedi.org?subject=JEDI WEB PAGE REPORT|<FONT COLOR="#0000FF" SIZE="-1"><U>Webmaster</U></FONT>=%
+ClearPixel=<IMG SRC="%=ImgDir=%1.gif" WIDTH=1 HEIGHT=1>
+ImgBtnNew=<IMG HEIGHT=14 WIDTH=31 SRC="%=mcImgDir=%btn_new.gif" VSPACE=0 HSPACE=0 ALIGN="TOP" %=mcBorder=% ALT="btn_new">
+ImgJediNow=<IMG HEIGHT=31 WIDTH=116 SRC="%=mcImgDir=%btn_jedinow.gif" %=mcBorder=% ALT="JM1">
+MailSuggestionsTo=%=MAILTO|suggestionbox@delphi-jedi.org|<B>Alan Moore</B>=%
+mcBorder=%=IF|bDebugJedi|BORDER=1||BORDER=0=%
+mcFTPRoot=ftp://delphi-jedi.org/
+mcJediLogoLeft=<IMG HEIGHT="134" WIDTH="232" SRC="%=mcImgDir=%LogoSubs.GIF" VSPACE=0 HSPACE=0 %=mcBorder=%>
+mcJediLogoSmall=<IMG HEIGHT="46" WIDTH="239" SRC="%=mcImgDir=%jedi-small.gif" vspace=0 hspace=0 %=mcBorder=%> 
+miFont=<FONT SIZE="-1" COLOR="#FFFFFF">
+mivFont=<FONT SIZE="-1">
+mivhFont=<FONT SIZE="-1" COLOR="#000099">
+mcBegin=<table><tr><td width=239 valign=middle>%=mcJediLogoSmall=%</td><td align=center valign=middle><font face="Verdana" size=4 color="gray">&nbsp;&nbsp;<b>
+mcEnd=</b></td></tr></table>
+
+//mi=Menu item
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>-Chunk:chPageHeader</h1>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<META NAME="Generator" CONTENT="%=Version=%">
+%=waIncCounter.Execute|JEDIGLOBALCOUNTER=%
+%=waIncCounter.Execute|%=PageID=%=%
+%=waIncCounter.Execute|JEDISECTION_%=APPDEFAULT.SECTION=%=%
+<TITLE>%=PAGEDESC=%</TITLE>
+%=MATCH|%=PageDefault.Layout=%~1|%=chJediHeader=%||%=chJediHeader=%=%
+
+<h1>-Chunk:chPageFooter</h1>
+%=MATCH|%=PageDefault.Layout=%~=1|%=chJediFooter=%||%=chJediFooter=%=%
+<BR>
+<CENTER>
+<FONT FONT="Arial" SIZE="-1">
+%=HREF|developers.href.com/|Find software, books and training materials
+ on developers.href.com=%</FONT>
+ </BODY></CENTER>
+%=IF|_bDebugPassOK|%=IF|bDebugJedi|<HR>%=chSystemInfo=%<HR>%=TimeSoFar=%=%=%
+</HTML>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<h1>-Chunk:chContactNewsDesk</h1>
+<A HREF=mailto:webmaster@delphi-jedi.org><B><FONT COLOR="#0099CC" SIZE="-1">Contact Newsdesk</FONT></B></A>
+
+<h1>-Page:InvalidPage=,,,Invalid page</h1>
+<B>We are sorry, but this page couldn't be found. If you believe this is a problem,<BR>
+please contact %=MailCommentsTo=%.</B><BR>
+<BR>
+%=JUMPBACK|Go to previous page=%<BR>
+%=GetPageIDFromQueryStringExecute.Execute=%
+
+<h1>-Page:DoRefresh=,,,Refresh</h1>
+%=waRefresh.Execute=%
+//%=htWebApp.Refresh=%
+
+<h1>-Chunk:chEnterRefreshPwd</h1>
+Please enter refresh password :
+%=INPUTFORM|DoRefresh=%
+<INPUT TYPE="PASSWORD" NAME="RefreshPwd">
+%=INPUTSUBMIT|,Refresh=%
+%=INPUTFORM|Close=%
+
+<h1>-Page:DebugJedi=,,,Debug Jedi</h1>
+The debug state is %=IF|bDebugJedi|ON||OFF=%<BR>
+%=JUMP|DebugJediChange|Click here to change debug status=%
+
+<h1>-Page:DebugJediChange=,,,</h1>
+%=IFNOT|_bDebugPassOK|
+%=MATCH|%=AppDefault.DebugPass=%~DebugPass|%=CHECK|_bDebugPassOK=%=%
+=%
+
+%=IF|_bDebugPassOK|
+%=TOGGLE|bDebugJedi=%
+%=PAGE|DebugJedi=%
+||%=chGetDebugPass=%=%
+
+<h1>-Chunk:chGetDebugPass=,,,</h1>
+Please enter the debug password :
+%=INPUTFORM|DebugJediChange=%
+<INPUT TYPE="PASSWORD" NAME="DebugPass">
+%=INPUTSUBMIT|,Debug=%
+%=INPUTFORM|Close=%

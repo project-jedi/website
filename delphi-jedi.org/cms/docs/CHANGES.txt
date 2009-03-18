@@ -1,0 +1,133 @@
+XOOPS v2 Changelog
+============================
+
+10/16/2003: Version 2.0.5a
+===============================
+- Fixed a typo in insta/install_tpl.php (onokazu)
+
+
+10/8/2003: Version 2.0.5
+===============================
+- Fixed template files not being updated even when the 'allow update from themes directory' option was enabled in preferences
+- Fixed RSS channel title being cutoff at special characters
+- Minor bug fix in pagenav.php
+- Fixed blocks disappearing from the block admin page on certain occasion
+- Additional fixes to work with register_globals off
+- Fixed problem with XoopsCode Img button not working on certain occasion
+- Added missing SQL query in kernel/avatar.php
+- Fixed problem with the newbb module where users could post without a thread title on certain occasion
+- Fixed problem in banner admin page where banner edit form not being displayed on certain occasion
+- Fixed group selection option in the blocks admin page not being selected on certain occasion
+- Fixed poll option textbox forms not displaying the correct values
+- Fixed show all link in user profile page not working in 2.0.5RC
+- Additional phrases in language/english/global.php(_NOTITLE), language/english/search.php(_SR_IGNOREDWORDS), install/language/english/install.php(_INSTALL_L128, _INSTALL_L200)
+- Added check in install/index.php to read $HTTP_ACCEPT_LANGUAGE on initial load
+
+
+9/30/2003: Version 2.0.5 RC
+===============================
+- Fixed email checking bug mentioned in http://www.xoops.org/modules/newbb/viewtopic.php?topic_id=12288&forum=2 (mvandam)
+- Fixed a number of bugs in blocks admin page (onokazu)
+- More usability fix in blocks admin page (onokazu)
+- Fixed forum topic links to correctly use the # feature in url (onokazu)
+- Fixed password checking bug mentioned in http://www.xoops.org/modules/newbb/viewtopic.php?topic_id=12301&post_id=49369&order=0&viewmode=flat&pid=49203&forum=21#forumpost49369
+- Fixed database connection error when creating database during install (onokazu)
+- Fixed mb_output_handler causing problems in backend.php/image.php/downloader (onokazu)
+- Fixed search feature to use GET requests for prev/next/showall links (onokazu)
+- Register_globals related fix in /include/comment_post.php (contrib by gstarrett)
+- Added $xoopsUserIsAdmin global variable (onokazu)
+- Added xoops_getLinkedUnameById function to /include/functions.php (Catzwolf)
+- Fixed invalid Smarty tags in /modules/system/templates/system_siteclosed.html, /modules/system/templates/system_redirect.html, /modules/system/templates/system_imagemanager2.html (onokazu)
+
+
+9/19/2003: Version 2.0.4
+===============================
+- XOOPS_CACHE_PATH, XOOPS_UPLOAD_PATH, XOOPS_THEME_PATH", XOOPS_COMPILE_PATH, XOOPS_THEME_URL, XOOPS_UPLOAD_URL are now set in include/common.php (onokazu)
+- Added [siteurl][/siteurl] tag to XoopsCode (mvandam)
+- Fixed a typo in class/uploader.php (onokazu)
+- Fixed some redirect problems after login (onokazu)
+- registre_globals fix in include/comment_view.php (onokazu)
+- Xoops.org news is disabled by default in the admin section (onokazu)
+- Added a new error handler class (class/errorhandler.php) (mvandam)
+- Fixed XoopsGroupPermHandler returning duplicate permissions (onokazu)
+- Fixed block-disappearing problem in blocks admin (onokazu)
+- Fixed typo in kernel/notification.php (mvandam)
+- Added XoopsGuestUser class in kernel/user.php (onokazu)
+- Fixed newbb module to correctly use the # feature in URL (onokazu)
+- Improved usability in blocks admin section
+- Reduced number of users to display in group/edituser page to max 200 users (onokazu)
+- Fixed bug where admins could add users with a existing username (onokazu)
+- Added files for module developers to easily add group permisson feature (modules/system/groupperm.php, class/xoopsform/groupperm.php) (onokazu)
+- Fixed typo in register.php (onokazu)
+
+
+6/17/2003: Version 2.0.3
+===============================
+- fixed CSS related bug in global search page
+- register_globals bug fix in comments
+- Smarty updated to 2.5.0
+- fixed typo in kernel/object.php
+- fixed group permission bug
+- fixed bug where image categories were deleted after group permission update
+- fixed bug where user votes could not be deleted in the mylinks module
+- fixed some language typos
+- changed XoopsGroupPermHandler::getItemIds to accept an array fot the second parameter (gperm_groupid), which was required in certain places..
+- removed avatar image files
+
+
+4/25/2003: Version 2.0.2
+===============================
+- security fix to prevent malicious cross site scripting attacks (onokazu)
+- fixed character encoding problem for some languages when using the mailer class (onokazu)
+- fixed some major bugs in the xoopsheadline module (onokazu)
+- fixed some cookie related problems in the forums module (mvandam)
+
+
+4/18/2003: Version 2.0.1
+===============================
+- fixed bug where notification feature could not be turned on
+- fixed character encoding problem for some languages when using the mailer class (onokazu)
+- fixed the theme selection block to work again
+- fixed typo in kernel/module.php
+- fixed incorrect table name in xoops_version.php of the new headline module
+- changed max limit size of some columns in the configoption table
+- fixed image manager bug when using db store method
+- xoops.org can now be disabled by adding nonews=1
+
+
+4/16/2003: Version 2.0.0
+===============================
+- xoopsheadlines module replaced with xoopsheadline module to fix character encoding problems
+- numerous bug fixes
+
+
+3/19/2003: Version 2.0.0 RC3
+===============================
+- a major change in the handling of theme files, the detail of which you can read in this [url=http://www.xoops.org/modules/news/article.php?storyid=677]article[/url] (onokazu)
+- a new global notification feature that can easily be incorporated into modules (that use Smarty) by only modifying xoops_version.php and template files (mvandam)
+- SMTP support using phpMailer (bunny)
+- group permission tables merged into one table (onokazu)
+- code refactoring
+
+
+2/9/2003: Version 2.0.0 RC2
+===============================
+A bug fix release..
+- avatar upload bug
+- themeset image upload bug
+- register_globals fix
+- recommend us block error
+- error message displayed upon submit of news article
+- page navigation bug in some modules
+- blank page bug on some servers
+- SQL displayed in blocks admin
+
+
+1/31/2003: Version 2.0.0 RC1
+===============================
+The first public release of 2.0 series.
+For new features that have been added from 1.3.x, please refer to 
+the articles listed below:
+http://www.xoops.org/modules/news/article.php?storyid=486
+http://www.xoops.org/modules/news/article.php?storyid=549
+http://www.xoops.org/modules/xoopsdocs/index.php?cat_id=6

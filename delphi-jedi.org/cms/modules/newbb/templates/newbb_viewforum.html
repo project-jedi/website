@@ -1,0 +1,58 @@
+<!-- start module contents -->
+<table border="0" width="100%" cellpadding="5" align="center">
+  <tr>
+    <td align="left"><img src="<{$forum_image_folder}>" alt="/" />&nbsp;&nbsp;<a href="<{$xoops_url}>/modules/newbb/index.php"><{$forum_index_title}></a><br />&nbsp;&nbsp;&nbsp;<img src="<{$forum_image_folder}>" alt="/" />&nbsp;&nbsp;<b><{$forum_name}></b><br />(<{$lang_moderatedby}>:<{$forum_moderators}>)</td>
+    <td align="right"><{$forum_post_or_register}></td>
+  </tr>
+</table>
+
+<table align="center" border="0" width="100%">
+  <tr>
+    <td align="right"><{$forum_pagenav}></td>
+  </tr>
+</table>
+
+<!-- start forum main table -->
+<form action="viewforum.php" method="get">
+<table class="outer" cellspacing="1">
+  <tr>
+    <th colspan="7"> <{$forum_name}></th>
+  </tr>
+  <tr class="head" align="left">
+    <td width="2%">&nbsp;</td>
+    <td width="2%">&nbsp;</td>
+    <td>&nbsp;<b><a href="<{$h_topic_link}>"><{$lang_topic}></a></b></td>
+    <td width="9%" align="center" nowrap="nowrap"><b><a href="<{$h_reply_link}>"><{$lang_replies}></a></b></td>
+    <td width="20%" align="center" nowrap="nowrap"><b><a href="<{$h_poster_link}>"><{$lang_poster}></a></b></td>
+    <td width="8%" align="center" nowrap="nowrap"><b><a href="<{$h_views_link}>"><{$lang_views}></a></b></td>
+    <td width="15%" align="center" nowrap="nowrap"><b><a href="<{$h_date_link}>"><{$lang_date}></a></b></td>
+  </tr>
+  <!-- start forum topic -->
+  <{foreach item=topic from=$topics}>
+  <tr class="<{cycle values="even,odd}>">
+    <td align="center"><img src="<{$topic.topic_folder}>" alt="/" /></td>
+    <td align="center"><{$topic.topic_icon}></td>
+    <td>&nbsp;<a href="<{$topic.topic_link}>"><{$topic.topic_title}></a><{$topic.topic_page_jump}></td>
+    <td align="center" valign="middle"><{$topic.topic_replies}></td>
+	<td align="center" valign="middle"><{$topic.topic_poster}></td>
+    <td align="center" valign="middle"><{$topic.topic_views}></td>
+	<td align="right" valign="middle"><{$topic.topic_last_posttime}><br /><{$lang_by}> <{$topic.topic_last_poster}></td>
+  </tr>
+  <{/foreach}>
+  <!-- end forum topic -->
+  <tr class="foot">
+    <td colspan="7" align="center">
+    <b><{$lang_sortby}></b> <{$forum_selection_sort}> <{$forum_selection_order}> <{$forum_selection_since}> <input type="hidden" name="forum" value="<{$forum_id}>" /><input type="submit" name="refresh" value="<{$lang_go}>" />
+    </td>
+  </tr>
+</table>
+<!-- end forum main table -->
+
+<table align="center" border="0" width="100%">
+  <tr>
+    <td valign="top"><img src="<{$img_newposts}>" alt="/" /> = <{$lang_newposts}> (<img src="<{$img_hotnewposts}>" alt="/" /> = <{$lang_hotnewposts}>)<br /><img src="<{$img_folder}>" alt="/" /> = <{$lang_nonewposts}> (<img src="<{$img_hotfolder}>" alt="/" /> = <{$lang_hotnonewposts}>)<br /><img src="<{$img_locked}>" alt="/" /> = <{$lang_topiclocked}><br /><img src="<{$img_sticky}>" alt="/" /> = <{$lang_topicsticky}></td>
+    <td align="right"><{$forum_pagenav}><br /><{$forum_jumpbox}></td>
+  </tr>
+</table>
+<{include file='db:system_notification_select.html'}>
+<!-- end module contents -->

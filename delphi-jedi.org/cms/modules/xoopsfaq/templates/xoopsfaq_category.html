@@ -1,0 +1,58 @@
+<h4 style="text-align:left;"><{$lang_faq}></h4>
+<a id="top" name="top"><a href="index.php"><{$lang_main}></a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;<b><{$category_name}></b><br /><br />
+<table width="100%" class="outer" cellspacing="1">
+  <tr>
+    <th colspan="2"><{$lang_toc}></th>
+  </tr>
+  <tr>
+    <td colspan="2" class="even">
+      <ul style="list-style-image:url(images/question.gif);">
+
+      <!-- start question loop -->
+      <{foreach item=question from=$questions}>
+
+        <li>&nbsp;<a href="#q<{$question.id}>"><{$question.title}></a></li>
+
+      <{/foreach}>
+      <!-- end question loop -->
+
+      </ul>
+    </td>
+  </tr>
+</table>
+<br /><br />
+<table width="100%" class="outer" cellspacing="1">
+
+<!-- start question and answer loop -->
+<{foreach item=question from=$questions}>
+
+  <tr>
+    <th><a id="q<{$question.id}>" name="q<{$question.id}>"></a><{$question.title}></th>
+  </tr>
+  <tr>
+    <td class="even"><{$question.answer}><div style="text-align: right"><a href="#top"><{$lang_backtotop}></a></div></td>
+  </tr>
+
+<{/foreach}>
+<!-- end question and answer loop -->
+
+</table>
+<br /><br />
+<div style="text-align:center;"><b>[ <a href="index.php"><{$lang_backtoindex}></a> ]</b></div>
+
+<div style="text-align:center; padding: 3px; margin:3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>

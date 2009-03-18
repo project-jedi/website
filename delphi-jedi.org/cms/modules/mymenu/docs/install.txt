@@ -1,0 +1,42 @@
+######################################################################################
+# myMenu 1.2 für exoops
+# ====================
+#
+# Copyright (c) 2003 Marcel Widmer (m.widmer@coaching-forum.net)
+# http://www.coaching-forum.net
+#
+// modified for e-xoops                                                      //
+// http://www.e-xoops.de                                                     //
+#
+######################################################################################
+
+MODULE INSTALLATION
+-------------------
+- Unzip the package in the "modules" folder.
+- Go to the exoops administration and do the following:
+  - Install the myMenu module
+  - go to the block administration and make myMenu visible
+  - modify your user groups to make myMenu available to ALL users
+  - go to the myMenu configuration menu and add/modify/delete menu items as you want!
+- That's all folks!
+
+QUESTIONS ?
+-----------
+For feed back, bugs report, please contact me by eMail.
+eMail -> m.widmer@coaching-forum.net
+
+Marcel
+
+
+Modul Installation
+------------------
+- Das komplette Paket "unzip"en
+- Kopiere es komplett in das Verzeichnis /modules
+- Installiere es im Adminmenü
+- Gehe in die Moduladministration, mache es "sichtbar"
+- vergebe die Gruppenrechte
+- gehe in den MyMenu Konfigurator und füge Einträge hinzu, modefiziere oder lösche Einträge.
+
+Noch Fragen?
+------------
+http://www.e-xoops.de 

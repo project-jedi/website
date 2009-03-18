@@ -1,0 +1,72 @@
+
+<table border="0"  width="90%" cellspacing="1" cellpadding="1" align="center">
+  <tr valign="middle"> 
+    <td align="left" >
+      <div align="center"><img src="images/logo.gif" alt="WF-FAQ" border="0"></div>
+    </td>
+  </tr>
+  <tr> 
+    <td align="left" class="title" height="20">&nbsp;</td>
+  </tr>
+  
+  <tr> 
+    <td align="left"><div align="center"><H4><{$lang_articleheading}></H4></div></td>
+  </tr>
+  <tr> 
+    <td align="left"><div align="center"><H4><{$lang_topicsindex}></H4></div></td>
+  </tr>
+  <tr> 
+    <td align="left"><div align="left"><{$category.catjump}></div></td>
+  </tr>
+</table>
+<table border="0" width="90%" cellspacing="1" cellpadding="3" align="center">
+  <tr> 
+    <td align="left" valign="middle" colspan="5">
+      <div><{$category.description}><br>
+        <br>
+      </div>
+    </td>
+  </tr>
+  <tr> 
+    <td align="left" class="itemHead" width='23%'><b><{$lang_question}></b></td>
+    <td align="left" class="itemHead" width='25%'><b><{$lang_summary}></b></td>
+    <td align="left" class="itemHead" width="17%"> 
+      <div align="center"><b><{$lang_author}></b></div>
+    </td>
+    <td align="left" class="itemHead" width="19%" > 
+      <div align="center"><b><{$lang_submitted}></b></div>
+    </td>
+    <td align="left" class="itemHead" width="5%"> 
+      <div align="center"><b><{$lang_hits}></b></div>
+    </td>
+  </tr>
+  <!-- Start topic loop -->
+  <{foreach item=topics from=$topics}> 
+  <tr valign="top"> 
+    <td class="head" align="left"><a href="index.php?op=view&t=<{$topics.id}>"><b><{$topics.question}></b></a></td>
+    <td class="even" align="left"><{$topics.summary}></td>
+    <td class="even" align="left"> 
+      <div align="center"><{$topics.poster}></div>
+    </td>
+    <td class="even" align="left"> 
+      <div align="center"><{$topics.datesub}></div>
+    </td>
+    <td class="even" align="left"> 
+      <div align="center"><{$topics.counter}></div>
+    </td>
+  </tr>
+  <{/foreach}> 
+  <!-- End topic loop -->
+  <tr> 
+    <td class="itemHead" align="left" colspan="5" height="10"><b><{$lang_categorytag}></b> 
+      &raquo; <{$category.name}></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="1" cellpadding="2">
+  <tr> 
+    <td valign="middle" align="center">&nbsp;</td>
+  </tr>
+  <tr> 
+    <td valign="middle" class="even" align="center"><{$category.catlink}></td>
+  </tr>
+</table>

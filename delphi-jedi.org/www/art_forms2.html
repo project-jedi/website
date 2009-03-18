@@ -1,0 +1,641 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Making Forms Work: Part II</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"> 
+<h3><font color="maroon">Communicating Between Forms</font></h3>
+<b>&copy; Kevin S. Gallagher</a></b>
+&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<p>In <a href="art_forms1.html" style="text-decoration:none;color:maroon;">Part I</a> we looked at simple SDI forms and considered some good reasons for not letting your program auto-create forms. This instalment builds on that to demonstrate techniques available when closing modal forms and how one form can retrieve user input or other data from a secondary form. </p>
+<P>
+<h3>Finding out how a modal form was closed </h3>
+
+<p>Modal forms offer specific features that we cannot have when displaying non-modally. Most commonly, we will display a form modally to isolate its processes from anything that might otherwise happen on the main form. Once these processes complete, you might want to know whether the user pressed the Save or Cancel button to close the modal form.</p>
+
+<p>You can write some interesting code to accomplish this, but it does not have to be difficult. Delphi supplies modal forms with the ModalResult property, which we can read to tell how the user exited the form. </P>
+
+<p>The following code returns a result, but the calling routine ignores it: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+var
+  F:TForm2 ;
+begin
+  F := TForm2.Create(nil) ;
+  F.ShowModal ;
+  F.Release ;</pre></FONT></P>
+
+<p>The example just shows the form, lets the user do something with it, then releases it. To check how the form was terminated we need to take advantage of the fact that the ShowModal method is a function that returns one of several <i>ModalResult</i> values. Change the line </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+  F.ShowModal</pre></FONT>
+&nbsp;&nbsp; to 
+<br>
+<FONT FACE="Courier New,Courier"><pre>
+if F.ShowModal = mrOk then
+  ...</pre></FONT></P>
+
+<p>We need some code in the modal form to set up whatever it is we want to retrieve. There is more than one way to get the ModalResult because TForm is not the only component having a ModalResult property - TButton has one too. </P>
+
+<p>Let us look at TButton's ModalResult first. Start a new project, and add one additional form. Next add 
+a TButton to the main form, double click the new button and enter the following code: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TForm1.Button1Click(Sender: TObject); 
+var
+  f:TForm2 ;
+begin
+  f := TForm2.Create(nil) ;
+  try
+    if f.ShowModal = mrOk then
+      Caption := 'Yes'
+    else
+      Caption := 'No' ;
+  finally
+    f.Release ;
+  end ;
+end ;</pre></FONT></P>
+
+<p>Now select the additional form. Give it two TButtons, labelling one 'Save' and the other 'Cancel'. Select the Save button and press F4 to bring up the Object Inspector, scroll up/down until you find the property ModalResult 
+and set it to mrOk. Go back to the form and select the Cancel button, press F4, select the property ModalResult, and set it to mrCancel.</P>
+
+<p>It's as simple as that. Now press F9 to run the project. (Depending on your 
+environment settings, Delphi may prompt to save the files.) Once the main form appears, press the Button1 you added earlier, to show the child form. When the child form appears press the Save button and the form closes, 
+once back to the main form note that it's caption says &quot;Yes&quot;. Press the main form's button to bring up the child form again but this time press the Cancel button (or the System menu Close item or the [x] 
+button in the caption area). The main form's caption will read &quot;No&quot;. </P>
+
+<p>How does this work? To find out take a look at the Click event for TButton (from StdCtrls.pas): </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TButton.Click;
+  var
+    Form: TCustomForm; 
+begin
+  Form := GetParentForm(Self);
+  if Form &lt;&gt; nil then 
+    Form.ModalResult := ModalResult;
+  inherited Click;
+end;</pre></FONT></P>
+
+<p>What happens is that the Owner (in this case the secondary form) of TButton gets its ModalResult set according to the value of the TButton's ModalResult. If you don't set TButton.ModalResult, then the value is mrNone. Even if the TButton is placed on another control the parent form is still used to set its result. The last line then invokes the Click event inherited from its ancestor class. </P>
+
+<p>To understand what goes on with the Forms ModalResult it is worthwhile reviewing the code in Forms.pas, which you should be able to find in ..\DelphiN\Source (where N represents the version number. </P>
+
+<p>In TForm's ShowModal function, directly after the form is shown, a Repeat-Until loop starts, which keeps 
+checking for the variable ModalResult to become a value greater than zero. When this occurs, the final code closes the form. </P>
+
+<p>You can set ModalResult at design-time, as described above, but you can also set the form's ModalResult property directly in code at run-time:</P>
+
+<h3>Points of Interest</h3>
+
+<P><I>Events</I> to look at for ModalResult (in Forms.pas): </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+function TCustomForm.ShowModal: Integer;
+procedure TCustomForm.CloseModal;
+function TCustomForm.CloseQuery: Boolean;
+TCustomForm.Close;
+
+<I>ModalResult Constants</I> from Controls.pas
+const
+  mrNone = 0;
+  mrOk = idOk;
+  mrCancel = idCancel;
+  mrAbort = idAbort;
+  mrRetry = idRetry;
+  mrIgnore = idIgnore;
+  mrYes = idYes;
+  mrNo = idNo;
+  mrAll = mrNo + 1;
+  mrNoToAll = mrAll + 1;
+  mrYesToAll = mrNoToAll + 1;</pre></font></p>
+
+<P>Now, knowing whether the user wants to accept or reject what occurred on the child form, the calling form can react by using the information from the child form or ignoring it. Sometimes you will need to get more than one piece of information back from a form, but let's start simple. The following example shows how to get the value stored in a TEdit text property if the user pressed the Ok button on the child form. </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+// Code for main form</FONT>
+procedure TfrmMain.ModalResultdemo2Click(Sender: TObject);
+var
+  f:TfrmSimpleString ;
+begin
+  f := TfrmSimpleString.Create(nil) ;
+  try
+    if f.ShowModal = mrOk then
+      ShowMessage( f.Edit1.Text ) ;
+  finally
+    f.Release ;
+  end ;
+end;</pre></FONT></P>
+
+<p>To keep the example short we are just checking for an Ok response and ignoring negative responses. When the user presses the OK button (its ModalResult is set to mrOk) the following code reads the value of an edit control, Edit1, on the called form and then destroys the form. In a real application you might need information from several components on the called form. We could have streamlined the code a little more by adding code to let the user choose whether to continue with closing the form or aborting back into the called form:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+// Code for main form
+procedure TfrmMain.ModalResultdemo2Click(Sender: TObject);
+var
+  f:TfrmSimpleString ;
+  S:String ;
+begin
+  f := TfrmSimpleString.Create(nil) ;
+  try
+    f.GetThatString(S) ;
+    ShowMessage(s) ;
+  finally
+    f.Release ;
+  end ;
+end;
+//
+// Code for the called form 
+type
+  TfrmSimpleString = class(TForm)
+  Button1: TButton;
+  Button2: TButton;
+  Edit1: TEdit;
+private
+  <FONT COLOR="#000080">{ Private declarations }</font>
+public
+  <FONT COLOR="#000080">{ Public declarations }</font>
+  procedure GetThatString(var aString: string);
+end;
+
+var
+  frmSimpleString: TfrmSimpleString; 
+implementation
+<FONT COLOR="#000080">{$R *.DFM}</font>
+procedure TfrmSimpleString.GetThatString(var aString: string);
+begin
+  case ShowModal of
+    mrOk: aString := 'OK' ;
+    mrCancel: aString := 'Cancel' ;
+  end ;
+end;</pre</FONT></P>
+
+<p>On the called form we add a procedure to interrogate the user modally to find out whether the user wants to continue or abort the current operation. For elegance, the Case statement is used rather than a chain of nested IF..THEN..ELSE statements, i.e. </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+if ShowModal = mrOk then
+  ...
+  else if ShowModal = mrCancel then
+    ...
+    else if ShowModal = mrRetry then
+      ...</pre></FONT></P>
+
+<h3>More Complex Return Types</h3>
+
+<p>Retrieving a string is simple enough but, often, you will need much more than a simple string. Methods 
+for getting a lot of information back from a called form include using an array, a TList, a stringlist, or records. The logic used to determine if the user wants to return information remains the same, only the means of 
+storing it varies.</p>
+
+<p>To show how this might be done, I will use a record to store user input for retrieval once the user presses OK in the called form. To make things interesting, we will use an array of records so that 
+multiple pieces of information can be returned from the called form! <P>
+Before digging into an example, lets go through a short lesson of record types for those programmers that may have not worked with records: </P>
+
+<h4>Record Types, the Basics</h4>
+
+<p>A record is a special kind of user-defined data type. A record is a container for a mixture of related variables of diverse types, referred to as fields, collected into one type. Records 
+are sometimes called complex types, because they are made up of other data types. Other data types by comparison, are often referred to as simple data types. </P>
+
+<p>I can hear beginners saying &quot;I really don't have a use for them...&quot; or &quot;I will learn them later when I am not so busy&quot;. Well, later is not always the best time to learn things, especially when &quot;later&quot; may be the crunch time when unwelcome bugs habitually creep into applications! </P>
+
+<p>Records are commonly used in Microsoft Windows API calls, where they are referred to as quot;structures&quot;, which is C/C++ programming language terminology for a very similar thing. <P>
+
+<p>Suppose you are writing an application and you need to determine a form's original state before minimizing or maximizing the form, or get/set the size a form can shrink to or grow to. Some of this can be done 
+with plain old Delphi code while other parts need to be done using API calls. If you need to restrict form sizing then you are going to have to use WM_GETMINMAXINFO from the API.</p>
+
+<p>As you might have guessed, that uses a record. In Delphi Win32 Help you will find that the record used is defined as: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+typedef struct tagMINMAXINFO 
+  { 
+  // mmi 
+  POINT ptReserved;
+  POINT ptMaxSize; 
+  POINT ptMaxPosition; 
+  POINT ptMinTrackSize; 
+  POINT ptMaxTrackSize; 
+  } MINMAXINFO;</pre></FONT></P>
+
+<p>The Delphi architects thoughtfully wrote the interface translation to handle this, but you need to search though the Delphi source code to find the information. The following record is defined in Messages.pas:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+TWMGetMinMaxInfo = record
+  Msg: Cardinal;
+  Unused: Integer;
+  MinMaxInfo: PMinMaxInfo;
+  Result: Longint; 
+end;</pre></FONT></P>
+
+<p>The rest is found in the Windows unit: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+{ Struct pointed to by WM_GETMINMAXINFO lParam }
+PMinMaxInfo = ^TMinMaxInfo;
+TMinMaxInfo = packed record
+  ptReserved: TPoint;
+  ptMaxSize: TPoint;
+  ptMaxPosition: TPoint;
+  ptMinTrackSize: TPoint;
+  ptMaxTrackSize: TPoint;
+end;</pre></FONT></P>
+
+<p>Of course you could say that not much knowledge is needed for accomplishing the task we set up, but what if Delphi didn't have code for the above? Obviously you would have had to write it yourself, and without the proper knowledge it would be impossible to code. At times you need many pieces of information about a form. One of the API calls to acquire the information is called GetWindowPlacement, and to change form stuff that Delphi does not directly handle you might need to call SetWindowPlacement. Both require the use of this record:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+typedef struct _WINDOWPLACEMENT 
+{ <FONT COLOR="#000080">// wndpl</FONT>
+  UINT length;
+  UINT flags; 
+  UINT showCmd; 
+  POINT ptMinPosition; 
+  POINT ptMaxPosition; 
+  RECT rcNormalPosition; 
+} WINDOWPLACEMENT;</pre></FONT></P>
+
+<p>Delphi has defined it, but if they had not, we would be translating it ourselves! </P>
+
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type
+  Tkg_WINDOWPLACEMENT = Record
+    Length:Integer ;
+    Flags:Integer ;
+    ShowCmd:Integer ;
+    ptMinPosition:Tpoint ;
+    ptMaxPosition:Tpoint ;
+    rcNormalPosition:Trect ;
+end ;</pre></FONT></P>
+
+<p>This demonstrates the importance of knowing how to work with records for API calls. While everyday cases are not obvious, they do arise. One is hinted at in Delphi Help, with an example:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type
+  TPerson = record
+    FirstName, LastName: string[40] ; 
+    <font color=#000080>{ Fixed portion of record begins here }</font>
+    BirthDate: TDate;
+    case Citizen: Boolean of 
+      <FONT COLOR="#000080">{ variant portion of record begins here }</font>
+      True: (BirthPlace: string[40]);
+      False: (Country: string[20]);
+      EntryPort: string[20];
+      EntryDate: TDate;
+      ExitDate: TDate);
+    end;
+  end </pre></FONT></P>
+
+<p>This variant record has a section (which must follow the fixed section) that can have multiple personalities. In the above example, if Citizen equaled true then we would have: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type
+  TPerson = record
+    FirstName, LastName: string[40];
+    BirthDate: TDate;
+    BirthPlace: string[40];
+  end </pre></FONT></P>
+
+<p>If Citizen was false:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type
+  TPerson = record
+    FirstName, LastName: string[40];
+    BirthDate: TDate;
+    Country: string[20];
+    EntryPort: string[20];
+    EntryDate: TDate;
+    ExitDate: TDate;
+  end </pre></font></P>
+
+<h4>Stacking Records into An Array</h4> 
+
+<P>Now we have a understanding of records, let's step into another dimension and create an <I>array of records</I> which allows you to store <I>multiple</I> records which can be returned to a calling form. Place the following declaration into the interface section of a form.</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+TPerson = record
+  FirstName, LastName: string[40] ;
+  BirthDate: TDate ;
+  BirthPlace: string[40] ;
+end;</pre></FONT></P>
+
+<p>Add a Memo control and a command button to the form, enter the code below: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  MyPeople: Array[0..2] of TPerson ;
+  i:Integer ; 
+begin
+  Memo1.Clear ;
+  for i := 0 to 2 do 
+  begin
+    MyPeople[i].FirstName := 'MyPeople[' + IntToStr(i) + '].FirstName' ;
+    MyPeople[i].LastName := 'MyPeople[' + IntToStr(i) + '].LastName';
+    MyPeople[i].BirthDate := Now;
+    MyPeople[i].BirthPlace := 'MyPeople[' + IntToStr(i) + '].BirthPlace';
+  end ;<P>
+  for i := 0 to 2 do 
+  begin
+    with Memo1.Lines do 
+    begin
+      Add(MyPeople[i].FirstName + ' ' + MyPeople[i].LastName);
+      Add(DateToStr(MyPeople[i].BirthDate));
+      Add(MyPeople[i].BirthPlace);
+      Add('');
+    end;
+  end;
+end;</pre></FONT></P>
+
+<p>Pressing the button populates the array of records with dummy information, then displays the records in the memo control. This should give you a starting point to working with record arrays. The main thing to remember 
+about the example above is that we created a record type, supplied the name of TPerson, then created a local variable called MyPeople which is an array of type TPerson which can hold three (3) rows of information. <P>
+Let's use the idea to present a data entry form to a user, allow data to be entered about several people before returning to the main form to process it. Use the next piece of code to call the secondary form for the 
+data entry:</P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+TfrmMain.PersonRecord1Click(Sender: TObject);
+var
+  f:TForm5;
+begin
+  f := TForm5.Create(Self);
+  try
+    if f.ShowModal = mrOk then
+      if f.PersonCount &gt; 0 then
+        ShowMessage('The first person is' + #13 + '&quot;' 
+                      + f.PersonArray[0].FirstName + '&quot; &quot;'
+                      + f. PersonArray[0].LastName + '&quot;');
+  finally
+    f.Release;
+  end;
+end;</pre></FONT></P>
+
+<p>When the user invokes the event, the main form creates the data entry form, shows it, then checks to see if there were any people entered into the people array. The variable PersonCount in the data entry form is incremented each time a new person is added to the array of records. </P>
+
+<p>The following code is placed into a simple unit so that any form in the project can see the People record along with a constant used to limit how many elements (records) can be used in the array of records. </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+unit kg_Globals;
+
+interface
+<B>uses</B> 
+  Windows,Dialogs,SysUtils,Messages,Classes,Forms,FileCtrl;
+
+<B>const</B> 
+  ARRAY_SIZE = 5; {Could be a larger size}
+
+<B>type</B>
+Tkg_People = Record
+  FirstName:String;
+  LastName:String;
+  Street:String;
+  City:String;
+  State:String;
+  ZipCode:String;
+  Phone:String;
+  Email:String;
+<b>end;</b>
+
+<B>implementation
+end.</B></pre></FONT></P>
+
+<p>(Keep each record member to strings to make the example code easy to understand) </P>
+
+<p>In the <B>public</B> portion of the called form's declarations we declare an array of records and a variable for keeping track of how many records the user has entered. </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+...
+<b>public</b>
+<FONT COLOR="#000080">{ Public declarations }</font>
+  PersonArray: Array [0..ARRAY_SIZE] of Tkg_People;
+  PersonCount: Integer;</pre></FONT></P>
+
+<p>In the Create event of the data entry form the following code is called to clear all edit controls so that the form starts up with a clean slate: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TForm5.ClearEdits;
+var
+  i:Integer ;
+begin
+<FONT COLOR="#000080">{ sets each TEdit control's text property to an empty string }</font>
+  for i := 0 to ComponentCount -1 do
+    if (Components[i] is TEdit) then
+      TEdit(Components[i]).Text := '' ;
+end;</pre></FONT></P>
+
+<p>(Each time the user accepts a screenful of people information the ClearEdit procedure is triggered) </P>
+
+<p>The next code fills a row of data in the people array and increments the row counter. The counter is checked to ensure that the number of rows keeps within the fixed boundaries of the array of records. </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+procedure TForm5.cmdAddPersonClick(Sender: TObject);
+begin
+<font color="#000080">{ Populate a record in an element in the array of records with current textbox values }</font>
+  PersonArray[PersonCount].FirstName := First.Text;
+  PersonArray[PersonCount].LastName := Last.Text;
+  PersonArray[PersonCount].Street := Street.Text;
+  PersonArray[PersonCount].City := City.Text;
+  PersonArray[PersonCount].State := State.Text;
+  PersonArray[PersonCount].ZipCode := Zip.Text;
+  PersonArray[PersonCount].Phone := Phone.Text;
+  PersonArray[PersonCount].Email := Email.Text;
+
+  Inc(PersonCount);
+
+  <font color="#000080">{ Once the maximum elements are used up, disable this button. 
+  NOTE: ARRAY_SIZE is a user defined constant created for this demo. 
+  The Constant indicates how many records can be accessed in the array. }</font>
+
+  TButton(Sender).Enabled := PersonCount &lt; ARRAY_SIZE; 
+  <font color="#000080">{ If we can still add more persons clear old entries, place
+  focus on &quot;First&quot; name text control }</font>
+  if TButton(Sender).Enabled then 
+  begin
+    ClearEdits;
+  First.SetFocus ;
+  end
+  else
+    <font color="#000080">{ Exit time, give a hint by placing focus on the exit button }</font>
+    cmdCloseForm.SetFocus ;
+end;</pre></FONT></P>
+
+<p>Using this example you can return just about any type of data, in either single or multiple rows. </P>
+
+<p>To recap, you can detect how a modal form was closed and get information back in several ways. Keep in mind there are other ways to accomplish returning information from modal forms. </P>
+
+<h3>Detour</h3>
+
+<p>The last thing a programmer needs when searching for assistance in a help file or manuals is an incorrect example of how to do a particular task. I caught one in D4 after writing this article, to do with &quot;Passing additional arguments to forms&quot;, listed under &quot;forms&quot; in Delphi help. Here are the key pieces: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+TResultsForm = class(TForm)
+  ResultsLabel: TLabel;
+  OKButton: TButton;
+  procedure OKButtonClick(Sender: TObject);
+private
+public
+  constructor CreateWithButton(whichButton: Integer; Owner: TComponent);
+end;
+constructor CreateWithButton(whichButton: Integer; Owner: TComponent);
+begin
+  case whichButton of
+    1: ResultsLabel.Caption := 'You picked the first button.';
+    2: ResultsLabel.Caption := 'You picked the second button.';
+    3: ResultsLabel.Caption := 'You picked the third button.';
+  end;
+end;
+
+procedure TMainForm.SecondButtonClick(Sender: TObject);
+var
+  rf: TResultsForm; 
+begin
+  rf := TResultsForm.CreateWithButton(2, self);
+  rf.ShowModal;
+  rf.Free;
+end;</pre></FONT></P>
+
+<p>Don't feel bad if you can not figure out what's missing/wrong with the example. This code was posted on Borland's news group as a solution for a posted question. Instead of trying to figure out the errors, look at the correct code: </P>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+type 
+  TResultsForm = class(TForm)
+  ResultsLabel: TLabel;
+  OKButton: TButton;
+private
+public
+  constructor Create(whichButton: Integer; Owner: TComponent); reintroduce ;
+end; 
+  constructor TResultsForm.Create(whichButton: Integer; Owner: TComponent);
+
+begin
+  inherited Create(Owner) ;
+  case whichButton of
+    1: ResultsLabel.Caption := 'You picked the first button.';
+    2: ResultsLabel.Caption := 'You picked the second button.';
+    3: ResultsLabel.Caption := 'You picked the third button.';
+  end;
+end; 
+
+procedure TMainForm.SecondButtonClick(Sender: TObject); 
+var
+  f: TResultsForm ; 
+begin
+  f := TResultsForm.Create(2, self);
+  try
+    f.ShowModal;
+  finally
+    f.Release ;
+  end;
+end;</pre></FONT></P>
+
+<blockquote>
+<h4>Downloads</h4>
+<p><A HREF="ftp://ftp.delphi-jedi.org/voyager/FormsPart2.zip" style="text-decoration:none;color:maroon;">
+<b>Examples</b></A> (Zip file)
+<br>Try out the code without having to type it in yourself. The source units also expand some concepts beyond the scope of this article and provide more technical explanations. </p>
+
+<p><A HREF="ftp://ftp.delphi-jedi.org/voyager/FormsPart2.doc" style="text-decoration:none;color:maroon;">
+<b>This article</b></A> in Microsoft Word format</p>
+</blockquote>
+
+<p align="center"<I>Kevin S. Gallagher is a full time systems analyst at Oregon Department Of Revenue<br>where he uses Delphi, Visual Basic and Clipper to create Property Tax Systems.</p>
+<hr size=1>
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

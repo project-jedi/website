@@ -1,0 +1,31 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-25 14:39:01
+         compiled from db:tinycontent_navigation_block.html */ ?>
+<table cellspacing="0">
+  <tr align=left>
+    <td id="steeringmenu">
+  <?php if (isset($this->_foreach['menuitems'])) unset($this->_foreach['menuitems']);
+$this->_foreach['menuitems']['name'] = 'menuitems';
+$this->_foreach['menuitems']['total'] = count((array)$this->_tpl_vars['block']['links']);
+$this->_foreach['menuitems']['show'] = $this->_foreach['menuitems']['total'] > 0;
+if ($this->_foreach['menuitems']['show']):
+$this->_foreach['menuitems']['iteration'] = 0;
+    foreach ((array)$this->_tpl_vars['block']['links'] as $this->_tpl_vars['link']):
+        $this->_foreach['menuitems']['iteration']++;
+        $this->_foreach['menuitems']['first'] = ($this->_foreach['menuitems']['iteration'] == 1);
+        $this->_foreach['menuitems']['last']  = ($this->_foreach['menuitems']['iteration'] == $this->_foreach['menuitems']['total']);
+?>
+    <a class="steeringmenuMain" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/jedisdl/index.php?id=<?php echo $this->_tpl_vars['link']['id']; ?>
+"><?php echo $this->_tpl_vars['link']['title']; ?>
+ </a> 
+
+<?php if ($this->_foreach['menuitems']['last'] == false): ?> 
+&nbsp | &nbsp
+<?php endif; ?>
+
+<?php echo $this->_foreach['customers']['last']; ?>
+
+ <?php endforeach; endif; ?> 
+</td>
+  </tr>
+</table>

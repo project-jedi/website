@@ -1,0 +1,46 @@
+<{if $article.indeximage != ''}>
+	<div align="center"><{$article.indeximage}></div>
+<{/if}>
+
+<h3><{$article.headline}></h3>
+<!-- Start topic loop -->
+<{if $article.isdefaultpage == 1}>
+	<{if $totalcount.total > 0}>
+		<div><B><{$lang_more}></B></div>
+	<{/if}>
+	<{foreach item=chanlink from=$chanlink}>
+		<div align="left" style="margin-left: 16px;"><a href="index.php?pagenum=<{$chanlink.id}>"><b><{$chanlink.pagetitle}></b></a></div>
+	<{/foreach}>
+
+	<{if $mainp.num == 1}>
+		<div align="left" style="margin-left: 16px;"><a href="index.php?op=link"><b><{$lang_linktous}></b></a></div>
+	<{/if}>
+
+	<{if $mainp.ref == 1}>
+		<div align="left" style="margin-left: 16px;" ><a href="index.php?op=refer"><b><{$lang_referfriend}></b></a></div>
+	<{/if}>
+<br />
+<{/if}>
+
+<!-- Opentable for block decoration -->
+<div align = "left"><{$article.maintext}></div>
+<!-- Closetable for block decoration -->
+<br />
+
+<div style="text-align: center; padding: 3px; margin: 3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin: 3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+

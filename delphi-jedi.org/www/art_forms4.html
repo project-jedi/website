@@ -1,0 +1,519 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Making Forms Work: Part IV</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+<h3><font color="maroon">Interaction and Feedback</font></h3>  
+<b>&copy; Kevin S. Gallagher</a></b>
+&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+<p>At some point in almost any application, you need to communicate with the user - to prompt for input or to provide specific instructions in a modal fashion. Our common tools for these tasks are <I>ShowMessage</I> or <I>MessageDlg</I> for quick, impromptu messages and <I>MessageDlg</I> to present mutually exclusive response options and return a value. For single line string input, you might use the <I>InputQuery</I> function. Several other methods are available to do the same tasks, but these three exemplify how standard dialogs work.</p>
+
+<p>Dialogs of this nature are normally centered on the display screen so that they might grab the user's attention. Most of the time this works, although sometimes the effect would be improved if the dialog were centered on the application or even positioned over a particular control. There are no solid rules for positioning since there are simply too many situations where rules would be overruled by the specific context. What you can do is be prepared with knowledge of the alternatives to the standard methods like ShowMessage and InputQuery.</p>
+
+<h3>InputQuery and InputBox</h3>
+
+<p>Capturing information in ways that simulate InputQuery and InputBox could consume this entire article but that is not my plan. Instead we will cover the basics. In my opinion, InputBox and InputQuery should be avoided in business applications since they do not provide any events to assist with validation. For instance, if the user does not enter anything in the text box you must show an error message and redisplay the dialog. </p>
+
+<p>If you are set on using InputBox or InputQuery you can enhance it, or build a better method to retrieve information. I suggest reviewing the source code for InputBox. I have included modified version of InputQuery in this month's demo to assist with this. The modified InputQuery permits it to be centered over the application's active form, or centered on the screen if there is no active form. Use TForm as the foundation to get the same functionality as Delphi's standard functions and place your validation directly into the form.</p>
+
+<h3>ShowMessage and MessageDlg</h3>
+
+<p>ShowMessage is useful for presenting quick feedback when it does not matter where the message is positioned on the screen and when the need to acknowledge before proceeding does not intrude unnecessarily on the work flow. MessageDlg builds on ShowMessage by allowing you to control the appearance of your message, to select which buttons are used and to provide context-defined help. With MessageDlg you can also ask questions and get back controlled responses from the user:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<b>procedure</B> TForm1.cmdExitClick(Sender: TObject);
+<B>begin</B> 
+  <B>if</B> MessageDlg('Ready to quit?',mtConfirmation,[mbNo,mbYes],0) = mrYes <B>then</B> 
+    Close; 
+<B>end</B>; </pre></FONT></p>
+
+<p>The first parameter is the message presented to the user, the second is a message type constant to determine the dialog's caption and the icon which will appear. The third is a set of message button constants which tells Delphi which buttons you want to be shown. The final parameter is for the Help ID of the topic which should be invoked if the user presses F1. If you do not want to provide help, use zero here. </p>
+
+<h3>Handling the Help</h3>
+
+<p>How does the user know he can press F1 for help? Some users won't remember it is available, even if you tell them. A better approach is to employ a Help button: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<b>procedure</B> TForm1.cmdExitClick(Sender: TObject); 
+<B>begin</B> 
+  <B>if</B> MessageDlg('Ready to quit?', mtConfirmation,[mbNo,mbYes,mbHelp],103) = mrYes <B>then</B> 
+    Close; 
+<B>end</B>;</pre></FONT></p> 
+
+<p>Now when the user needs help he simply presses the help button. OK, I jumped ahead a little there. There is more to be said about buttons!</p>
+
+<h3>Employing the Buttons</h3>
+
+<p>You need to enclose the buttons in square brackets, even if there is only one, because this parameter is of type <B>set</B>. If you look at help for MessageDlg you will see the following buttons are available:</p>
+                  <table>
+                    <tr>
+                      <td><img src="img/clearpixel.gif" width=80></td>
+                      <td>
+
+                        <table>
+                          <tr>
+                            <TD WIDTH=120><b>Button Constant</b></TD>
+                            <TD WIDTH=78><b>Caption</b></td>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbYes</TD>
+                            <TD WIDTH=78>Yes</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbNo </TD>
+                            <TD WIDTH=78>No</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbOK</TD>
+                            <TD WIDTH=78>OK</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbCancel</TD>
+                            <TD WIDTH=78>Cancel</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbHelp</TD>
+                            <TD WIDTH=78>Help</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbAbort</TD>
+                            <TD WIDTH=78>Abort</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbRetry</TD>
+                            <TD WIDTH=78>Retry</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbIgnore</TD>
+                            <TD WIDTH=78>Ignore</TD>
+                          </TR>
+                          <TR>
+                            <TD WIDTH=120>mbAll</TD>
+                            <TD WIDTH=78>All</TD>
+                          </TR>
+                        </TABLE>
+                      </td>
+                    </tr>
+                  </table>    
+
+<p>You can freely to combine any buttons from this list. </p>
+
+<blockquote>
+<p><u>Tip</u>: The Dialogs unit has three constants representing sets of commonly used combinations of buttons: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>const</B> 
+  mbYesNoCancel = [mbYes, mbNo, mbCancel]; 
+  mbOKCancel = [mbOK, mbCancel]; 
+  mbAbortRetryIgnore = [mbAbort, mbRetry, mbIgnore]; </pre></FONT></p>
+
+<p>When using these constants, don't enclose them in square brackets. If you do, Delphi will give you an error message, which says something that will not help you figure out the error. </p>
+</blockquote>
+
+<h4>Example using one of the predefined button sets</h4>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.cmdExitClick(Sender: TObject); 
+<B>begin</B> 
+<B>if</B> MessageDlg('Ready to quit?',mtConfirmation, mbYesNoCancel,0) = mrYes <B>then</B> 
+  Close; 
+<B>end</B></pre></FONT></p>
+
+<p>If you are presenting more than two buttons, a simple <B>if</B> statement is not the cleanest method to condition the response handler. I suggest using a <B>case</B> construct instead. The following example displays a multi-choice message dialog and responds appropriately with another, simple modal one:
+</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>var</B> 
+  msg: String; 
+<B>begin</B> 
+  ...
+  ...
+  <B>case</B> MessageDlgCtr('Printing failed', mtInformation, 
+       mbAbortRetryIgnore, mrRetry,True) <B>of</B> 
+    mrRetry: msg := 'Retry was picked'; 
+    mrAbort: msg := 'Abort was picked'; 
+    mrIgnore: msg := 'Ignore was picked'; 
+  <B>end</B>; 
+  MessageDlgCtr(msg,mtInformation,[mbOk],mrOk,True); 
+  ...
+  ...
+<B>end; </B></pre></FONT></p>
+
+<p>Although the message dialog type has changed, you can see that this is a cleaner way to check which button was pressed.</p>
+
+<h3>Button Order</h3>
+
+<p>In case you didn't notice, the first example had the button order as [mbNo,mbYes], but the actual ordering of the buttons was Yes followed by No. This is because MessageDlg is created using CreateMessageDialog. If you look at the source code you will see:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>for</B> B := Low(TMsgDlgBtn) <B>to</B> High(TMsgDlgBtn) <B>do</B></pre></font></p>
+
+<p>In the definition of TMsgDlgBtn:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+TMsgDlgBtn = (mbYes, mbNo, mbOK, mbCancel, mbAbort, mbRetry, 
+              mbIgnore, mbAll, mbNoToAll, mbYesToAll, mbHelp);</pre></FONT></p>
+
+<p>you see that the button order is from left to right in TMsgDlgBtn, not the order you called them. </p>
+
+<p>With a bit of hacking we can change the order of the buttons! Below is a very simple piece of demo code that will do just that:</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.Button1Click(Sender: TObject); 
+<B>var</B> 
+  F: TForm; 
+  OkBtn: TControl; 
+  CancelBtn: TControl; 
+  L: Integer; 
+<B>begin</B> 
+  F := CreateMessageDialog('button swap demo', mtInformation, [mbOk,mbCancel]); 
+  <B>try</B> 
+    OkBtn := F.FindComponent('Ok') <B>as</B> TControl; 
+    CancelBtn := F.FindComponent('Cancel') <B>as</B> TControl; 
+    <FONT COLOR=#000080><i>{ swap left position, 
+                             you might want to swap taborder too }</i></FONT>
+    L := CancelBtn.Left; 
+    CancelBtn.Left := OkBtn.Left; 
+    OkBtn.Left := L; 
+    <FONT COLOR=#000080><i>{ as you see, you can change anything you want 
+                             before showing the form, even insert new controls, 
+                             hide/delete existing etc.}</i></FONT>
+    F.ShowModal; 
+  <B>finally</B> 
+    F.Free; 
+  <B>end</B>; 
+<B>end</B>;</pre></FONT></p>
+
+<p>The secret is to locate the buttons (in this case &quot;Cancel&quot; and &quot;Ok&quot;) using FindComponent. Once found, simply manipulate the left property of each button to suit.</p>
+
+<blockquote>
+<p><i><u>NOTE</u> &nbsp; Many programmers wish they could define their own captions for message boxes such as ShowMessage or MessageDlg. The logic to do this is not difficult, although the coding is not so simple. When I need a dialog  with better control over button captions, I use Greg Lief's G.L.A.D. message box.  For more information on G.L.A.D. send email to glad AT greglief DOT com) glad@greglief.com. The price of this library is  (last time I checked) $69.00 USD, which breaks down to around $1.30 per component. Of course you could build your own dialog, but do not go running to the keyboard so fast! In this month's demo you will find a component which provides not only custom buttons, but some other nifty features. Complete source code is included.</i><p>
+</blockquote>
+
+<h3>Excerpt from Demo Project</h3>
+
+<p>I coded this portion of the demo so you need not install the component simply to try it out. All you need to do is make sure that the source code is in the library search path. Normally you would install the component and use it like any other dialog component, e.g. TOpenDialog.</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>procedure</B> TForm1.cmdDemoingUserDlgComponentClick(Sender: TObject); 
+<B>const</B>
+  kgNope = 0; 
+  kgYep = 1; 
+<B>var</B> 
+  f:TUserDlg; 
+<B>begin</B> 
+  f := TUserDlg.Create(Self); 
+  <B>try</B> 
+  <FONT COLOR=#000080<i>{ Must clear the list, otherwise you will get
+                          an &quot;OK&quot; Button }</i></FONT> 
+    f.Buttons.Clear; 
+    f.Buttons.Add('Nope'); 
+    f.Buttons.Add('Yep'); 
+    f.Message.Add('Do you use Delphi 4'); 
+    f.Message.Add('Please respond'); 
+    f.Title := 'Question' ; 
+    <B>case</B> f.Show <B>of</B> 
+      kgNope: MessageDlg('0 returned',mtInformation,[mbOk],0); 
+      kgYep: MessageDlg('1',mtInformation,[mbOk],0); 
+    <B>end</B>; 
+  <B>finally</B> 
+    f.Free; 
+  <B>end</B>; 
+<B>end; </B></pre></FONT></p>
+
+<h4>Positioning</h4>
+
+<p>One nice feature would be a method to center a message box on a form. With the standard message box routines you get your message displayed in the center of the screen. To find out why, work through the code that creates MessageDlg, to a function called <I>MessageDlgPosHelp</I>. With this function CreateMessageDialog creates our dialog and sets the position property to poScreenCenter. Knowing this, it is not hard to figure out how to alter the position so that it centers on the <I>calling form</I> rather than the screen. I created a wrapper surrounding CreateMessageDialog, similarly to the way Delphi does MessageDlg. </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>function</B> MessageDlgCtr(<B>const</B> aCaption: string; 
+                              <B>const</B> Msg: string; 
+                              DlgType: TMsgDlgType; 
+                              Buttons: TMsgDlgButtons; 
+                              HelpCtx: Longint; 
+                              bCenterOnForm: boolean): Integer; 
+<B>begin</B> 
+  <B>if</B> Screen.ActiveForm = <B>nil then</B> bCenterOnForm := false; 
+  <B>with</B> CreateMessageDialog(Msg, DlgType, Buttons) <B>do</B> 
+  <B>try</B> 
+    Caption := aCaption; 
+    HelpContext := HelpCtx; 
+    <B>if</B> bCenterOnForm <B>then</B> 
+    <B>try</B> 
+      Left := Screen.ActiveForm.Left + (Screen.ActiveForm.Width div 2) 
+              - (Width div 2); 
+      Top := Screen.ActiveForm.Top + (Screen.ActiveForm.Height div 2) 
+              -(Height div 2); 
+    <B>except</B> 
+      <FONT COLOR=#000080><i>{ place logic here if you desire 
+                               to raise an exception on failure } </i></font>
+    <B>end</B>; 
+    Result := ShowModal; 
+  <B>finally</B> 
+    Free; 
+  <B>end</B>; 
+<B>end</B>;</pre></FONT></p>
+
+<p>Note that the first line in the functions block checks to see if there is an active form. What you passed (True or False) gets passed along if there is an active form; otherwise, the value of bCenterOnForm parameter is forced to False. You might ask, how would there be a application without a form? Many programmers create complete applications without forms using just the project file and other units. </p>
+
+<p>Now we have a dialog that can be centered on a calling form or positioned as any other standard dialog function. The next step is to add a method to allow changing the default button, that is, which button has initial focus. The logic for this goes through each component on the dialog form, checks to see if it matches the DefButton parameter and makes it the default button if it does.</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>function</B> MessageDlgCtr(<B>const</B> Msg: string; 
+                              DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; 
+                              DefButton: Integer; bCenterOnForm: boolean): Integer; 
+<B>var</B> 
+  i: Integer; 
+  btn: TButton; 
+<B>begin</B> 
+  <B>if</B> Screen.ActiveForm = <B>nil then</B> bCenterOnForm := false; 
+  <B>with</B> CreateMessageDialog(Msg, DlgType, Buttons) <B>do </B>
+  <B>try</B> 
+    <B>for</B> i := 0 to ComponentCount -1 <B>do</B> 
+      <B>if</B> Components[i] <B>Is</B> TButton <B>then</B> 
+      <B>begin</B> 
+        btn := TButton(Components[i]); 
+        btn.default:= btn.ModalResult = DefButton; 
+        <B>if</B> btn.default <B>then</B> 
+          ActiveControl := Btn; 
+      <B>end</B>; 
+    <B>if</B> bCenterOnForm <B>then </B>
+    <B>begin</B> 
+      Left := Screen.ActiveForm.Left + (Screen.ActiveForm.Width <B>div</B> 2)
+                                     -(Width <B>div</B> 2); 
+      Top := Screen.ActiveForm.Top + (Screen.ActiveForm.Height <B>div</B> 2)
+                                   - (Height div 2); 
+    <B>end</B>; 
+    Result := ShowModal; 
+  <B>finally</B> 
+    Free; 
+  <B>end</B>; 
+<B>end</B>; </pre></FONT></p>
+
+<p>One more trivial addition, a method to separate breaking lines: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>function</B> StrCrLf(<B>const</B> cMsg:String):String ; 
+<B>var</B> 
+  nLen, i:Integer; 
+<B>begin</B> 
+  nLen := Length(cMsg); 
+  i := 1; 
+  <B>while</B> i &lt;= nLen <B>do</B>
+    <B>begin</B> 
+      <B>if</B> cMsg[i] <B>in</B> [';','~'] <B>then</B> 
+        Result := Result + #13 
+    <B>else</B> 
+      Result := Result + cMsg[i]; 
+    Inc(i); 
+  <B>end</B>; 
+<B>end</B>; </pre></FONT></p>
+
+<h4>Example of Using the Function</h4>
+
+<p>This example will display two lines in the message and center the dialog on the form which called it.</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+MessageDlgCtr('This is some message~'More text', mtInformation, [mbOk],mrOk, True) ; </pre>
+</font></p>
+
+<p>Now we have a base function which can be made simpler to use by wrapping it into functions designed for specific tasks.</p>
+
+<blockquote>
+<h5><i>Note for pre-Delphi 4 users</h5>
+
+<p>These wrappers use the default parameters feature introduced with Delphi 4. Each wrapper's last parameter sets a default value. If you are not using D4, then remove the text following the last formal parameter starting with the = sign, up to but not including the closing &quot;)&quot;. The </i>dialog.pas<I> unit included with this month's demo has versions of each wrapper for both Delphi 4 and lower versions which do not support default parameters</I>.</p>
+</blockquote>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>function</B> Question(cQuestion: String; DefButton: Integer = mrYes): boolean; 
+<B>begin</B> 
+  <B>case </B>DefMessageDlg('Question', cQuestion, mtInformation, [mbYes,mbNo], DefButton, 0) 
+  <B>of</B> 
+    IDYES : Result := True; 
+    IDNO : Result := False; 
+  <B>else</B> 
+    Result := False; 
+  <B>end</B>; 
+<B>end</B>; 
+
+<B>function</B> RetryOperation(cMessage: string ; 
+                               DefButton: Integer = mrReTry; 
+                               DefCaption: String = 'Alert'): boolean; 
+<B>begin</B> 
+  <B>case</B> DefMessageDlg(DefCaption, cMessage, mtInformation,
+                            [mbNo,mbRetry], DefButton, 0) <B>of</B> 
+  IDRETRY : Result := True; 
+  IDNO : Result := False; 
+  <B>else</B> 
+    Result := False; 
+  <B>end</B>; 
+<B>end</B>; </pre></FONT></p>
+
+<p>So, to ask a question we need only supply the question and look for a response: </p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>if</B> Question('Format hard disk?') <B>then</B> 
+  <FONT COLOR=#000080><i>// format the disk </i></font></pre></FONT><p>
+
+<h3>Using Overloading and Default Parameters to Enhance It</h3>
+
+<p>Although the question function does a nice job of wrapping up some tedious coding, it could be enhanced a little. You might want to control the dialogs caption and perhaps have the choice of centering it on either the screen or the calling form. To add these enhancements I will be utilizing two features of Delphi 4, <I>default parameters</I> (already mentioned) and <I>overloading</I>. </p>
+
+<p>Overloading functions is not used very much. The main purpose Delphi architects used it for was to allow different numeric types to be passed into routines. A good example is <I>IntToStr</I>, which accepts either a plain integer or Int64 (a signed 64bit integer).</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<B>function</B> IntToStr(Value: Integer): string; <B>overload</B>;
+
+<B>function</B> IntToStr(Value: Int64): string; <B>overload</B>; </pre></font><p>
+
+<p>The following is from my demo dialog unit's interface section. All declarations under VER120 section are also in the ELSE clause for earlier versions of Delphi. </p>
+
+<p>MessageDlgCtr function uses overloading to gain control over the dialog's caption and to keep it as the first parameter, which I tend to like. The purist would most likely slap me silly for even thinking about what I did, but each to his own. In any event, the same was done to the function Question. I just love to have a default caption, but also have the ability to override it if needed.</p>
+
+<p><FONT FACE="Courier New,Courier"><pre>
+<FONT COLOR=#000080><i>{$IFDEF VER120}</i></FONT> 
+<B>function</B> MessageDlgCtr(<B>const</B> Msg : String; DlgType : TMsgDlgType; 
+                              Buttons : TMsgDlgButtons; DefButton : Integer; 
+                              bCenterOnForm: boolean): Integer; <B>overload</B>; 
+
+<B>function</FONT></B> MessageDlgCtr(<B>const</B>aCaption : String; Msg : String; 
+                                     DlgType : TMsgDlgType; Buttons : TMsgDlgButtons; 
+                                     DefButton : Integer; 
+                                     bCenterOnForm: boolean): Integer; <B>overload</B>; 
+
+<B>function</B> Question(cQuestion: String; 
+                         DefButton: Integer = mrYes): boolean; <B>overload</B>; 
+
+<B>function</B> Question(aCaption : String; cQuestion : String; 
+                        DefButton : Integer = mrYes; 
+                        bCenterOnForm: boolean = True): boolean; <B>overload</B>;
+
+<FONT COLOR=#000080<i>{$ELSE}</I></font>
+<B>function</B> MessageDlgCtr(<B>const</B> Msg: string; DlgType: TMsgDlgType; 
+                            Buttons: TMsgDlgButtons; DefButton: Integer; 
+                            bCenterOnForm: boolean): Integer; 
+
+<B>function</B> Question(<B>const</B> Msg): boolean;
+<FONT COLOR=#000080><i>{$ENDIF}</i></pre></FONT></p>
+
+<p>When you type in MessageDlgCtr in Delphi 4, Code Completion shows you two sets of parameters since we are working with an overloaded routine. As you type, Delphi figures out which version of the function you intend to use and the other declaration goes away. </p>
+
+<h3>Conclusion</h3>
+<p>I've about covered the basics and I hope these additional tools will be useful as you develop your applications.</p>
+
+<blockquote>
+<p><A HREF="ftp://ftp.delphi-jedi.org/Voyager/formspart4.zip" style="text-decoration:none;color:maroon;">
+<b>Download</b></A> this month's demo project and component</p>
+
+<p><A HREF="ftp://ftp.delphi-jedi.org/Voyager/formspart4.doc" style="text-decoration:none;color:maroon;">
+<b>Download this article</b></A> (Word 7 format)</p>
+
+<p align="center"><font size="1"><i>Kevin S. Gallagher is a full time systems analyst at Oregon Department Of Revenue<br>where he uses Delphi, Visual Basic and Clipper to create Property Tax Systems.</p>
+
+<hr size=1>
+
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+

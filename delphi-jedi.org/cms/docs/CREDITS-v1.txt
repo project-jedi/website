@@ -1,0 +1,136 @@
+XOOPS: PHP Web Portal System
+============================
+
+CREDITS
+-------
+
+#########   Developers   #########
+
+* Lead Developer
+Kazumi Ono (onokazu) - webmaster@mywebaddons.com webmaster@myweb.ne.jp
+http://www.myweb.ne.jp/  , http://www.mywebaddons.com/  
+
+* Co-Developer
+Goghs Cheng (goghs) - webmaster@eqiao.com
+http://www.eqiao.com/
+
+* Theme Design
+Jan Inge Pettersen (Xend) - jan@xendtech.com
+http://www.xendtech.com/
+
+* Quality Assurance
+w4z004 - w4z004@hotmail.com
+http://ar.xoops.org/
+
+* Quality Assurance
+wanderer - webmaster@wanderer.com.tw
+http://tw.xoops.org/
+
+* Documentation
+Mihelle Alexandria (malexandria) - webmaster@eclipsemagazine.com
+http://eclipsemagazine.com/
+
+* Documentation
+Eric Caldwell - ecxstar@hotmail.com
+http://www.boardjive.com 
+
+#########  Beta Testers  #########
+
+
+#########  Official Support Sites  #########
+
+
+#########  Translation   #########
+
+
+#########     Core       #########
+
+* myPHPNuke
+Various fixes and hacks
+Copyright (c) 2001 by Heinrich Steenberg (heinrich@kodewulf.za.net)
+http://www.kodewulf.za.net/ and Heinz Hoombergs (heinz@hhombergs.de)
+http://www.hhombergs.de/
+
+* PHP Nuke
+Copyright (c) 2001 by Francisco Burzi (fburzi@ncc.org.ve)
+http://phpnuke.org/
+
+* Thatware
+Copyright (c) 2000 by David Norman
+http://thatware.org
+
+
+#########  Modules/Addons  #########
+
+* Fetching Request Box, Contact Us Form
+Copyright (c) 2001 by John Hoke (aka Slapd) (admin@slapd.net)
+http://www.slapd.net/
+
+* Random Quotes AddOn
+Coyprigt (c) 2001 by Erik Slooff (erik@slooff.com)
+http://www.slooff.com/
+
+* Last Seen AddOn
+Copyright (c) 2001 by Michael Yarbrough (opedog@comediccadavers.com)
+http://www.comediccadavers.com/
+
+* Partners-Addon
+Copyright (c) 2001 by Dietrich Bojko (webmaster@jimmy-net.de)
+http://www.jimmy-net.de/
+
+* Web Links Hacks
+Copyright (c) 2000 by James Knickelbein
+Journey Milwaukee (http://www.journeymilwaukee.com/)
+ - This is the original sript form which My Link/My Downloads were created.
+
+* Visitors 2.0.1      - Web site statistics analysis program 
+Copyright (C) 2000, 2001  J-Pierre DEZELUS <jpdezelus@phpinfo.net>
+http://phpinfo.net/
+
+* phpBB 1.4.4
+Copyright (c) 2001 by James Atkinson (james@totalgeek.org)
+http://phpbb.com/
+
+* Automated FAQ, Memberlist, Private Messages, Multi-Tier Admin
+Copyright (c) 2000 by Richard Tirtadji (rtirtadji@hotmail)
+		      Hutdik Hermawan (hutdik76@hotmail)
+http://www.nukeaddon.com/
+
+* Blaze Board
+For the AVATAR inspiration!
+Copyright (c) 2000 by Jonathan
+http://www.blazeboard.com/
+
+* PHP Layers Menu 1.0.7
+(c) 2001, 2002 Marco Pratesi <pratesi@telug.it>
+
+#########  Themes  #########
+
+*Bluely Theme, Flexi2 Theme, Paradise Theme, Redstar Theme, Silver Theme, Tellus Theme
+Copyright (c) 2001 by Jan Inge Pettersen (jan@xendtech.com)
+XendTech (http://www.xendtech.com/)
+
+*PhpDark Theme, PhpKaox Theme
+Copyright (c) 2001 by DJCHENA (DJCHENA@ono.com)
+http://www.kaox.d2g.com/
+
+
+#########  Others  #########
+
+* PHP
+Just a few words to the people who developed PHP: Thanks folks you're the
+best! PHP is easy to install, extremely easy to learn and use. Perl Sucks!
+http://www.php.net/
+
+* MySQL
+One of the best database software I've ever seen. Flexible and powerfull.
+Thanks!!! for releasing it under GPL!!!
+http://www.mysql.com/
+
+* Apache
+What can I say? The best Web server software.
+http://www.apache.org/
+
+* Linux
+This software was made thanks to my love for Linux.
+Linux is a registered trademark of Linus Torvalds

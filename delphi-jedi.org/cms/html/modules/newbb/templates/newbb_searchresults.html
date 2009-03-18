@@ -1,0 +1,66 @@
+<!-- start module contents -->
+<table border="0" cellpadding="5" align="center">
+  <tr>
+    <td colspan="2" align="left"><img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<a href="<{$xoops_url}>/modules/newbb/index.php"><{$lang_forumindex}></a><br />&nbsp;&nbsp;&nbsp;<img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<a href="search.php"><{$lang_search}></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="<{$img_folder}>" alt="" />&nbsp;&nbsp;<{$lang_searchresults}></td>
+  </tr>
+</table>
+
+<table class="outer" border="0" cellpadding="0" cellspacing="0" align="center" width="95%">
+  <tr>
+    <td>
+      <table border="0" cellpadding="4" cellspacing="1" width="100%">
+        <tr class="head" align="center">
+			<td><{$lang_forum}></td>
+			<td><{$lang_topic}></td>
+			<td><{$lang_author}></td>
+			<td><{$lang_replies}></td>
+			<td><{$lang_views}></td>
+			<td nowrap><{$lang_possttime}></td>
+        </tr>
+        <!-- start search results -->
+		<{section name=i loop=$results}>
+        <!-- start each result -->
+        <tr align="center">
+          <td class="even"><a href="viewforum.php?forum=<{$results[i].forum_id}>"><{$results[i].forum_name}></a></td>
+          <td class="odd"><a href="viewtopic.php?topic_id=<{$results[i].topic_id}>&amp;forum=<{$results[i].forum_id}>"><{$results[i].topic_title}></a></td>
+          <td class="even"><a href="<{$xoops_url}>/userinfo.php?uid=<{$results[i].user_id}>"><{$results[i].user_name}></a></td>
+          <td class="odd"><{$results[i].topic_replies}></td>
+          <td class="even"><{$results[i].topic_views}></td>
+          <td class="odd"><{$results[i].post_time}></td>
+        </tr>
+        <!-- end each result -->
+        <{/section}>
+        <!-- end search results -->
+      </table>
+    </td>
+  </tr>
+</table>
+<br />
+<form name="Search" action="search.php" method="post">
+  <table class="outer" border="0" cellpadding="1" cellspacing="0" align="center" width="95%">
+    <tr>
+      <td>
+        <table border="0" cellpadding="1" cellspacing="1" width="100%" class="head">
+          <tr>
+            <td class="head" width="50%" align="right"><b><{$lang_keywords}></b>&nbsp;</td>
+            <td class="even" width="50%"><input type="text" name="term" /></td>
+          </tr>
+          <tr>
+            <td class="head" width="50%">&nbsp;</td>
+            <td class="even" width="50%"><input type="radio" name="addterms" value="any" checked="checked" /><{$lang_searchany}></td>
+          </tr>
+          <tr>
+            <td class="head" width="50%">&nbsp;</td>
+            <td class="even" width="50%"><input type="radio" name="addterms" value="all" /><{$lang_searchall}></td>
+          </tr>
+            <td class="head" width="50%" align="right"><b><{$lang_author}></b>&nbsp;</td>
+            <td class="even" width="50%"><input type="text" name="search_username" /></td>
+          </tr>
+            <td class="head" width="50%" align="right">&nbsp;</td>
+            <td class="even"><input type="submit" name="submit" value="<{$lang_search}>" /></td>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- end module contents -->

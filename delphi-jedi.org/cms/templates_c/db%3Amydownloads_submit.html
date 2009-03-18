@@ -1,0 +1,104 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 07:00:41
+         compiled from db:mydownloads_submit.html */ ?>
+<br /><br />
+
+<br />
+
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+  <tr>
+    <td>
+<h1>Submit a API Library Donation</h1>
+<p> 
+This page will guide you through a short procedure to help Project
+JEDI organize donated files. Please follow the instructions to help ensure that the donation goes smoothly. </p>
+<p>
+If possible please include an info.txt file.  Simply download the info.ini template, fill in the blanks, rename the file to info.txt and include it in your zipfile. For your convenience, a template for your Pascal unit header is included in this file.
+</p>
+
+<form action="submit.php" method="post">
+        <table class ="outer" width="80%">
+          <tr> 
+            <td class="itemHead" align="left" nowrap colspan="2"><b><?php echo $this->_tpl_vars['lang_submitcath']; ?>
+</b> 
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left" nowrap><b>API name</b></td>
+            <td class="even"> 
+              <input type="text" name="title" size="50" maxlength="100" />
+            </td>
+          </tr>
+
+          <tr> 
+            <td class="head" align="left" nowrap><b><?php echo $this->_tpl_vars['lang_siteurl']; ?>
+</b></td>
+            <td class="odd" > 
+              <input type="text" name="url" size="50" maxlength="250" value="http://" /> or upload a local file <br>
+             <INPUT TYPE="file" NAME="myfile" SIZE=30> 
+
+          </tr>
+          <tr> 
+            <td class="head" align="left" nowrap><b><?php echo $this->_tpl_vars['lang_category']; ?>
+</b></td>
+            <td class="even"><?php echo $this->_tpl_vars['category_selbox']; ?>
+</td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><?php echo $this->_tpl_vars['lang_homepage']; ?>
+</b></td>
+            <td class="odd" > 
+              <input type="text" name="homepage" size="50" maxlength="100" value="<?php echo $this->_tpl_vars['file']['homepage']; ?>
+">
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><?php echo $this->_tpl_vars['lang_version']; ?>
+</b></td>
+            <td class="even"> 
+              <input type="text" name="version" size="10" maxlength="20" value="<?php echo $this->_tpl_vars['file']['version']; ?>
+">
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><?php echo $this->_tpl_vars['lang_size']; ?>
+</b></td>
+            <td class="odd"> 
+              <input type="text" name="size" size="10" maxlength="20" value="<?php echo $this->_tpl_vars['file']['size']; ?>
+">
+              <?php echo $this->_tpl_vars['lang_bytes']; ?>
+</td>
+          </tr>
+          <tr> 
+            <td class="head" align="left"><b><?php echo $this->_tpl_vars['lang_platform']; ?>
+</b></td>
+            <td class="even"> 
+              <input type="text" name="platform" size="50" maxlength="50" value="<?php echo $this->_tpl_vars['file']['plataform']; ?>
+">
+            </td>
+          </tr>
+          <tr> 
+            <td class="head" align="left" valign="top" nowrap><b><?php echo $this->_tpl_vars['lang_description']; ?>
+</b></td>
+            <td class="odd"><?php echo $this->_tpl_vars['xoops_codes']; ?>
+<?php echo $this->_tpl_vars['xoops_smilies']; ?>
+</td>
+          </tr>
+          <tr>
+            <td class="head"><b><?php echo $this->_tpl_vars['lang_options']; ?>
+</b></td>
+            <td class="even">
+            <?php if ($this->_tpl_vars['notify_show']): ?>
+              <input type="checkbox" name="notify" value="1"><?php echo $this->_tpl_vars['lang_notify']; ?>
+</input>
+            <?php endif; ?>
+            </td>
+          </tr>
+        </table>
+      <br />
+      <div style="text-align: center;"><input type="submit" name="submit" class="button" value="<?php echo $this->_tpl_vars['lang_submit']; ?>
+" />&nbsp;<input type="button" value="<?php echo $this->_tpl_vars['lang_cancel']; ?>
+" onclick="javascript:history.go(-1)" /></div>
+    </form>
+  </td>
+</tr>
+</table>

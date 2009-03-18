@@ -1,0 +1,66 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:56:19
+         compiled from db:news_archive.html */ ?>
+<?php $this->_load_plugins(array(
+array('function', 'cycle', 'db:news_archive.html', 27, false),)); ?><table>
+  <tr>
+    <th><?php echo $this->_tpl_vars['lang_newsarchives']; ?>
+</th>
+  </tr>
+
+<?php if (count((array)$this->_tpl_vars['years'])):
+    foreach ((array)$this->_tpl_vars['years'] as $this->_tpl_vars['year']):
+?>
+<?php if (count((array)$this->_tpl_vars['year']['months'])):
+    foreach ((array)$this->_tpl_vars['year']['months'] as $this->_tpl_vars['month']):
+?>
+
+  <tr class="even">
+    <td><a href="./archive.php?year=<?php echo $this->_tpl_vars['year']['number']; ?>
+&amp;month=<?php echo $this->_tpl_vars['month']['number']; ?>
+"><?php echo $this->_tpl_vars['month']['string']; ?>
+ <?php echo $this->_tpl_vars['year']['number']; ?>
+</a></td>
+  </tr>
+
+<?php endforeach; endif; ?>
+<?php endforeach; endif; ?>
+
+</table>
+
+<?php if ($this->_tpl_vars['show_articles'] == true): ?>
+
+<table>
+  <tr>
+    <th><?php echo $this->_tpl_vars['lang_articles']; ?>
+</th><th align="center"><?php echo $this->_tpl_vars['lang_actions']; ?>
+</th><th align="center"><?php echo $this->_tpl_vars['lang_views']; ?>
+</th><th align="center"><?php echo $this->_tpl_vars['lang_date']; ?>
+</th>
+  </tr>
+
+  <?php if (count((array)$this->_tpl_vars['stories'])):
+    foreach ((array)$this->_tpl_vars['stories'] as $this->_tpl_vars['story']):
+?>
+
+  <tr class="<?php echo $this->_plugins['function']['cycle'][0](array('values' => "even, odd"), $this) ; ?>
+">
+    <td><?php echo $this->_tpl_vars['story']['title']; ?>
+</td><td align="center"><a href="<?php echo $this->_tpl_vars['story']['print_link']; ?>
+"><img src="images/print.gif" alt="<?php echo $this->_tpl_vars['lang_printer']; ?>
+" /></a> <a href="<?php echo $this->_tpl_vars['story']['mail_link']; ?>
+" target="_top" /><img src="images/friend.gif" alt="<?php echo $this->_tpl_vars['lang_sendstory']; ?>
+" /></td><td align="center"><?php echo $this->_tpl_vars['story']['counter']; ?>
+</td><td align="center"><?php echo $this->_tpl_vars['story']['date']; ?>
+</td>
+  </tr>
+
+  <?php endforeach; endif; ?>
+
+</table>
+
+<div>
+<?php echo $this->_tpl_vars['lang_storytotal']; ?>
+
+</div>
+
+<?php endif; ?>

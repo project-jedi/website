@@ -1,0 +1,15 @@
+<table cellspacing="0">
+  <tr>
+    <td id="mainmenu">
+      <!-- start module menu loop -->
+      <{foreach item=item from=$block.contents}>
+        <{if $item.link == ""}>
+        <span style="padding-left: 3px; border-right: 1px solid #666666; border-bottom: 1px solid #666666; border-left: 1px solid silver; padding: 4px; background-color: #e6e6e6; display: block; margin: 0;"><strong><{$item.title}></strong></span>
+        <{else}>
+      	<a class="menuMain" target="<{$item.target}>" href="<{$item.link}>">&middot; <{$item.title}></a>
+        <{/if}>
+      <{/foreach}>
+      <!-- end module menu loop -->
+    </td>
+  </tr>
+</table>

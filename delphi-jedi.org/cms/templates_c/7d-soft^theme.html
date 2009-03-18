@@ -1,0 +1,300 @@
+<?php /* Smarty version 2.5.0, created on 2004-04-03 07:44:57
+         compiled from 7d-soft/theme.html */ ?>
+<?php $this->_load_plugins(array(
+array('function', 'cycle', '7d-soft/theme.html', 127, false),)); ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->_tpl_vars['xoops_langcode']; ?>
+" lang="<?php echo $this->_tpl_vars['xoops_langcode']; ?>
+">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=<?php echo $this->_tpl_vars['xoops_charset']; ?>
+" />
+<meta http-equiv="content-language" content="<?php echo $this->_tpl_vars['xoops_langcode']; ?>
+" />
+<meta name="robots" content="<?php echo $this->_tpl_vars['xoops_meta_robots']; ?>
+" />
+<meta name="keywords" content="<?php echo $this->_tpl_vars['xoops_meta_keywords']; ?>
+" />
+<meta name="description" content="<?php echo $this->_tpl_vars['xoops_meta_description']; ?>
+" />
+<meta name="rating" content="<?php echo $this->_tpl_vars['xoops_meta_rating']; ?>
+" />
+<meta name="author" content="<?php echo $this->_tpl_vars['xoops_meta_author']; ?>
+" />
+<meta name="copyright" content="<?php echo $this->_tpl_vars['xoops_meta_copyright']; ?>
+" />
+<meta name="generator" content="XOOPS" />
+<title><?php echo $this->_tpl_vars['xoops_sitename']; ?>
+ - <?php echo $this->_tpl_vars['xoops_pagetitle']; ?>
+</title>
+<link href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/xoops.css" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->_tpl_vars['xoops_themecss']; ?>
+" />
+<!-- RMV: added module header -->
+<?php echo $this->_tpl_vars['xoops_module_header']; ?>
+
+<script type="text/javascript">
+<!--
+<?php echo $this->_tpl_vars['xoops_js']; ?>
+
+//-->
+</script>
+</head>
+<body>
+<table border="0" align="center" cellpadding="0" cellspacing="0" class="okvir_main">
+  <tr>
+    <td>
+     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="21"><img src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/top_tab_left.gif" border="0" /></td>
+      <td align="middle" width="100%" background="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/top_tab_bg.gif"></td>
+      <td width="21"><img src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/top_tab_right.gif" border="0" /></td></tr></table>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="okvir">
+  <tr>
+    <td>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" id="header">
+        <tr> 
+          <td id="headerlogo"><a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/"><img src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/logo.bmp" alt="7dana online" /></a></td>
+          <td align="right" id="headerbanner"><?php echo $this->_tpl_vars['xoops_banner']; ?>
+&nbsp;&nbsp;</td>
+        </tr>
+            </table>
+ <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td>
+	    <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0 BOTTOMMARGIN="0">
+                <tr align="center"> 
+                  <td width="45%" class="sat" bgcolor="#ECE9D8"><span id="clock"></span> <script language="JavaScript" type="text/javascript" src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/clock.js">
+      </script> &nbsp;</td>
+                  <td id="headmenu"><a onmouseover=showit(1) class="menuHead" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/index.php">HOME</a></td>
+                   <td id="headmenu"><a onmouseover=showit(2) class="menuHead"  href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/news/">NEWS</a></td>
+                  <td id="headmenu"><a onmouseover=showit(3) class="menuHead" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/">Lists & Newsgroups</a></td>
+                <td id="headmenu"><a onmouseover=showit(4) class="menuHead"  href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/partners/">Partners</a></td>
+                  <td id="headmenu"><a onmouseover=showit(5) class="menuHead" href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/">API Library</a></td>
+                  <td id="headmenu"><a onmouseover=showit(6) class="menuHead"  href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/jedifaq/">FAQ</a></td>
+                </tr>
+	    <TR>
+          <TD class="subnavigate" colSpan=8 >
+           <DIV width="100%"; padding-left:15px; id=describe onmouseover=clear_delayhide() onmouseout=resetit(event)></DIV>
+            <SCRIPT language=JavaScript1.2>
+var submenu=new Array()
+submenu[1]=''
+submenu[2]='&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/news/">NEWS</a>&nbsp;|&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/news/submit.php">SUBMIT NEWS</a>&nbsp;|&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/news/archive.php">NEWS ARCHIVE</a>&nbsp;'
+submenu[3]=''
+submenu[4]='&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/partners/submit.php">SUBMIT LINKS</a>&nbsp;|&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/partners/topten.php">TOP LINKS</a>&nbsp;</a>'
+submenu[5]='&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/submit.php">SUBMIT DOWNLOAD</a>&nbsp;|&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/topten.php?hit=1">POPULAR</a>&nbsp;|&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/apilib/topten.php?rate=1">TOP RATED</a>&nbsp;'
+submenu[6]=''
+submenu[7]='&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/contact/">CONTACT US</a>&nbsp;|&nbsp;<a href="mailto:your@email.com?subject=Contact%20from%20web%20site">SEND EMAIL</a>'
+var delay_hide=750
+var menuobj=document.getElementById? document.getElementById("describe") : document.all? document.all.describe : document.layers? document.dep1.document.dep2 : ""
+function showit(which){
+clear_delayhide()
+thecontent=(which==-1)? "" : submenu[which]
+if (document.getElementById||document.all)
+menuobj.innerHTML=thecontent
+else if (document.layers){
+menuobj.document.write(thecontent)
+menuobj.document.close()
+}
+}
+function resetit(e){
+if (document.all&&!menuobj.contains(e.toElement))
+delayhide=setTimeout("showit(-1)",delay_hide)
+else if (document.getElementById&&e.currentTarget!= e.relatedTarget&& !contains_ns6(e.currentTarget, e.relatedTarget))
+delayhide=setTimeout("showit(-1)",delay_hide)
+}
+function clear_delayhide(){
+if (window.delayhide)
+clearTimeout(delayhide)
+}
+function contains_ns6(a, b) {
+while (b.parentNode)
+if ((b = b.parentNode) == a)
+return true;
+return false;
+}
+</SCRIPT>
+</TD></TR></table>
+</td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="180" class="headerprvi">
+              <form style="margin-top: 2px; margin-bottom: 0px" action="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/search.php" method="post">
+                &nbsp;&nbsp;<input class="button" type="text" name="query" size="13" />
+                <input type="hidden" name="action" value="results" />
+                <input name="submit" type="submit" value="Search" />
+              </form>
+          </td>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr> 
+                <td class="pozdrav" align="right"> &nbsp;&nbsp;<?php if ($this->_tpl_vars['xoops_isuser']): ?> Hello <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/user.php"><?php echo $this->_tpl_vars['xoops_uname']; ?>
+</a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/user.php">Your Info </a>&nbsp; <?php else: ?> <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/register.php">Regiser
+                    now 
+                  </a>  <?php endif; ?> <span class="right"> <?php if ($this->_tpl_vars['xoops_isuser']): ?> 
+                  <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/user.php?op=logout">Logout</a> <?php else: ?> &nbsp;&nbsp;&nbsp;<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/user.php">Login</a> 
+                  <?php endif; ?> </span>
+                  </td>
+              </tr>
+            </table></td>
+        </tr>
+      </table>
+      <table border="0" cellpadding="0" cellspacing="0" id="glavna">
+        <td id="leftcolumn"> 
+		  <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/"><img src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/logo_mali.jpg" alt="" /></a>
+		  <!-- Start left blocks loop -->
+          <?php if (count((array)$this->_tpl_vars['xoops_lblocks'])):
+    foreach ((array)$this->_tpl_vars['xoops_lblocks'] as $this->_tpl_vars['block']):
+?> <div class="<?php echo $this->_plugins['function']['cycle'][0](array('values' => 'blockTitle'), $this) ; ?>
+"><?php echo $this->_tpl_vars['block']['title']; ?>
+</div>
+          <div class="blockContent"><?php echo $this->_tpl_vars['block']['content']; ?>
+</div>
+		  <img src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/160.gif" width="150" height="1" alt="" />
+          <?php endforeach; endif; ?> 
+          <!-- End left blocks loop -->
+          <br /> <br />          </td>
+        <td id="centercolumn">
+
+          <!-- Display center blocks if any -->
+          <?php if ($this->_tpl_vars['xoops_showcblock'] == 1): ?> <table class="sadrzaj" cellspacing="0">
+            <tr> 
+              <td id="centerCcolumn" colspan="2"> 
+                <!-- Start center-center blocks loop -->
+                <?php if (count((array)$this->_tpl_vars['xoops_ccblocks'])):
+    foreach ((array)$this->_tpl_vars['xoops_ccblocks'] as $this->_tpl_vars['block']):
+?> <table align="center" cellpadding="0" cellspacing="2">
+                  <tr> 
+                    <td> <div class="blockTitle"><?php echo $this->_tpl_vars['block']['title']; ?>
+</div>
+                      <div class="blockContent"><?php echo $this->_tpl_vars['block']['content']; ?>
+</div></td>
+                  </tr>
+                </table>
+                <?php endforeach; endif; ?> 
+                <!-- End center-center blocks loop -->
+              </td>
+            </tr>
+            <tr> 
+              <td id="centerLcolumn"> 
+                <!-- Start center-left blocks loop -->
+                <?php if (count((array)$this->_tpl_vars['xoops_clblocks'])):
+    foreach ((array)$this->_tpl_vars['xoops_clblocks'] as $this->_tpl_vars['block']):
+?> <table class="blok" align="center" cellpadding="3" cellspacing="2">
+                  <tr> 
+                    <td> <div class="blockTitle"><?php echo $this->_tpl_vars['block']['title']; ?>
+</div>
+                      <div class="blockContent"><?php echo $this->_tpl_vars['block']['content']; ?>
+</div></td>
+                  </tr>
+                </table>
+                <?php endforeach; endif; ?> 
+                <!-- End center-left blocks loop -->
+              </td>
+              <td id="centerRcolumn"> 
+                <!-- Start center-right blocks loop -->
+                <?php if (count((array)$this->_tpl_vars['xoops_crblocks'])):
+    foreach ((array)$this->_tpl_vars['xoops_crblocks'] as $this->_tpl_vars['block']):
+?> <table class="blok" align="center" cellpadding="3" cellspacing="2">
+                  <tr> 
+                    <td> <div class="blockTitle"><?php echo $this->_tpl_vars['block']['title']; ?>
+</div>
+                      <div class="blockContent"><?php echo $this->_tpl_vars['block']['content']; ?>
+</div></td>
+                  </tr>
+                </table>
+                <?php endforeach; endif; ?> 
+                <!-- End center-right blocks loop -->
+              </td>
+            </tr>
+          </table>
+          <?php endif; ?> 
+          <!-- End display center blocks -->
+          <div id="content"> <?php echo $this->_tpl_vars['xoops_contents']; ?>
+ </div>
+          <br /> <br /> <br /> </td>
+        <?php if ($this->_tpl_vars['xoops_showrblock'] == 1): ?> 
+        <td id="rightcolumn"> 
+          <!-- Start right blocks loop -->
+          <?php if (count((array)$this->_tpl_vars['xoops_rblocks'])):
+    foreach ((array)$this->_tpl_vars['xoops_rblocks'] as $this->_tpl_vars['block']):
+?> <div class="<?php echo $this->_plugins['function']['cycle'][0](array('values' => 'blockTitle'), $this) ; ?>
+"><?php echo $this->_tpl_vars['block']['title']; ?>
+</div>
+          <div class="blockContent"><?php echo $this->_tpl_vars['block']['content']; ?>
+</div>
+		  <img src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/160.gif" width="150" height="1" alt="" />
+          <?php endforeach; endif; ?> 
+          <!-- End right blocks loop -->
+          <br /> 
+          <br /> </td>
+        <?php endif; ?> </tr>
+        <tr> 
+          <td colspan="3" class="line_main"><div class="privatnost"><br />
+Copyright © 2004 by <a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+" target="_self">your company</a> &nbsp;|&nbsp;
+<?php echo $this->_tpl_vars['xoops_footer']; ?>
+ &nbsp;|&nbsp;
+<!-- Webmaster, dont remove this text. It denied by license! -->
+Design by <a href="http://www.7dana.com" target="_blank">7dana.com</a>
+<!--End  "design by" text! -->
+
+          <br /><br /></div></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="21"><img 
+                  src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/bot_cat_left.gif" 
+                  border="0" /></td>
+      <td align="middle" width="100%" 
+                background="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/bot_cat_bg.gif"></td>
+      <td width="21"><img 
+                  src="<?php echo $this->_tpl_vars['xoops_imageurl']; ?>
+images/bot_cat_right.gif" 
+                  border="0" /></td>
+                  </tr>
+               </table>
+    </td>
+  </tr>
+</table><br />
+</body>
+</html>

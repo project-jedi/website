@@ -1,0 +1,41 @@
+<br /><br />
+
+<p align="center">
+    <a href="<{$xoops_url}>/modules/mydownloads/index.php"><img src="<{$xoops_url}>/modules/mydownloads/images/logo-en.gif" alt="" /></a>
+</p>
+
+<br /><br /><br />
+<!-- Start ranking loop -->
+<{foreach item=ranking from=$rankings}>
+<table class="outer">
+  <tr>
+    <th colspan="6" align="center"><{$ranking.title}> (<{$lang_sortby}>)</th>
+  </tr>
+  <tr>
+    <td width='7%' class="head"><{$lang_rank}></td>
+    <td width='28%' class="head"><{$lang_title}></td>
+    <td width='40%' class="head"><{$lang_category}></td>
+    <td width='8%' class="head" align='center'><{$lang_hits}></td>
+    <td width='9%' class="head" align='center'><{$lang_rating}></td>
+    <td width='8%' class="head" align='right'><{$lang_vote}></td>
+  </tr>
+
+  <!-- Start files loop -->
+  <{foreach item=file from=$ranking.file}>
+
+  <tr>
+    <td class="even"><{$file.rank}></td>
+    <td class="odd"><a href='singlefile.php?cid=<{$file.cid}>&amp;lid=<{$file.id}>'><{$file.title}></a></td>
+    <td class="even"><{$file.category}></td>
+    <td class="odd" align='center'><{$file.hits}></td>
+    <td class="even" align='center'><{$file.rating}></td>
+    <td align='right'><{$file.votes}></td>
+  </tr>
+
+  <{/foreach}>
+  <!-- End links loop-->
+
+</table>
+<br />
+<{/foreach}>
+<!-- End ranking loop -->

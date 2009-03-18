@@ -1,0 +1,118 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:25:10
+         compiled from db:wfchannel_linktous.html */ ?>
+<p>
+<?php if ($this->_tpl_vars['linktous']['linkpagelogo']): ?>
+<div align="center">
+	<div><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['linkpagelogo']; ?>
+' name='image' id='image' alt='' /></div>
+</div></p>
+<?php endif; ?>
+
+<p><div align= "center"><h3><?php echo $this->_tpl_vars['lang_linktous']; ?>
+</h3></div></p>
+<p><div align= "left"><?php echo $this->_tpl_vars['lang_linkintro']; ?>
+</div></p>
+
+<?php if ($this->_tpl_vars['linktous']['textlink']): ?>
+	<p><div align= "left" class = "itemHead"><b><?php echo $this->_tpl_vars['lang_displaytext']; ?>
+</b></div></p>
+	<p><div align= "left"><b><?php echo $this->_tpl_vars['lang_textexample']; ?>
+</b><br /> <a href='<?php echo $this->_tpl_vars['xoops_url']; ?>
+' target='_blank'><?php echo $this->_tpl_vars['linktous']['textlink']; ?>
+</b></a></a><br></div></p>
+	<div align= "left"><?php echo $this->_tpl_vars['lang_displayscript']; ?>
+</div>
+	<textarea name='linktext' cols='60' rows='2' wrap='VIRTUAL'><a href='<?php echo $this->_tpl_vars['xoops_url']; ?>
+' target='_blank'><?php echo $this->_tpl_vars['linktous']['textlink']; ?>
+</b></a></textarea>
+<?php endif; ?>
+
+<?php if ($this->_tpl_vars['linktous']['button']): ?>
+	<p><div align= "left" class = "itemHead"><b><?php echo $this->_tpl_vars['lang_displaybutton']; ?>
+</b></div></p>
+	<p><div align= "left"><b><?php echo $this->_tpl_vars['lang_buttonexample']; ?>
+</b></div>
+	<div><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['button']; ?>
+' name='image' id='image' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+' /></div></p>
+	<div align= "left"><?php echo $this->_tpl_vars['lang_displayscript']; ?>
+</div>
+	<textarea name='lienbt' cols='70' rows='4' wrap='VIRTUAL'><a href='<?php echo $this->_tpl_vars['xoops_url']; ?>
+' target='_blank'><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['button']; ?>
+' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+'></a></textarea>
+<?php endif; ?>
+
+<?php if ($this->_tpl_vars['linktous']['logo']): ?>
+	<p><div align= "left" class = "itemHead"><b><?php echo $this->_tpl_vars['lang_displaylogo']; ?>
+</b></div></p>
+	<p><div align= "left"><b><?php echo $this->_tpl_vars['lang_logoexample']; ?>
+</b></div>
+	<div><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['logo']; ?>
+' name='image' id='image' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+' /></div></p>
+	<div align= "left"><?php echo $this->_tpl_vars['lang_displayscript']; ?>
+</div>
+	<textarea name='lienbt' cols='70' rows='4' wrap='VIRTUAL'><a href='<?php echo $this->_tpl_vars['xoops_url']; ?>
+' target='_blank'><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['logo']; ?>
+' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+'></a></textarea>
+<?php endif; ?>
+
+<?php if ($this->_tpl_vars['linktous']['banner']): ?>
+	<p><div align= "left" class = "itemHead"><b><?php echo $this->_tpl_vars['lang_displaybanner']; ?>
+</b></div></p>
+	<p><div align= "left"><b><?php echo $this->_tpl_vars['lang_bannerexample']; ?>
+</b></div>
+	<div><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['banner']; ?>
+' name='image' id='image' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+' /></div></p>
+	<div align= "left"><?php echo $this->_tpl_vars['lang_displayscript']; ?>
+</div>
+	<textarea name='lienbt' cols='70' rows='4' wrap='VIRTUAL'><a href='<?php echo $this->_tpl_vars['xoops_url']; ?>
+' target='_blank'><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/<?php echo $this->_tpl_vars['linktous']['path']; ?>
+/<?php echo $this->_tpl_vars['linktous']['banner']; ?>
+' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+'></a></textarea>
+<?php endif; ?>
+
+<?php if ($this->_tpl_vars['linktous']['newsfeed'] == 1): ?>	
+	<p><div align= "left" class = "itemHead"><b><?php echo $this->_tpl_vars['lang_displaynews']; ?>
+</b></div></p>
+	<p><div><img src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/modules/wfchannel/images/rss.gif' name='image' id='image' alt='<?php echo $this->_tpl_vars['linktous']['sitename']; ?>
+' /></div></p>
+	<p><div align= "left"><?php echo $this->_tpl_vars['lang_displaynewsrss']; ?>
+</div></p>
+	<p><div align= "left"><i><?php echo $this->_tpl_vars['lang_newsfeedexample']; ?>
+ <b><?php echo $this->_tpl_vars['xoops_url']; ?>
+/backend.php</b></i></div></p>
+<?php endif; ?>
+
+<?php if ($this->_tpl_vars['linktous']['newsfeedjs'] == 1): ?>	
+	<p><div align= "left"><?php echo $this->_tpl_vars['lang_displayjsnewsrss']; ?>
+</div></p>
+	<p><div align= "left"><i><?php echo $this->_tpl_vars['lang_newsfeedjsexample']; ?>
+ <b><?php echo $this->_tpl_vars['xoops_url']; ?>
+/backendjs.php</b></i></div></p>
+	<div align= "left"><?php echo $this->_tpl_vars['lang_displayscript']; ?>
+</div>
+	<textarea name='backend' cols='70' rows='4' wrap='VIRTUAL'><script type='text/javascript' src='<?php echo $this->_tpl_vars['xoops_url']; ?>
+/backendjs.php'></script></textarea>
+<?php endif; ?>
+<br /><br />
+<p><div align= "center"><small><?php echo $this->_tpl_vars['lang_copyrightnotice']; ?>
+</small></div></p>

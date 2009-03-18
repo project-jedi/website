@@ -1,0 +1,32 @@
+<?php /* Smarty version 2.5.0, created on 2004-03-15 06:07:21
+         compiled from db:news_item.html */ ?>
+<div class="item">
+<div class="itemHead">
+<span class="itemTitle"><?php echo $this->_tpl_vars['story']['title']; ?>
+</span></div>
+
+
+  <div class="itemBody">
+    <?php echo $this->_tpl_vars['story']['imglink']; ?>
+
+    <p class="itemText"><?php echo $this->_tpl_vars['story']['text']; ?>
+</p>
+  </div>
+
+<div class="itemFoot">
+
+<span class="itemPoster"><?php echo $this->_tpl_vars['lang_postedby']; ?>
+ <?php echo $this->_tpl_vars['story']['poster']; ?>
+</span> 
+
+<span class="itemPostDate"><?php echo $this->_tpl_vars['lang_on']; ?>
+ <?php echo $this->_tpl_vars['story']['posttime']; ?>
+</span> (<span class="itemStats"><?php echo $this->_tpl_vars['story']['hits']; ?>
+ <?php echo $this->_tpl_vars['lang_reads']; ?>
+</span>) &nbsp &nbsp
+
+<span class="itemAdminLink"><?php echo $this->_tpl_vars['story']['adminlink']; ?>
+</span> <span class="itemPermaLink"><?php echo $this->_tpl_vars['story']['morelink']; ?>
+</span>
+  </div>
+</div>

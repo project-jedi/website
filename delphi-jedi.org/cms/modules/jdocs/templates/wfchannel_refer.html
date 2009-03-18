@@ -1,0 +1,42 @@
+<p>
+<{if $referfriend.linkpagelogo }>
+<div align="center">
+	<div><img src='<{$xoops_url}>/<{$referfriend.path}>/<{$referfriend.linkpagelogo}>' name='image' id='image' alt='' /></div>
+</div></p>
+<{/if}>
+
+<div align= "center">
+  <h3 align="left"><{$lang_linktous}></h3>
+</div>
+<div align= "left"><{$referfriend.chanrefheadline}></div>
+
+<form name = 'refer'  action='index.php?op=refersend' method = 'post'>
+
+  <div align = 'center'><b><{$lang_sendername}></b>:<br>
+    <input type='text' name='uname' size='40' maxlength='50' value= '<{ $referfriend.uname }>' /></div>
+  <div align = 'center'><b><{$lang_senderemail}></b><br>
+    <input type='text' name='email' size='40' maxlength='50' value= '<{ $referfriend.emailaddy }>' /></div>
+<br />
+
+  <div align = 'center'><b><{$lang_recipname}></b><br>
+    <input type='text' name='runame' size='40' maxlength='50' value= '' /></div>
+  <div align = 'center'><b><{$lang_reciptremail}></b><br>
+    <input type='text' name='remail' size='40' maxlength='50' value= '' /></div>
+<br />
+
+
+<{if $referfriend.usersblurb }>
+<div align = 'center'><b><{$lang_writeblurb}></b><br />
+    <textarea name="message" cols="60" rows="10"><{ $referfriend.defblurb }>
+</textarea>
+</div>
+<br />
+<{/if}>
+
+<br />
+<div align ="center">
+<input type = 'submit' value = 'Send' >
+ <input type = 'reset' value = 'Clear' >
+</div>
+</form>
+

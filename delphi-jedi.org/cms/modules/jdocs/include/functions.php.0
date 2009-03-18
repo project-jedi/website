@@ -1,0 +1,131 @@
+<?php
+/**
+ * $Id: functions.php v 1.3 20 November 2003 Catwolf Exp $
+ * Module: WF-Channel
+ * Version: v1.0.2
+ * Release Date: 20 November 2003
+ * Author: Catzwolf
+ * Licence: GNU
+ */
+
+function htmlarray( $thishtmlpage, $thepath )
+{
+   	$file_array = filesarray( $thepath );
+
+    echo "<select size='1' name='htmlpage'>";
+    echo "<option value=''>------</option>";
+    foreach($file_array as $htmlpage){
+        if ($htmlpage == $thishtmlpage){
+            $opt_selected = "selected='selected'";
+        }else{
+            $opt_selected = "";
+        }
+        echo "<option value='" . $htmlpage . "' $opt_selected>" . $htmlpage . "</option>";
+    }
+    echo "</select>";
+    return $htmlpage;
+} 
+
+function getDirSelectOption( $selected, $dirarray, $namearray )
+{ 
+    // global $workd;
+    echo "<select size='1' name='workd' onchange='location.href=\"upload.php?rootpath=\"+this.options[this.selectedIndex].value'>";
+    echo "<option value=''>--------------------------------------</option>";
+    foreach( $namearray as $namearray => $workd )
+    {
+        if ( $workd === $selected )
+        {
+            $opt_selected = "selected";
+        } 
+        else
+        {
+            $opt_selected = "";
+        } 
+        echo "<option value='" . htmlspecialchars( $namearray, ENT_QUOTES ) . "' $opt_selected>" . $workd . "</option>";
+    } 
+    echo "</select>";
+} 
+
+function filesarray( $filearray )
+{
+    $files = array();
+    $dir = opendir( $filearray );
+
+    while ( ( $file = readdir( $dir ) ) !== false )
+    {
+        if ( ( !preg_match( "/^[.]{1,2}$/", $file ) && preg_match( "/[.htm|.html|.xhtml]$/i", $file ) && !is_dir( $file ) ) )
+        {
+            if ( strtolower( $file ) != 'cvs' && !is_dir( $file ) )
+            {
+                $files[$file] = $file;
+            } 
+        } 
+    } 
+    closedir( $dir );
+    asort( $files );
+    reset( $files );
+    return $files;
+} 
+
+function adminmenu( $header = '', $extra = '' )
+{
+    global $xoopsConfig, $xoopsModule;
+
+    echo "<div><h3>" . $header . "</h3></div>";
+    echo "<div align='left' valign='top' >";
+    echo "<table class='outer' cellpadding= '4'cellspacing= '1' width = '100%'>";
+    echo "<tr>";
+    echo "<td class='odd' align='center' valign='middle' width='19%'><a href='" . XOOPS_URL . "/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule -> getVar( 'mid' ) . "'>" . _AM_GENERALSET . "</a></td>";
+    echo "<td class='even' align='center' valign='middle' width='19%'><a href='index.php?op=default'>" . _AM_MAINADMIN . "</a></td>";
+    echo "<td class='odd' align='center' valign='middle' width='19%'><a href='index.php?op=create'>" . _AM_CREATENEWPAGE . "</a></td>";
+    echo "<td class='even' align='center' valign='middle' width='19%'><a href='index.php?op=links'>" . _AM_CLINKTOUS . "</a></td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "<td class='even' align='center' valign='middle' width='19%'><a href='./permissions.php'>" . _AM_GROUPPERMISSIONS . "</a></td>";
+    echo "<td class='odd' align='center' valign='middle' width='19%'><a href='index.php?op=refer'>" . _AM_REFER . "</a></td>";
+    echo "<td class='even' align='center' valign='middle' width='19%'><a href='upload.php'>" . _AM_UPLOAD . "</a></td>";
+    echo "<td class='odd' align='center' valign='middle' width='19%'><a href='reorder.php?'>" . _AM_REORDER . "</a></td>";
+    echo "</tr>";
+    echo "</table>";
+
+    if ( $extra )
+    {
+        echo "<div>&nbsp;</div>";
+    } 
+} 
+
+function uploading( $allowed_mimetypes, $httppostfiles, $redirecturl = "index.php", $num = 0, $dir = "uploads", $redirect = 0 )
+{
+    include_once XOOPS_ROOT_PATH . "/class/uploader.php";
+
+    global $xoopsConfig, $xoopsModuleConfig, $HTTP_POST_VARS;
+
+    $maxfilesize = $xoopsModuleConfig['maxfilesize'];
+    $maxfilewidth = $xoopsModuleConfig['maximgwidth'];
+    $maxfileheight = $xoopsModuleConfig['maximgheight'];
+    $uploaddir = XOOPS_ROOT_PATH . "/" . $dir . "/";
+
+    $uploader = new XoopsMediaUploader( $uploaddir, $allowed_mimetypes, $maxfilesize, $maxfilewidth, $maxfileheight );
+
+    if ( $uploader -> fetchMedia( $HTTP_POST_VARS['xoops_upload_file'][$num] ) )
+    {
+        if ( !$uploader -> upload() )
+        {
+            $errors = $uploader -> getErrors();
+            redirect_header( $redirecturl, 1, $errors );
+        } 
+        else
+        {
+            if ( $redirect )
+            {
+                redirect_header( $redirecturl, 1 , "File Uploaded" );
+            } 
+        } 
+    } 
+    else
+    {
+        $errors = $uploader -> getErrors();
+        redirect_header( $redirecturl, 1, $errors );
+    } 
+} 
+?>

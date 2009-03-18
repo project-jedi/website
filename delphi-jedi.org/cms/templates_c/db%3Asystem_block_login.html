@@ -1,0 +1,31 @@
+<?php /* Smarty version 2.5.0, created on 2005-08-23 16:31:47
+         compiled from db:system_block_login.html */ ?>
+<table>
+<tr>
+<td class="usermenu">
+
+<form style="color: #FFFFFF; margin-top: 0px;" action="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/user.php" method="post"><?php echo $this->_tpl_vars['block']['lang_username']; ?>
+<br /><input type="text" name="uname" size="12" value="<?php echo $this->_tpl_vars['block']['unamevalue']; ?>
+" /><br /><?php echo $this->_tpl_vars['block']['lang_password']; ?>
+<br /><input type="password" name="pass" size="12" /><!-- <br />
+<input style="color: #FFFFFF"; type="checkbox" name="rememberme" value="On" class ="formButton" /><?php echo $this->_tpl_vars['block']['lang_rememberme']; ?>
+ //--><br /><input type="hidden" name="xoops_redirect" value="<?php echo $this->_tpl_vars['xoops_requesturi']; ?>
+" /><input type="hidden" name="op" value="login" /><input type="submit" value="<?php echo $this->_tpl_vars['block']['lang_login']; ?>
+" /><br /><?php echo $this->_tpl_vars['block']['sslloginlink']; ?>
+
+</form>
+</td>
+</tr>
+<tr>
+<td class="usermenu">
+<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/user.php#lost"><?php echo $this->_tpl_vars['block']['lang_lostpass']; ?>
+</a>
+<a href="<?php echo $this->_tpl_vars['xoops_url']; ?>
+/register.php"><?php echo $this->_tpl_vars['block']['lang_registernow']; ?>
+</a>
+</td>
+</tr>
+
+</table>

@@ -1,0 +1,77 @@
+
+####-ENGLISH-#############################################################################
+Hello,
+
+and thank you for your interest in my Tutorialmodul in Xoops. In the following you receive important notes for the installation and
+the use of this Modules.
+
+The installation!
+--------------------
+1. copy tutorials in your modules folder
+2. chmod modules/tutorials, modules/tutorials/cache and  modules/tutorials/images to 777
+3. Install the module in the administration of Xoops and activate the group rights
+4. Activate in the preference of Xoops "Allow HTML tags in user comments?"
+5. aktivate und configure the tutorial blocks
+
+Update of version 2.0 to 2.1
+-----------------------------------
+
+Copy all files and then start "updateDB20-21.php"
+
+Example: http://www.domain.de/modules/tutorials/updateDB20-21.php
+
+This will update your tutorial tables in the database.
+
+After a successfull update delete this file.
+----------------------------------------------------------------
+
+If you have questions, please write in my forum (http://www.mytutorials.info)
+
+So and now much fun with Tutorials for Xoops
+
+Thomas (Todi) Wolf
+
+
+I do not undertake to be caused guarantee for any damage by Tutorials (I believe that must purely, or? :))
+
+Homepage: http://www.mytutorials.info
+Mail: todi@dark-side.de oder webmaster@mytutorials.info
+####-GERMAN-#############################################################################
+
+Hallo,
+
+und vielen Dank für dein Interesse an meinem Tutorialmodul für Xoops. Im folgenden erhälst du wichtige Hinweise für die
+Installation und die Benutzung dieses Modules. 
+
+Die Installation!
+--------------------
+1. Verzeichnis "tutorials" ins Modules-Verzeichnis kopieren
+2. Zugriffsrechte mit chmod 777 auf das Verzeichnis "tutorials" und auf "cache" und "images" innerhalb 
+   des Tutorial-Verzeichnisses setzen
+3. In der Administration von Xoops das Modul installieren und die Gruppenrechte einstellen
+4. In den Systemeinstellungen von Xoops den Punkt: "HTML in Userbeiträgen erlauben" aktivieren
+5. Blöcke aktivieren und konfigurieren
+
+Update von Version 2.0 auf 2.1
+---------------------------------------
+Alle Files kopieren und dann "updateDB20-21.php" aufrufen.
+
+Bsp: http://www.domain.de/modules/tutorials/updateDB20-21.php
+
+Danach kann dieses File gelöscht werden.
+Damit wird ein Update der Tutorialstabellen in der Datenbank durchgeführt.
+---------------------------------------------------------------------------------------
+
+Sollten dennoch Fragen bestehen, so bitte ich dich dies im Form von www.mytutorials.info zu tun 
+
+
+So und nun viel Spass mit Tutorials für Xoops
+
+Thomas (Todi) Wolf
+
+
+Ich übernehme keine Gewähr für irgendwelche Schäden die durch Tutorials entstehen (ich glaube das muß rein, oder? :))
+
+Homepage: http://www.mytutorials.info
+Mail: todi@dark-side.de oder webmaster@mytutorials.info
+

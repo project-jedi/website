@@ -1,0 +1,51 @@
+<table cellspacing="0">
+  <tr>
+    <td>
+    <{if $block.fadeImage != ""}>
+    <{literal}>
+    <script type="text/javascript">
+    <!--
+    nereidFadeObjects = new Object();
+    nereidFadeTimers = new Object();
+    function nereidFade(object, destOp, rate, delta){
+        if (!document.all) {
+            return;
+        }
+        if (object != '[object]'){
+            setTimeout('nereidFade('+object+','+destOp+','+rate+','+delta+')',0);
+            return;
+        }
+        clearTimeout(nereidFadeTimers[object.sourceIndex]);
+        diff = destOp-object.filters.alpha.opacity;
+        direction = 1;
+        if (object.filters.alpha.opacity > destOp){
+            direction = -1;
+        }
+        delta = Math.min(direction*diff,delta);
+        object.filters.alpha.opacity+=direction*delta;
+
+        if (object.filters.alpha.opacity != destOp){
+            nereidFadeObjects[object.sourceIndex]=object;
+            nereidFadeTimers[object.sourceIndex]=setTimeout('nereidFade(nereidFadeObjects['+object.sourceIndex+'],'+destOp+','+rate+','+delta+')',rate);
+        }
+    }
+    //-->
+    </script>
+    <{/literal}>
+    <{/if}>
+      <br />
+      <{foreach item=partner from=$block.partners}>
+      <a href="<{$xoops_url}>/modules/xoopspartners/vpartner.php?id=<{$partner.id}>" target="_blank">
+      <{if $partner.image != ""}>
+      <img src="<{$partner.image}>" width="102" height="47" border="0" alt="<{$partner.url}>" <{$block.fadeImage}> /><br />
+      <{/if}>
+      <{$partner.title}>
+      </a>
+      <{if $block.insertBr != ""}>
+      <br />
+      <{/if}>
+      <br />
+      <{/foreach}>
+    </td>
+  </tr>
+</table>

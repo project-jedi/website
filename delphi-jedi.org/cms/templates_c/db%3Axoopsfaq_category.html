@@ -1,0 +1,90 @@
+<?php /* Smarty version 2.5.0, created on 2004-10-03 16:04:22
+         compiled from db:xoopsfaq_category.html */ ?>
+<h4 style="text-align:left;"><?php echo $this->_tpl_vars['lang_faq']; ?>
+</h4>
+<a id="top" name="top"><a href="index.php"><?php echo $this->_tpl_vars['lang_main']; ?>
+</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;<b><?php echo $this->_tpl_vars['category_name']; ?>
+</b><br /><br />
+<table width="100%" class="outer" cellspacing="1">
+  <tr>
+    <th colspan="2"><?php echo $this->_tpl_vars['lang_toc']; ?>
+</th>
+  </tr>
+  <tr>
+    <td colspan="2" class="even">
+      <ul style="list-style-image:url(images/question.gif);">
+
+      <!-- start question loop -->
+      <?php if (count((array)$this->_tpl_vars['questions'])):
+    foreach ((array)$this->_tpl_vars['questions'] as $this->_tpl_vars['question']):
+?>
+
+        <li>&nbsp;<a href="#q<?php echo $this->_tpl_vars['question']['id']; ?>
+"><?php echo $this->_tpl_vars['question']['title']; ?>
+</a></li>
+
+      <?php endforeach; endif; ?>
+      <!-- end question loop -->
+
+      </ul>
+    </td>
+  </tr>
+</table>
+<br /><br />
+<table width="100%" class="outer" cellspacing="1">
+
+<!-- start question and answer loop -->
+<?php if (count((array)$this->_tpl_vars['questions'])):
+    foreach ((array)$this->_tpl_vars['questions'] as $this->_tpl_vars['question']):
+?>
+
+  <tr>
+    <th><a id="q<?php echo $this->_tpl_vars['question']['id']; ?>
+" name="q<?php echo $this->_tpl_vars['question']['id']; ?>
+"></a><?php echo $this->_tpl_vars['question']['title']; ?>
+</th>
+  </tr>
+  <tr>
+    <td class="even"><?php echo $this->_tpl_vars['question']['answer']; ?>
+<div style="text-align: right"><a href="#top"><?php echo $this->_tpl_vars['lang_backtotop']; ?>
+</a></div></td>
+  </tr>
+
+<?php endforeach; endif; ?>
+<!-- end question and answer loop -->
+
+</table>
+<br /><br />
+<div style="text-align:center;"><b>[ <a href="index.php"><?php echo $this->_tpl_vars['lang_backtoindex']; ?>
+</a> ]</b></div>
+
+<div style="text-align:center; padding: 3px; margin:3px;">
+  <?php echo $this->_tpl_vars['commentsnav']; ?>
+
+  <?php echo $this->_tpl_vars['lang_notice']; ?>
+
+</div>
+
+<div style="margin:3px; padding: 3px;">
+<!-- start comments loop -->
+<?php if ($this->_tpl_vars['comment_mode'] == 'flat'): ?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_flat.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php elseif ($this->_tpl_vars['comment_mode'] == 'thread'): ?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_thread.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php elseif ($this->_tpl_vars['comment_mode'] == 'nest'): ?>
+  <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include("db:system_comments_nest.html", array());
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+<?php endif; ?>
+<!-- end comments loop -->
+</div>

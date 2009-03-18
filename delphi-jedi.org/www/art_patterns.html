@@ -1,0 +1,795 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<HTML>
+<HEAD>
+<TITLE>Project JEDI Knowledgebase Article</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#993366" VLINK="#006699" TEXT="#000000" TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+<span style="font-family:Verdana;font-size:12pt;">
+<table width="85%">
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td width=145 valign="middle">
+<a href="articles.html">
+<img src="img/jedi-articles.gif" width=140 height=38 border=0></a>
+          </td>
+          <td>
+<font color="483d8b">
+<h2>Introduction to Design Patterns</h2></font>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">  
+<b>&copy; 1998 Ader Gonzalez</a></b>
+<br>&nbsp;
+    </td>
+  </tr>
+</table>
+
+
+<table width="85%">
+  <tr>
+    <td>
+    <!-- White margin at left -->
+
+      <table>  
+        <tr>
+          <td width="10">
+          <img src="img/clearpixel.gif" width="10">
+          </td>
+<!--  Main body -->
+          <td>
+<!-- --------------------------- -->
+            <table>
+              <tr>
+                <td>
+<!-- --------------------------- -->
+
+
+                  <table cellpadding="3">
+                    <tr>
+                      <td>
+<P><I>This will be general introduction to Design Patterns, not a history or a formal discourse. 
+
+I want to go straight to the heart of the matter with sample implementations in Delphi's Object Pascal. To pick up the background, look at some of the publications and links listed in the <A HREF="#appendix">Appendix</A>.</I></P>
+                      </td>
+                    </tr>
+                    <tr bgcolor="pink">
+                      <td align="center">
+<p>If you're a newcomer to object-oriented programming or to Delphi, download Ader's companion paper to this one, <A HREF="ftp://ftp.delphi-jedi.org/voyager/Delphi_OO.zip" style="text-decoration:none;color:#8b008b;"><b><I>Delphi Object-Oriented Programming Concepts Review</I></b></a>, which introduces  just about everything worth saying on the subject.</P>
+                      </TD>
+                    </TR>
+                  </TABLE>
+                </TD>
+              </TR>
+              <TR>
+                <td>
+
+<P>Design patterns should be independent of any implementation. However, I have chosen to illustrate this topic with examples in Delphi because it is a very informal and straightforward way to grasp the principles in action. I am not attempting to document any new patterns here.</p>
+
+<P>If you explore the literature you will discover several formal structures for documenting patterns&#151;Alexandrian form (<A HREF="#alexander" style="text-decoration:none;color:#8b008b;">Alexander et al. 1977)</A>, the GOF (<A HREF="#gang4" style="text-decoration:none;color:#8b008b;">Gang of Four</A>) Form (Gamma et al. 1994), and the <A HREF="#coplien" style="text-decoration:none;color:#8b008b;">Coplien</A> form (Coplien, 1995), among others.</p>
+
+<P>
+<A NAME="tolist"></a>The following design patterns will be covered:</p>
+<OL type="a">
+<LI><A HREF="#singleton" style="text-decoration:none;color:#8b008b;">Singleton</A>
+<LI><A HREF="#template" style="text-decoration:none;color:#8b008b;">Template Method</A>
+<LI><A HREF="#strategy" style="text-decoration:none;color:#8b008b;">Strategy</A>
+<LI><A HREF="#observer" style="text-decoration:none;color:#8b008b;">Observer</A>
+<LI><A HREF="#adapter" style="text-decoration:none;color:#8b008b;">Adapter</A>
+</OL>
+</p>
+
+<P>I will present each of these basic patterns in the following format:</p>
+<UL type="circle">
+<LI>The <B>name</B> of the design pattern, with a description and some guidelines as to when to use it and the kinds of problems it can solve</li>
+<LI>The <B>structure</B> of the pattern in UML v1.0 notation</li>
+<LI><B>Sample implementation in Delphi 3</B> Object Pascal. The code samples are very simple, designed to illustrate the class structures or collaborating components that make up a given pattern, not to demonstrate problems and solutions.</li>
+</UL>
+
+<P><h3>Design Patterns Defined</h3>
+
+<P>A pattern is a vehicle for capturing and conveying expertise in a specific environment. As Christopher Alexander defines it , &quot;each pattern describes a problem which occurs over and over again in our environment, and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, without ever doing it the same way twice&quot;. The Gang of Four book offers these insights into identifying what we mean by &quot;a pattern&quot;&#151; </p>
+<UL type="circle">
+<LI><p>A pattern is a repeating solution to a problem within a context.</p>
+
+<P>The problem specifies the need, the context the constraints, and the solution specifies how to meet the need within those constraints. </p></li>
+
+<LI>A pattern is a component of software design that has a name.</li>
+
+<LI>A pattern is part of a catalog of named patterns.</li>
+</UL>
+
+<P>Because a pattern is a characteristic of analysis and design, it cannot be defined in terms of a particular implementation, algorithm, or data structure. Rather, it is about why, when and how to go about creating a a specific solution. It has to be a good design that engenders a repeatable solution (&quot;best practice&quot;) that has been proven to work in various contexts.</p>
+
+<P><I>A design that has proven unworkable is termed an &quot;anti-pattern&quot;. We can - and should - document them, along with the remedies, outcomes and lessons learnt from them.</I></p>
+
+<P>You may have encountered several paradigms of patterns in the course of your work and study; for example, <I>process</I> patterns, <I>analysis</I> patterns, <I>organizational</I> patterns, etc. The term &quot;<I>design pattern</I>&quot; describes an architectural element of object-oriented software. In considering a low-level pattern, specific to a programming language and often using language-specific features, you may hear the term &quot;<I>idiom&quot;. </I>A collection of named patterns, including rules and guidelines explaining how and when to apply them to a problem that cannot be solved by one pattern alone, is termed a &quot;<I>Pattern Language</I>&quot;.</p>
+
+<P>Capturing object-oriented/software-engineering design expertise according to a form of &quot;design pattern&quot; documentation should cover at <I>least</I> the following elements:</p>
+<UL type="circle">
+<LI><B>Name</B>, or phrase to describe the pattern</li>
+<LI><B>Problem</B>, or statement of the problem that it solves</li>
+<LI><B>Context</B>&#151;when to apply it</li>
+<LI><B>Solution</B>&#151;the components of the design, their relationships and responsibilities&#151;but not the implementation, since implementations may vary according to context</li>
+</UL>
+
+<P>Different &quot;forms&quot; of documenting design patterns may require additional elements. For example, the Coplien Form includes the elements of Force and Rationale; the GOF form includes Applicability, Consequences, Known Uses, et al.</p>
+
+<P>Design patterns provide many benefits but they are not a silver bullet. They will not solve every problem that a software developer will be faced with. They won't make you an OO design guru, nor make your OO code instantly reusable. Misapplied patterns can make an OO solution more complicated than it needs to be, and they can create miscommunication if any members of the team don't understand the pattern terminology that you use. </p>
+
+
+<P>Properly used, however, patterns are capable of providing significant benefits. For example, you can expect improvement in</p>
+<UL type="circle">
+
+<LI><I>communication</I> between designer and developers in a team by providing <I>consistent terms</I> for OO architectural elements and solutions.</li>
+
+<LI><I>documentation</I>&#151;the use of pattern names in documentation <I>reduces and simplifies</I> the task and makes your documents easier to maintain</li>
+
+<LI><I>reuse</I> of successful designs and architectures </li>
+
+<LI>allowing parts of a system to <I>change independently</I> of other parts</li>
+
+<LI><I>code maintenance</I><&#151;because they specify <I>class and object interactions</I> and their underlying intent</li>
+
+<LI><I>speed</I> of establishing the &quot;right&quot; design</li>
+
+<LI><I>future design</I>, by capturing the expertise of the people involved</li>
+</UL>
+
+<H3>Sample Pattern Implementations</h3>
+
+<P><A NAME="singleton"></a><font size="+1">
+<B><U>Singleton Pattern</U></b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1><A HREF="#tolist" style="text-decoration:none;color:#8b008b;">[ Back ]</A></font></P>
+
+<p><I>Ensures a class has only one instance and provides a global point of access to it.</I></p>
+
+<UL type="circle">
+
+<LI>Use when there must be exactly one instance of a class, and it must be accessible to clients from a well known point.</li>
+
+<LI>Good when the sole instance should be extensible by subclassing, and clients should be able to use an extended instance without modifying their code.</li> </UL>
+
+<P>
+<h4>Structure of the Singleton Pattern</h4>
+<P>
+<IMG SRC="img/dp_Singleton.gif" HEIGHT=126 WIDTH=333 ALT="Singleton Graphic"></P>
+
+<h4>Implementation of the Singleton Pattern</h4>
+
+<P>Two sample implementations are shown in TSingletonForm (uSingletonF.pas). The first one, returns a reference to allow the client class further control over the singleton instance. In this sample the Instance() class method acts as a well known point for clients to get a reference to the instance of TSingletonForm. This method acts as gatekeeper and it will only allow one instance of the class to be created. </p>
+
+<P>
+<FONT FACE="Courier New">
+<pre>
+<B>type</B><BR>
+  TSingletonForm = <B>class</B>(TForm)
+  ...
+   <B>public</B>
+    ...; 
+    <B>class function</B> Instance: TSingletonForm; 
+<B>end</B>;
+
+<B>implementation</B>
+<FONT COLOR=#0000FF> 
+{$R *.DFM}</I>
+</FONT> 
+<B>var</B>
+  SingletonFrm: TSingletonForm;
+
+<B>class function</B> TSingletonForm.Instance: TSingletonForm;
+<B>begin</B> <BR>
+  <B>if not</B> assigned(SingletonFrm) <B>then</B>
+    SingletonFrm := TSingletonForm.Create(Application);
+  result := SingletonFrm;
+<b>end</b>;
+</pre></font>
+
+<P>The alternative implementation does the same thing but is presented using the Open() class method, which provides a single point of entry to TSingletonForm class and does not return an instance reference. In a production application, this method could take parameters to further initialize the singleton instance. </p>
+
+<P><FONT FACE="Courier New">
+<pre>
+<B>class procedure</B> TSingletonForm.Open; 
+<B>begin</B> 
+  Screen.Cursor := crHourglass; 
+  <B>try
+    if not</B> assigned(SingletonFrm) <B>then</B>
+      SingletonFrm := TSingletonForm.Create(Application); 
+    <B>with</B> SingletonFrm <B>do
+    try</B>
+      <I><FONT COLOR=#0000FF>// do any form initialization here</FONT></I>
+      Show; 
+    <B>except</B>
+      on</B> Exception <B>do 
+      begin</B>
+        Free; 
+        raise;
+      <B>end;
+    end;
+  finally</B>
+    Screen.Cursor := crDefault; 
+  <B>end</B>; 
+<B>end</B>; 
+</pre></FONT></p>
+
+<P>Both samples rely on a global reference (implementation scope) <B>SingletonFrm</B> to the instance of TSingletonForm. The <B>SingletonFrm</B> is used to provide lazy initialization or on-demand construction of the instance, since TSingletonForm is not created until the client class accesses one of its well known entry points (Instance() or Open()). In the destructor, the <B>SingletonFrm </B>reference is set back to nil.</p>
+
+<P><FONT FACE="Courier New">
+<pre>
+<B>destructor</B> TSingletonForm.Destroy;
+
+<B>begin</B>
+  SingletonFrm := <B>nil</B>;
+  <B>inherited</B> Destroy; 
+<B>end</B>; 
+</pre></FONT>
+
+<P>The OnClose event handler calls Release(), which Frees the form instance by using an asynchronous windows message to allow all event handlers to complete safely.</p>
+
+<P><FONT FACE="Courier New">
+<pre>
+<B>procedure</B> TSingletonForm.FormClose(Sender: TObject; <B>var</B> Action: TCloseAction);
+
+<B>begin</B>
+  Release; 
+<B>end</B>;
+</pre></FONT></p>
+
+<P></P>
+
+<p><font size="+1"><B><U>Template Pattern</U></B></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<A NAME="template"></a>
+<FONT SIZE=1><A HREF="#tolist" style="text-decoration:none;color:#8b008b;">[ Back ]</A></font></P>
+
+<p>Defines the skeleton of an algorithm in an operation, deferring some steps to subclasses without changing the algorithm's structure. </p>
+
+<P>Good for</p>
+<UL type="circle">
+
+<LI>encapsulating a policy that is deployed by many different agents</li>
+
+<LI>reusing the code in a complex algorithm by encapsulating invariable parts and letting subclasses implement the behavior that can vary</li>
+
+<LI>providing hook operations at specific points that a subclass can extend, but requiring to be callable through the template method on the base class.</li>
+</UL>
+
+<h4>Structure of the Template Pattern</h4>
+
+<P><IMG SRC="img/dp_Template.gif" HEIGHT=283 WIDTH=336 ALT="Template Graphic"></p>
+
+<P><h4>Implementation of the Template Pattern</h4>
+
+<P>The Template pattern has several examples in the DelphiVCL, as might be expected in any object framework. In this sample, the VCL's TStream abstract class (classes.pas) implements stream copying in the template method CopyFrom(), which abstracts the algorithm for reading data from a stream and preparing its destination. TStream defers the implementation of Read() and Write() methods to its subclasses by declaring them as abstract methods. CopyFrom() uses Read() and Write() via the ReadBuffer() and WriteBuffer() methods, which are themselves template methods-since they are static and simply provide an interface to Read() and Write() virtual methods. Read() and Write() are the specific extension points that must be implemented in derived classes.</p>
+
+<P>For implementation details, please review the VCL's classes.pas unit, the TStream abstract class, and the concrete stream classes: TCustomMemoryStream/TMemoryStream and TStringStream; or download <A HREF="ftp://ftp.delphi-jedi.org/voyager/strmhelp1.zip">Streams.hlp</A>.</p>
+
+<P>Since you want users of your class to override the specific extension points and not the interface provided by the template method, a template method is usually declared statically on the base class, and the primitive methods are virtual.</p>
+
+<i><p><FONT FACE="Courier New"><pre><font COLOR=#0000FF> 
+{ TStream abstract class }</I></FONT>
+TStream = <B>class</B>(TObject)
+  <B>private</B>
+  ...
+  <B>protected</B>
+    <B>procedure</B> SetSize(NewSize: Longint); <B>virtual</B>;
+  <B>public</B>
+  <FONT COLOR=#0000FF>
+    <i>// primitive operations to be provided by derived classes</I></font>
+    <B>function</B> Read(<B>var</B> Buffer; Count: Longint): Longint; <B>virtual</B>; <B>abstract</B>;
+    <B>function</B> Write(<B>const</B> Buffer; Count: Longint): Longint; <B>virtual</B>; <B>abstract</B>;
+    <B>function</B> Seek(Offset: Longint; Origin: Word): Longint; <B>virtual</B>; <B>abstract</B>;
+    <FONT COLOR=#0000FF>
+    &nbsp;&nbsp;&nbsp;&nbsp;<i>// template methods</i></FONT>
+
+    <B> procedure</B> ReadBuffer(<B>var</B> Buffer; Count: Longint);
+    <B>procedure</B> WriteBuffer(<B>const</B> Buffer; Count: Longint);</FONT>
+    <FONT COLOR=#0000FF>
+    <i>// acts as template method by encapsulating the copy algorithm</i></FONT>
+    <B>function</B> CopyFrom(Source: TStream; Count: Longint): Longint;
+    ...
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>// concrete class</I></FONT>
+TStringStream = <B>class</B>(TStream)
+  ...
+  <B>public</B>
+    <B>constructor</B> Create(<B>const</B> AString: string);
+    <FONT COLOR=#0000FF><I>// concrete class implementations - varying behavior</I></FONT>
+    <B>function</B> Read(<B>var</B> Buffer; Count: Longint): Longint; <B>override</B>;
+    ...
+    <B>function</B> Write(const Buffer; Count: Longint): Longint; <B>override</B>;
+    ...
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>{ TStream }  // abstract class
+  ...
+// template methods</I></FONT>
+
+<B>procedure</B> TStream.ReadBuffer(<B>var</B> Buffer; Count: Longint);
+<B>begin<BR>
+  if</B> (Count &lt;&gt; 0) <B>and</B> (Read(Buffer, Count) &lt;&gt; Count) <B>then</B>
+    <B>raise</B> EReadError.Create(SReadError);
+<B>end</B>;
+
+<B>procedure</B> TStream.WriteBuffer(<B>const</B> Buffer; Count: Longint);
+<B>begin  
+  if</B> (Count &lt;&gt; 0) <B>and</B> (Write(Buffer, Count) &lt;&gt; Count) <B>then</B>
+    <B>raise</B> EWriteError.Create(SWriteError);
+<B>end</B>;<BR>
+
+<B>function</B> TStream.CopyFrom(Source: TStream; Count: Longint): Longint;
+<B>const</B>  <BR>
+  MaxBufSize = $F000;
+<B>var</B>  
+  BufSize, N: Integer;
+  Buffer: PChar;
+<B>begin
+  if</B> Count = 0 <B>then
+  begin</B>
+    Source.Position := 0;
+    Count := Source.Size;
+  <B>end</B>;
+  Result := Count;
+  <B>if</B> Count &gt; MaxBufSize <B>then</B> 
+    BufSize := MaxBufSize 
+  <B>else</B> BufSize := Count;
+  GetMem(Buffer, BufSize);
+  <B>try</B>
+    <B>while</B> Count &lt;&gt; 0 <B>do</B>
+    <B>begin</B>
+      <B>if</B> Count &gt; BufSize <B>then</B> 
+        N := BufSize 
+      <B>else</B> 
+        N := Count;
+      Source.ReadBuffer(Buffer^, N);
+      WriteBuffer(Buffer^, N);
+      Dec(Count, N);
+    <B>end</B>;
+  <B>finally</B>
+    FreeMem(Buffer, BufSize);
+  <B>end</B>;
+<B>end</B>;
+
+<FONT COLOR=#0000FF>
+<I>{ TStringStream } // concrete class
+...;
+// concrete class implementation of primitive operations</FONT></I>
+<B>function</B> TStringStream.Read(<B>var</B> Buffer; Count: Longint): Longint;
+<B>begin</B>  
+  Result := Length(FDataString) - FPosition;
+  <B>if</B> Result &gt; Count <B>then</B> 
+    Result := Count;
+  Move(PChar(@FDataString[FPosition + 1])^, Buffer, Result);
+  Inc(FPosition, Result);
+<B>end</B>;
+
+<B>function</B> TStringStream.Write(<B>const</B> Buffer; Count: Longint): Longint;
+<B>begin</B>  
+  Result := Count;
+  SetLength(FDataString, (FPosition + Result));
+  Move(Buffer, PChar(@FDataString[FPosition + 1])^, Result);
+  Inc(FPosition, Result);
+<B>end</B>;
+...
+</pre></font></p>
+<p></p>
+
+<p><A NAME="strategy"></a><font size="+1">
+<B><U>Strategy Pattern</U></b> </font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT SIZE=1><A HREF="#tolist" style="text-decoration:none;color:#8b008b;">[ Back ]</A></font></P>
+
+<p>Defines a family of interchangeable algorithms and encapsulates each one individually. Strategy lets the algorithm vary independently from clients that use it.</p>
+
+<UL type="circle">
+<LI>Different strategies can be swapped as needed.</li>
+<LI>Good for encapsulating many behaviors or algorithms that use data structures that a client shouldn't know about.</li>
+<LI>Eliminates use of conditional statements to select the right behavior.</li>
+</UL>
+
+<P>Unlike Template, which uses <I>inheritance</I> to vary <I>parts</I> of an algorithm, Strategy uses <I>delegation and composition</I> to exchange entire algorithms that are capable of being swapped dynamically in context. The actual algorithm is implemented via a <I>context object</I> that can be configured at run-time. The context object isolates client classes from specific dependencies on the algorithm interface by providing them with a more generic interface. An important aspect of the design of a Strategy pattern and its context object is to ensure that 1) any member of the family of related algorithms can be accommodated 2) subsequent concrete implementations, changes or additions can be adopted without modifying the interface.</p>
+
+<P>Strategies allow you to make flatter class hierarchies, which are easier to manage and maintain. Class hierarchies that rely heavily on inheritance can get very deep (multiple levels) and are harder to maintain.<P>
+
+<h4>Structure of Strategy Pattern</h4>
+<P>
+<IMG SRC="img/dp_Strategy.gif" HEIGHT=221 WIDTH=523 ALT="Strategy Graphic"></P>
+
+<h4>Implementation of Strategy Pattern</h4>
+
+<P>In this sample (uStrategy.pas) monthly credit charges are computed for a hypothetical credit card. The strategy pattern allows the different family of algorithms used to compute monthly finance charges to be encapsulated and accessed uniformly through the interface of TFinanzeCharge abstract class. TRegularCharge and TPreferredCharge are concrete classes that encapsulate the different algorithms for computing monthly credit finance charges.</p>
+
+<P>TMonthlyCharge implements the TContextCharge interface and is configured with the different concrete strategy objects. TContextCharge acts as a mediator between the client object and the strategy classes, helping to decouple dependencies between the client object and specific strategy/algorithm implementations. </p>
+
+<P><FONT FACE="Courier New">
+<pre>
+<font color=#0000ff><i>// strategy interface (abstract class)</i></FONT>
+TFinanzeCharge = <B>class
+  public</B>
+  <FONT color=#0000ff><I>// returns monthly finance charge</i></FONT>
+    <B>function</B> getCharge(<B>const</B> Balance: double): double; <B>virtual; abstract;
+  end;</B>
+
+<FONT COLOR=#0000FF><I>// Concrete Strategy 1</I></FONT>
+TRegularCharge = <B>class</B>(TFinanzeCharge)
+  <B>public
+    function</B> getCharge(<B>const</B> Balance: double): double; <B>override</B>;
+<B>end;</B>
+
+<FONT COLOR=#0000FF><I>// Concrete Strategy 2</I></FONT>
+TPreferredCharge = <B>class</B>(TFinanzeCharge)
+  <B>public
+    function</B> getCharge(<B>const</B> Balance: double): double; <B>override</B>;
+<B>end;</B>
+</pre></font></p>
+
+<P>The context interface is what clients will depend on when using specific strategies. Because the context is configured by the client, the client needs to be aware of the strategies/algorithms available. An alternative implementation could provide a default strategy if the context does not receive a valid instance during initialization. </P>
+
+<p><FONT FACE="Courier New">
+<pre><font color=#0000ff>
+<I>// Context Interface</I></FONT>
+TChargeContext = <B>class</B>
+  <B>public</B>
+    <B>function</B> ComputeCharges(<B>const</B> Balance: double): double; <B>virtual; abstract;
+end</B>;
+
+<FONT COLOR=#0000FF"><I>// Concrete Context 1</I></FONT>
+</pre></font></P>
+
+<p>This class acts as a mediator between the client and the strategy classes, and is configured by using composition and passing an instance of a concrete finance charge in its constructor. </p>
+
+<P><FONT FACE="Courier New">
+<pre>
+TMonthlyCharges = <B>class(TChargeContext)</B>
+<B>private</B>
+FFinanzeCharge: TFinanzeCharge;
+  <B>public</B></FONT>
+  <FONT COLOR=#0000FF><I>// context interface called by client classes</i></FONT>
+    <B>function</B> ComputeCharges(<B>const</B> Balance: double): double; <B>override</B>;
+    <FONT COLOR=#0000FF><I>// constructor configures the context object</I></FONT>
+    <B>constructor</B> Create(aFinanzeCharge: TFinanzeCharge); <B>virtual</B>;
+    <B>destructor</B> Destroy; <B>override</B>;
+<B>end</B>;
+
+<B>implementation</B>
+<FONT COLOR=#0000FF><I>// TRegularCharge</I></FONT>
+<B>function</B> TRegularCharge.getCharge(<B>const</B> Balance: double): double;
+<B>begin</B>
+   result := Balance * (REG_RATE / 12);
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>// TPreferredCharge</I></FONT>
+<B>function</B> TPreferredCharge.getCharge(<B>const</B> Balance: double): double;
+<B>begin</B>
+<FONT COLOR=#0000FF><I>// this could be a complex algorithm that takes into account the
+// credit card holder's buying patterns and reward points accumulated.</I></FONT>
+result := Balance * (PREFERRED_RATE / 12);
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>// Concrete Context 2
+// TMonthlyCharges</I></FONT>
+<B>constructor</B>TMonthlyCharges.Create(aFinanzeCharge: TFinanzeCharge);
+<B>begin<BR>
+  inherited</B> Create;</B>
+<FONT COLOR=#0000FF>// aFinanzeCharge configures the context object
+// this class takes ownership of aFinanzeCharge (will destroy it)</I></FONT>
+  FFinanzeCharge := aFinanzeCharge;
+<B>end</B>;
+
+<B>destructor</B> TMonthlyCharges.Destroy;
+<B>begin</B>
+  FFinanzeCharge.Free;
+  <B>inherited</B> Destroy;
+<B>end</B>;
+
+<B>function</B> TMonthlyCharges.ComputeCharges(<B>const</B> Balance: double): double;
+<B>begin</B>
+  result := FFinanzeCharge.getCharge(Balance);
+<B>end</B>;
+</pre></font></p>
+
+<p><A NAME="observer"></><FONT SIZE="+1"<B><U>Observer Pattern</U></b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT SIZE=1><A HREF="#tolist" style="text-decoration:none;color:#8b008b;">[ Back ]</A></font></P>
+
+<p>Defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.</p>
+
+<UL type="circle">
+<LI>Decouples information model from Interface model (MVC, Document-View)</li>
+<LI>Good to synchronize changes in one object with other dependent objects when you don't know how many there may be.</li>
+<LI>Good when one object needs to notify another object without knowing in advance which object it will be</li>
+</UL>
+
+<P>The Observer pattern is a generalized version of a more specific pattern known as the Model-View-Controller (MVC), which is used to build interfaces in Smalltalk-80 and other OO class libraries. MVC aims at decoupling views (GUI classes) and models (problem domain objects) by establishing a subscribe/notify protocol between them. Whenever the model's data changes, it notifies any views that depend on it. In response, each view that has subscribed to receive notifications gets the opportunity to update itself.</p>
+<P>
+With this approach you can attach multiple views to a model, to create distinct representations of each state the object can have. It allows you to create new views without affecting the model. The Controller classes in MVC define the way the user interface reacts to user input, such as keyboard events and mouse movements. However, some implementations of MVC, such as Java Swing (JFC framework), merge the View and Controller parts in the singular GUI classes.</p>
+<P>
+
+<h4>Structure of Observer Pattern</h4>
+<p><IMG SRC="img/dp_Observer.gif" HEIGHT=328 WIDTH=538 ALT="Observer Graphic"></p>
+
+<h4>Implementation of Observer Pattern</h4>
+
+<P>In this sample (uObserver.pas) TMySubject implements the TObservable interface, which represents the object that is being observed (the subject). The observed object will normally be a problem domain or data object. In this case, our data object contains x and y values, which are accessible via getX()/setX, getY()/setY methods.</p>
+
+<P>TMyBars implements the TObserver interface, and is registered with TMySubject in order to be notified whenever the state of the subject changes (x and y values). It encapsulates two progress bars that will reflect the state changes. TMyBars pulls the X and Y values, whenever it receives a notification from TMySubject.</p>
+
+<P><FONT FACE="Courier New">
+<pre>
+<font COLOR=#0000FF><I>// Observer interface consists of a single update() method used to
+// notify the observer to update itself to reflect the state change
+// on the subject (observable object)</I></FONT>
+TObserver = <B>class</B>
+  <B>procedure</B> Update(ChangedSubject: TObservable); <B>virtual; abstract;
+end</B>;
+
+<FONT COLOR=#0000FF"><I>// Subject interface</I></FONT>
+TObservable = <B>class</B>
+<FONT COLOR=#0000FF"><I>// Add and remove are used to subscribe/un-subscribe</I></FONT>
+  <B>procedure</B> Add(Observer: TObserver); <B>virtual; abstract</B>;
+  <B>procedure</B> Remove(Observer: TObserver); <B>virtual; abstract;</B>
+  <FONT COLOR=#0000FF"><I>// notify subscribed/registered observers of state change</I></FONT>
+  <B>procedure</B> Notify; <B>virtual; abstract</B>;
+<B>end</B>;
+</pre></font></p>
+
+<P>An instance of TList (FObservers) is used to manage the references of all the observers that have subscribed to receive state change notifications.</p>
+
+<P><FONT FACE="Courier New">
+<pre><font color=#0000ff><i>// concrete observable classes
+// Observable/Subject data object</i></FONT>
+TMySubject = <B>class</B>(TObservable)
+  <B>private</B>
+    FObservers: TList;
+    Fx: integer;
+    Fy: integer;
+  <B>public</B>
+    <B>constructor</B> Create;
+    <B>destructor</B> Destroy; override;
+
+    <FONT COLOR=#0000FF><I>//TObservable</I></FONT>
+    <B>procedure</B> Add(Observer: TObserver); <B>override</B>;
+    <B>procedure</B> Remove(Observer: TObserver); <B>override</B>;
+    <B>procedure</B> Notify; <B>override</B>
+
+    <FONT COLOR=#0000FF><I>//MyData interface</I></FONT>
+    <B>function</B> getX: integer;
+    <B>function</B> getY: integer;
+    <B>procedure</B> setX(value: integer);
+    <B>procedure</B> setY(value: integer);
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>// Concrete Observer Object</I></FONT>
+TMyBars = <B>class</B>(TObserver)
+  <B>private</B>
+    FBarX: TProgressBar;
+    FBarY: TProgressBar;
+  <B>public</B>
+    <B>constructor</B> CreateBars(aParent: TWinControl);
+    <B>destructor</B> Destroy; <B>override</B>;
+    <B>procedure</B> Update(ChangedSubject: TObservable); <B>override</B>;
+<B>end</B>;
+
+<B>implementation</B>
+
+<FONT COLOR=#0000FF><I>// TMySubject Observable object</I></FONT>
+<B>constructor</B> TMySubject.Create;
+<B>begin</B>
+  <B>inherited</B> Create;
+  FObservers := TList.Create;
+<B>end</B>;
+
+<B>destructor</B> TMySubject.Destroy;
+<B>begin</B>
+  FObservers.Free;
+  <B>inherited</B> Destroy;
+<B>end</B>;
+
+<B>procedure</B> TMySubject.Add(Observer: TObserver);
+<B>begin</B>
+  FObservers.Add(Observer);
+<B>end</B>;
+
+<B>procedure</B> TMySubject.Remove(Observer: TObserver);
+<B>begin</B>
+  FObservers.Remove(Observer);
+<B>end</B>;
+
+<B>procedure</B> TMySubject.Notify;
+<B>var</B>
+  i: integer;
+<B>begin</B>
+  <B>for</B> i := 0 <B>to pred</B>(FObservers.Count) <B>do</B>
+    TObserver(FObservers.Items[i]).Update(Self);
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>// Observer</I></FONT>
+<B>constructor</B> TMybars.CreateBars(aParent: TWinControl);
+<B>begin</B>
+  <B>inherited</B> Create;
+  FBarX := TMyProgressBar.Create(<B>nil</B>);
+  FBarY := TMyProgressBar.Create(<B>nil</B>);
+  FBarX.Parent := aParent;
+  FBarY.Parent := aParent;
+<B>end</B>;
+
+<B>destructor</B> TMybars.Destroy;
+<B>begin</B>
+  FBarX.Free;
+  FBarY.Free;
+  <B>inherited</B> Destroy;
+<B>end</B>;
+
+<FONT COLOR=#0000FF><I>// When the observer is notified with the Update() method,
+// it updates itself by pulling the values of X and Y.</I></FONT>
+<B>procedure</B> TMyBars.Update(ChangedSubject: TObservable);
+<B>begin</B>
+  FBarX.Position := (ChangedSubject <B>as</B> TMySubject).getX;
+  FBarY.Position := (ChangedSubject <B>as</B> TMySubject).getY;
+<B>end</B>;
+</pre></font></p>
+
+<P>Note that the Changed subject is passed in the update method. This allows the observer to register with multiple subjects and provide an integrated view of different data objects, since it knows which subject changed it can respond differently for each one (not shown in this example). </p>
+
+<p></p>
+
+<p><A NAME="adapter"></a><FONT SIZE="+1"><B><U>Adapter Pattern</U></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT>
+<FONT SIZE=1><A HREF="#tolist" style="text-decoration:none;color:#8b008b;">[ Back ]</A></font></P>
+
+<P>Converts the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't do so otherwise because of incompatible interfaces.</p>
+
+<UL type="circle">
+<LI>Use when you want to use an existing class and its interface does not match the one you need, or has an incompatible interface.</li>
+</UL>
+
+<P>This pattern is also known as a <B>wrapper</B> and there are variations of it, such as &quot;pluggable adapters,&quot; which are popular in Smalltalk and NextStep environments. The one presented here is known as an &quot;object adapter&quot; and consists of an <B>adaptee</B>, which defines the existing interface being adapted, and a <B>target</B>, which defines the interface the client class uses. The Adapter class inherits the target interface, and forwards the requests to the adaptee by using composition. </p>
+
+<h4>Structure of Adapter Pattern</h4>
+
+<P><IMG SRC="img/dp_Adapter.gif" HEIGHT=190 WIDTH=441 ALT="Adapter Graphic"></P>
+
+<h4>Implementation of Adapter Pattern</h4>
+
+<P>In this sample (uSingletonF.pas) the TFormAdapter is used to adapt the TSingletonForm (adaptee) interface to that of the TObserver (target) interface, which is required in order to be able to attach to TMySubject as an observer and receive notifications of state changes. TFormAdapter forwards any received Update() requests to the specific method corresponding to that request on the TSingletonForm interface, the UpdateView() method. </P>
+
+<p><FONT FACE="Courier New">
+<pre>
+TFormAdapter = class(TObserver)
+  <B>private</B>
+    ;FAdaptee: TSingletonForm;
+  <B>public</B>
+    <B>constructor</B> Create(aForm: TSingletonForm);
+    <B>procedure</B> Update(ChangedSubject: TObservable); <B>override</B>;
+<B>end</B>;
+
+<B>implementation</B>
+<FONT COLOR=#0000FF><I>//  TFormAdapter</I></FONT>
+<B>constructor</B> TFormAdapter.Create(aForm: TSingletonForm);
+<B>begin
+  inherited</B> Create;
+  FAdaptee := aForm;
+<B>end</B>;
+
+<B>procedure</B> TFormAdapter.Update(ChangedSubject: TObservable);
+<B>begin</B>
+  FAdaptee.UpdateView;
+  <FONT COLOR=#0000FF><I>// adapted interface</I></FONT>
+<B>end</B>;
+</pre></FONT></P>
+
+<P></P>
+
+<h3>Conclusion</B></h3>
+
+<P>Patterns are a vehicle for capturing and documenting &quot;best practices&quot; in any field. In software engineering, design patterns allow you to improve your OO designs and architectures, improve documentation and facilitate maintenance of source code. If all members of your team understand the pattern names you are referring to then patterns allow a higher level of communication during analysis/design discussions. Using patterns allows you to leverage the expertise of others.</p>
+
+<P>If you are an expert in your field, write down some patterns and have your peers review them. If you are not an expert, learn the published patterns. The more patterns you know, the better a designer and solution provider you will become and it will be reflected in improved quality of the products you build. This quality and aesthetic elegance in designs is referred to as &quot;Quality Without A Name&quot; (QWAN) by Christopher Alexander because it imparts incommunicable beauty and immeasurable value to a structure. (For more on QWAN, see the sources of information in the <A HREF="#appendix" style="text-decoration:none;color:#8b008b;">Appendix</A>.) </p>
+<hr size=1>
+
+<CENTER>
+<h3><A NAME="appendix"></a>Appendix</h3></p>
+</CENTER>
+
+<h5><U>Additional Sources of Information</u></h5>
+
+<p><B>Patterns Home Page</B>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://st-www.cs.uiuc.edu/users/patterns/patterns.html">http://st-www.cs.uiuc.edu/users/patterns/patterns.html</a></p>
+
+<P><B>The Wiki Web</B>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://c2.com/cgi-bin/wiki">http://c2.com/cgi-bin/wiki</a></p>
+
+<P><B>Doug Lea's Home Page and Patterns FAQ</B>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a HREF="http://gee.cs.oswego.edu/dl/">http://gee.cs.oswego.edu/dl/</a></p>
+
+<P><B>Doug Schmidt's Home Page</B>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a  HREF="http://www.cs.wustl.edu/~schmidt/">http://www.cs.wustl.edu/~schmidt/</a></p>
+
+<p><B>Jim Coplien's Home Page</B>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a HREF="http://www.bell-labs.com/user/cope">http://www.bell-labs.com/user/cope</a></p>
+<P><B>Readings</b></U></p>
+
+<OL>
+<LI><A NAME="alexander"></a>Alexander, C. et al. (1977), <I>A Pattern Language</I>, New York: Oxford University Press<br><br></li>
+
+<LI><A NAME="coplien"></a>Coplien, J. O and Schmidt, D. C. (1995), <I>Pattern Languages of program design</I>. Reading MA: Addison-Wesley<br><br></li>
+
+<LI><A NAME="gang4"></a>Gamma, E., Helm R., Johnson, R., and Vlissides J. (1994), <I>Design Patterns, Elements of Reusable Object Oriented Software</I>, Reading, MA: Addison-Wesley. AKA: The GOF (gang of four) book.<br><br></li>
+
+<LI>Martin, Robert (1997), <I>Object-Oriented Programming in C++,</I> Object Mentor<br><br></li>
+
+<LI>Rising, Linda (1998), <I>The Patterns Handbook: Techniques, Strategies, and Applications</I>, Cambridge University Press<br><br></li>
+
+<LI><A NAME="vlissides"></a>Vlissides, John (Object Magazine, March 1997), <I>Patterns: The Top Ten Misconceptions</i><BR></li>
+
+</OL>
+
+<!-- --------------------------- -->
+                </td>
+              </tr>
+            </table>
+<!-- --------------------------- -->
+          </td> 
+        </tr>
+      </table>
+
+<!-- Footer -->
+
+      <table> 
+        <tr>
+          <td colspan=2 align="center">
+<a href="articles.html">
+<img src="img/return_articles.gif" width=134 height=39 border=0></a> 
+          </td>
+        </tr>
+
+        <tr>   
+          <td>
+<hr size=1>
+This site and the pages contained within are Copyright © 1997-2006, Project JEDI.  Articles displayed or downloaded remain Copyright to their authors and may be used with the appropriate attribution.
+<br><br>
+For questions and comments regarding this site please contact webmaster-AT-delphi-jedi.org
+          </td>
+          <td align=center valign=middle>
+<IMG HEIGHT=31 WIDTH=116 SRC="img/btn_jedinow.gif" BORDER=0 ALT="Jedi NOW!">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+<hr size="1">
+            <table>
+              <tr>
+                <td valign="middle">
+<A HREF="http://www.href.com/">
+<img src="img/href_logo.gif" border=0></a>
+                </td>
+                <td>
+<center>
+Find software, books and training materials at our sponsor's site, www.href.com</center>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</span>
+
+</BODY>
+
+</HTML>
+
