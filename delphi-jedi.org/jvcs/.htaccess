@@ -8,7 +8,7 @@ RewriteBase /
 # --------------------------------------------------------------
 # To redirect to the external website
 # --------------------------------------------------------------
-RewriteRule .*  http://jedivcs.sourceforge.net/ [L,R=301]
+RewriteRule .*  http://jedivcs.sourceforge.net/ [L,R]
 
 
 
