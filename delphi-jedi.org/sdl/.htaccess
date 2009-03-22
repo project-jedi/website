@@ -1,0 +1,14 @@
+Order Allow,Deny
+Allow from all
+
+RewriteEngine On
+
+RewriteBase /
+
+# --------------------------------------------------------------
+# To redirect to the external website
+# --------------------------------------------------------------
+RewriteRule .*  http://sourceforge.net/projects/jedi-sdl [L,R=301]
+
+
+

@@ -1,0 +1,13 @@
+Order Allow,Deny
+Allow from all
+
+RewriteEngine On
+
+RewriteBase /
+
+# --------------------------------------------------------------
+# To redirect to the webmail
+# --------------------------------------------------------------
+RewriteRule ^$  http://webmail.delphi-jedi.org/webmail [L,R=301]
+
+

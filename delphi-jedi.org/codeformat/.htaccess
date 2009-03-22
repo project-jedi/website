@@ -1,0 +1,13 @@
+Order Allow,Deny
+Allow from all
+
+RewriteEngine On
+
+RewriteBase /
+
+# --------------------------------------------------------------
+# To redirect to the external website
+# --------------------------------------------------------------
+RewriteRule .*  http://jedicodeformat.sourceforge.net/ [L,R=301]
+
+
