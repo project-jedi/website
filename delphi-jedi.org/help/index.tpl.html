@@ -4,7 +4,7 @@
   <link rel="STYLESHEET" href="styles/default.css" type="text/css">
   <title>JEDI Online Help</title>
   <meta content="Olivier Sannier for the JEDI group" name="author">
-  <SCRIPT LANGUAGE="JavaScript" src="utils.js"></SCRIPT>
+  <SCRIPT LANGUAGE="JavaScript" type="text/javascript" src="utils.js"></SCRIPT>
 </head>
 <body>
 {COMMON_LOGIN_STATUS}
@@ -27,7 +27,7 @@ Please choose from one of the options below<br>
 <!-- END search_no_projects -->
 <!-- BEGIN search_section -->
 <div id="overDiv" style="position: absolute;"></div>
-<SCRIPT LANGUAGE="JavaScript" src="overlib.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript" src="overlib.js"></SCRIPT>
 <table
  style="width: 80%; text-align: left; margin-left: auto; margin-right: auto;"
  border="0" cellspacing="0" cellpadding="0" class="special">
@@ -49,7 +49,7 @@ Please choose from one of the options below<br>
                       'or less will never return a result.<br>' +
                       'Click on the image to open the MySQL website detailling those '+
                       'functions.');" 
-   onmouseout="nd();"><img border="0" src="help.png"></a></form>
+   onmouseout="nd();"><img border="0" src="help.png" alt="help"></a></form>
 Or use the <a href="advanced_search.php">Advanced
 search</a> </td>
     </tr>
@@ -74,7 +74,7 @@ project for which to browse the help:<br>
  href="browse.php?Id=%7BPROJECT_ID%7D">By&nbsp;units</a>
       </td>
       <td style="vertical-align: top;"><a
- href="browse.php?Id=%7BPROJECT_ID%7D&types=1">By&nbsp;types</a>
+ href="browse.php?Id=%7BPROJECT_ID%7D&amp;types=1">By&nbsp;types</a>
       </td>
       <td style="vertical-align: top;">{PROJECT_DESCRIPTION}
       </td>

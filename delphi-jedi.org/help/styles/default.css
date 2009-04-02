@@ -5,7 +5,7 @@ h2 {font-size: 145%;}
 h3 {font-size: 130%;}
 h4 {font-size: 115%;}
 h5 {font-size: 105%;}
-hr {align:"right";color:"#000080";noshade;}
+hr {}
 ul p, ol p, dl p {margin-left: 0em;}
 p {margin-top: .6em;margin-bottom:.6em;}
 dl {margin-top: 0em;}
@@ -17,7 +17,7 @@ ul {list-style-type: disc;margin-left: 1.9em; }
 li {margin-bottom: .6em;}
 ul ol, ol ol {list-style-type: lower-alpha;}
 pre {margin-top: .6em;margin-bottom: .6em; }
-pre,code {font-family: Courier New, Courier, mono;color: #660000;}
+pre,code {font-family: "Courier New", Courier, mono;color: #660000;}
 table {background: #999999;margin-top: .6em;margin-bottom: .3em;}
 th {padding: 4px 8px;background: #cccccc;text-align: left;font-size: 70%;vertical-align: middle;height: 25px;}
 td {padding: 4px 8px;background: #ffffff;vertical-align: top;font-size: 70%;height: 25px;}
