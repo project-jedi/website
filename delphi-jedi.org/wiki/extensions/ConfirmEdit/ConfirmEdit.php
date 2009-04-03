@@ -88,8 +88,8 @@ $wgCaptchaClass = 'SimpleCaptcha';
  * which also takes into account per namespace triggering.
  */
 $wgCaptchaTriggers = array();
-$wgCaptchaTriggers['edit']          = false; // Would check on every edit
-$wgCaptchaTriggers['create']		= false; // Check on page creation.
+$wgCaptchaTriggers['edit']          = true;  // Would check on every edit
+$wgCaptchaTriggers['create']        = true;  // Check on page creation.
 $wgCaptchaTriggers['addurl']        = true;  // Check on edits that add URLs
 $wgCaptchaTriggers['createaccount'] = true;  // Special:Userlogin&type=signup
 $wgCaptchaTriggers['badlogin']      = true;  // Special:Userlogin after failure
