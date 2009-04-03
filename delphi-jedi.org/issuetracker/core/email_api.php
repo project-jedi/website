@@ -762,6 +762,7 @@
 					break;
 		}
 
+    $mail->LE = "\n";
 		$mail->IsHTML( false );              # set email format to plain text
 		$mail->WordWrap = 80;              # set word wrap to 50 characters
 		$mail->Priority = $t_email_data->metadata['priority'];  # Urgent = 1, Not Urgent = 5, Disable = 0
