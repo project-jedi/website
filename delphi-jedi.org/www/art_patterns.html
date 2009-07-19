@@ -61,7 +61,7 @@ I want to go straight to the heart of the matter with sample implementations in 
                     </tr>
                     <tr bgcolor="pink">
                       <td align="center">
-<p>If you're a newcomer to object-oriented programming or to Delphi, download Ader's companion paper to this one, <A HREF="ftp://ftp.delphi-jedi.org/voyager/Delphi_OO.zip" style="text-decoration:none;color:#8b008b;"><b><I>Delphi Object-Oriented Programming Concepts Review</I></b></a>, which introduces  just about everything worth saying on the subject.</P>
+<p>If you're a newcomer to object-oriented programming or to Delphi, download Ader's companion paper to this one, <A HREF="files/voyager/Delphi_OO.zip" style="text-decoration:none;color:#8b008b;"><b><I>Delphi Object-Oriented Programming Concepts Review</I></b></a>, which introduces  just about everything worth saying on the subject.</P>
                       </TD>
                     </TR>
                   </TABLE>
@@ -267,7 +267,7 @@ I want to go straight to the heart of the matter with sample implementations in 
 
 <P>The Template pattern has several examples in the DelphiVCL, as might be expected in any object framework. In this sample, the VCL's TStream abstract class (classes.pas) implements stream copying in the template method CopyFrom(), which abstracts the algorithm for reading data from a stream and preparing its destination. TStream defers the implementation of Read() and Write() methods to its subclasses by declaring them as abstract methods. CopyFrom() uses Read() and Write() via the ReadBuffer() and WriteBuffer() methods, which are themselves template methods-since they are static and simply provide an interface to Read() and Write() virtual methods. Read() and Write() are the specific extension points that must be implemented in derived classes.</p>
 
-<P>For implementation details, please review the VCL's classes.pas unit, the TStream abstract class, and the concrete stream classes: TCustomMemoryStream/TMemoryStream and TStringStream; or download <A HREF="ftp://ftp.delphi-jedi.org/voyager/strmhelp1.zip">Streams.hlp</A>.</p>
+<P>For implementation details, please review the VCL's classes.pas unit, the TStream abstract class, and the concrete stream classes: TCustomMemoryStream/TMemoryStream and TStringStream; or download <A HREF="files/voyager/strmhelp1.zip">Streams.hlp</A>.</p>
 
 <P>Since you want users of your class to override the specific extension points and not the interface provided by the template method, a template method is usually declared statically on the base class, and the primitive methods are virtual.</p>
 
