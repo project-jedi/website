@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<config>
+  <TempFolder>externals_temp</TempFolder>
+  <SVNExePath/>
+  <LogFolder/>
+  <externals>
+    <external Name="mantis" Kind="ekVendorBranch">
+      <BaseURL>https://projectjedi.svn.sourceforge.net/svnroot/projectjedi</BaseURL>
+      <WorkingCopyPath>.</WorkingCopyPath>
+      <ExternalWorkingCopySubfolder>issuetracker</ExternalWorkingCopySubfolder>
+      <RepositoryExternalPath>/trunk/delphi-jedi.org/issuetracker</RepositoryExternalPath>
+      <DefaultSubfolder/>
+      <VendorBranchOptions SourceKind="eskFolder">
+        <BaseURL/>
+        <VendorPath>/vendors/mantisbt</VendorPath>
+        <VendorBranchCommitComment>Synchronized with public version</VendorBranchCommitComment>
+        <MergeCommitComment/>
+      </VendorBranchOptions>
+      <SVNExternalOptions>
+        <BaseURL/>
+        <PropertyLocationPath/>
+        <PropertyCommitComment/>
+      </SVNExternalOptions>
+    </external>
+    <external Name="wiki" Kind="ekVendorBranch">
+      <BaseURL>https://projectjedi.svn.sourceforge.net/svnroot/projectjedi</BaseURL>
+      <WorkingCopyPath>.</WorkingCopyPath>
+      <ExternalWorkingCopySubfolder>wiki</ExternalWorkingCopySubfolder>
+      <RepositoryExternalPath>/trunk/delphi-jedi.org/wiki</RepositoryExternalPath>
+      <DefaultSubfolder/>
+      <VendorBranchOptions SourceKind="eskFolder">
+        <BaseURL/>
+        <VendorPath>/vendors/mediawiki</VendorPath>
+        <VendorBranchCommitComment>Synchronized with public version</VendorBranchCommitComment>
+        <MergeCommitComment/>
+      </VendorBranchOptions>
+      <SVNExternalOptions>
+        <BaseURL/>
+        <PropertyLocationPath/>
+        <PropertyCommitComment/>
+      </SVNExternalOptions>
+    </external>
+  </externals>
+</config>
