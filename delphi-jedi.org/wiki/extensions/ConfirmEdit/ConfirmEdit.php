@@ -105,8 +105,8 @@ $wgCaptchaTriggers['badlogin']      = true;  // Special:Userlogin after failure
 $wgCaptchaTriggersOnNamespace = array();
 
 #Example:
-#$wgCaptchaTriggersOnNamespace[NS_TALK]['create'] = false; //Allow creation of talk pages without captchas.
-#$wgCaptchaTriggersOnNamespace[NS_PROJECT]['edit'] = true; //Show captcha whenever editing Project pages.
+$wgCaptchaTriggersOnNamespace[NS_TALK]['create']  = true; //Show captcha whenever creating talk pages.
+$wgCaptchaTriggersOnNamespace[NS_PROJECT]['edit'] = true; //Show captcha whenever editing Project pages.
 
 /**
  * Indicate how to store per-session data required to match up the
