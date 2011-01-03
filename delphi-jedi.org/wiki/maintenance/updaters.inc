@@ -1763,7 +1763,7 @@ function do_postgres_updates() {
 			'mw_version' => $wgVersion,
 			'pg_version' => $version,
 			'sql_version' => '$LastChangedRevision: 46891 $',
-			'sql_date' => '$LastChangedDate: 2009-02-05 22:54:47 -0600 (Thu, 05 Feb 2009) $',
+			'sql_date' => '$LastChangedDate: 2009-02-06 05:54:47 +0100 (ven., 06 févr. 2009) $',
 		) );
 	return;
 }

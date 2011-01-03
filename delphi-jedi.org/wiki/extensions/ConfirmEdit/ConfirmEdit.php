@@ -44,6 +44,15 @@ $wgExtensionCredits['other'][] = array(
 	'descriptionmsg' => 'captcha-desc',
 );
 
+# Disable for users, too: by default 'user' is allowed to edit, even if '*' is not.
+$wgGroupPermissions['user']['edit']           = false;
+# Make it so users with confirmed e-mail addresses are in the group.
+$wgAutopromote['emailconfirmed'] = APCOND_EMAILCONFIRMED;
+# Hide group from user list. 
+$wgImplicitGroups[] = 'emailconfirmed';
+# Finally, set it to true for the desired group.
+$wgGroupPermissions['emailconfirmed']['edit'] = true;
+
 /**
  * The 'skipcaptcha' permission key can be given out to
  * let known-good users perform triggering actions without
@@ -52,11 +61,12 @@ $wgExtensionCredits['other'][] = array(
  * By default, sysops and registered bot accounts will be
  * able to skip, while others have to go through it.
  */
-$wgGroupPermissions['*'            ]['skipcaptcha'] = false;
-$wgGroupPermissions['user'         ]['skipcaptcha'] = false;
-$wgGroupPermissions['autoconfirmed']['skipcaptcha'] = false;
-$wgGroupPermissions['bot'          ]['skipcaptcha'] = true; // registered bots
-$wgGroupPermissions['sysop'        ]['skipcaptcha'] = true;
+$wgGroupPermissions['*'             ]['skipcaptcha'] = false;
+$wgGroupPermissions['user'          ]['skipcaptcha'] = false;
+$wgGroupPermissions['autoconfirmed' ]['skipcaptcha'] = false;
+$wgGroupPermissions['emailconfirmed']['skipcaptcha'] = true;
+$wgGroupPermissions['bot'           ]['skipcaptcha'] = true; // registered bots
+$wgGroupPermissions['sysop'         ]['skipcaptcha'] = true;
 $wgAvailableRights[] = 'skipcaptcha';
 
 /**
