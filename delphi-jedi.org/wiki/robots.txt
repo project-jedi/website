@@ -1,0 +1,8 @@
+# robots.txt for http://wiki.delphi-jedi.org/
+
+User-agent: *
+Disallow: /w/
+Disallow: /wiki/Special:*
+Disallow: /JEDI_Help/
+Disallow: /JCL_Help/
+Disallow: /JVCL_Help/

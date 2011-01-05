@@ -11,4 +11,14 @@ RewriteBase /
 #RewriteCond %{REMOTE_ADDR} !=82.67.45.121
 #RewriteRule .*  http://www.delphi-jedi.org/ [L,R]
 
+# to have all wiki URL rewritten to wiki.delphi-jedi.org/wiki/
 
+RewriteEngine On
+RewriteRule ^wiki/(.*)$ /w/index.php?title=$1 [PT,L,QSA]
+RewriteRule ^wiki/*$ /w/index.php [L,QSA]
+RewriteRule ^/*$ /w/index.php [L,QSA]
+RewriteRule ^index(.*)$ /w/index$1 [L,QSA]
+RewriteRule ^api(.*)$ /w/api$1 [L,QSA]
+RewriteRule ^JEDI_Help/(.*)$ /w/index.php?title=JEDI_Help:$1 [L,QSA]
+RewriteRule ^JCL_Help/(.*)$ /w/index.php?title=JCL_Help:$1 [L,QSA]
+RewriteRule ^JVCL_Help/(.*)$ /w/index.php?title=JVCL_Help:$1 [L,QSA]
