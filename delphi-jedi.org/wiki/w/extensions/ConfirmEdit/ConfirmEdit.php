@@ -64,6 +64,7 @@ $wgGroupPermissions['emailconfirmed']['edit'] = true;
 $wgGroupPermissions['*'             ]['skipcaptcha'] = false;
 $wgGroupPermissions['user'          ]['skipcaptcha'] = false;
 $wgGroupPermissions['autoconfirmed' ]['skipcaptcha'] = false;
+$wgGroupPermissions['nocaptcha'     ]['skipcaptcha'] = true;
 $wgGroupPermissions['emailconfirmed']['skipcaptcha'] = true;
 $wgGroupPermissions['bot'           ]['skipcaptcha'] = true; // registered bots
 $wgGroupPermissions['sysop'         ]['skipcaptcha'] = true;
