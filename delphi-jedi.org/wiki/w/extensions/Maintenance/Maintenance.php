@@ -18,8 +18,8 @@ if( !defined('MEDIAWIKI') ) {
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['specialpage'][] = array(
 	'name' => 'Maintenance',
-	'author' => 'Ryan Schmidt',
-	'version' => '1.0.3',
+	'author' => 'Ryan Schmidt, Florent Ouchet',
+	'version' => '1.0.3 modified',
 	'description' => '[[Special:Maintenance|Web interface]] for various maintenance scripts',
 	'descriptionmsg' => 'maintenance-desc',
 	'url' => 'http://www.mediawiki.org/wiki/Extension:Maintenance',

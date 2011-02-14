@@ -9,7 +9,7 @@ class Maintenance extends SpecialPage {
 	static $scripts = array(
 		'changePassword', 'createAndPromote', 'deleteBatch', 'deleteRevision',
 		'initEditCount', 'initStats', 'moveBatch', 'runJobs', 'showJobs', 'stats',
-		'sql', 'eval', 'reassignEdits', 
+		'sql', 'eval', 'reassignEdits', 'purgeDeletedText',
 	);
 
 	/**
@@ -127,6 +127,9 @@ class Maintenance extends SpecialPage {
 				$wgOut->addHTML( Xml::checkLabel( wfMsg( 'maintenance-re-force' ), 'wpForce', 'wpForce' ) . '<br /><br />' );
 				$wgOut->addHTML( Xml::checkLabel( wfMsg( 'maintenance-re-rc' ), 'wpRc', 'wpRc' ) . '<br /><br />' );
 				$wgOut->addHTML( Xml::checkLabel( wfMsg( 'maintenance-re-report' ), 'wpReport', 'wpReport' ) . '<br /><br />' );
+				break;
+			case 'purgeDeletedText':
+				//just hit the button to start this, no additional settings are needed :)
 				break;
 			case 'runJobs':
 				//just hit the button to start this, no additional settings are needed :)
@@ -278,6 +281,112 @@ class Maintenance extends SpecialPage {
 				$wgUser = $OldUser;
 				$wgOut->addWikiMsg( 'maintenance-success', $type );
 				break;
+            case 'purgeDeletedText':
+	            # Data should come off the master, wrapped in a transaction
+	            $dbw = wfGetDB( DB_MASTER );
+	            $dbw->begin();
+
+                # compute table names
+	            $tbl_arc = $dbw->tableName( 'archive' );
+	            $tbl_rev = $dbw->tableName( 'revision' );
+	            $tbl_txt = $dbw->tableName( 'text' );
+
+	            # Delete as appropriate
+	            $dbw->query( "TRUNCATE TABLE $tbl_arc" );
+
+                // list of "valid" text ids
+                $new_ids = array();
+                $new_start = 0;
+                // list of "existing" text ids
+                $old_ids = array();
+                $old_start = 0;
+                // index id
+                $id = 1;
+                // list of ids to be deleted
+                $del_ids = array();
+                while ( ($id > 0) && (count($del_ids) < 100 )) {
+                    // get some new "valid" text ids
+                    if ( count($new_ids) == 0 ) {
+                        $res = $dbw->query( "SELECT DISTINCTROW rev_text_id FROM $tbl_rev ORDER BY rev_text_id ASC LIMIT $new_start,100" );
+                        while( $row = $dbw->fetchObject( $res ) ) {
+                            $new_ids[$row->rev_text_id] = $row->rev_text_id;
+                        }
+                        if (count($new_ids) == 0) {
+                            $id = 0;
+                        } else {
+                          $new_start += count($new_ids);
+                        }
+                    }
+                    // get some new "existing" text ids 
+                    if ( count($old_ids) == 0 ) {
+                        $res = $dbw->query( "SELECT DISTINCTROW old_id FROM $tbl_txt ORDER BY old_id ASC LIMIT $old_start,100" );
+                        while( $row = $dbw->fetchObject( $res ) ) {
+                            $old_ids[$row->old_id] = $row->old_id;
+                        }
+                        if (count($old_ids) == 0) {
+                            $id = 0;
+                        } else {
+                          $old_start += count($old_ids);
+                        }
+                    }
+                    // for all ids, check that existing ids are valid
+                    while ( (count($new_ids) > 0) && (count($old_ids) > 0) ) {
+                        if (isset($new_ids[$id])) {
+                            unset($new_ids[$id]);
+                        } else {
+                            if (isset($old_ids[$id])) {
+                                $del_ids[] = $id;
+                            }
+                        }
+                        unset($old_ids[$id]);
+                        $id += 1;
+                    }
+                }
+
+                // print result
+                foreach( $del_ids as $del_id ) {
+                    $wgOut->addHTML( strval($del_id).'<br/>' );
+                }
+
+                // delete rows
+                if( count($del_ids) > 0 ) {
+		          $set = implode( ', ', $del_ids );
+		          $dbw->query( "DELETE FROM $tbl_txt WHERE old_id IN ( $set )" );
+                }
+
+                // this solution consummes too much memory
+	            //# Get "active" text records from the revisions table
+	            //$res = $dbw->query( "SELECT DISTINCTROW rev_text_id FROM $tbl_rev" );
+	            //while( $row = $dbw->fetchObject( $res ) ) {
+		        //    $cur[] = $row->rev_text_id;
+	            //}
+
+            	//# Get the IDs of all text records not in these sets
+	            //$set = implode( ', ', $cur );
+	            //$res = $dbw->query( "SELECT old_id FROM $tbl_txt WHERE old_id NOT IN ( $set )" );
+	            //$old = array();
+	            //while( $row = $dbw->fetchObject( $res ) ) {
+		        //    $old[] = $row->old_id;
+                //}
+
+	            //$count = count( $old );
+	            //# Delete as appropriate
+	            //if( $count ) {
+		        //    $set = implode( ', ', $old );
+		        //    $dbw->query( "DELETE FROM $tbl_txt WHERE old_id IN ( $set )" );
+                //}
+
+                // this solution is too slow
+	            //$res = $dbw->query( "SELECT DISTINCTROW old_id FROM $tbl_txt WHERE NOT EXISTS (SELECT * FROM $tbl_rev WHERE $tbl_rev.rev_text_id = $tbl_txt.old_id)" );
+	            //while( $row = $dbw->fetchObject( $res ) ) {
+		        //    $old_id = $row->old_id;
+                //    $wgOut->addHTML( strval($old_id).'<br/>' );
+	            //}
+
+	            # done
+	            $dbw->commit();
+				$wgOut->addWikiMsg( 'maintenance-success', $type );
+                break;
 			case 'eval':
 				$temp = error_reporting( E_ALL );
 				ob_start();
