@@ -211,7 +211,7 @@ class ApiDeleteRevision extends ApiBase {
         return true;
     }
 
-	public function mustBePosted() { return false; }
+	public function mustBePosted() { return true; }
 
 	public function getAllowedParams() {
 		return array (
