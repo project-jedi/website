@@ -304,7 +304,7 @@ class Maintenance extends SpecialPage {
                 $id = 1;
                 // list of ids to be deleted
                 $del_ids = array();
-                while ( ($id > 0) && (count($del_ids) < 100 )) {
+                while ( ($id > 0) && (count($del_ids) < 1000 )) {
                     // get some new "valid" text ids
                     if ( count($new_ids) == 0 ) {
                         $res = $dbw->query( "SELECT DISTINCTROW rev_text_id FROM $tbl_rev ORDER BY rev_text_id ASC LIMIT $new_start,100" );
