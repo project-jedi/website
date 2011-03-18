@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>De:</b> ";
+$text_header["subject"]="<b>Asunto:</b> ";
+$text_header["newsgroups"]="<b>Foro:</b> ";
+$text_header["followup"]="<b>Responder a:</b> ";
+$text_header["organization"]="<b>Organisación:</b> ";
+$text_header["date"]="<b>Fecha:</b> ";
+$text_header["message-id"]="<b>Mensage-ID:</b> ";
+$text_header["references"]="<b>Referencia:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="d. M Y, H:i:s";
+
+$text_thread["no_articles"]="<p><b>Ningún Artículo</b></p>";
+$text_thread["button_write"]="Escribir";
+$text_thread["button_grouplist"]="Al Foro-Lista";
+$text_thread["button_top"]="Hacia Arriba";
+$text_thread["date"]="<b>Fecha</b>";
+$text_thread["subject"]="<b>Tema</b>";
+$text_thread["author"]="<b>Autor</b>";
+$text_thread["no_such_group"]="El grupo no existe.";
+
+$text_groups["newsgroup"]="<b>News-grupo</b>";
+$text_groups["description"]="<b>Descripción</b>";
+
+$text_article["button_answer"]="Responder";
+
+$text_post["missing_message"]="Naturalmente debes ingresar un texto como cuerpo de la noticia.";
+$text_post["missing_email"]="La dirección de eMail debe ser ingresada.";
+$text_post["missing_name"]="Debes mínimo ingresar un nombre, puede ser tambien un NickName.";
+$text_post["missing_subject"]="El Asunto es necesario para enviar la noticia.";
+$text_post["button_post"]="Enviar";
+$text_post["remember"]="Nombre y  eMail enviado";
+$text_post["message"]="Noticia";
+$text_post["group_head"]="Siguiete Artículo ";
+$text_post["group_tail"]=" Escribir";
+$text_post["followup_not_allowed"]="No tenes permisos en el grupo correspondiente a este Artículo. Por lo tanto no tenes tampoco permiso para contestar :";
+$text_post["message_posted"]="Noticia Enviada";
+$text_post["message_posted2"]="La noticia fue enviada exitosamente!";
+$text_post["button_back"]="Volver";
+$text_post["button_back2"]="siguiente";
+$text_post["error_newsserver"]="La noticia fue con el siguiente error del Newsserver devuelta:";
+$text_post["error_readonly"]="Sin permisos de escritura";
+$text_post["error_wrong_email"]="La dirección de Email ingresada no es correcta. Ingrese la misma nuevamente.";
+
+$text_error["error:"]='<font color="red">Error:</font>';
+$text_error["connection_failed"]="Hubo problemas al intentar contactar el Newsserver";
+$text_error["article_not_found"]="<p>El Artículo no Existe.</p>";
+$text_error["read_access_denied"]="<p>Sin permisos de Lectura!</p>";
+$text_error["post_failed"]="Conexión al servidor con complicaciones. Por favor trate de cargar la Pagina nuevamente mas tarde.";
+$text_error["auth_error"]="Authentificación en el  Newsserver con problemas. Intente nuevamente.";
+$text_error["spool_error"]="Error en Archivo Spool. Carge de nuevo la Página.";
+
+?>

@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>From:</b> ";
+$text_header["subject"]="<b>Subject:</b> ";
+$text_header["newsgroups"]="<b>Newsgroups:</b> ";
+$text_header["followup"]="<b>Followup:</b> ";
+$text_header["organization"]="<b>Organization:</b> ";
+$text_header["date"]="<b>Date:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>No articles aviable</b></p>";
+$text_thread["button_write"]="Write";
+$text_thread["button_grouplist"]="Newsgroups";
+$text_thread["button_top"]="Back to Top";
+$text_thread["date"]="<b>Date</b>";
+$text_thread["subject"]="<b>Subject</b>";
+$text_thread["author"]="<b>Author</b>";
+$text_thread["no_such_group"]="No such Group.";
+
+$text_groups["newsgroup"]="<b>Newsgroup</b>";
+$text_groups["description"]="<b>Description</b>";
+
+$text_article["button_answer"]="Answer";
+
+$text_post["missing_message"]="You must include a message to post.";
+$text_post["missing_email"]="You must include an email address.";
+$text_post["missing_name"]="You must include a name or at least an alias.";
+$text_post["missing_subject"]="You must include a subject.";
+$text_post["button_post"]="Post";
+$text_post["remember"]="Remember name and email address";
+$text_post["message"]="Message";
+$text_post["group_head"]="Compose article for ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="You aren't allowed to post to the groups:";
+$text_post["message_posted"]="Message posted";
+$text_post["message_posted2"]="The message was successfully posted.";
+$text_post["button_back"]="Back";
+$text_post["button_back2"]="to";
+$text_post["error_newsserver"]="The newsserver does not accept the message:";
+$text_post["error_readonly"]="The group is write protected";
+$text_post["error_wrong_email"]="The email adress is wrong";
+
+$text_error["error:"]='<font color="red">Error:</font>';
+$text_error["connection_failed"]="The connection to the Newsserver failed";
+$text_error["article_not_found"]="<p>The article doesn't exist.</p>";
+$text_error["read_access_denied"]="<p>No permission to read!</p>";
+$text_error["post_failed"]="Connection failed. Try to reload later.";
+$text_error["auth_error"]="Authentifikation at the Newsserver failed.";
+$text_error["spool_error"]="Error in spoolfile. Please reload.";
+
+?>

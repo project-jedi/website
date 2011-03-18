@@ -1,0 +1,7 @@
+- Zu große Artikel führen zum Abbruch (?)
+- Es ist nicht geklärt, was passiert, wenn mehrfach gleichzeitig
+  die Artikelübersucht angefordert wird, und gleichzeitig ein neuer Artikel
+  beim Newsserver vorliegt. Bislang ist jedoch nichts auffaelliges passiert.
+- Message-IDs innerhalb von Texten werden als eMail-Adresse
+  fehlinterpretiert und dann mit einem mailto-tag versehen.
+- Der References-Header kann zu lang werden

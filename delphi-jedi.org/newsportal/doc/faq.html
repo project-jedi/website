@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>NewsPortal - FAQ</title>
+</head>
+<body>
+<h1 align=center>NewsPortal - FAQ</h1>
+
+<p>
+<ol>
+<li><a href="#f1">Warum bricht NewsPortal in der thread.php3 mit der Meldung 
+  "maximun execution time exeeded in newsportal.php3 at line XXX" ab?</a>
+<li><a href="#f2">Warum bricht NewsPortal in der thread.php3 mit der Meldung
+  "Fatal error: Call to unsupported or undefined function gzopen()
+        in newsportal.php at line XXX" ab?</a>
+<li><a href="#f3">Welchen Newsserver soll ich benutzen</a>
+</ol>
+</p>
+
+<p><b>
+<a name="f2">
+1. Warum bricht NewsPortal in der thread.php3 mit der Meldung "maximun execution
+time exeeded in newsportal.php3 at line XXX" ab?</a></b></p>
+
+<p>NewsPortal mu&szlig; seine Spooldaten, wo die Artikelinformationen zu der
+jeweiligen Newsgruppe aufbewahrt werden, neu aufbauen, wenn diese 1. noch
+nicht existieren, oder 2. Artikel aus der Newsgruppe gel&ouml;scht worden
+sind. Wenn die Verbindung zwischen Webserver und Newsserver nur langsam ist,
+oder der Newsserver aus anderen Gr&uuml;nden nur langsam reagiert, dann
+dauert das Aufbauen dieser Spooldateien wom&ouml;glich zu lange, und Apache
+beendet das PHP3-Skript nach &Uuml;berschreiten einer bestimmten Zeitspanne.
+Folgende L&ouml;sungsm&ouml;glichkeiten gibt es:
+<ol>
+<li>Einen Newsserver w&auml;hlen, der schneller zu erreichen ist. Zur Not
+auch verschiedene Server zum Lesen und Schreiben benutzen.
+<li>Die Anzahl der Artikel mit der Option <i>$maxarticles</i> in der
+<tt>config.inc</tt> st&auml;rker begrenzen
+</ol>
+</p>
+
+<p><b>
+<a name="f2">
+2. Warum bricht NewsPortal in der thread.php3 mit der Meldung "Fatal error:
+Call to unsupported or undefined function gzopen() in newsportal.php at line
+XXX" ab?</a></b></p>
+
+<p>Wenn diese Meldung auftritt, dann unterst&uuml;tzt die von Dir verwendete
+Version von PHP3 noch nicht das Komprimieren von Dateien. Schalte in der
+<tt>config.inc</tt> mit dem Setzen von <i>$compress_spoolfiles</i> auf
+<i>false</i> das Komprimieren ab. Die Spooldateien werden dadurch allerdings
+um ein Vielfaches gr&ouml;&szlig;er.
+</p>
+
+<p><b><a name="f3">
+3. Welchen Newsserver soll ich benutzen</a></b></p>
+
+<p>Ich habe NewsPortal in erster Linie geschrieben, um lokale Newsgruppen,
+wie z.B. die von Mailboxnetzen oder Firmeninterne Gruppen, auch &uuml;ber
+Web lesbar zu machen. Das hei&szlig;t, wenn Du oder Dein
+Verein/Mailboxverbund einen Newsserver betreibt, kannst Du den mit
+NewsPortal benutzen. Willst Du jedoch Newsgruppen des UseNet mit NewsPortal
+ansprechen, ist die Situation eine v&ouml;llig andere, da im UseNet gewisse
+Spielregeln gelten, an die Du Dich zu halten hast. So solltest Du 1. nur
+Newsserver benutzen, von denen Du wei&szlig;t, da&szlig; der Betreiber
+dieses Servers nichts gegen die Verwendung von NewsPortal hat. 2. Solltest
+Du keinen Schreibzugriff auf die UseNet Newsgruppen geben, au&szlig;er Du
+hast (z.B. wenn NewsPortal in einem Passwortgesch&uuml;tzten Bereich liegt)
+Kontrolle dar&uuml;ber, wer Artikel schreiben kann, und bist zudem gewillt,
+eine gewisse Mitverantwortung f&uuml;r Deine User zu &uuml;bernehmen.<br>
+Hier einige Newsgruppen, die Dir weiterhelfen sollten:
+<ul>
+<li><tt>de.comm.provider.usenet</tt> Hier kann man Dir auf der Suche nach
+einem Newsserver helfen.
+<li><tt>de.admin.net-abuse.news</tt> Diskussionen &uuml;ber den
+Mi&szlig;brauch des UseNet.
+<li><tt>de.comm.software.newsserver</tt> Newsserver Software, wie z.B. INN,
+Microsoft News oder Hamster.
+</ul>
+</p>

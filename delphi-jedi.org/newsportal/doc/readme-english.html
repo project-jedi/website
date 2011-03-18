@@ -1,0 +1,297 @@
+<html>
+<head>
+<title>Newsportal readme</title>
+</head>
+<body textcolor=black bgcolor=white>
+<h1 align=center>News portal</h1>
+
+<p>Version 0.24pre4</p>
+
+<h2>Introduction</h2>
+
+<p>News portal is a PHP based newsreader.  It is licensed under the GNU
+Public License (see enclosed LICENSE).
+</p>
+
+
+<h2>Overview</h2>
+
+<p>This script collection enables the access to a newsserver (by NNTP) from
+a webpage. It allows you to combine web-forums and newsgroups.
+The script is also suitable for presentation of announce newsgroups
+on web pages, without having the user notice that he is in fact accessing a newsserver.
+</p>
+
+<p>The main functionality of the script is located in the file
+<tt>newsportal.php</tt>, which contains the major part of the implemented php3-functions.
+In addition to that there are four more php3-files, which are directly accessed
+by the browser:</p>
+<UL>
+<li><i>index.php</i>  shows the available newsgroups of the newsserver (if
+you have added the names to groups.txt)
+<li><i>thread.php </i>displays the article-overview of a newsgroup. The
+articles are displayed in a thread.
+<li><i>article.php</i> displays an individual article.
+<li><i>post.php</i> posts a message into a newsgroup. 
+<li><i>attachment.php</i> shows possible attachments of articles.
+</UL>
+
+<p>There are some more files that control the behavior of newsportal or
+contain information:</p>
+<UL>
+<li><i>config.inc </i> contains the configuration.
+<li><i>head.inc</i> contains the header and the body-tag of the pages. This way
+the layout of the pages (i.e. the background) can easily be adjusted.
+<li><i>tail.inc</i> contains the end of every page.
+<li><i>german.lang </i>:  The German language definitions
+<li><i>english.lang </i>:  The English language definitions
+</ul></p>
+
+<p>Since fetching the article overview of the newsserver takes quite some time,
+newsportal caches this data in the directory
+<tt>spool/</tt>. Any file can be put in this directory, they will
+automatically be regenerated.
+</p>
+
+<h2>Installation:</h2>
+
+<p><ol>
+<li>download the zip or tar.gz archive
+<li>unzip it to a directory
+
+<li>The file<tt>config.inc</tt> 
+must be edited with your settings (the most important variables are:
+<i>$server, $port, $title and $readonly</i>).
+
+<li>Write the names of all groups newsportal should show into the file <tt>groups.txt</tt>.
+Behind the groupname, seperated by a blank, a description of the group can be added. If the description is missing,
+newsportal will try to request the description from the newsserver.
+
+<li>The spool directory has to be created and configured to grant read an write access to the newsserver
+("chmod 777 spool" ).
+
+<li>Adjust the Codepage in head.inc. If you are in western europe or the USA
+the predefined iso-8859-1 is correct and you don't have to change it.
+</ol></p>
+
+<h2>Configuration</h2>
+<p>The following adjustments can be made in <tt>config.inc</tt>
+</p>
+
+<p><b>Directories and files:</b>
+<UL>
+<li><i>$file_newsportal="newsportal.php":</i>Name of the file containing
+the newsportal-functions.
+<li><i>$file_groups="index.php"</i>: The file which shows the list of
+available newsgroups.
+<li><i>$file_thread="thread.php"</i>: The file which shows the
+article-thread of a selected newsgroup
+<li><i>$file_article="article.php"</i>: Displays an article
+<li><i>$file_post="post.php"</i>: The file which allows you to post an
+article to a newsgroup. This file can be removed, if the system is set on
+readonly (see below).
+<li><i>$file_language="english.lang"</i>:  Reference to the language
+definition file.
+<li><i>$file_footer</i>: Optionally, the name of a file can
+be indicated, which will be attached to every article posted to a newsgroup.
+</ul></p>
+
+<p><b>Newsserver setip</b>
+<UL>
+<li><i>$server </i>: Hostname or IP of the newsserver
+<li><i>$port </i>: Port of the newsserver, normally 119
+<li><i>$post_server</i>: Optionally an extra newsserver can be indicated here
+which is used by post.php3 for writing articles. 
+This is useful if two newsservers need to be accessed, a fast read-only server and a slow server
+to post articles. Be aware that it might take some time until the posted article will show up on your
+main newsserver ($server), which you use to read articles.
+<li><i>$post_port </i>: Port of your post-newsserver
+<li><i>$server_auth_user</i>: If the newsserver requires authentication by name and password put your username
+here. Otherwise just set the variable to "".
+<li><i>$server_auth_pass</i>: Put your password here.
+</ul></p>
+
+<p><b>Thread Layout</b>
+<ul>
+<li><i>$treestyle </i>:The appearance of the message tree:
+<ul>
+ <li>0: Simple listing of the articles</li>
+ <li>1: Easy listing of the articles, with some more HTML tags</li>
+ <li>2: Simple listing in a table</li>
+ <li>3: Threaded with HTML-tags (UL, li)</li>
+ <li>4: Threaded with text characters</li>
+ <li>5: Threaded with graphical images</li>
+ <li>6: Threaded with text characters and table</li>
+ <li>7: Threaded with graphical images table</li>
+</ul></li>
+
+<li><i>$thread_fontPre</i>: The code given here is put in front of every text fragment in thread.php3, i.e.
+font face or size can be set.</li>
+<li><i>$thread_fontPost</i>: The same as $thread_fontPre,
+only code is appended at the end of the text.</li>
+
+<li><i>$thread_showDate,<br>
+       $thread_showSubject,<br>
+       $thread_showAuthor</i>:
+<ul>
+ <li>true: the date / the subject / the author are displayed in
+     the thread</li>
+ <li>false: output is suppressed.</li>
+</ul>
+
+<li><i>$thread_maxSubject </i>: Maximum number of characters of the subject displayed</li>
+<li><i>$maxarticles</i>: This number indicates the maximum amount of
+overview data of a newsgroup newsportal tries to get from the newsserver.
+"0" means no limitation. $maxarticles also indicates the amount of articles
+to be stored in the spoolfiles. A lower value means less work for newsportal</li>
+<li><i>$maxarticles_extra</i>: The problem with $maxarticles is that all
+article data must be completely requested again by the new server, if the
+indicated value is exceeded.
+$maxarticles_extra can be set to prevent this.
+The article-spool will only be restructured if
+$maxarticles + $maxarticles_extra articles are present, whereby
+$maxarticles many article data are requested. 
+Only if an exact given number of articles should be displayed on the web page, the value of
+this variable schould be set "0".</li>
+<li><i>$age_count </i>: Number of different age levels for the
+coloured marking of articles</li>
+<li><i>$$age_time[n] </i>: maximal age of an article in seconds,
+so that the article gets marked with the colour $age_color[n].
+n is a natural number &gt; = 1 and all numbers from 1 to n must be
+assigned, gaps are not permitted.</li>
+<li><i>$age_color[n]</i>: The colour in which the article is marked</li>
+<li><i>$thread_sorting </i>: The sort sequence for the articles:
+<ul>
+ <li>0: No assortment, articles are displayed in the order in which they are polled from
+	  the server. This is nearly like ascending
+        assortment.</li>
+<li> 1: ascending assortment, the oldest articles to the top.</li>
+<li> -1: descending assortment, the newest articles to the top.</li>
+</ul></li>
+<li><i>$articles_per_page</i>: If this value is not 0, the maximum amount of articles is given, which are to be
+displayed on one page at the same time. The thread will be split into
+individual pages.</li>
+<li><i>$startpage</i>: In connection with $$articles_per_page
+the variable indicates, which page is to be displayed first:
+<ul>
+  <li>"first": The page with the newest articles</li>
+  <li>"last":  the page with the oldest articles</li>
+</ul>
+The specification should be co-ordinated with <i>$thread_sorting</i>.
+"first" for 0 and 1, and "last" for -1.</li>
+</ul></p>
+
+<p><b>Article layout</b>
+<ul>
+<li><i>$article_show["Subject"],<br>
+       $article_show["From"],<br>
+       $article_show["Newsgroups"],<br>
+       $article_show["Organization"],<br>
+       $article_show["Date"],<br>
+       $article_show["Message-ID"],<br>
+       $article_show["User-Agent"],<br>
+       $article_show["References"]</i>:
+"true" displays the
+respective header line in article.php3, by "false" it
+is suppressed.</ul></p>
+
+<p><b>Frame support</b><br>
+Example files for the frame support are located in
+<tt>extras/frames/</tt>. In this section the names of the frames can be
+defined. If you want to use frames you have to set the variable
+$frame_thread to "thread_frameset.php3".
+<ul>
+<li><i>$frame_articles</i>: Name of the article frame. Must be the same as
+defined in <tt> thread_frameset.php3</tt>.</li>
+<li>$frame_thread</i>:  Name of the thread frame.
+<li><i>$frame_groups</i>: Name of the frame for the grouplist, normally set
+to "_top" to open a new frameset.</li>
+<li><i>$frame_post </i>: Name of the frame for post.php3</li>
+<li><i>$frame_threadframeset </i>: Name of the frame, in which the
+frameset is to appear, which takes up the article and thread Frames.
+Normally set to "_top".</li>
+<li><i>$frame_externallink</i>: Target frame for external links within
+articles.</li>
+</ul>
+
+<p><b>Safety settings</b>
+<ul>
+<li><i>$send_poster_host</i>: "true" means that a header-line named "X-HTTP-Posting-Host:"
+will be attached to every posted article, set to the hostname of the user who wrote the article.</li>
+<li><i>$readonly </i>: if set to "true", the newsportal is read-only. The file post.php3 can be safely removed.</li>
+<li><i>$testgroup </i>: if set to "true" newsportal checks if a group is
+listed in <tt>groups.txt</tt> when accessed through thread.php3.
+Otherwise a group could be seen simply entering the right URL, although
+the group is not displayed in the group list.</li>
+<li><i>$validate_email </i>: Sets how newsportal checks an
+email address in post.php3 for syntax:
+<ul>
+ <li>0: no examination.  Not recommended, since the
+newsserver will give an error message, if the address is not syntactically
+correct.</li>
+ <li>1:  Checks the address on syntactic correctness.</li>
+ <li>2:  Additionally a MX or A record is checked for the domain-name of the e-mail address.
+	Newsportal performs a hostname lookup.</li>
+</ul>
+</UL></p>
+
+<p><b>General setting</b>
+<UL>
+<li><i>$title</i>: The value of this variable is put in the title-header of
+the generated webpages.</li>
+<li><i>$organization </i>: Name of your organization. Put after the
+"Organization:"-header when posting articles.</li>
+<li><i>$setcookies </i>: Permits the user to save his name and his
+email-address as cookies in his browser.</li>
+<li><i>$compress_spoolfiles</i>:  Sets whether the spool files should be compressed or not.
+This is recommended under normal conditions, since the size of the spoolfiles shrinks 
+approximately to about 15% of the original size. Be aware that some PHP-Versions
+do not support compressing
+</UL></p>
+
+<h2>Safety notes</h2>
+
+<p>A few things must be kept in mind to not allow newsportal to open 
+safety-holes:
+<ul>
+<li><tt>config.inc</tt> can be requested by every user that knows the filename,
+if you do not move it to a protected area of your webserver.
+</ul></p>
+
+<p>This script was originally (and actually still) only meant
+for access to local newsgroups. If you use it with UseNet newsgroups,
+following problems could show up:
+<ul>
+<li>Articles could be posted anonymously (i.e. spamming), see $send_poster_host</li>
+<li>Newsportal produces 8-bit header lines (i.e. the Subject),
+which is not permitted.  However there do not seem to be any problems.</li>
+<li>There are lists with so-called "open" newsservers in the
+internet. Mostly "open" doesn't mean for this server that everyone is
+allowed to use this server. Normally it means that the operator of the server
+forgot to protect his server adequatly. So before using an "open" newsserver,
+you should make sure that the operator permits the use of his
+server for newsportal.</li>
+<li>Posting articles anonymously is not accepted in most UseNet groups. 
+Before you give writing access to a newsgroup, you should ask the users in the newsgroup
+if they have no objections. <b>Do not give public write access on UseNet newsgroups,
+if you do not know exactly, what you are doing!</b></li>
+</ul></p>
+
+<p>The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the program provided.
+Liability claims regarding damage caused by the program provided, will therefore be rejected.<br>
+In other words: Use this program at your own risk !</p>
+
+<h2>Compatibility</h2>
+
+<p>Newsportal should work with every phpserver with php3 support
+and every newsserver. Webserver and newsserver do not need to run on the
+same machine.</p>
+
+<h2>Contact</h2>
+
+<p>Florian Amrhein<br>
+email: <a href="mailto:florian.amrhein@gmx.de">florian.amrhein@gmx.de</a><br>
+WWW:
+<a href=http://florian-amrhein.de">http://florian-amrhein.de</a>
+</p>
+</body></html>

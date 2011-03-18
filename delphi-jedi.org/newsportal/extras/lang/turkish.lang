@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>Kimden:</b> ";
+$text_header["subject"]="<b>Konu:</b> ";
+$text_header["newsgroups"]="<b>Haber gruplari:</b> ";
+$text_header["followup"]="<b>Üyelik:</b> ";
+$text_header["organization"]="<b>Organizasyon:</b> ";
+$text_header["date"]="<b>Gün:</b> ";
+$text_header["message-id"]="<b>Mesaj-ID:</b> ";
+$text_header["references"]="<b>Referanslar:</b> ";
+$text_header["user-agent"]="<b>Kullanici:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Makale mevcut degil</b></p>";
+$text_thread["button_write"]="Yaz";
+$text_thread["button_grouplist"]="Haber gruplari";
+$text_thread["button_top"]="Üste Dön";
+$text_thread["date"]="<b>Gün</b>";
+$text_thread["subject"]="<b>Konu</b>";
+$text_thread["author"]="<b>Yazar</b>";
+$text_thread["no_such_group"]="Böyle bir grup yok.";
+
+$text_groups["newsgroup"]="<b>Haber Grubu</b>";
+$text_groups["description"]="<b>Tanimlama</b>";
+
+$text_article["button_answer"]="Yanitla";
+
+$text_post["missing_message"]="Mesaji postalamak için birsey yazmak zorundasiniz.";
+$text_post["missing_email"]="Bir e-posta adresi girmelisiniz.";
+$text_post["missing_name"]="Adinizi yada lakabinizi girmelisiniz.";
+$text_post["missing_subject"]="Bir konu basligi girmelisiniz.";
+$text_post["button_post"]="Postala";
+$text_post["remember"]="Adi ve e-posta adresini kaydet";
+$text_post["message"]="Mesaj";
+$text_post["group_head"]="Makale yaz ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="Bu gruplara postalamaya yetkili degilsiniz:";
+$text_post["message_posted"]="Mesaj gönderildi";
+$text_post["message_posted2"]="Mesaj basariyla gönderildi.";
+$text_post["button_back"]="Geri";
+$text_post["button_back2"]="Kime";
+$text_post["error_newsserver"]="Haber grubu sunucusu bu mesaji kabul etmedi:";
+$text_post["error_readonly"]="Bu Grup yazma korumalidir";
+$text_post["error_wrong_email"]="Geçerli bir e-posta adresi girmediniz";
+
+$text_error["error:"]='<font color="red">Hata:</font>';
+$text_error["connection_failed"]="Haber Grubu sunucusuna baglanilamadi";
+$text_error["article_not_found"]="<p>Böyle bir makale yok.</p>";
+$text_error["read_access_denied"]="<p>Okuma izniniz yok!</p>";
+$text_error["post_failed"]="Baglanti koptu. Tekrar deneyin.";
+$text_error["auth_error"]="Kullanici kimligi denetimi basarisiz.";
+$text_error["spool_error"]="spoolfile dosyasinda hata. Lütfen tekrar yükleyin.";
+
+?>

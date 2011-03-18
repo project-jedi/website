@@ -1,0 +1,362 @@
+<html>
+<head>
+<title>Newsportal</title>
+</head>
+<body textcolor=black bgcolor=white>
+<h1 align=center>News Portal</h1>
+
+<p>Version 0.24pre6</p>
+
+<h2>Einleitung</h2>
+
+<p>Newsportal ist ein PHP-Basierter Newsreader.
+Es steht unter der GNU Public License (siehe beiliegende LICENSE).</p>
+
+
+<h2>&Uuml;berblick</h2>
+
+<p>Diese Skriptsammlung ermöglicht von einer Webseite aus den Zugriff auf einen
+Newsserver (per NNTP). Man kann damit Webforen und Newsgruppen verbinden, so
+daß auf ein "Webforum" auch per NNTP zugegriffen werden kann. Dieses Skript
+eignet sich auch für die Präsentation von Announce-Newsgruppen auf
+Webseiten, ohne daß der Benutzer merkt, daß er in Wirklichkeit auf einen
+Newsserver zugreift.</p>
+
+<p>Die eigentliche Funktionalitäts des Skripts liegt in der Datei
+<tt>newsportal.php</tt>, in der die meisten php-Funktionen untergebracht sind.
+Zusätzlich gibt es vier weitere php-Dateien, auf die direkt mit dem Browser
+zugegriffen wird:</p>
+<UL>
+<li><i>index.php</i> zeigt die auf dem Newsserver verfügbaren Newsgruppen an (sofern
+  sie auch in die Datei groups.txt eingetragen sind).
+<li><i>thread.php</i> zeigt die Artikel in einer Newsgruppe an.
+<li><i>article.php</i> zeigt einen einzelnen Artikel an.
+<li><i>post.php</i> schreibt eine Nachricht in die passende Newsgruppe.
+<li><i>attachment.php</i> zeit m&ouml;gliche Attachments an.
+</UL>
+
+<p>Neben dan Dateien, auf die direkt zugegriffen wird, gibt es eine Zahl
+weiterer Dateien, die das Verhalten von Newsportal steuern oder wichtige
+Daten enthalten:</p>
+
+<UL>
+<li><i>config.inc</i> enthält die Einstellungen
+<li><i>head.inc</i> enthält den Kopf jeder von Newsportal ausgegebenen Seite,
+  wie den HTML-title und das Body-Tag mit den Farbeinstellungen für die
+  Webseiten.
+<li><i>tail.inc</i> enthält das Ende jeder generierten Seite.
+<li><i>deutsch.lang</i>: Die deutschen Sprachdefinitionen
+<li><i>english.lang</i>: Die englischen Sprachdefinitionen
+</UL>
+
+<p>Da das Abfragen der Artikelübersicht vom Newsserver viel Zeit beansprucht,
+werden diese Dateien im Verzeichnis <tt>spool/</tt> zwischengespeichert. Die Dateien
+dort drin können nach belieben gelöscht werden, sie werden bei Bedarf neu
+angelegt.</p>
+
+<h2>Installation:</h2>
+
+<p><ol>
+<li>Das Archiv in ein Verzeichnis entpacken.
+
+<li>Die Datei <tt>config.inc</tt> muß angepasst werden (für einen Schnellstart müssen
+<i>$server, $port, $title</i> und gegebenenfalls <i>$readonly</i> verändert werden).
+
+<li>In die Datei <tt>groups.txt</tt> werden alle Newsgruppen eingetragen, die
+Newsportal anzeigen soll. Optional kann man hinter den Gruppennamen von
+einem Leerzeichen getrennt eine Beschreibung eintragen, die dann von der
+<tt>index.php3</tt> angezeigt wird. Fehlt diese, wird die Beschreibung vom
+Newsserver angefordert.
+
+<li>Das Verzeichnis spool muß mit "<code>chmod 777 spool</code>" für jeden les- und
+schreibbar gemacht werden. Nach einem Update kann es passieren, daß das
+Skript ohne das Löschen aller Dateien in diesem Verzeichnis nicht
+funktioniert. Das kommt aber darauf an, ob ich das Format dieser Dateien
+geändert habe. NewsPortal erkennt normalerweise fehlerhafte Spooldateien und
+l&ouml;scht sie gegebenenfalls.
+<li>In der Datei head.inc den Zeichensatz anpassen, falls man sich nicht in
+Westeuropa oder den USA befindet, wo die Voreinstellung von iso-8859-1
+richtig ist.
+</ol></p>
+
+<h2>Konfiguration</h2>
+<p>Folgende Einstellungen können in der <tt>config.inc</tt> vorgenommen werden:
+</p>
+
+<p><b>Verzeichnisse und Dateien:</b>
+<UL>
+<li><i>$file_newsportal="newsportal.php":</i> Name des newsportal-Skripts
+
+<li><i>$file_groups="index.php"</i>: Die Gruppenübersicht
+
+<li><i>$file_thread="thread.php"</i>: Die Artikelübersicht
+
+<li><i>$file_article="article.php"</i>: Zeigt den Artikel an
+
+<li><i>$file_post="post.php"</i>: einen Artikel schreiben. Die Datei kann entfernt
+  werden, wenn das System auf readonly gesetzt ist (siehe unten)
+
+<li><i>$file_language="deutsch.lang"</i>: Verweis auf die Sprachdefinitionsdatei.
+<li><i>$file_footer</i>: Hier kann Optional der Name einer Datei angegeben
+werden, die an jede &uuml;ber Newsportal verschickte Nachricht
+angeh&auml;ngt wird.
+</ul></p>
+
+<p><b>Servereinstellungen</b>
+<UL>
+<li><i>$server</i>: Adresse des Newsservers
+<li><i>$port</i>: Port des Newsservers, normalerweise 119
+<li><i>$post_server</i>: Optional kann hier f&uuml;r das Schreiben von
+Artikeln ein eigener Server angegeben werden. Es ist dann nat&uuml;rlich so,
+da&szlig; ein Artikel eine Zeit braucht, bis er vom $post_server zum $server
+gelangt ist.
+<li><i>$post_port</i>: Port des Post-Newsservers, normalerweise 119
+<li><i>$maxfetch</i>: Hier wird die maximal bei einem Aufruf von thread.php3 vom 
+  Newsserver anzufordernden Artikelübersichten beschränkt. Auf "0" gesetzt
+  werden so viele Artikel angefordert, wie neu zur Verfügung stehen, jede
+  andere Nummer legt die Maximalanzahl fest. Diese Option sollte nur dann
+  auf etwas anderes als 0 gesetzt werden, wenn es Probleme mit der
+  Geschwindigkeit gibt.
+<li><i>$initialfetch</i>: Bei einem Neuaufbau der Overview-Spooldatei wird statt
+  $maxfech viele Artikel maximal $initialfetch viele Artikel abgeholt.
+  Bei "0" ist es auch ungeschränkt.
+<li><i>$server_auth_user</i>: Falls der Newsserver durch Name und Passwort
+gsch&uuml;tzt wird, kann hier der Username angegeben werden. Ansonsten
+einfach die Variable auf "" setzen.
+<li><i>$server_auth_pass</i>: Hier wird das zum Usernamen passende Passwort
+angegeben.
+</ul></p>
+
+<p><b>Threaddarstellung</b>
+<ul>
+<li><i>$treestyle</i>: Setzt das Aussehen des Nachrichtenbaums.
+ <ul>
+ <li>0: Einfache Auflistung der Artikel</li>
+ <li>1: Einfache Auflistung der Artikel, jedoch als HTML-Auflistung</li>
+ <li>2: Einfache Auflistung in Tabellenform</li>
+ <li>3: Thread mit HTML-Auflistungen</li>
+ <li>4: Thread aus Textzeichen</li>
+ <li>5: Thread auf Graphikelementen</li>
+ <li>6: Thread aus Textzeichen mit Tabelle</li>
+ <li>7: Thread aus Grafikzeichen mit Tabelle</li>
+ </ul></li>
+
+<li><i>$thread_fontPre</i>: Der Inhalt dieser Variable wird vor Texten in
+der Threadansicht ausgegeben. Diese Variable ist gedacht um z.B. die
+Textgr&ouml;&szlig;e der Texte zu &auml;ndern. Standardm&auml;&szlig; wird
+dort der Font klein gestellt. Das ist bei alle Threadstyles sinnvoll, wo mit
+Tabellen gearbeitet wird, bei allen anderen ist es sch&ouml;ner die Variable
+auf einen leeren String zu setzen.</li>
+
+<li><i>$thread_fontPost</i>: Das gleiche wie $thread_fontPre, nur da&szlig;
+dieser String nach Textausgaben ausgegeben wird.</li>
+
+<li><i>$thread_showDate,<br>
+       $thread_showSubject,<br>
+       $thread_showAuthor</i>:
+ <ul>
+ <li>true: das Datum / das Subject / der Autor wird im Artikelbaum angezeigt
+ <li>false: Darstellung wird unterdrückt.
+ </ul>
+
+<li><i>$thread_maxSubject</i>: Anzahl der Zeichen, die vom Subject in der
+  Artikelübersicht angezeigt werden.
+
+<li><i>$maxarticles</i>: Gibt die Anzahl der Artikel an, die maximal im Artikelbam
+  angezeigt werden. "0" bedeutet keine Beschränkung.
+  Es werden immer die letzten x Artikel angezeigt, wo wie sie auf dem
+  Newsserver liegen. Das muß nicht unbedingt mit dem Erstelldatum des
+  Artikels übereinstimmen.
+
+<li><i>$maxarticles_extra</i>: Das Problem beim Betrieb mit $maxarticles
+  ist, da&szlig; alle Artikeldaten vom Newsserver komplett neu angefordert
+  werden m&uuml;ssen, wenn der angegebene Wert &uuml;berschritten worden
+  ist. Damit dies nicht ganz so oft vorkommt, kann $maxarticles_extra
+  gesetzt werden. Dann wird die Artikeldatenbank erst neu aufgebaut, wenn
+  $maxarticles + $maxarticles_extra Artikel vorliegen, wobei dann
+  $maxarticles viele Artikeldaten angefordert werden. Wenn man mit
+  $maxarticles arbeitet, weil die Newsgruppen zu gro&szlig; sind, sollte man
+  unbedingt immer auch mit $maxarticles_extra arbeiten. Der Wert sollte etwa
+  20% von $maxarticles betragen. Nur dann, wenn man wirklich eine ganz genau
+  vorgegebene Anzahl von Artikeln auf einer Webseite anzeigen will, sollte
+  man hier den Wert auf Null setzen.
+
+<li><i>$age_count</i>: Anzahl der verschiedenen Altersstufen für die
+  farbliche Markierung von Artikeln
+
+<li><i>$age_time[n]</i>: maximales Alter eines Artikels in Sekunden, so daß der
+  Artikel mit der Farbe $age_color[n] markiert wird. n ist eine natürliche
+  Zahl >= 1, wobei alle Zahlen von 1 bis n vergeben sein müssen, Lücken sind
+  also nicht erlaubt.
+
+<li><i>$age_color[n]</i>: Die Farbe, mit dem der Artikel markiert wird
+
+<li><i>$thread_sorting</i>: Die Sortierreihenfolge für die Artikel:
+  <ul>
+  <li>0: Keine Sortierung, die Artikel werden in der Reihenfolge angezeigt,
+      in der sie vom Newsserver kommen.
+  <li>1: aufsteigende Sortierung, die ältesten Artikel zu oberst
+  <li>-1: absteigende Sortierung, die neusten Artikel zu oberst
+  </ul>
+  Es ist zu beachten, daß die Artikel in einer Baumstruktur angezeigt
+  werden, so daß der oberste Artikel eines Teilbaums immer den Ausschlag
+  gibt.
+
+<li><i>$articles_per_page</i>: Ist dieser Wert ungleich 0, so gibt er die
+Anzahl der Artikel an, die auf einer Seite gleichzeitig angezeigt werden
+sollen. Es gibt dann Links um die einzelnen Seiten zu wechseln. Benutzt man
+diese Option, so sollte man <i>$maxarticles</i> beachten: Diese Variable
+gibt n&auml;mlich auch an, wieviele Artikel in den Spooldateien gespeichert
+werden, sa da&szlig; ein zu hoher Wert trotz Seiteneinteilung die
+Geschwindigkeit herabsetzen kann.</li>
+
+<li><i>$startpage</i>: In Verbindung mit $articles_per_page wird hier
+angegeben, welche Seite bei Aufruf des Threads angezeigt werden soll:
+  <ul>
+  <li>"first": zeigt zuerst die erste Seite an.
+  <li>"last": zeigt die letzte Seite an.
+  </ul>
+Die Angabe sollte mit <i>$thread_sorting</i> abgestimmt werden. "first"
+f&uuml;r 0 und 1, und "last" f&uuml;r -1.</li>
+</ul></p>
+
+<p><b>Artikeldarstellung</b>
+<ul>
+<li><i>$article_show["Subject"],<br>
+$article_show["From"],<br>
+$article_show["Newsgroups"],<br>
+$article_show["Organization"],<br>
+$article_show["Date"],<br>
+$article_show["Message-ID"],<br>
+$article_show["User-Agent"],<br>
+$article_show["References"]</i>: Bei "true" wird die jeweilige Headerzeile in der
+  Artikelansicht angezeigt, bei "false" wird sie unterdrückt. Momentan ist
+  die Ansicht weiterer Headerzeilen nicht möglich.
+</ul></p>
+
+<p><b>Attachments</b>
+<ul>
+<li><i>$attachment_show</i>: true oder false, je nochdem ob die Dekodierung
+von Attachments unterstützt werden soll. Ist sie deaktiviert, werden die
+m&ouml;glichen Attachments im Rohformat angezeigt.</li>
+<li><i>$attachment_delete_alternative</i>: true oder false. Wenn ein Artikel
+mehr als einen Body in verschiedenen Formaten hat (multipart alternative),
+dann werden alle überflüssigen Alternativen verworfen.</li>
+<li><i>$attachment_uudecode</i>: true oder false. Aktiviert die Dekodierung
+von uuencoded Attachments. Momentan sehr langsam und fehlerhaft.</li>
+</ul></p>
+
+<p><b>Frameunterst&uuml;tzung</b><br>
+Beispieldateien f&uuml;r die Frameunterst&uuml;tzung liegen in
+<tt>extras/frames/</tt>. In dieser Sektion werden die targets f&uuml;r
+diverse Links definiert, also in welchem Frame welche Webseite dargestellt
+werden soll. In der <tt>config.inc</tt> mu&szlig; statt "<i>thread.php3</i>"
+"<i>thread_frameset.php3</i>" eingetragen werden.
+<ul>
+<li><i>$frame_article</i>: Name des Artikel-Frames. Mu&szlig; mit dem Namen
+in <tt>thread_frameset.php3</tt> &uuml;bereinstimmen
+<li>$frame_thread</i>: Name des Thread-Frames;
+<li><i>$frame_groups</i>: Name des Frames f&uuml;r die Gruppen&uuml;bersicht,
+normalerweise "_top".
+<li><i>$frame_post</i>: Name des Schreiben-Frames
+<li><i>$frame_threadframeset</i>: Frame, in dem der Frameset erscheinen
+soll, der den Artikel- und Thread-Frame aufnimmt. Normalerweise "_top".
+<li><i>$frame_externallink</i>: Zielframe f&uuml;r extrerne Links innerhalb
+von Artikeln
+</ul>
+
+<p><b>Sicherheitseinstellungen</b>
+<ul>
+<li><i>$send_poster_host</i>: bei "true" wird bei jeder geschriebenen Nachricht noch
+  die Zeile "X-HTTP-Posting-Host: " in den Header geschrieben, und der Name
+  des Rechners eingetragen, der die Nachricht abgeschickt ist. Das kann als
+  Ersatz von "NNTP-Posting-Host" angesehen werden, dessen Wert beim Einsatz
+  von Newsportal immer nur den Namen des Webservers anzeigt.
+<li><i>$readonly</i>: wenn auf "true" gesetzt, kann man keine Artikel in Gruppen
+  schreiben.
+<li><i>$testgroup</i>: auf "true" gesetzt wird beim Anzeigen des Threads überprüft, ob
+  betreffende Gruppe in die "groups.txt" eingetragen ist.
+  Andernfalls könnte man über das direkte Eintragen der richtigen URL eine
+  Gruppe einsehen, obwohl diese nicht in der Gruppenübersicht angezeigt wird.
+<li><i>$validate_email</i>: Hier kann eingestellt werden, wie Newsportal
+  beim Posten eine angegebene eMail-Adresse auf richtigkeit pr&uuml;ft:
+ <ul>
+ <li>0: keine &Uuml;berpr&uuml;fung. Ist nicht zu empfehlen, da
+        normalerweise der Newsserver eine Fehlermeldung liefert, wenn
+        die Adresse syntaktisch Falsch ist.
+ <li>1: &Uuml:berpr&uuml;ft die Adresse auf syntaktische Richtigkeit.
+ <li>2: hier wird zus&auml;tzlich &uuml;berpr&uuml;ft, ob zu der angegebenen
+        Domain ein MX oder A Record existiert.
+ </ul>
+</UL></p>
+
+<p><b>Allgemeines</b>
+<ul>
+<li><i>$title</i>: Name des Systems, wird als Überschrift verwendet
+
+<li><i>$organization</i>: Die Organisation für den NNTP-Header beim
+  Schreiben von Nachrichten
+
+<li><i>$setcookies</i>: Erlaubt dem Benutzer, seinen Namen und seine eMail-Adresse
+  beim schreiben eines Artikels als Cookie abzuspeichern, so daß die Daten
+  beim erneuten Schreiben eines Artikels automatisch eingesetzt werden. 
+
+<li><i>$compress_spoolfiles</i>: Hier kann eingestellt werden, ob die
+  Spooldateien komprimiert werden sollen. Dies ist im Normalfall empfohlen,
+  da auf etwa 10 bis 15% der Originalgr&ouml;&szlig;e komprimiert wird.
+  Bei aelteren PHP-Versionen mu&szlig; man diese Variable jedoch auf
+  <code>false</code> setzen, falls diese Kompression noch nicht
+  unterst&uuml;tzen.
+</ul></p>
+
+<h2>Sicherheitshinweise</h2>
+
+<p>Ein paar Kleinigkeiten m&uuml;&szlig;en beachtet werden, damit NewsPortal
+nicht zu einem Sicherheitsloch werden soll:
+<ul>
+<li>Zu Debugzwecken wird immer der User-Agent in der Artikelansicht
+  mitübermittelt, wenn die Anzeige ($article_show["User-Agent"])
+  abgeschaltet ist, ist der Eintrag lediglich unsichtbar.
+<li>Die config.inc kann solange von jedem Websurfer (der den Dateinamen
+  kennt) abgerufen werden, wie die Datei nicht in einen geschützten Bereich
+  des Webservers verschoben worden ist.
+</ul></p>
+
+<p>Dieses Skript ist nur f&uuml;r
+den Zugriff auf lokale Newsgruppen
+gedacht. Wenn Gruppen des UseNet im Web verfügbar sind, ergeben sich
+folgende Probleme:
+<ul>
+<li>Spammer können anonym ($send_poster_host beachten!) Artikel abschicken
+<li>Es gibt im Internet Listen mit sogenannten "offenen" Newsservern. Offen
+hei&szlig;t hier meist nicht, da&szlig; die jeder benutzen darf, sondern
+da&szlig; diese einfach nur nicht ordentlich gesichert worden sind. Bevor Du
+also einen solchen Newsserver benutzt, solltest Du Dich vergewissern,
+da&szlig; der Betreiber nichts gegen Dein Vorhaben einzuwenden hat.
+<li>Es wird im UseNet oft nicht gerne gesehen, wenn Personen anonym in
+Newsgruppen schreiben k&ouml;nnen. Bevor Du also schreibenden Zugriff auf
+eine Newsgruppe erlaubst, solltest Du in der betreffenden Gruppe nachfragen,
+ob es dort keine Einw&auml;nde gibt. Etwas anderes ist es nat&uuml;rlich,
+wenn Du NewsPortal in einem gesch&uuml;tzten Bereich Deines Webservers
+betreibst, auf den nur eine Dir bekannte Benutzergruppe zugreifen kann.
+<b>Gib keinen &ouml;ffentlichen Schreibzugriff auf UseNet Newsgruppen, wenn
+Du nicht ganz genau wei&szlig;t, was Du tust!</b>
+</ul></p>
+
+<p>Die Benutzung des Skripts erfolgt auf eigene Gefahr!</p>
+
+
+<h2>Kompatiblität</h2>
+
+<p>Sollte auf jedem PHP4-Fähigen Webserver zusammen mit jedem NNRP-fähigen
+Newsserver laufen. Webserver und Newsserver müßen nicht auf der selben
+Maschine laufen.</p>
+
+<h2>Kontakt:</h2>
+
+<p>Florian Amrhein<br>
+eMail: <a href="mailto:florian.amrhein@web.de">florian.amrhein@web.de</a><br>
+WWW: <a href="http://florian-amrhein.de">http://florian-amrhein.de</a>
+</p>
+</body>
+</html>

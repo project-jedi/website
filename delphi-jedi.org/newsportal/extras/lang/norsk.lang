@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>Fra:</b> ";
+$text_header["subject"]="<b>Tittel:</b> ";
+$text_header["newsgroups"]="<b>Nyhetsgrupper:</b> ";
+$text_header["followup"]="<b>Oppfølging:</b> ";
+$text_header["organization"]="<b>Organisasjon:</b> ";
+$text_header["date"]="<b>Dato:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>Referanser:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Ingen artikler tilgjenglig</b></p>";
+$text_thread["button_write"]="Skriv";
+$text_thread["button_grouplist"]="Nyhetsgrupper";
+$text_thread["button_top"]="Tilbake til toppen";
+$text_thread["date"]="<b>Dato</b>";
+$text_thread["subject"]="<b>Tittel</b>";
+$text_thread["author"]="<b>Forfatter</b>";
+$text_thread["no_such_group"]="Ingen slik gruppe.";
+
+$text_groups["newsgroup"]="<b>Nyhetsgruppe</b>";
+$text_groups["description"]="<b>Beskrivelse</b>";
+
+$text_article["button_answer"]="Svar";
+
+$text_post["missing_message"]="Du må inkludere en melding.";
+$text_post["missing_email"]="Du må oppgi e-mail addresse.";
+$text_post["missing_name"]="Du må oppgi navn eller alias.";
+$text_post["missing_subject"]="Du må ha med tittel.";
+$text_post["button_post"]="Post";
+$text_post["remember"]="Husk navn og e-mail addresse";
+$text_post["message"]="Melding";
+$text_post["group_head"]="Skriv artikkel for";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="Du har ikke rettigheter til å poste her:";
+$text_post["message_posted"]="Melding postet";
+$text_post["message_posted2"]="Melding velykket postet.";
+$text_post["button_back"]="Tilbake";
+$text_post["button_back2"]="til";
+$text_post["error_newsserver"]="Nyhets serveren aksepterer ikke meldingen:";
+$text_post["error_readonly"]="Gruppen er skrivebeskyttet";
+$text_post["error_wrong_email"]="E-mail addressen er feil";
+
+$text_error["error:"]='<font color="red">Feil:</font>';
+$text_error["connection_failed"]="Kunne ikke koble til tjeneren";
+$text_error["article_not_found"]="<p>Artikkelen eksisterer ikke.</p>";
+$text_error["read_access_denied"]="<p>Ingen rettigheter til å lese!</p>";
+$text_error["post_failed"]="Kunne ikke koble til, venneligst prøv senere.";
+$text_error["auth_error"]="Authentifikation at the Newsserver failed.";
+$text_error["spool_error"]="Feil i Spoolfile, vennligst prøv igjen.";
+
+?>

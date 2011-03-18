@@ -1,0 +1,27 @@
+body, p, h1, h2, h3, table, td, th, ul, ol
+{
+font-size: 11pt;
+font-family: verdana,helvetica,arial,sans-serif;
+}
+
+pre, tt
+{
+font-size: 10pt;
+font-family: verdana,helvetica,arial,sans-serif;
+}
+
+small
+{
+font-size: 9pt;
+font-family: verdana,helvetica,arial,sans-serif;
+}
+
+A:visited {font-weight: normal; color: black;}
+A:active {font-weight: bold; color: black;}
+A:link {font-weight: bold; text-decoration: underline; color: blue;}
+A:hover {text-decoration: underline;}
+
+A.thread:visited {font-weight: normal; text-decoration: none; color: black;}
+A.thread:active {font-weight: bold; text-decoration: none; color: black;}
+A.thread:link {font-weight: bold; text-decoration: underline; color: blue;}
+A.thread:hover {text-decoration: underline;}

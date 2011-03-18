@@ -1,0 +1,28 @@
+Folgende Leistungsmerkmale könnten irgendwann mal in NewsPortal verfügbar
+sein. Vorschläge für weitere bitte an florian.amrhein@gmx.de schicken.
+
+- (konfigurierbare) Möglichkeit, Artikel anonym zu veschicken (eine 
+  default Adresse wird statt dessen eingesetzt)
+- Besser konfigurierbares Layout (über Templates, oder sowas)
+- Möglichkeit für den Benutzer, die Threadansicht und die verwendete
+  Sprache zu ändern.
+- Konfigurationsskript
+- Einstellmöglichkeiten, wann wie oft zum Newsserver verbunden wird, um
+  nach neuen Artikeln zu sehen usw. Momentan wird ständig neu verbunden,
+  was nicht gerade förderlich für die Geschwindigkeit ist, und den
+  Newsserver unnötig belastet.
+- Es sollte abgefragt werden, ob das spool-Verzeichnis die passenden Rechte
+  (chmod 777 spool) hat, denn wenn nicht, laeuft Newsportal wesentlich
+  langsamer, und zusaetzlich werden je nach Konfiguration von PHP Warnungen
+  nicht ausgegeben.
+- Reply-To abfragen, und entsprechend anzeigen
+- Crossposting ermöglichen?
+- Man sollte einen "Followup-To: poster" Header setzen können
+- Beim Quoten von Artikeln sollte die Signatur automatisch entfernt werden.
+- Beim Textumbrechen bei zu langen gequoteten Zeilen werden die Quoteebenen
+  zerstört.
+- Posten von Artikeln die ausschließlich gequotete Zeilen enthalten muß
+  unterbunden werden.
+- Mehrfaches Abschicken ein und des selben Artikels muß verboten werden.
+- Den Load des Newsservers niedriger halten (u.a. durch Cachen)
+

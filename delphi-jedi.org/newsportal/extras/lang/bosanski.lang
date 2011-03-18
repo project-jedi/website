@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>From:</b> ";
+$text_header["subject"]="<b>Subject:</b> ";
+$text_header["newsgroups"]="<b>Newsgroups:</b> ";
+$text_header["followup"]="<b>Followup:</b> ";
+$text_header["organization"]="<b>Organization:</b> ";
+$text_header["date"]="<b>Date:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Nema clanaka</b></p>";
+$text_thread["button_write"]="Pisi";
+$text_thread["button_grouplist"]="Lista grupa";
+$text_thread["button_top"]="Na vrh";
+$text_thread["date"]="<b>Date</b>";
+$text_thread["subject"]="<b>Datum</b>";
+$text_thread["author"]="<b>Autor</b>";
+$text_thread["no_such_group"]="Takva grupa ne postoji.";
+
+$text_groups["newsgroup"]="<b>Grupa</b>";
+$text_groups["description"]="<b>Opis</b>";
+
+$text_article["button_answer"]="Odgovor";
+
+$text_post["missing_message"]="Nedostaje vam poruka.";
+$text_post["missing_email"]="Nedostaje email adresa.";
+$text_post["missing_name"]="Nedostaje ime.";
+$text_post["missing_subject"]="Nedostaje subjekt.";
+$text_post["button_post"]="Salji";
+$text_post["remember"]="Zapamti ime i email adresu";
+$text_post["message"]="Message";
+$text_post["group_head"]="Sastavi poruku za ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="Nije vam dozvoljeno slanje u grupe:";
+$text_post["message_posted"]="Poruka poslana";
+$text_post["message_posted2"]="Poruka uspjesno poslana.";
+$text_post["button_back"]="Nazad";
+$text_post["button_back2"]="na";
+$text_post["error_newsserver"]="Newsserver nije prihvatio poruku:";
+$text_post["error_readonly"]="Grupa je read-only";
+$text_post["error_wrong_email"]="Email adresa je pogresna";
+
+$text_error["error:"]='<font color="red">Greska:</font>';
+$text_error["connection_failed"]="Nije uspjelo konektovanje na newsserver";
+$text_error["article_not_found"]="<p>Clanak ne postoji.</p>";
+$text_error["read_access_denied"]="<p>NEmate dozvolu za citanje!</p>";
+$text_error["post_failed"]="Konekcija prekinuta. Pokusajte kasnije.";
+$text_error["auth_error"]="Autorizacija kod newsservera nije prosla.";
+$text_error["spool_error"]="Greska u spoolfile-u. Pritisnite refresh (reload) dugme.";
+
+?>

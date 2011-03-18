@@ -1,0 +1,54 @@
+<?
+$text_header["from"]="<b>Von:</b> ";
+$text_header["subject"]="<b>Betreff:</b> ";
+$text_header["newsgroups"]="<b>Gruppen:</b> ";
+$text_header["followup"]="<b>Antwort-An:</b> ";
+$text_header["organization"]="<b>Organisation:</b> ";
+$text_header["date"]="<b>Datum:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>Referenzen:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="d. M Y, H:i:s";
+
+$text_thread["no_articles"]="<p><b>Keine Artikel vorhanden</b></p>";
+$text_thread["button_write"]="Schreiben";
+$text_thread["button_grouplist"]="Zur Gruppenliste";
+$text_thread["button_top"]="Nach oben";
+$text_thread["date"]="<b>Datum</b>";
+$text_thread["subject"]="<b>Thema</b>";
+$text_thread["author"]="<b>Autor</b>";
+$text_thread["no_such_group"]="Die Gruppe existiert nicht.";
+
+$text_groups["newsgroup"]="<b>Newsgruppe</b>";
+$text_groups["description"]="<b>Beschreibung</b>";
+
+$text_article["button_answer"]="Beantworten";
+
+$text_post["missing_message"]="Du mu&szlig;t nat&uuml;rlich das Nachrichtenfeld ausf&uuml;llen.";
+$text_post["missing_email"]="Die E-Mailadresse mu&szlig; angegeben werden.";
+$text_post["missing_name"]="Du mu&szlig;t einen Namen angeben, wenigstens einen Spitznamen.";
+$text_post["missing_subject"]="Das Subject mu&szlig; angegeben werden.";
+$text_post["button_post"]="Absenden";
+$text_post["remember"]="Name und eMail abspeichern";
+$text_post["message"]="Nachricht";
+$text_post["group_head"]="Artikel nach ";
+$text_post["group_tail"]=" schreiben";
+$text_post["followup_not_allowed"]="Du darfst auf den Artikel nicht antworten, da dieser in Folgende Gruppen geschrieben werden soll, zu denen Du kein Schreibrecht hast:";
+$text_post["message_posted"]="Nachricht verschickt";
+$text_post["message_posted2"]="Die Nachricht wurde erfolgreich verschickt.";
+$text_post["button_back"]="Zur&uuml;ck";
+$text_post["button_back2"]="nach";
+$text_post["error_newsserver"]="Die Nachricht wurde vom Newsserver mit folgender Fehlermeldung abgelehnt:";
+$text_post["error_readonly"]="keine Schreiberlaubnis";
+$text_post["error_wrong_email"]="Die angegebene eMail-Adresse ist ung&uuml;ltig";
+
+$text_error["error:"]='<font color="red">Fehler:</font>';
+$text_error["connection_failed"]="Der Verbindungsaufbau zum Newsserver ist fehlgeschlagen";
+$text_error["article_not_found"]="<p>Der Artikel ist nicht vorhanden</p>";
+$text_error["read_access_denied"]="<p>Keine Leseberechtigung!</p>";
+$text_error["post_failed"]="Verbindungsaufbau zum Newsserver fehlgeschlagen. Versuche es vielleicht später nochmal einen Reload.";
+$text_error["auth_error"]="Authentifikation beim Newsserver fehlgeschlagen.";
+$text_error["spool_error"]="Fehler in Spooldatei. Bitte neuladen.";
+
+
+?>

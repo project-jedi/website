@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>Odesílatel:</b> ";
+$text_header["subject"]="<b>Nadpis:</b> ";
+$text_header["newsgroups"]="<b>Diskusní skupiny:</b> ";
+$text_header["followup"]="<b>Followup:</b> ";
+$text_header["organization"]="<b>Organizace:</b> ";
+$text_header["date"]="<b>Datum:</b> ";
+$text_header["message-id"]="<b>ID zprávy:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Žádné èlánky k dispozici</b></p>";
+$text_thread["button_write"]="Pøidej zprávu";
+$text_thread["button_grouplist"]="Diskusní skupiny";
+$text_thread["button_top"]="Zpìt nahoru";
+$text_thread["date"]="<b>Datum</b>";
+$text_thread["subject"]="<b>Nadpis</b>";
+$text_thread["author"]="<b>Autor</b>";
+$text_thread["no_such_group"]="Žádná taková skupina.";
+
+$text_groups["newsgroup"]="<b>Skupina</b>";
+$text_groups["description"]="<b>Popis</b>";
+
+$text_article["button_answer"]="Odpovìz";
+
+$text_post["missing_message"]="Nezadal jste pøíspìvek.";
+$text_post["missing_email"]="Nezadal jste email.";
+$text_post["missing_name"]="Nezadal jste jméno.";
+$text_post["missing_subject"]="Nezadal jste nadpis.";
+$text_post["button_post"]="Odešli";
+$text_post["remember"]="Zapamatujte si jméno a emailovou adresu";
+$text_post["message"]="Zpráva";
+$text_post["group_head"]="Psaní zprávy do:<B> ";
+$text_post["group_tail"]="</B>";
+$text_post["followup_not_allowed"]="Nemáte povolení pøispívat do tìchto skupin:";
+$text_post["message_posted"]="Zpráva odeslána";
+$text_post["message_posted2"]="Zpráva úspìšnì odeslána.";
+$text_post["button_back"]="Zpìt";
+$text_post["button_back2"]="do";
+$text_post["error_newsserver"]="News-server nepøijal tuto zprávu:";
+$text_post["error_readonly"]="Tato skupina je chránìna proti zápisu";
+$text_post["error_wrong_email"]="Emailová adresa je chybná";
+
+$text_error["error:"]='<font color="red">Chyba:</font>';
+$text_error["connection_failed"]="Spojení na news-server se nepodaøilo";
+$text_error["article_not_found"]="<p>Takový èlánek neexistuje.</p>";
+$text_error["read_access_denied"]="<p>Nemáte právo pro ètení!</p>";
+$text_error["post_failed"]="Nepovedlo se pøipojit. Zkuste po chvíli obnovit stránku.";
+$text_error["auth_error"]="Autentifikace na news-server se nepodaøila.";
+$text_error["spool_error"]="Chyba v spool-souboru. Obnovte, prosím stránku.";
+
+?>

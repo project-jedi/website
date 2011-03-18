@@ -1,0 +1,57 @@
+<?
+/*
+ * add this line to body.inc:
+ * <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=iso-8859-2">
+ */
+$text_header["from"]="<b>Od:</b> ";
+$text_header["subject"]="<b>Temat:</b> ";
+$text_header["newsgroups"]="<b>Grupa:</b> ";
+$text_header["followup"]="<b>Followup:</b> ";
+$text_header["organization"]="<b>Organizacja:</b> ";
+$text_header["date"]="<b>Data:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Brak artykułów</b></p>";
+$text_thread["button_write"]="Napisz";
+$text_thread["button_grouplist"]="Lista grup";
+$text_thread["button_top"]="<small>Z powrotem na początek</small>";
+$text_thread["date"]="<b>Data</b>";
+$text_thread["subject"]="<b>Temat</b>";
+$text_thread["author"]="<b>Autor</b>";
+$text_thread["no_such_group"]="Nie ma takiej grupy.";
+
+$text_groups["newsgroup"]="<b>Grupa</b>";
+$text_groups["description"]="<b>Opis</b>";
+
+$text_article["button_answer"]="Odpowiedz";
+
+$text_post["missing_message"]="Musisz wpisać treść wiadomości.";
+$text_post["missing_email"]="Musisz podać swój e-mail.";
+$text_post["missing_name"]="Musisz wpisać imię i nazwisko (a przynajmniej ksywkę).";
+$text_post["missing_subject"]="Musisz podać temat wiadomości.";
+$text_post["button_post"]="Wyślij";
+$text_post["remember"]="Zapamiętaj nazwisko i e-mail";
+$text_post["message"]="Wiadomość";
+$text_post["group_head"]="Wyślij wiadomość na grupę ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="Nie masz uprawnień do wysyłania wiadomości na grupy:";
+$text_post["message_posted"]="Wiadomość wysłana";
+$text_post["message_posted2"]="Wiadomość została wysłana.";
+$text_post["button_back"]="Z powrotem";
+$text_post["button_back2"]="do";
+$text_post["error_newsserver"]="Serwer nie przyjął wiadomości. Komunikat błędu:";
+$text_post["error_readonly"]="Ta grupa jest tylko do odczytu";
+$text_post["error_wrong_email"]="Podany adres e-mail jest nieprawidłowy";
+
+$text_error["error:"]='<font color="red">Błąd:</font>';
+$text_error["connection_failed"]="Nie udało się nawiązanie połączenia z serwerem Usenetu";
+$text_error["article_not_found"]="<p>Wiadomość nie istnieje.</p>";
+$text_error["read_access_denied"]="<p>Brak uprawnień do odczytu!</p>";
+$text_error["post_failed"]="Połączenie zerwane. Spróbuj ponownie za jakiś czas.";
+$text_error["auth_error"]="Bład autentyfikacji na serwerze.";
+$text_error["spool_error"]="Błąd w pliku wiadomości. Proszę przeładować stronę..";
+
+?>

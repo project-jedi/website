@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>Avtor:</b> ";
+$text_header["subject"]="<b>Tema:</b> ";
+$text_header["newsgroups"]="<b>Skupina:</b> ";
+$text_header["followup"]="<b>Odgovor v:</b> ";
+$text_header["organization"]="<b>Organizacija:</b> ";
+$text_header["date"]="<b>Datum:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Ni sporocil</b></p>";
+$text_thread["button_write"]="Novo sporocilo";
+$text_thread["button_grouplist"]="Skupine";
+$text_thread["button_top"]="Na vrh";
+$text_thread["date"]="<b>Datum</b>";
+$text_thread["subject"]="<b>Tema</b>";
+$text_thread["author"]="<b>Avtor</b>";
+$text_thread["no_such_group"]="Skupina ne obstaja";
+
+$text_groups["newsgroup"]="<b>Skupina</b>";
+$text_groups["description"]="<b>Opis</b>";
+
+$text_article["button_answer"]="Odgovori";
+
+$text_post["missing_message"]="Manjka vsebina sporocila.";
+$text_post["missing_email"]="Manjka vas postni naslov.";
+$text_post["missing_name"]="Manjka vase ime.";
+$text_post["missing_subject"]="Manjka tema sporocila.";
+$text_post["button_post"]="Poslji";
+$text_post["remember"]="Shrani ime in postni naslov";
+$text_post["message"]="Sporocilo:";
+$text_post["group_head"]="Napisi sporocilo v ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="V to skupino ne morete pisati:";
+$text_post["message_posted"]="Sporocilo poslano";
+$text_post["message_posted2"]="Sporocilo je bilo uspesno poslano.";
+$text_post["button_back"]="Nazaj";
+$text_post["button_back2"]="na";
+$text_post["error_newsserver"]="Streznik ne sprejme sporocila:";
+$text_post["error_readonly"]="Skupina je read-only";
+$text_post["error_wrong_email"]="Postni naslov je napacen";
+
+$text_error["error:"]='<font color="red">Napaka:</font>';
+$text_error["connection_failed"]="Povezava z streznikom ni bila uspesna.";
+$text_error["article_not_found"]="<p>Sporocilo ne obstaja.</p>";
+$text_error["read_access_denied"]="<p>Branje ni dovoljeno!</p>";
+$text_error["post_failed"]="Povezava prekinjena. Poskusite kasneje.";
+$text_error["auth_error"]="Avtorizacija neuspesna.";
+$text_error["spool_error"]="Napaka na strezniku. Poskusite osveziti stran.";
+
+?>

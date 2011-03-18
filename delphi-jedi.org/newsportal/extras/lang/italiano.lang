@@ -1,0 +1,53 @@
+<?
+$text_header["from"]="<b>Da:</b> ";
+$text_header["subject"]="<b>Subject:</b> ";
+$text_header["newsgroups"]="<b>Newsgroup:</b> ";
+$text_header["followup"]="<b>Followup:</b> ";
+$text_header["organization"]="<b>Organizzazione:</b> ";
+$text_header["date"]="<b>Data:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["date_format"]="M d Y H:i:s";
+
+$text_thread["no_articles"]="<p><b>Non ci sono articoli</b></p>";
+$text_thread["button_write"]="Scrivi un messaggio";
+$text_thread["button_grouplist"]="Newsgroup";
+$text_thread["button_top"]="Torna su";
+$text_thread["date"]="<b>Data</b>";
+$text_thread["subject"]="<b>Subject</b>";
+$text_thread["author"]="<b>Mittente</b>";
+$text_thread["no_such_group"]="Gruppo inesistente";
+
+$text_groups["newsgroup"]="<b>Newsgroup</b>";
+$text_groups["description"]="<b>Descrizione</b>";
+
+$text_article["button_answer"]="Rispondi al messaggio";
+
+$text_post["missing_message"]="Errore: messaggio mancante";
+$text_post["missing_email"]="Errore: devi specificare l'email";
+$text_post["missing_name"]="Errore: devi specificare un nome od un alias";
+$text_post["missing_subject"]="Errore: subject mancante";
+$text_post["button_post"]="Inserisci";
+$text_post["remember"]="Ricorda nome ed email";
+$text_post["message"]="Messaggio";
+$text_post["group_head"]="Crea articolo per ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="Non puoi scrivere nei newsgroup:";
+$text_post["message_posted"]="Messaggio inserito";
+$text_post["message_posted2"]="Messaggio inserito con successo.";
+$text_post["button_back"]="indietro";
+$text_post["button_back2"]="a";
+$text_post["error_newsserver"]="Il newsserver non accetta il messaggio:";
+$text_post["error_readonly"]="Il newsgroup e' protetto da scrittura";
+$text_post["error_wrong_email"]="e-mail inesistente";
+
+$text_error["error:"]='<font color="red">Errore:</font>';
+$text_error["connection_failed"]="Connessione fallita al newsserver";
+$text_error["article_not_found"]="<p>L'articolo non esiste.</p>";
+$text_error["read_access_denied"]="<p>Non hai il permesso di lettura!</p>";
+$text_error["post_failed"]="Connessione fallita. Prova piu' tardi";
+$text_error["auth_error"]="Autenticazione fallita.";
+$text_error["spool_error"]="Errore nello spoolfile. Ricarica la pagina.";
+
+?>

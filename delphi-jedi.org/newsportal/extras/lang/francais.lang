@@ -1,0 +1,55 @@
+<?
+$text_header["from"]="<b>De:</b> ";
+$text_header["subject"]="<b>Sujet:</b> ";
+$text_header["newsgroups"]="<b>Groupes:</b> ";
+$text_header["followup"]="<b>Suivi-à:</b> ";
+$text_header["organization"]="<b>Organisation:</b> ";
+$text_header["date"]="<b>Date:</b> ";
+$text_header["message-id"]="<b>Message-ID:</b> ";
+$text_header["references"]="<b>References:</b> ";
+$text_header["user-agent"]="<b>User-Agent:</b> ";
+$text_header["attachments"]="<b>Attachements:</b> ";
+$text_header["date_format"]="d M Y, H:i:s";
+
+$text_thread["no_articles"]="<p><b>Pas d'articles</b></p>";
+$text_thread["button_write"]="Nouveau message";
+$text_thread["button_grouplist"]="Liste des Groupes";
+$text_thread["button_top"]="Retour en haut de la page";
+$text_thread["date"]="<b>Date</b>";
+$text_thread["subject"]="<b>Sujet</b>";
+$text_thread["author"]="<b>Auteur</b>";
+$text_thread["no_such_group"]="Groupe inexistant";
+
+$text_groups["newsgroup"]="<b>Groupe</b>";
+$text_groups["description"]="<b>Description</b>";
+
+$text_article["button_answer"]="Répondre";
+
+$text_error["error:"]='<font color="red">Erreur:</font>';
+$text_error["connection_failed"]="La connexion au serveur de news a échoué";
+$text_error["article_not_found"]="<p>L'article n'existe pas.</p>";
+$text_error["read_access_denied"]="<p>Lecture non autorisée!</p>";
+$text_error["post_failed"]="Le serveur de news ne répond pas. Réessayez plus tard.";
+$text_error["auth_error"]="L'authentification auprès du serveur de news a échoué.";
+$text_error["spool_error"]="Erreur dans le fichier de spool. Rechargez la page.";
+
+$text_post["missing_message"]="Vous devez inclure du texte dans votre message.";
+$text_post["missing_email"]="Vous devez préciser une adresse email.";
+$text_post["missing_name"]="Vous devez préciser un nom ou au moins un surnom.";
+$text_post["missing_subject"]="Vous devez préciser un sujet.";
+$text_post["button_post"]="Poster";
+$text_post["remember"]="Retenir le nom et l'adresse email";
+$text_post["message"]="Message";
+$text_post["group_head"]="Rédiger un article pour ";
+$text_post["group_tail"]="";
+$text_post["followup_not_allowed"]="Vous n'êtes pas autorisé à poster dans les groupes :";
+$text_post["message_posted"]="Article posté";
+$text_post["message_posted2"]="L'article a été posté avec succès.";
+$text_post["button_back"]="Retour";
+$text_post["button_back2"]="à";
+$text_post["error_newsserver"]="Le serveur de news n'accepte pas l'article :";
+$text_post["error_readonly"]="Le groupe est protégé en écriture";
+$text_post["error_wrong_email"]="L'adresse email est invalide";
+
+
+?>

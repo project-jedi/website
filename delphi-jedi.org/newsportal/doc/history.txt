@@ -1,0 +1,233 @@
+0.24pre6 (8.3.2002)
+- Attachmentanzeige sollte nun gehen...
+- Frames werden wieder unterstuetzt
+
+0.24pre4 (29.10.2001)
+- Tschechisches Sprachpaket (Dank an Michal Sanger, sanger@math.muni.cz)
+- kleinere Fehler entfernt
+
+0.24pre3 (17.05.2001)
+- Mime-multipart-nachrichten werden nun dekodiert, und die attachments
+  können einzeln abgerufen werden
+- Artikel können nun im spool-verzeichnis gecached werden
+- Nicht gefundene Artikel oder Attachments liefern nun einen 404-Header
+  in der article.php3 bzw. attachment.php3
+- kleine Geschwindigkeitsverbesserungen
+- Die einzelnen Seiten haben nun einen Expires:-Header, so daß sie nicht
+  bei Abruf des Users vom Browser neu angefordert werden, und Proxys besser
+  cachen können
+- Header mit 8bit-Zeichen werden nun quoted-printable kodiert
+- Bugfix: Die Cookies fuer das Speichern von Name und E-Mail beim Schreiben
+  von Artikeln bleiben nun 3 Monate erhalten.
+- Bugfix: Fehler bei der Dekodierung von base64-kodierten Headerzeilen behoben
+- türkische und polnische Sprachunterstützung.
+
+0.23 (19.12.2000)
+- Ein einigen Stellen wurden bei bestimmten PHP-Versionen bzw. Konfigurationen
+  Warnungen ausgegeben
+- Frames funktionierten nicht zusammen mit mehrseitigen Threads
+- Threading war ein wenig defekt
+- Slovenisches Sprachpaket hinzugefügt (Dank an Tomaz Zelic,
+  tomaz.zelic@siol.net)
+- in der Artikelansicht sind die References nun mit Links hinterlegt und
+  werden nur noch duchnummeriert, und nicht mehr voll ausgeschrieben
+- Die Organization-Headerzeile wird nun in der Artikelansicht nach URLs
+  durchsucht, die dann mit Links hinterlegt werden
+
+0.22 (15.10.2000)
+- Man kann nun den Thread seitenweise durchblaettern
+- htmlentities() durch htmlspecialchars() ersetzt: ermoeglicht nun auch
+  die Anzeige diverser laenderspezifischer Zeichen.
+- Massenhaft "Re:" oder "Aw:" werden nun im Thread und beim Antworten auf
+  Artikel zusammengekuerzt
+- Bei einigen Versionen von PHP funktionierte das Laden der Spooldateien
+  nicht
+- bosnisches, italiaenisches und portugiesisches Sprachpaket hinzugefuegt
+Aenderungen von Georg Burkhard (Georg.Burkhard@roma-online.de):
+- Gefaltete Headerzeilen werden nun ordentlich zusammengefuegt anstatt
+  gekuerzt
+- Sicherheitsloch gestopft: Alle Zeilen, die nach einem einzelnen "." beim
+  Schreiben eines Artikels standen, wurden nicht in den Artikel uebernommen,
+  sondern vom Newsserver als Befehle interpretiert.
+- Kleiner Fehler bei der Anzeige der References im Artikel behoben
+
+0.21 (5.6.2000)
+- Verbesserte Unterstuetzung fuer Browser ohne Frameunterstützung (z.B. Lynx)
+  innerhalb der Frameunterstuetzung von Newsportal
+Aenderungen von Samuel Hocevar (sam@via.ecp.fr):
+- Einige Aenderungen der HTML-Syntax um XHTML-Konform zu werden
+- Die body.inc enthaelt nun auch den Header der HTML-Dateien
+- die footer.inc wird an jede Datei angehaengt
+- das franzoesische Sprachpaket ist nun komplett
+
+0.20 (17.5.2000)
+- Base64 kodierte Headerzeilen werden nun korrekt dekodiert.
+- das franzoesische Sprachpaket wurde stark erweitert (Dank an
+  Samuel Hocevar (sam@via.ecp.fr)
+
+0.19 (15.3.2000)
+- Es kann fuer das Posten von Artikeln ein anderer Newsserver angegeben
+  werden.
+- Man kann nun eine Datei angeben, die an jede Nachricht angehaengt wird,
+  die mit NewsPortal geschrieben wird.
+- Bugfix: Newsportal hing in einer Endlosschleife fest, wenn man eine
+  leere Newsgruppe betreten hat, und man einen Microsoft Newsserver benutzt
+  hat
+
+0.18 (13.3.2000)
+- Man kann nun einstellen, ob die Spooldateien komprimiert werden sollen
+  oder nicht. Das Abschalten der Kompression kann sinnvoll sein, wenn man
+  eine aeltere PHP-Version benutzt, die Kompression nicht unterstuetzt
+- Die Spooldateien werden automatisch neu aufgebaut, wenn man in der
+  Konfigurationsdatei Optionen veraendert hat, die sonst erst nach einem
+  manuellen Loeschen der Spooldateien wirksam geworden waeren
+
+0.17 (11.3.2000)
+- Neue Layoutmoeglichkeiten fuer die Artikeluebersicht, die Routinen wurden
+  teilweise neu geschrieben, und sind nun leichter fuer jeden individuell
+  anpassbar.
+- Weitere URLs werden erkannt und anklickbar gemacht: https://, news:// und
+  gopher://, zudem werden bestimmte Adressen in der form www.domain.de
+  erkannt, bei denen das einleitende http:// fehlt.
+- Auch die Texte in post.php3 koennen nun auch über die .lang Dateien an
+  verschiedene Sprachen angepasst werden.
+- Es ist nun nicht mehr moeglich, durch Crossposts oder Followups in
+  Gruppen zu schreiben, auf die man sonst keinen Zugriff haette.
+- Neue, etwas schnellere und flexiblere Technik zur Verwaltung der
+  Spooldateien eingebaut
+- Die Routine zur Dekodierung von Quoted-Printable kodierten Headerzeilen
+  nach RFC 2047 wurde verbessert
+- eMail-Adressen koennen vor dem Posten geprueft werden, um Missbrauch
+  ein wenig einzuschraenken
+- in der groups.txt koennen nun zusaetzlich Beschreibungen der Newsgruppen
+  eingetragen werden
+- Bugfix: schreibgeschuetzte Newsserver koennen nun auch benutzt werden.
+- Bugfix: # innerhalb von http-URLs wurden nicht als der URL zugehoerig
+  erkannt
+- Bigfix: Der Nachrichtenbody wurde nicht korrekt angezeigt, wenn er
+  Quoted-Printable kodiert wurde, und die Angaben im header dazu gross
+  geschrieben sind.
+- Bugfix: in der Routine, die entscheidet, welche Artikelinformationen im
+  Spool vorliegen, und welche zusaetzlich noch angefordert werden muessen,
+  gab es einige Ungereimtheiten.
+- Bugfix: " im Subject beim Schreiben von Artikeln werden nun korrekt
+  abgeschickt anstatt in der Form \"
+
+0.16 (15.2.2000)
+- Bugfix: Bearbeitung der Webseite wurde komplett unterbrochen, wenn ein
+  Fehler aufgetreten ist. So konnten z.B. Tabellen nicht mehr geschlossen
+  werden.
+- Frameunterstuetzung
+- Unterstuetzung fuer passwortgeschuetzte Newsserver
+- ueberarbeitete Funktion zur Erkennung von URLs in Texten
+- Fehlerhafte Spool-Datenbanken werden nun erkannt und sofort geloescht.
+
+0.15 (24.19.1999)
+- Bugfix: Newsgruppen, deren Namen Zeichen wie + oder & enthalten, können nun
+  auch gelesen werden.
+- HTML-Tags innerhalb vom Nachrichtenkopf (eMail-Adresse, Subject) werden
+  nun sowohl in der Threadansicht als auch in der Artikelansicht im
+  Klartext angezeigt
+- Das Datumsformat bei der Anzeige von Artikeln kann nun in den
+  Sprachdefinitionsdateien angegeben werden.
+- Bugfix: Kursivschrift in Artikeln bei gequotetem Text funktioniert wieder
+
+0.14 (18.12.1999)
+- Datumsangaben werden nun als Unix-Timestamps verwaltet, so daß endlich
+  Zeitmessungen möglich sind (Farbmarkierungen, Sortierung)
+- in der Artikelübersicht können die Datumsangaben je nach Alter der
+  Nachricht farblich markiert werden
+- Sortierung der Artikel in der Artikelübersicht kann festgelegt werden
+- Bugfix: Ist der Newsserver nicht erreichbar, werden keine sinnlosen
+  Meldungen mehr ausgegeben, sondern die Bearbeitung abgebrochen.
+- weitere Meldungen in die Sprachdefinitionsdateien ausgelagert
+- Hinweis: die Spool-Dateien müssen bei einem Update gelöscht werden
+
+0.13 (17.12.1999)
+- Zeilenumbruchbehandlung überarbeitet
+- Bugfix: schon geladene Artikelinformationen wurden überflüssigerweise
+  unter bestimmten Bedingungen nochmal geladen (Geschwindigkeitsverlust)
+- Begonnen, Meldungen und bestimmte Begriffe in einer extrernen Datei zu
+  definieren, um leicht zwischen verschiedenen Sprachen wechseln zu können
+  und um einfacher kleine Aenderungen am Layout machen zu können.
+
+0.12 (15.12.1999)
+- Subjectzeilen können in der Länge begrenzt werden
+- Bugfix: auf dem Newsserver gelöschte Artikel waren in der Artikelübersicht
+  noch sichtbar
+- HTML-Tags in Artikeln werden nun nicht mehr vom Browser interpretiert,
+  sondern im Klartext angezeigt.
+- Der User-Agent kann nun auch im Artikel angezeigt werden
+
+0.11 (23.11.1999)
+- Bugfix: Die Organization-Headerzeile wird wieder mit veschickt beim Posten
+- Bessere Fehlermeldungen beim Schreiben, wenn Eingabefelder nicht
+  ausgefüllt worden sind
+- Bugfix: Nur die neuen Artikeloverview-Daten werden wieder vom Newsserver
+  angefordert.
+- Bugfix: Falsches einfuegen von Quotezeichen beim Antworten korrigiert
+
+0.10 (29.10.1999)
+- Etwas neue Struktur, Artikel werden nun nicht mehr über ihre ID 
+  referenziert, sondern über ihre nummer in der Newsgruppe zusammen mit
+  dem Gruppennamen.
+- Überlange Zeilen werden nun korrekt eingelesen
+- Falls es mehrere Zeilen Beschreibung (durch Doppeleinträge) für eine
+  Newsgruppe gibt, kommt es nun nicht mehr zum Fehler
+- http-Links können nun direkt angeklickt werden
+- Quoted-Printable-Dekodierung scheint nun fehlerfrei zu sein
+
+0.9pl1 (17.10.1999)
+- Kleinen Fehler behoben, der das Antworten auf Artikel unmöglich gemacht
+  hat
+
+0.9 (16.10.1999)
+- Followup-To Header wird beim Antworten auf einen Artikel beachtet
+- Gruppen, die nicht in der groups.txt eingetragen sind, können nun nicht
+  mehr eingesehen werden.
+- Ein kleiner Fehler bei der Übergabe der Message-IDs, der von den meisten
+  Newsservern ignoriert wird, wurde entfernt.
+- Etwas verbesserte Quoted-Printable-Dekodierung (aber leider noch immer
+  nicht ganz fehlerfrei, kommt aber noch)
+
+0.8 (12.10.1999)
+- Einige Dateien umbenannt
+- das Schreiben von Artikeln kann verboten werden
+- das Anzeigen von Artikeln, die Leerzeilen enthalten, was bei einigen
+  nicht funktionierte, funktioniert nun
+- Die Namen der php3-Dateien können nun variiert werden
+- Die Anzeige von Datum, Subject und Autor in der Artikelübersicht kann
+  unterbunden werden
+- Die Anzeige der Headerzeilen in der Artikelansicht kann konfiguriert
+  werden
+- Die in der config.inc angegebenen Optionen können nun innerhalb der
+  php3-Dateien überschrieben werden, um im Einzelfall eine andere
+  Darstellung zu erzwingen
+
+0.7 (9.10.1999)
+- Einige kleinere Fehler behoben
+- Optional Cookies eingefuehrt, um email-adresse und Namen des Benutzers
+  speichern zu können
+- Die Darstellung des Artikelbaumes kann nun variiert werden.
+- Die Anzahl der anzuzeigenden Artikel kann begrenzt werden.
+
+0.6pl1 (8.10.1999)
+- Dateinamen von .phtml nach .php3 benannt
+- config nach config.inc umbenannt
+- groups.txt wird nun komplett eingelesen
+- fehlender </head> Tag ergaenzt
+- imap-Funktionen entfernt, so daß das Skript nun ohne imap-unterstuetzung
+  laufen sollte
+
+0.6 (6.10.1999)
+- Die Overview-Informationen des Newsservers werden nun lokal in einem
+  Spoolverzeichnis zwischengespeichert. Das bewirkt eine wesentliche
+  Geschwindigkeitssteigerung bei der Anzeige des Kommentarbaumes.
+
+0.5: (29.9.1999)
+- graphische Kommentarbaumanzeige
+- besser kommentierte Skripte
+
+0.4: (28.9.1999)
+- Newsportal läuft nun auch zusammen mit einem Microsort Newsserver, nachdem
+  ich einige Fehler gefunden habe.
