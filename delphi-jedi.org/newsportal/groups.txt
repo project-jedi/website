@@ -1,0 +1,8 @@
+jedi.apiconversion Newsgroup for the JEDI API conversion libraries
+jedi.binaries Newsgroup for binary attachments
+jedi.codeformat Newsgroup for the JEDI Code Format project
+jedi.general Newsgroup for general discussions about Project JEDI
+jedi.jcl Newsgroup for the JEDI Code Library
+jedi.jvcl Newsgroup for the JEDI Visual Component Library
+jedi.jvcs Newsgroup for the JEDI Version Control System
+test Test Newsgroup

@@ -6,6 +6,7 @@
   <META HTTP-EQUIV="pragma" CONTENT="no-cache">
   <META HTTP-EQUIV="cache-control" CONTENT="no-cache">
   <LINK REL="stylesheet" TYPE="text/css" HREF="<? echo $stylesheet; ?>">
+  <link rel="shortcut icon" href="/JEDI.ico" />
 </HEAD>
 <BODY BGCOLOR="#FFFFFF">
 

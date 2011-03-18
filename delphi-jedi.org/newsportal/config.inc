@@ -76,7 +76,7 @@ $testgroup=true;
 $validate_email=1;
 
 // Misc
-$title="NewsPortal - Delphi Jedi";
+$title="NewsPortal - Delphi JEDI";
 $organization="http://www.delphi-jedi.org";
 $setcookies=true;
 $compress_spoolfiles=false;
