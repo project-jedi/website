@@ -5,7 +5,7 @@
    $title.= ' - '.$group;
    include "head.inc"; ?>
 
-<frameset rows="60,*" frameborder="1" border="3" framespacing="0">
+<frameset rows="130,*" frameborder="1" border="3" framespacing="0">
   <frame src="topframe.php?group=<? echo urlencode($group); ?>" name="topframe" scrolling="no" noresize="true">
   <frameset cols="45%,*" frameborder="1" border="3" framespacing="3">
     <frame src="<? echo $file_framethread; ?>?group=<? echo urlencode($group); ?>" name="thread">
@@ -28,4 +28,5 @@ Articles</a></li>
 ?>
 </UL>
 </noframes>
+
 <? include "tail.inc"; ?>
