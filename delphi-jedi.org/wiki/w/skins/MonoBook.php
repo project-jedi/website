@@ -212,7 +212,7 @@ class MonoBookTemplate extends QuickTemplate {
 		// Generate additional footer links
 		$footerlinks = array(
 			'lastmod', 'viewcount', 'numberofwatchingusers', 'credits', 'copyright',
-			'privacy', 'about', 'disclaimer', 'tagline',
+			/*'privacy',*/ 'about', /*'disclaimer',*/ 'tagline',
 		);
 		$validFooterLinks = array();
 		foreach( $footerlinks as $aLink ) {
