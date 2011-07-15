@@ -1,4 +1,6 @@
 <? include "config.inc";
+require_once('recaptcha.php');
+require_once('extras/recaptcha/recaptchalib.php');
 
 if (($setcookies==true) && (isset($abspeichern)) && ($abspeichern=="ja")) {
   setcookie("cookie_name",stripslashes($name),time()+(3600*24*90));
@@ -58,6 +60,14 @@ if ($type=="post") {
   if (trim($subject)=="") {
     $type="retry";
     $error=$text_post["missing_subject"];
+  }
+  $resp = recaptcha_check_answer($private_key,
+                                 $_SERVER["REMOTE_ADDR"],
+                                 $_POST["recaptcha_challenge_field"],
+                                 $_POST["recaptcha_response_field"]);
+  if (!$resp->is_valid) {
+    $type="retry";
+    $error="The reCAPTCHA wasn't entered correctly.";
   }
   if ($type=="post") {
     if (!$readonly) {
@@ -192,6 +202,8 @@ if ($testnewsgroups == "") {
 <textarea name="body" rows="20" cols="79" wrap="physical">
 <? if (isset($bodyzeile)) echo stripslashes($bodyzeile); ?>
 </textarea></td></tr>
+<tr><td>
+<? echo recaptcha_get_html($public_key); ?></td></tr>
 <tr><td>
 <input type="submit" value="<? echo $text_post["button_post"];?>" />
 <? if ($setcookies==true) { ?>
