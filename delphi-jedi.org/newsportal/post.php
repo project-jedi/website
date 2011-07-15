@@ -161,10 +161,7 @@ if ($testnewsgroups == "") {
 <br />
 
 <p align="left">
-  This webportal mirrors the content of the NNTP server located at
-  <a href="nntp://news.delphi-jedi.org/">
-    nntp://news.delphi-jedi.org/
-  </a>
+  This webportal mirrors the content of the NNTP server located at news.delphi-jedi.org.
 </p>
 <p align="left">
   These newsgroups are private newsgroups. They may be used only for discussing about Project JEDI and related subprojects.
