@@ -24,10 +24,11 @@
       [<a target="<? echo $frame_groups;?>" href="<? echo $file_groups ?>">
          <? echo $text_thread["button_grouplist"] ?>
        </a>]
-      <? if (!$readonly)
+      <? if (!$readonly) {
         echo "[<a target=\"$frame_post\" ";
         echo "href=\"$file_post?newsgroups=".urlencode($group)."&type=new\">";
         echo $text_thread["button_write"]."</a>]";
+      }
       ?>
     </td>
   </tr>

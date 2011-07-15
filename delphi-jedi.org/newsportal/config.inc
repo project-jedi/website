@@ -71,7 +71,7 @@ $attachment_uudecode=false;
 
 // Security settings
 $send_poster_host=true;
-$readonly=false;
+$readonly=true;
 $testgroup=true;
 $validate_email=1;
 

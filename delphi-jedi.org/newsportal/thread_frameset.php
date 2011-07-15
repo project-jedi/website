@@ -21,10 +21,11 @@
 <UL>
 <li><a href="<? echo $file_framethread.'?group='.$group; ?>">Read
 Articles</a></li>
-<? if (!$readonly) 
+<? if (!$readonly) {
   echo "<li><a target=\"$frame_post\" ";
   echo "href=\"$file_post?newsgroups=".urlencode($group)."&type=new\">";
   echo $text_thread["button_write"]."</a></li>";
+}
 ?>
 </UL>
 </noframes>
