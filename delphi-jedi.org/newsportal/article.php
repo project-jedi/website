@@ -36,7 +36,7 @@ echo '[<a href="'.$next->number.'.html">Nächster</a>]';
 </p>
 <?
   if (!$message)
-    echo $text_error["article_not_found"];
+    echo "<p>".$text_error["article_not_found"]."</p>";
   else
     show_article($group,$id,0,$message);
 ?>

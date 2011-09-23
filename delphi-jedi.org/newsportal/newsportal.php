@@ -76,14 +76,14 @@ function OpenNNTPconnection($nserver=0,$nport=0) {
   $ns=fsockopen($nserver,$nport);
   $weg=lieszeile($ns);  // kill the first line
   if (substr($weg,0,2) != "20") {
-    echo "<p>".$text_error["error:"].$weg."</p>";
+    echo '<p><font color="red">'.$text_error["error:"].$weg."</font></p>";
   } else {
     if ($ns != false) {
       fputs($ns,"mode reader\r\n");
       $weg=lieszeile($ns);  // and once more
       if ((substr($weg,0,2) != "20") && 
           ((!$authorize) || ((substr($weg,0,3) != "480") && ($authorize)))) {
-        echo "<p>".$text_error["error:"].$weg."</p>";
+        echo '<p><font color="red">'.$text_error["error:"].$weg."</font></p>";
       }
     }
     if ((isset($server_auth_user)) && (isset($server_auth_pass)) &&
@@ -93,7 +93,7 @@ function OpenNNTPconnection($nserver=0,$nport=0) {
       fputs($ns,"authinfo pass $server_auth_pass\r\n"); 
       $weg=lieszeile($ns);
       if (substr($weg,0,3) != "281") {
-        echo "<p>".$text_error["error:"]."</p>";
+        echo '<p><font color="red">'.$text_error["error:"]."</font></p>";
         echo "<p>".$text_error["auth_error"]."</p>";
       }
     }
@@ -392,8 +392,8 @@ function showgroups($gruppen) {
   global $file_thread,$text_groups;
   $c = count($gruppen);
   echo "<table>\n";
-  echo "<tr><td>#</td><td>".$text_groups["newsgroup"].
-       "</td><td>".$text_groups["description"]."</td></tr>\n";
+  echo "<tr><td>#</td><td><b>".$text_groups["newsgroup"].
+       "</b></td><td><b>".$text_groups["description"]."</b></td></tr>\n";
   for($i = 0 ; $i < $c ; $i++) {
     $g = $gruppen[$i];
     echo "<tr><td>";
@@ -718,7 +718,7 @@ function parse_message($rawmessage) {
 function read_message($id,$bodynum=0,$group="") {
   global $cache_articles,$spooldir,$text_error;
   if (!testGroup($group)) {
-    echo $text_error["read_access_denied"];
+    echo "<p>".$text_error["read_access_denied"]."</p>";
     return;
   }
   $message = new messageType;
@@ -857,7 +857,7 @@ function readPlainHeader(&$von,$group,$articleNumber) {
   fputs($von,"head $articleNumber\r\n");
   $zeile=lieszeile($von);
   if (substr($zeile,0,3) != "221") {
-    echo $text_error["article_not_found"];
+    echo "<p>".$text_error["article_not_found"]."</p>";
     $header=false;
   } else {
     $zeile=lieszeile($von);
@@ -952,7 +952,7 @@ function rebuildOverview(&$von,$groupname,$poll) {
   fputs($von,"group $groupname\r\n");   // select a group
   $groupinfo=explode(" ",liesZeile($von));
   if (substr($groupinfo[0],0,1) != 2) {
-    echo "<p>".$text_error["error:"]."</p>";
+    echo '<p><font color="red">'.$text_error["error:"]."</font></p>";
     echo "<p>".$text_thread["no_such_group"]."</p>";
     flush();
   } else {
@@ -1084,7 +1084,7 @@ function readOverview(&$von,$groupname,$readmode = 1,$poll=false) {
   global $text_error, $maxarticles;
   global $spooldir,$thread_sorting;
   if (!testGroup($groupname)) {
-    echo $text_error["read_access_denied"];
+    echo "<p>".$text_error["read_access_denied"]."</p>";
     return;
   }
   if ($von == false) return false;
@@ -1418,7 +1418,7 @@ function showHeaders(&$headers,$group,$article_first=0,$article_last=0) {
   global $text_thread,$thread_treestyle;
   $article_count=0;
   if ($headers == false) {
-    echo $text_thread["no_articles"];
+    echo "<p><b>".$text_thread["no_articles"]."</b></p>";
   } else {
     reset($headers);
     $c=current($headers);
@@ -1434,11 +1434,11 @@ function showHeaders(&$headers,$group,$article_first=0,$article_last=0) {
           ($thread_treestyle==7)) {
         echo "<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n";
         echo "<tr>\n";
-        if ($thread_showDate) echo "<td>".$text_thread["date"]."&nbsp;</td>";
-        if ($thread_showSubject) echo "<td>".$text_thread["subject"]."</td>";
+        if ($thread_showDate) echo "<td><b>".$text_thread["date"]."</b>&nbsp;</td>";
+        if ($thread_showSubject) echo "<td><b>".$text_thread["subject"]."</b></td>";
         if ($thread_showAuthor) {
           echo "<td>&nbsp;&nbsp;</td>";
-          echo "<td>".$text_thread["author"]."</td>\n";
+          echo "<td><b>".$text_thread["author"]."</b></td>\n";
         }
         echo "</tr>\n";
         showThread($headers,$liste,1,"",$group,$article_first,$article_last,
@@ -1465,26 +1465,26 @@ function showHeaders(&$headers,$group,$article_first=0,$article_last=0) {
 function show_header($head,$group) {
   global $article_show,$text_header,$file_article,$attachment_show;
   global $file_attachment;
-  if ($article_show["Subject"]) echo $text_header["subject"].htmlspecialchars($head->subject)."<br>";
+  if ($article_show["Subject"]) echo "<b>".$text_header["subject"]."</b>".htmlspecialchars($head->subject)."<br>";
   if ($article_show["From"]) {
-    echo $text_header["from"].'<a href="mailto:'.htmlspecialchars($head->from).'">'.$head->from.'</a> ';
+    echo "<b>".$text_header["from"]."</b>".'<a href="mailto:'.htmlspecialchars($head->from).'">'.$head->from.'</a> ';
     if ($head->name != "") echo '('.htmlspecialchars($head->name).')';
     echo "<br>";
   }
   if ($article_show["Newsgroups"]) 
-    echo $text_header["newsgroups"].htmlspecialchars(str_replace(',',', ',$head->newsgroups))."<br>\n";
+    echo "<b>".$text_header["newsgroups"]."</b>".htmlspecialchars(str_replace(',',', ',$head->newsgroups))."<br>\n";
   if (isset($head->followup) && ($article_show["Followup"]) && ($head->followup != "")) 
-    echo $text_header["followup"].htmlspecialchars($head->followup)."<br>\n";
+    echo "<b>".$text_header["followup"]."</b>".htmlspecialchars($head->followup)."<br>\n";
   if ((isset($head->organization)) && ($article_show["Organization"]) &&
      ($head->organization != ""))
-    echo $text_header["organization"].
+    echo "<b>".$text_header["organization"]."</b>".
          html_parse(htmlspecialchars($head->organization))."<br>\n";
   if ($article_show["Date"])
-    echo $text_header["date"].date($text_header["date_format"],$head->date)."<br>\n";
+    echo "<b>".$text_header["date"]."</b>".date($text_header["date_format"],$head->date)."<br>\n";
   if ($article_show["Message-ID"])
-    echo $text_header["message-id"].htmlspecialchars($head->id)."<br>\n";
+    echo "<b>".$text_header["message-id"]."</b>".htmlspecialchars($head->id)."<br>\n";
   if (($article_show["References"]) && (isset($head->references[0]))) {
-    echo $text_header["references"];
+    echo "<b>".$text_header["references"]."</b>";
     for ($i=0; $i<=count($head->references)-1; $i++) {
       $ref=$head->references[$i];
       echo ' '.'<a href="'.$file_article.'?group='.urlencode($group).
@@ -1495,14 +1495,14 @@ function show_header($head,$group) {
   if (isset($head->user_agent)) {
     if ((isset($article_show["User-Agent"])) &&
        ($article_show["User-Agent"])) {
-      echo $text_header["user-agent"].htmlspecialchars($head->user_agent)."<br>\n";
+      echo "<b>".$text_header["user-agent"]."</b>".htmlspecialchars($head->user_agent)."<br>\n";
     } else {
       echo "<!-- User-Agent: ".htmlspecialchars($head->user_agent)." -->\n";
     }
   }
   if ((isset($attachment_show)) && ($attachment_show==true) &&
       (isset($head->content_type[1]))) {
-    echo $text_header["attachments"];
+    echo "<b>".$text_header["attachments"]."</b>";
     for ($i=1; $i<count($head->content_type); $i++) {
       echo '<a href="'.$file_attachment.'/'.urlencode($group).'/'.
            urlencode($head->number).'/'.

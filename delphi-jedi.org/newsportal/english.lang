@@ -1,34 +1,34 @@
 <?
-$text_header["from"]="<b>From:</b> ";
-$text_header["subject"]="<b>Subject:</b> ";
-$text_header["newsgroups"]="<b>Newsgroups:</b> ";
-$text_header["followup"]="<b>Followup:</b> ";
-$text_header["organization"]="<b>Organization:</b> ";
-$text_header["date"]="<b>Date:</b> ";
-$text_header["message-id"]="<b>Message-ID:</b> ";
-$text_header["references"]="<b>References:</b> ";
-$text_header["user-agent"]="<b>User-Agent:</b> ";
-$text_header["attachments"]="<b>Attachments:</b> ";
+$text_header["from"]="From: ";
+$text_header["subject"]="Subject: ";
+$text_header["newsgroups"]="Newsgroups: ";
+$text_header["followup"]="Followup: ";
+$text_header["organization"]="Organization: ";
+$text_header["date"]="Date: ";
+$text_header["message-id"]="Message-ID: ";
+$text_header["references"]="References: ";
+$text_header["user-agent"]="User-Agent: ";
+$text_header["attachments"]="Attachments: ";
 $text_header["date_format"]="M d Y H:i:s";
 
-$text_thread["no_articles"]="<p><b>No articles aviable</b></p>";
+$text_thread["no_articles"]="No articles available";
 $text_thread["button_write"]="Write";
 $text_thread["button_grouplist"]="Newsgroups";
 $text_thread["button_top"]="Back to Top";
-$text_thread["date"]="<b>Date</b>";
-$text_thread["subject"]="<b>Subject</b>";
-$text_thread["author"]="<b>Author</b>";
+$text_thread["date"]="Date";
+$text_thread["subject"]="Subject";
+$text_thread["author"]="Author";
 $text_thread["no_such_group"]="No such Group.";
 
-$text_groups["newsgroup"]="<b>Newsgroup</b>";
-$text_groups["description"]="<b>Description</b>";
+$text_groups["newsgroup"]="Newsgroup";
+$text_groups["description"]="Description";
 
 $text_article["button_answer"]="Answer";
 
-$text_error["error:"]='<font color="red">Error:</font>';
+$text_error["error:"]='Error: ';
 $text_error["connection_failed"]="The connection to the Newsserver failed";
-$text_error["article_not_found"]="<p>The article doesn't exist.</p>";
-$text_error["read_access_denied"]="<p>No permission to read!</p>";
+$text_error["article_not_found"]="The article doesn't exist.";
+$text_error["read_access_denied"]="No permission to read!";
 $text_error["post_failed"]="Connection failed. Try to reload later.";
 $text_error["auth_error"]="Authentifikation at the Newsserver failed.";
 $text_error["spool_error"]="Error in spoolfile. Please reload.";
