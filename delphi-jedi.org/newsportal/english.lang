@@ -12,8 +12,11 @@ $text_header["attachments"]="Attachments: ";
 $text_header["date_format"]="M d Y H:i:s";
 
 $text_thread["no_articles"]="No articles available";
-$text_thread["button_write"]="Write";
-$text_thread["button_grouplist"]="Newsgroups";
+$text_thread["button_write"]="Start a new thread";
+$text_thread["button_grouplist"]="Back to the list of newsgroups";
+$text_thread["frame"]="Frame version";
+$text_thread["dynamic"]="Dynamic version";
+$text_thread["next"]="Next messages";
 $text_thread["button_top"]="Back to Top";
 $text_thread["date"]="Date";
 $text_thread["subject"]="Subject";

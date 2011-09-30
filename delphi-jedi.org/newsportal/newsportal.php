@@ -1196,7 +1196,7 @@ function formatTreeText($tree) {
   return($tree);
 }
 
-function formatSubject($c,$group) {
+function formatSubject($c,$group,$ajax) {
   if ($c->isReply) {
     $re="Re: ";
   } else {
@@ -1204,11 +1204,15 @@ function formatSubject($c,$group) {
   }
   global $file_article, $thread_maxSubject, $frame_article;
   $return='<a ';
-  if ((isset($frame_article)) && ($frame_article != ""))
+  if ((isset($frame_article)) && ($frame_article != "") && (!$ajax))
     $return .= 'target="'.$frame_article.'" ';
-  $return .= 'class="thread" href="'.$file_article.
-       '?id='.urlencode($c->number).'&group='.urlencode($group).'">'.
-       $re.htmlspecialchars(substr(trim($c->subject),0,$thread_maxSubject))."</a>";
+  $return .= 'class="thread" ';
+  $return .= 'href="'.$file_article.'?id='.urlencode($c->number).'&group='.urlencode($group).'" ';
+  if ($ajax)
+    $return .= 'onclick="return showmessage(&#39;'.$file_article.'&#39;,&#39;'.urlencode($c->number).'&#39;,&#39;'.urlencode($group).'&#39);">';
+  else
+    $return .= '>';
+  $return .= $re.htmlspecialchars(substr(trim($c->subject),0,$thread_maxSubject))."</a>";
   return($return);
 }
 
@@ -1230,7 +1234,7 @@ function formatAuthor($c) {
   return($return);
 }
 
-function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$article_last=0,&$article_count) {
+function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$article_last=0,&$article_count,$ajax) {
   global $thread_treestyle;
   global $thread_showDate,$thread_showSubject;
   global $thread_showAuthor,$imgdir;
@@ -1255,27 +1259,29 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
         case 0: // simple list
           echo $thread_fontPre;
           if ($thread_showDate) echo formatDate($c)." ";
-          if ($thread_showSubject) echo formatSubject($c,$group)." ";
+          if ($thread_showSubject) echo formatSubject($c,$group,$ajax)." ";
           if ($thread_showAuthor) echo "(".formatAuthor($c).")";
           echo $thread_fontPost;
           echo "<br>\n";
           break;
         case 1: // html-auflistung, kein baum
-          echo "<li><nobr>".$thread_fontPre;
+          echo "<li>";
+          echo "<nobr>".$thread_fontPre;
           if ($thread_showDate)
             echo formatDate($c)." ";
           if ($thread_showSubject)
-            echo formatSubject($c,$group)." ";
+            echo formatSubject($c,$group,$ajax)." ";
           if ($thread_showAuthor)
             echo "<i>(".formatAuthor($c).")</i>";
-          echo $thread_fontPost."</nobr></li>";
+          echo $thread_fontPost."</nobr>";
+          echo "</li>";
           break;
         case 2:   // table
           echo "<tr>";
           if ($thread_showDate)
             echo "<td>".$thread_fontPre.formatDate($c)." ".$thread_fontPost."</td>";
           if ($thread_showSubject) {
-            echo '<td nowrap="nowrap">'.$thread_fontPre.formatSubject($c,$group);
+            echo '<td nowrap="nowrap">'.$thread_fontPre.formatSubject($c,$group,$ajax);
             echo $thread_fontPost."</td>";
           }
           if ($thread_showAuthor) {
@@ -1286,14 +1292,16 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
           echo "</tr>\n";
           break;
         case 3: // html-tree
-          echo "<li><nobr>".$thread_fontPre;
+          echo "<li>";
+          echo "<nobr>".$thread_fontPre;
           if ($thread_showDate)
             echo formatDate($c)." ";
           if ($thread_showSubject)
-            echo formatSubject($c,$group)." ";
+            echo formatSubject($c,$group,$ajax)." ";
           if ($thread_showAuthor)
             echo "<i>(".formatAuthor($c).")</i>";
-          echo $thread_fontPost."</nobr>\n";
+          echo $thread_fontPost."</nobr>";
+          echo "</li>\n";
           break;
         case 4:  // thread
           echo "<nobr><tt>".$thread_fontPre;
@@ -1302,7 +1310,7 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
           /*echo formatTreeText($newtree)." ";*/
           echo formatTreeText($newtree).$thread_fontPost."</tt> ".$thread_fontPre;
           if ($thread_showSubject)
-            echo formatSubject($c,$group)." ";
+            echo formatSubject($c,$group,$ajax)." ";
           if ($thread_showAuthor)
             echo "<i>(".formatAuthor($c).")</i>";
           echo $thread_fontPost."</nobr><br>";
@@ -1313,10 +1321,19 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
             echo '<td nowrap="nowrap">'.$thread_fontPre.formatDate($c)." ".$thread_fontPost."</td>";
           echo "<td>".$thread_fontPre.formatTreeGraphic($newtree).$thread_fontPost."</td>";
           if ($thread_showSubject)
-            echo '<td nowrap="nowrap">'.$thread_fontPre."&nbsp;".formatSubject($c,$group)." ";
+            echo '<td nowrap="nowrap">'.$thread_fontPre."&nbsp;".formatSubject($c,$group,$ajax)." ";
           if ($thread_showAuthor)
             echo "(".formatAuthor($c).")".$thread_fontPost."</td>";
-          echo "</tr></table>";
+          echo "</tr>";
+          if (($ajax == true) && (($thread_showSubject) || ($thread_showAuthor))) {
+            echo '<tr>';
+            if ($thread_showDate) 
+              echo '<td colspan=2></td>';
+            else
+              echo '<td></td>';
+            echo '<td><div id="msg'.$c->number.'" class="dynmsg"></div></td>';
+          }
+          echo "</table>";
           break;
         case 6:  // thread, table
           echo "<tr>";
@@ -1325,7 +1342,7 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
           /*echo '<td nowrap="nowrap"><tt>'.$thread_fontPre.formatTreeText($newtree)." ";*/
           echo '<td nowrap="nowrap"><tt>'.$thread_fontPre.formatTreeText($newtree)."</tt>";
           if ($thread_showSubject) {
-            echo formatSubject($c,$group).$thread_fontPost."</td>";
+            echo formatSubject($c,$group,$ajax).$thread_fontPost."</td>";
             echo "<td></td>";
           }
           if ($thread_showAuthor)
@@ -1340,7 +1357,7 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
           echo "<td><table cellspacing=\"0\" cellpadding=\"0\" border=\"0\">\n";
           echo "<td>".formatTreeGraphic($newtree)."</td>";
           if ($thread_showSubject)
-            echo '<td nowrap="nowrap">'.$thread_fontPre."&nbsp;".formatSubject($c,$group).$thread_fontPost."</td>";
+            echo '<td nowrap="nowrap">'.$thread_fontPre."&nbsp;".formatSubject($c,$group,$ajax).$thread_fontPost."</td>";
           echo "</table></td>";
           if ($thread_showSubject) echo "<td></td>";
           if ($thread_showAuthor)
@@ -1359,7 +1376,7 @@ function showThread(&$headers,&$liste,$depth,$tree,$group,$article_first=0,$arti
       }
       if (!isset($newtree)) $newtree="";
       showThread($headers,$c->answers,$depth+1,$newtree."",$group,
-                 $article_first,$article_last,$article_count);
+                 $article_first,$article_last,$article_count,$ajax);
     }
     flush();
   }
@@ -1412,7 +1429,7 @@ function saveThreadData($headers,$group) {
 }
 
 
-function showHeaders(&$headers,$group,$article_first=0,$article_last=0) {
+function showHeaders(&$headers,$group,$article_first=0,$article_last=0,$ajax) {
   global $thread_showDate, $thread_showTable;
   global $thread_showAuthor,$thread_showSubject;
   global $text_thread,$thread_treestyle;
@@ -1442,12 +1459,12 @@ function showHeaders(&$headers,$group,$article_first=0,$article_last=0) {
         }
         echo "</tr>\n";
         showThread($headers,$liste,1,"",$group,$article_first,$article_last,
-                   $article_count);
+                   $article_count,$ajax);
         echo "</table>\n";
       } else {
         if ($thread_treestyle==1) echo "<ul>\n";
         showThread($headers,$liste,1,"",$group,$article_first,$article_last,
-                   $article_count);
+                   $article_count,$ajax);
         if ($thread_treestyle==1) echo "</ul>\n";
       }
     }

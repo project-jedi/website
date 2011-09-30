@@ -25,3 +25,10 @@ A.thread:visited {font-weight: normal; text-decoration: none; color: black;}
 A.thread:active {font-weight: bold; text-decoration: none; color: black;}
 A.thread:link {font-weight: bold; text-decoration: underline; color: blue;}
 A.thread:hover {text-decoration: underline;}
+
+div.dynmsg
+{
+  background-color: #DDDDDD;
+  padding: 10 10 10 10;
+  display: none;
+}

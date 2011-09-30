@@ -13,18 +13,12 @@
       <span style="font-size:10px;"><a href="http://www.delphi-jedi.org">Back to homepage</a></span>
     </td>
     <td>
-      <h1 align="center"><? echo htmlspecialchars($title); ?></h1>
+      This webportal mirrors the content of the NNTP server located at news.delphi-jedi.org.<br/>
+      These newsgroups are private newsgroups. They may be used only for discussing about Project JEDI and related subprojects.
     </td>
   </tr>
 </table>
 <br />
-
-<p align="left">
-  This webportal mirrors the content of the NNTP server located at news.delphi-jedi.org.
-</p>
-<p align="left">
-  These newsgroups are private newsgroups. They may be used only for discussing about Project JEDI and related subprojects.
-</p>
 
 <div width="100%" style="position:relative; padding-top:20;">
 <?

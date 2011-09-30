@@ -7,6 +7,11 @@
   <META HTTP-EQUIV="cache-control" CONTENT="no-cache">
   <LINK REL="stylesheet" TYPE="text/css" HREF="<? echo $stylesheet; ?>">
   <link rel="shortcut icon" href="/JEDI.ico" />
-</HEAD>
+  <script type="text/javascript"><!--
+    var RecaptchaOptions = {
+      theme : 'white'
+    };
+  --></script>
+  </HEAD>
 <BODY BGCOLOR="#FFFFFF">
 
