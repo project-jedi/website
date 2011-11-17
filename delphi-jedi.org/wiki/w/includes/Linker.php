@@ -1077,6 +1077,9 @@ class Linker {
 		if( $blockable && $wgUser->isAllowed( 'block' ) ) {
 			$items[] = $this->blockLink( $userId, $userText );
 		}
+		if( $blockable && $wgUser->isAllowed( 'usermerge' ) ) {
+			$items[] = $this->mergeLink( $userId, $userText );
+		}
 
 		if( $items ) {
 			return ' <span class="mw-usertoollinks">(' . implode( ' | ', $items ) . ')</span>';
@@ -1118,6 +1121,23 @@ class Linker {
 		$blockPage = SpecialPage::getTitleFor( 'Blockip', $userText );
 		$blockLink = $this->link( $blockPage, wfMsgHtml( 'blocklink' ) );
 		return $blockLink;
+	}
+
+	/**
+	 * @param $userId Integer: userid
+	 * @param $userText String: user name in database.
+	 * @return string HTML fragment with merge link
+	 * @private
+	 */
+	function mergeLink( $userId, $userText ) {
+        global $wgUser;
+		$mergePage = SpecialPage::getTitleFor( 'UserMerge' );
+        $mergeOptions['olduser'] = $userText;
+        $mergeOptions['newuser'] = 'Spam';
+        $mergeOptions['deleteuser'] = 'true';
+        $mergeOptions['token'] = $wgUser->editToken();
+		$mergeLink = $this->link( $mergePage, 'merge', array(), $mergeOptions ); //wfMsgHtml( 'mergelink' ) );
+		return $mergeLink;
 	}
 
 	/**
@@ -1338,7 +1358,7 @@ class Linker {
 	function commentBlock( $comment, $title = NULL, $local = false ) {
 		// '*' used to be the comment inserted by the software way back
 		// in antiquity in case none was provided, here for backwards
-		// compatability, acc. to brion -Ã¦var
+		// compatability, acc. to brion -ævar
 		if( $comment == '' || $comment == '*' ) {
 			return '';
 		} else {
