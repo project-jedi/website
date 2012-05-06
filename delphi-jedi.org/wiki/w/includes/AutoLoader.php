@@ -287,6 +287,7 @@ $wgAutoloadLocalClasses = array(
 	'ApiRollback' => 'includes/api/ApiRollback.php',
 	'ApiUnblock' => 'includes/api/ApiUnblock.php',
 	'ApiUndelete' => 'includes/api/ApiUndelete.php',
+	'ApiUserMerge' => 'includes/api/ApiUserMerge.php',
 	'ApiWatch' => 'includes/api/ApiWatch.php',
 	'Services_JSON' => 'includes/api/ApiFormatJson_json.php',
 	'Services_JSON_Error' => 'includes/api/ApiFormatJson_json.php',

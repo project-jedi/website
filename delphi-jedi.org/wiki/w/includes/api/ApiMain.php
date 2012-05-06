@@ -80,7 +80,8 @@ class ApiMain extends ApiBase {
 		'emailuser' => 'ApiEmailUser',
 		'watch' => 'ApiWatch',
 		'patrol' => 'ApiPatrol',
-        'deleterevision' => 'ApiDeleteRevision',
+		'deleterevision' => 'ApiDeleteRevision',
+		'usermerge' => 'ApiUserMerge',
 	);
 
 	/**
